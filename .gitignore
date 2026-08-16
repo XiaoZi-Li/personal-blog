@@ -97,3 +97,11 @@ Desktop.ini
 .turbo
 
 .coze-logs
+.cozeproj/reduction
+
+# Preview files
+.preview
+.codegraph
+
+# Coze export assets (unused, resume lives in public/resume.pdf)
+assets/

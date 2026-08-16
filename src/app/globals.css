@@ -157,16 +157,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
+  background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
 }
 
 /* ========================================
@@ -302,10 +302,10 @@ html {
 /* 渐变边框动画 */
 @keyframes border-gradient {
   0%, 100% {
-    border-color: theme('colors.purple.400');
+    border-color: #c084fc;
   }
   50% {
-    border-color: theme('colors.pink.400');
+    border-color: #f472b6;
   }
 }
 
