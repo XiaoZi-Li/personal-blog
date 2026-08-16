@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "bash ./scripts/build.sh",
+    "build": "next build",
     "dev": "bash ./scripts/dev.sh",
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint",
@@ -88,7 +88,7 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@11.16.0",
   "engines": {
     "pnpm": ">=9.0.0"
   },
