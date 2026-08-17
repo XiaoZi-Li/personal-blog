@@ -129,6 +129,18 @@ CREATE TRIGGER update_project_comments_updated_at BEFORE UPDATE ON project_comme
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- =====================================================
+-- 底层 GRANT 授权（新版 Supabase 项目不再自动授予，必须显式执行）
+-- =====================================================
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+  GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+  GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
+-- =====================================================
 -- Supabase RLS（行级安全策略）
 -- =====================================================
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
