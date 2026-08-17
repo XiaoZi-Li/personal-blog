@@ -396,7 +396,7 @@ export default function Home() {
                 </p>
                 <a href="/resume" className="mt-3 sm:mt-4 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 text-white text-xs sm:text-sm font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                   <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {t('home.career.viewResume')}
+                  {t('home.career.goToResume')}
                 </a>
               </CardContent>
             </Card>
