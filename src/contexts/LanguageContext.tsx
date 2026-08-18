@@ -87,7 +87,7 @@ const translations = {
       name: '李俊杰',
       subtitle: '嵌入式开发 / Rust学习者 / 具身智能热爱者',
       about: '关于我',
-      aboutContent: '电子信息工程专业大三学生，对嵌入式软硬件开发和具身智能方向充满热情。目前还在不断学习中，借助AI工具完成了一些项目实践，希望能在实习中快速成长，也期待与各位技术同好交流切磋。',
+      aboutContent: '电子信息工程专业大四学生，对嵌入式软硬件开发和具身智能方向充满热情。目前还在不断学习中，借助AI工具完成了一些项目实践，希望能在实习中快速成长，也期待与各位技术同好交流切磋。',
       contact: '联系方式',
       skills: '技术栈',
       projects: '项目经历',
@@ -98,7 +98,7 @@ const translations = {
       phone: '电话',
       university: '天津工业大学',
       major: '电子信息工程',
-      grade: '大三',
+      grade: '大四',
       // Skills
       skillLevels: {
         core: '有所实践',
@@ -119,9 +119,9 @@ const translations = {
         rustEnthusiast: 'Rust爱好者',
         rustEnthusiastDesc: '对Rust语言充满热爱，相信它在嵌入式和系统编程中的潜力，正在持续学习',
         humbleLearner: '谦逊学习者',
-        humbleLearnerDesc: '目前所有项目均借助AI辅助完成，深知自身不足，保持虚心学习的态度',
+        humbleLearnerDesc: '善用 AI 工具提升开发效率，深知学无止境，保持虚心求索的态度',
         teamWork: '团队协作',
-        teamWorkDesc: '担任竞赛队长，积极沟通协作，相信团队力量大于个人',
+        teamWorkDesc: '积极沟通协作，相信团队力量大于个人',
         aiAssisted: 'AI辅助实践',
         aiAssistedDesc: '借助AI辅助完成MCP、AI Agent等项目开发，善于利用工具提升效率',
       },
@@ -248,6 +248,15 @@ const translations = {
         track: 'FPGA创新设计赛道',
         detail1: '基于安路HX4S20 FPGA实现边缘检测、图像滤波、HSV色彩识别硬件加速，多级流水线支持640×480@30fps实时处理',
         detail2: '负责核心逻辑设计、时序约束与资源优化，解决多时钟域信号跨域传输的亚稳态问题'
+      },
+      // Competition 3 (服务外包)
+      comp3: {
+        title: '中国大学生服务外包创新创业大赛',
+        award: '国家级三等奖',
+        date: '2025年6月',
+        track: '智能家居物联网',
+        detail1: '基于鸿蒙Hi3861开发智能家居传感器数据采集与无线通信系统，适配低功耗场景需求',
+        detail2: '完成设备间通信协议适配，解决信号稳定性问题'
       }
     },
     // Projects
@@ -445,7 +454,7 @@ const translations = {
       name: 'Li Junjie',
       subtitle: 'Embedded Developer / Rust Learner / Embodied AI Enthusiast',
       about: 'About Me',
-      aboutContent: 'Junior student in Electronic Information Engineering. Passionate about embedded hardware/software development and embodied AI. Still learning and growing — I\'ve completed projects with AI assistance, and I\'m looking for an internship to level up. Always happy to connect and learn from fellow developers.',
+      aboutContent: 'Senior student in Electronic Information Engineering. Passionate about embedded hardware/software development and embodied AI. Still learning and growing — I\'ve completed projects with AI assistance, and I\'m looking for an internship to level up. Always happy to connect and learn from fellow developers.',
       contact: 'Contact',
       skills: 'Tech Stack',
       projects: 'Projects',
@@ -456,7 +465,7 @@ const translations = {
       phone: 'Phone',
       university: 'Tianjin Polytechnic University',
       major: 'Electronic Information Engineering',
-      grade: 'Junior',
+      grade: 'Senior',
       // Skills
       skillLevels: {
         core: 'Practiced',
@@ -477,9 +486,9 @@ const translations = {
         rustEnthusiast: 'Rust Enthusiast',
         rustEnthusiastDesc: 'Deeply passionate about Rust, believing in its potential for embedded and systems programming',
         humbleLearner: 'Humble Learner',
-        humbleLearnerDesc: 'All projects completed with AI assistance, aware of limitations, maintaining a humble learning attitude',
+        humbleLearnerDesc: 'Skilled at leveraging AI tools to boost efficiency, while staying humble and eager to keep growing',
         teamWork: 'Teamwork',
-        teamWorkDesc: 'Competition team leader, active communicator, believing team power exceeds individuals',
+        teamWorkDesc: 'Active communicator and collaborator, believing team power exceeds individuals',
         aiAssisted: 'AI-Assisted Practice',
         aiAssistedDesc: 'Completed MCP, AI Agent projects with AI-assisted development, skilled at leveraging tools',
       },
@@ -588,6 +597,15 @@ const translations = {
         track: 'FPGA Innovation Design Track',
         detail1: 'Hardware acceleration of edge detection, image filtering and HSV color recognition on Anlu HX4S20 FPGA, multi-stage pipeline supporting 640×480@30fps real-time processing',
         detail2: 'Responsible for core logic design, timing constraints and resource optimization, resolved multi-clock-domain metastability issues'
+      },
+      // Competition 3 (Service Outsourcing)
+      comp3: {
+        title: 'China College Student Service Outsourcing Innovation Competition',
+        award: 'National 3rd Prize',
+        date: 'June 2025',
+        track: 'Smart Home IoT',
+        detail1: 'Smart home sensor data acquisition & wireless communication system based on HarmonyOS Hi3861, adapted for low-power scenarios',
+        detail2: 'Completed device protocol adaptation, solved signal stability issues'
       }
     },
     // Projects
@@ -785,7 +803,7 @@ const translations = {
       name: '李俊杰（Li Junjie）',
       subtitle: '組込み開発者 / Rust学習者 / 具身AI愛好家',
       about: '私について',
-      aboutContent: '電子情報工学専攻の3年生です。組込みハードウェア・ソフトウェア開発と具身AIに情熱を持っています。まだ学びの途中で、AIの支援を受けながらプロジェクトを完成させました。インターンシップで成長したいと考えています。同じ志を持つ開発者との交流も歓迎します。',
+      aboutContent: '電子情報工学専攻の4年生です。組込みハードウェア・ソフトウェア開発と具身AIに情熱を持っています。まだ学びの途中で、AIの支援を受けながらプロジェクトを完成させました。インターンシップで成長したいと考えています。同じ志を持つ開発者との交流も歓迎します。',
       contact: '連絡先',
       skills: 'スキル',
       projects: 'プロジェクト',
@@ -796,7 +814,7 @@ const translations = {
       phone: '電話',
       university: '天津工業大学',
       major: '電子情報工学',
-      grade: '3年生',
+      grade: '4年生',
       // Skills
       skillLevels: {
         core: '実践経験あり',
@@ -817,9 +835,9 @@ const translations = {
         rustEnthusiast: 'Rust愛好家',
         rustEnthusiastDesc: 'Rustに深い情熱を持ち、組込みとシステムプログラミングでの可能性を信じる',
         humbleLearner: '謙虚な学習者',
-        humbleLearnerDesc: 'すべてのプロジェクトはAIの支援で完了、限界を認識し、謙虚な学習姿勢を維持',
+        humbleLearnerDesc: 'AI ツールを活用して開発効率を高めつつ、学びは終わらないと謙虚に探究し続ける',
         teamWork: 'チームワーク',
-        teamWorkDesc: 'コンテストのチームリーダー、積極的なコミュニケーション、チームの力は個人を超えると信じる',
+        teamWorkDesc: '積極的なコミュニケーションと協力を重視し、チームの力は個人を超えると信じる',
         aiAssisted: 'AI支援実践',
         aiAssistedDesc: 'MCP、AIエージェントプロジェクトをAI支援で完了、ツールを活用する能力を持つ',
       },
@@ -928,6 +946,15 @@ const translations = {
         track: 'FPGAイノベーション設計トラック',
         detail1: '安路 HX4S20 FPGA でエッジ検出・画像フィルタ・HSV色彩認識のハードウェア高速化を実現、多段パイプラインで 640×480@30fps リアルタイム処理をサポート',
         detail2: 'コアロジック設計、タイミング制約とリソース最適化を担当、マルチクロックドメインのメタスタビリティ問題を解決'
+      },
+      // Competition 3 (サービス外包)
+      comp3: {
+        title: '中国大学生サービス外包イノベーション大会',
+        award: '国家級三等賞',
+        date: '2025年6月',
+        track: 'スマートホームIoT',
+        detail1: '鴻蒙Hi3861ベースのスマートホームセンサーデータ収集・無線通信システム、低電力シーンに適応',
+        detail2: 'デバイス間通信プロトコルアダプトを完了、信号安定性問題を解決'
       }
     },
     // Projects
