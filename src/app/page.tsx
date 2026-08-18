@@ -1,70 +1,19 @@
 'use client';
 
-import { 
+import {
   MapPin, GraduationCap, Mail, Phone,
-  Trophy, Code, Brain, Briefcase,
-  Calendar, Users, Cpu,
-  Star, MessageSquare, FileText, Microchip, Wrench
+  Trophy, Briefcase,
+  Calendar, Users,
+  Star, MessageSquare, FileText
 } from 'lucide-react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ResumeDownloadButton } from '@/components/ResumeDownloadButton';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
   const { t } = useLanguage();
-
-  // 技能分类 - 卡片式展示
-  const skillGroups = [
-    {
-      title: t('home.skillCategories.programming'),
-      icon: Code,
-      gradient: 'from-violet-500 to-purple-600',
-      glowColor: 'shadow-violet-500/15',
-      skills: [
-        { name: 'C/C++', desc: t('home.skillLevels.core') },
-        { name: 'Python', desc: t('home.skillLevels.core') },
-        { name: 'Verilog', desc: t('home.skillLevels.familiar') },
-        { name: 'Rust', desc: t('home.skillLevels.learning') },
-        { name: t('skills.cangjie'), desc: t('home.skillLevels.learning') },
-      ]
-    },
-    {
-      title: t('home.skillCategories.hardware'),
-      icon: Microchip,
-      gradient: 'from-blue-500 to-indigo-600',
-      glowColor: 'shadow-blue-500/15',
-      skills: [
-        { name: t('skills.fpga'), desc: t('home.skillLevels.familiar') },
-        { name: t('skills.esp32'), desc: t('home.skillLevels.familiar') },
-        { name: t('skills.stm32'), desc: t('home.skillLevels.familiar') },
-        { name: t('skills.harmony'), desc: t('home.skillLevels.familiar') },
-      ]
-    },
-    {
-      title: t('home.skillCategories.ai'),
-      icon: Brain,
-      gradient: 'from-fuchsia-500 to-pink-600',
-      glowColor: 'shadow-fuchsia-500/15',
-      skills: [
-        { name: t('skills.mcp'), desc: t('home.skillLevels.familiar') },
-        { name: t('skills.aiSkills'), desc: t('home.skillLevels.learning') },
-      ]
-    },
-    {
-      title: t('common.more'),
-      icon: Wrench,
-      gradient: 'from-emerald-500 to-teal-600',
-      glowColor: 'shadow-emerald-500/15',
-      skills: [
-        { name: 'PCB 绘制', desc: t('home.skillLevels.familiar') },
-        { name: '传感器融合', desc: t('home.skillLevels.familiar') },
-        { name: '嵌入式全流程', desc: t('home.skillLevels.familiar') },
-        { name: 'Next.js/TS 全栈', desc: t('home.skillLevels.learning') },
-      ]
-    },
-  ];
 
   // 竞赛经历
   const competitions = [
@@ -198,9 +147,9 @@ export default function Home() {
               {/* 核心优势 */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
                 {[
-                  { label: t('competitions.award.national') + ' ' + t('competitions.award.third'), value: '2', gradient: 'from-amber-500 to-orange-500', icon: '🏆' },
+                  { label: t('competitions.award.national') + ' ' + t('competitions.award.third'), value: '3', gradient: 'from-amber-500 to-orange-500', icon: '🏆' },
                   { label: t('competitions.award.provincialTop') + ' ' + t('competitions.award.first'), value: '1', gradient: 'from-violet-500 to-purple-600', icon: '🥇' },
-                  { label: t('home.stats.totalAwards'), value: '3', gradient: 'from-fuchsia-500 to-pink-600', icon: '⭐' },
+                  { label: t('home.stats.totalAwards'), value: '4', gradient: 'from-fuchsia-500 to-pink-600', icon: '⭐' },
                   { label: t('home.stats.certification'), value: '1', gradient: 'from-emerald-500 to-teal-500', icon: '📜' },
                 ].map((item, i) => (
                   <Card key={i} className="border-0 shadow-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
@@ -219,65 +168,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 技术技能 */}
+      {/* 科研经历 */}
       <section className="py-10 sm:py-16 bg-white dark:bg-slate-900 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-violet-50 via-transparent to-transparent dark:from-violet-950/20 dark:via-transparent dark:to-transparent" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-              <Code className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {t('home.skills')}
+              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              {t('home.research.badge')}
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">技术栈</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold">{t('home.research.title')}</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-            {skillGroups.map((group, i) => (
-              <Card key={i} className={`border-0 shadow-lg ${group.glowColor} hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 hover:-translate-y-1 group/card`}>
-                <CardHeader className="pb-2 sm:pb-3 px-4 sm:px-6 pt-4 sm:pt-6">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${group.gradient} flex items-center justify-center shadow-lg group-hover/card:scale-110 transition-transform`}>
-                      <group.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                    </div>
-                    <CardTitle className="text-sm sm:text-base">{group.title}</CardTitle>
+          <Card className="border-0 shadow-lg shadow-violet-500/15 hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 hover:-translate-y-1">
+            <CardContent className="pt-5 sm:pt-6 px-4 sm:px-8 pb-5 sm:pb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
+                <div>
+                  <h3 className="text-base sm:text-xl font-bold text-slate-800 dark:text-slate-100">{t('home.research.paper')}</h3>
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 text-xs sm:text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {t('home.research.period')}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="w-3 h-3" />
+                      {t('home.research.role')}
+                    </span>
+                    <span className="italic">{t('home.research.journal')}</span>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-1.5 sm:space-y-2 px-4 sm:px-6 pb-4 sm:pb-6">
-                  {group.skills.map((skill, j) => (
-                    <div key={j} className="flex items-center justify-between gap-1 sm:gap-2">
-                      <span className="font-medium text-xs sm:text-sm text-slate-700 dark:text-slate-300 truncate">{skill.name}</span>
-                      {skill.desc && (
-                        <span className="text-[10px] sm:text-xs text-muted-foreground px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 whitespace-nowrap shrink-0">
-                          {skill.desc}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* 专业领域标签 */}
-          <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-violet-50 to-indigo-50 dark:from-violet-950/30 dark:to-indigo-950/30 border border-violet-100 dark:border-violet-900/50">
-            <h3 className="font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-              <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-violet-500" />
-              {t('common.more')}
-            </h3>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {(function() {
-                const specialties = t('home.specialties');
-                if (Array.isArray(specialties)) {
-                  return specialties.map((tag: string, i: number) => (
-                    <Badge key={i} className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-violet-200 dark:border-violet-800/50 text-xs">
-                      {tag}
-                    </Badge>
-                  ));
-                }
-                return null;
-              })()}
-            </div>
-          </div>
+                </div>
+                <Badge className="bg-gradient-to-r from-violet-500 to-fuchsia-600 text-white border-0 shadow-md self-start whitespace-nowrap">
+                  {t('home.research.status')}
+                </Badge>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {t('home.research.desc')}
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

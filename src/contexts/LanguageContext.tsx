@@ -144,6 +144,16 @@ const translations = {
         certification: '职业认证',
         projects: '项目经历'
       },
+      research: {
+        badge: '论文发表',
+        title: '科研经历',
+        paper: 'CATSANet —— 跨模态行人重识别',
+        period: '2024.12 - 2026.02',
+        role: '共同第二作者',
+        status: 'SCI 已录用',
+        journal: 'Pattern Analysis and Applications',
+        desc: '论文被 SCI 期刊 Pattern Analysis and Applications 录用，代码已开源。提出跨模态语义 Token 选择模块与基于 Sinkhorn 最优传输的部件对齐损失（PACL），构建 PyTorch/CLIP 全流程训练评估管线，消融实验验证对检索精度的提升。'
+      },
       resume: {
         title: '个人简历与求职意向',
         subtitle: '实践驱动成长，热爱铸就方向',
@@ -514,6 +524,16 @@ const translations = {
         certification: 'Certifications',
         projects: 'Projects'
       },
+      research: {
+        badge: 'Publication',
+        title: 'Research Experience',
+        paper: 'CATSANet — Cross-modal Person Re-identification',
+        period: '2024.12 - 2026.02',
+        role: 'Co-2nd Author',
+        status: 'SCI Accepted',
+        journal: 'Pattern Analysis and Applications',
+        desc: 'Paper accepted by SCI journal Pattern Analysis and Applications, code open-sourced. Proposed a cross-modal semantic token selection module and a Sinkhorn optimal-transport part alignment loss (PACL), built the full PyTorch/CLIP training and evaluation pipeline, with retrieval gains validated by ablation studies.'
+      },
     },
     // Skills
     skills: {
@@ -843,6 +863,16 @@ const translations = {
         totalAwards: '総受賞数',
         certification: '職業認定',
         projects: 'プロジェクト'
+      },
+      research: {
+        badge: '論文発表',
+        title: '研究経歴',
+        paper: 'CATSANet — クロスモーダル歩行者再識別',
+        period: '2024.12 - 2026.02',
+        role: '共第二著者',
+        status: 'SCI 採録済み',
+        journal: 'Pattern Analysis and Applications',
+        desc: '論文が SCI ジャーナル Pattern Analysis and Applications に採録、コード公開済み。クロスモーダル意味トークン選択モジュールと Sinkhorn 最適輸送に基づく部位整合損失（PACL）を提案、PyTorch/CLIP による訓練・評価パイプラインを構築、消融実験で検索精度の向上を検証。'
       },
     },
     // Skills

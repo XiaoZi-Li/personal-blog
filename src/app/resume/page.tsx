@@ -134,6 +134,7 @@ function getResumeData(lang: string): ResumeData {
           { award: 'Embedded System Design Engineer Certification (Elementary)', date: 'Issued by China Institute of Electronics', emoji: '📜' },
           { award: '9th National Embedded Chip & System Design Competition — National Final 3rd Prize', date: '2026/07', emoji: '🥉' },
           { award: '8th National Embedded Chip & System Design Competition — Final 3rd Prize (FPGA Track)', date: '2025/12', emoji: '🥉' },
+          { award: 'China Service Outsourcing Innovation Competition — National 3rd Prize (Smart Home IoT)', date: '2025/06', emoji: '🥉' },
           { award: 'Tianjin 8th "New Engineering" Competition — Provincial 1st Prize (Team Leader)', date: '2025/06', emoji: '🥇' },
         ],
         education: {
@@ -198,6 +199,7 @@ function getResumeData(lang: string): ResumeData {
           { award: '組み込みシステム設計エンジニア認定（初級）', date: '中国電子学会発行', emoji: '📜' },
           { award: '第9回全国組み込みチップ・システム設計大会 — 全国決勝三等賞', date: '2026/07', emoji: '🥉' },
           { award: '第8回全国組み込みチップ・システム設計大会 — 決勝三等賞（FPGA トラック）', date: '2025/12', emoji: '🥉' },
+          { award: '中国サービスアウトソーシングイノベーション大会 — 国家級三等賞（スマートホーム IoT）', date: '2025/06', emoji: '🥉' },
           { award: '天津第8回「新工科」大会 — 省部級一等賞（リーダー）', date: '2025/06', emoji: '🥇' },
         ],
         education: {
@@ -262,6 +264,7 @@ function getResumeData(lang: string): ResumeData {
           { award: '嵌入式系统设计工程技术人员认证（初级）', date: '中国电子学会颁发', emoji: '📜' },
           { award: '第九届全国大学生嵌入式芯片与系统设计竞赛 全国总决赛三等奖', date: '2026/07', emoji: '🥉' },
           { award: '第八届全国大学生嵌入式芯片与系统设计竞赛 决赛三等奖', date: '2025/12', emoji: '🥉' },
+          { award: '中国大学生服务外包创新创业大赛 国家级三等奖（智能家居物联网）', date: '2025/06', emoji: '🥉' },
           { award: '天津第八届"新工科"竞赛 省部级一等奖（队长）', date: '2025/06', emoji: '🥇' },
         ],
         education: {
