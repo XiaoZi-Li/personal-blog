@@ -220,23 +220,23 @@ const translations = {
         detail1: '基于小智AI与MCP协议开发多设备智能管家系统',
         detail2: '担任队长，负责系统架构设计与核心功能开发'
       },
-      // Competition 1
+      // Competition 1 (第九届 机器狗)
       comp1: {
-        title: '全国大学生嵌入式芯片与系统设计竞赛',
-        award: '国家级三等奖',
+        title: '全国大学生嵌入式芯片与系统设计竞赛（第九届）',
+        award: '全国总决赛三等奖',
+        date: '2026年7月',
+        track: '芯片应用赛道',
+        detail1: '基于RDK X5（BPU 10 TOPS）+ ROS2开发机器狗双目深度避障、MediaPipe手势控制与三级优先级运动仲裁器',
+        detail2: '负责感知与运动控制系统开发，完成步态参数整定与系统集成调试'
+      },
+      // Competition 2 (第八届 FPGA)
+      comp2: {
+        title: '全国大学生嵌入式芯片与系统设计竞赛（第八届）',
+        award: '决赛三等奖',
         date: '2025年12月',
         track: 'FPGA创新设计赛道',
-        detail1: '使用Verilog语言完成图像处理模块开发，包括边缘检测、图像滤波等算法的硬件实现',
-        detail2: '负责FPGA逻辑与时序优化，解决跨时钟域信号处理、资源约束等关键问题'
-      },
-      // Competition 2
-      comp2: {
-        title: '中国大学生服务外包创新创业大赛',
-        award: '国家级三等奖',
-        date: '2025年7月',
-        track: '物联网方向',
-        detail1: '基于鸿蒙Hi3861开发板，参与智能家居系统的传感器数据采集与无线通信模块开发',
-        detail2: '协助完成设备间通信协议适配，解决低功耗场景下的信号稳定性问题'
+        detail1: '基于安路HX4S20 FPGA实现边缘检测、图像滤波、HSV色彩识别硬件加速，多级流水线支持640×480@30fps实时处理',
+        detail2: '负责核心逻辑设计、时序约束与资源优化，解决多时钟域信号跨域传输的亚稳态问题'
       }
     },
     // Projects
@@ -254,18 +254,18 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID行人重识别科研项目',
-        period: '2024.12 - 2026.03',
-        role: '核心成员',
-        description: '参与行人重识别模型训练，负责超参数调整与Loss函数优化',
-        tags: ['深度学习', '计算机视觉', 'PyTorch']
+        period: '2024.12 - 2026.02',
+        role: '共同第二作者',
+        description: '论文CATSANet已被SCI期刊Pattern Analysis and Applications录用，代码已开源；参与提出跨模态语义Token选择模块与基于最优传输的部件对齐损失',
+        tags: ['深度学习', '跨模态检索', 'PyTorch']
       },
       // Project 2
       project2: {
-        title: '小智MCP智能控制系统',
-        period: '2025.04 - 至今',
-        role: '核心开发者',
-        description: '基于ESP32和MCP协议构建的智能控制系统，实现AI模型与硬件设备的高效交互',
-        tags: ['嵌入式', 'MCP协议', '物联网']
+        title: '四足机器狗感知与运动控制系统',
+        period: '2026.04 - 2026.07',
+        role: '感知与运动控制开发',
+        description: '基于RDK X5与ROS2开发双目深度避障、手势控制与三级优先级运动仲裁器，获全国总决赛三等奖',
+        tags: ['具身智能', 'ROS2', 'RDK X5']
       },
       // Project 3
       project3: {
@@ -549,23 +549,23 @@ const translations = {
         detail1: 'Developed multi-device smart home system based on Xiaozhi AI and MCP protocol',
         detail2: 'Served as team captain, responsible for system architecture design and core functionality development'
       },
-      // Competition 1
+      // Competition 1 (9th, Robot Dog)
       comp1: {
-        title: 'National College Student Embedded Chip and System Design Competition',
-        award: 'National Third Prize',
+        title: 'National College Student Embedded Chip and System Design Competition (9th)',
+        award: 'National Final Third Prize',
+        date: 'July 2026',
+        track: 'Chip Application Track',
+        detail1: 'Developed stereo depth obstacle avoidance, MediaPipe gesture control and 3-level priority motion arbiter for a quadruped robot dog on RDK X5 (BPU 10 TOPS) + ROS2',
+        detail2: 'Responsible for perception and motion control system development, completed gait parameter tuning and system integration'
+      },
+      // Competition 2 (8th, FPGA)
+      comp2: {
+        title: 'National College Student Embedded Chip and System Design Competition (8th)',
+        award: 'Final Third Prize',
         date: 'December 2025',
         track: 'FPGA Innovation Design Track',
-        detail1: 'Completed image processing module development using Verilog, including hardware implementation of edge detection and image filtering algorithms',
-        detail2: 'Responsible for FPGA logic and timing optimization, solving critical issues like cross-clock domain signal processing and resource constraints'
-      },
-      // Competition 2
-      comp2: {
-        title: 'China College Student Service Outsourcing Innovation and Entrepreneurship Competition',
-        award: 'National Third Prize',
-        date: 'July 2025',
-        track: 'IoT Direction',
-        detail1: 'Participated in smart home system sensor data collection and wireless communication module development based on HarmonyOS Hi3861 board',
-        detail2: 'Assisted in device communication protocol adaptation, solving signal stability issues in low-power scenarios'
+        detail1: 'Hardware acceleration of edge detection, image filtering and HSV color recognition on Anlu HX4S20 FPGA, multi-stage pipeline supporting 640×480@30fps real-time processing',
+        detail2: 'Responsible for core logic design, timing constraints and resource optimization, resolved multi-clock-domain metastability issues'
       }
     },
     // Projects
@@ -583,18 +583,18 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID Person Re-identification Research Project',
-        period: '2024.12 - 2026.03',
-        role: 'Core Member',
-        description: 'Participated in person re-identification model training, responsible for hyperparameter tuning and Loss function optimization',
-        tags: ['Deep Learning', 'Computer Vision', 'PyTorch']
+        period: '2024.12 - 2026.02',
+        role: 'Co-2nd Author',
+        description: 'Paper CATSANet accepted by SCI journal Pattern Analysis and Applications, code open-sourced; co-proposed cross-modal semantic token selection module and optimal-transport part alignment loss',
+        tags: ['Deep Learning', 'Cross-modal Retrieval', 'PyTorch']
       },
       // Project 2
       project2: {
-        title: 'Xiaozhi MCP Intelligent Control System',
-        period: '2025.04 - Present',
-        role: 'Core Developer',
-        description: 'Intelligent control system based on ESP32 and MCP protocol, achieving efficient interaction between AI models and hardware devices',
-        tags: ['Embedded', 'MCP Protocol', 'IoT']
+        title: 'Quadruped Robot Dog Perception & Motion Control System',
+        period: '2026.04 - 2026.07',
+        role: 'Perception & Motion Control Developer',
+        description: 'Developed stereo depth obstacle avoidance, gesture control and motion arbiter on RDK X5 + ROS2, won National Final Third Prize',
+        tags: ['Embodied Intelligence', 'ROS2', 'RDK X5']
       },
       // Project 3
       project3: {
@@ -878,23 +878,23 @@ const translations = {
         detail1: '小智AIとMCPプロトコルに基づくマルチデバイス智能管家システムを担当',
         detail2: 'キャプテンとして、システムアーキテクチャ設計とコア機能開発を担当'
       },
-      // Competition 1
+      // Competition 1 (第9回 ロボットドッグ)
       comp1: {
-        title: '全国大学生組込みチップ・システム設計コンテスト',
-        award: '国家級三等賞',
+        title: '全国大学生組込みチップ・システム設計コンテスト（第9回）',
+        award: '全国決勝三等賞',
+        date: '2026年7月',
+        track: 'チップ応用トラック',
+        detail1: 'RDK X5（BPU 10 TOPS）+ ROS2 で四足ロボットドッグの双目深度障害回避、MediaPipe ジェスチャー制御、3段優先度運動アービタを開発',
+        detail2: '知覚・運動制御システム開発を担当、歩容パラメータ調整とシステム統合デバッグを完了'
+      },
+      // Competition 2 (第8回 FPGA)
+      comp2: {
+        title: '全国大学生組込みチップ・システム設計コンテスト（第8回）',
+        award: '決勝三等賞',
         date: '2025年12月',
         track: 'FPGAイノベーション設計トラック',
-        detail1: 'Verilog言語を使用して画像処理モジュールを開発、エッジ検出、画像フィルタ等のアルゴリズムのハードウェア実装を完了',
-        detail2: 'FPGAロジックとタイミング最適化を担当、クロックドメイン間信号処理、リソース制約等の重要問題を解決'
-      },
-      // Competition 2
-      comp2: {
-        title: '中国大学生サービス外包イノベーション起業コンテスト',
-        award: '国家級三等賞',
-        date: '2025年7月',
-        track: 'IoT方向',
-        detail1: '鴻蒙Hi3861開発ボードに基づき、スマートホームシステムのセンサーデータ収集とワイヤレス通信モジュール開発に参加',
-        detail2: 'デバイス間通信プロトコルアダプトを支援、低電力シーンでの信号安定性問題を解決'
+        detail1: '安路 HX4S20 FPGA でエッジ検出・画像フィルタ・HSV色彩認識のハードウェア高速化を実現、多段パイプラインで 640×480@30fps リアルタイム処理をサポート',
+        detail2: 'コアロジック設計、タイミング制約とリソース最適化を担当、マルチクロックドメインのメタスタビリティ問題を解決'
       }
     },
     // Projects
@@ -912,18 +912,18 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID歩行者再識別研究プロジェクト',
-        period: '2024.12 - 2026.03',
-        role: 'コアメンバー',
-        description: '歩行者再識別モデルのトレーニングに参加、ハイパーパラメータ調整とLoss関数最適化を担当',
-        tags: ['ディープラーニング', 'コンピュータビジョン', 'PyTorch']
+        period: '2024.12 - 2026.02',
+        role: '共第二著者',
+        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に採録、コード公開済み；クロスモーダル意味トークン選択モジュールと最適輸送部位整合損失を共同提案',
+        tags: ['ディープラーニング', 'クロスモーダル検索', 'PyTorch']
       },
       // Project 2
       project2: {
-        title: '小智MCPインテリジェント制御システム',
-        period: '2025.04 - 現在',
-        role: 'コア開発者',
-        description: 'ESP32とMCPプロトコルに基づくインテリジェント制御システム、AIモデルとハードウェアデバイスの効率的な対話を実現',
-        tags: ['組込み', 'MCPプロトコル', 'IoT']
+        title: '四足ロボットドッグ知覚・運動制御システム',
+        period: '2026.04 - 2026.07',
+        role: '知覚・運動制御開発',
+        description: 'RDK X5 + ROS2 で双目深度障害回避、ジェスチャー制御、運動アービタを開発、全国決勝三等賞を受賞',
+        tags: ['具現化知能', 'ROS2', 'RDK X5']
       },
       // Project 3
       project3: {
