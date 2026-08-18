@@ -196,11 +196,12 @@ export default function Home() {
               </Card>
               
               {/* 核心优势 */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
                 {[
                   { label: t('competitions.award.national') + ' ' + t('competitions.award.third'), value: '2', gradient: 'from-amber-500 to-orange-500', icon: '🏆' },
                   { label: t('competitions.award.provincialTop') + ' ' + t('competitions.award.first'), value: '1', gradient: 'from-violet-500 to-purple-600', icon: '🥇' },
                   { label: t('home.stats.totalAwards'), value: '3', gradient: 'from-fuchsia-500 to-pink-600', icon: '⭐' },
+                  { label: t('home.stats.certification'), value: '1', gradient: 'from-emerald-500 to-teal-500', icon: '📜' },
                 ].map((item, i) => (
                   <Card key={i} className="border-0 shadow-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
                     <CardContent className="pt-4 sm:pt-6 pb-3 sm:pb-6 text-center px-2 sm:px-4">

@@ -24,6 +24,13 @@ const projectsData: Record<string, {
     github: 'https://github.com/purplemist/smart-mcp-assistant',
     image: 'https://images.unsplash.com/photo-1558618666-ebe54879c9a3?w=800',
   },
+  'smart-home-iot': {
+    name: '服务外包创新创业大赛 · 智能家居物联网',
+    description: '基于鸿蒙 Hi3861 的智能家居传感器数据采集与无线通信系统。开发传感器数据采集模块与无线通信模块，适配低功耗场景需求，完成设备间通信协议适配，解决信号稳定性问题。获中国大学生服务外包创新创业大赛国家级三等奖。',
+    tech: ['鸿蒙 Hi3861', '物联网', '传感器采集', '无线通信', '低功耗'],
+    github: 'https://github.com/XiaoZi-Li',
+    image: 'https://images.unsplash.com/photo-1558002038-1055907531-9cfa346b8b8b?w=800',
+  },
   'personal-blog': {
     name: '个人博客网站',
     description: '基于Next.js + TypeScript + Supabase构建的个人博客网站，支持多语言切换、暗色模式、留言墙、用户认证等功能。采用shadcn/ui组件库，实现现代化的UI设计。',

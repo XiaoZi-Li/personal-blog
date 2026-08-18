@@ -116,6 +116,8 @@ function getResumeData(lang: string): ResumeData {
           { title: 'ReID Person Re-identification Research', role: 'Co-2nd Author', period: '2024/12 - 2026/02', desc: 'Paper CATSANet accepted by Pattern Analysis and Applications (SCI journal), code open-sourced. Built full PyTorch/CLIP training & evaluation pipeline; co-proposed cross-modal semantic token selection module and Sinkhorn optimal-transport part alignment loss (PACL), validated by ablation studies' },
           { title: 'FPGA-based Edge Intelligent Vision Terminal', role: 'Logic Design & System Integration', period: '2025/09 - 2025/12', desc: '8th National Embedded Chip & System Design Competition, FPGA Track — Final 3rd Prize. Hardware acceleration of edge detection, image filtering & HSV recognition on Anlu HX4S20 FPGA, multi-stage pipeline supporting 640×480@30fps, resolved multi-clock-domain metastability issues' },
           { title: 'Quadruped Robot Dog Perception & Motion Control', role: 'Perception & Motion Control Developer', period: '2026/04 - 2026/07', desc: '9th National Embedded Chip & System Design Competition, Chip Application Track — National Final 3rd Prize. Built stereo depth obstacle avoidance, MediaPipe gesture control and 3-level motion arbiter on RDK X5 (BPU 10 TOPS) + ROS2, completed gait tuning and system integration' },
+          { title: 'XiaoZhi MCP Intelligent Control System', role: 'Team Leader', period: '2025/10 - 2025/12', desc: 'ESP32-based multi-sensor fusion system integrating MCP protocol for efficient AI-model-to-device interaction. Won Provincial 1st Prize in Tianjin "New Engineering" Competition; designed the multi-sensor fusion scheme, led a 3-member team, balancing real-time data transmission and edge computing resources' },
+          { title: 'Service Outsourcing Innovation Competition · Smart Home IoT', role: 'Embedded Developer', period: '2025/01 - 2025/06', desc: 'Smart home sensor data acquisition & wireless communication system based on HarmonyOS Hi3861. Won National 3rd Prize in China College Student Service Outsourcing Competition; developed sensor acquisition and wireless modules for low-power scenarios, solved device protocol adaptation and signal stability issues' },
         ],
         passions: [
           { icon: '🤖', title: 'Embodied Intelligence', desc: 'Hands-on robotics integration experience (ROS2 stereo vision, gesture control, motion control), believing AI + hardware is the future direction' },
@@ -129,6 +131,7 @@ function getResumeData(lang: string): ResumeData {
           { title: 'AI Skills', color: 'blue', skills: ['PyTorch', 'On-device AI Deployment', 'MCP Protocol', 'AI-assisted Dev'] },
         ],
         awards: [
+          { award: 'Embedded System Design Engineer Certification (Elementary)', date: 'Issued by China Institute of Electronics', emoji: '📜' },
           { award: '9th National Embedded Chip & System Design Competition — National Final 3rd Prize', date: '2026/07', emoji: '🥉' },
           { award: '8th National Embedded Chip & System Design Competition — Final 3rd Prize (FPGA Track)', date: '2025/12', emoji: '🥉' },
           { award: 'Tianjin 8th "New Engineering" Competition — Provincial 1st Prize (Team Leader)', date: '2025/06', emoji: '🥇' },
@@ -177,6 +180,8 @@ function getResumeData(lang: string): ResumeData {
           { title: 'ReID 人物再識別研究プロジェクト', role: '共第二著者', period: '2024/12 - 2026/02', desc: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に採録、コード公開済み。PyTorch/CLIP による訓練・評価パイプラインを構築、クロスモーダル意味トークン選択モジュールと最適輸送に基づく部位整合損失（PACL）を共同提案、消融実験で検証' },
           { title: 'FPGA ベースのエッジインテリジェントビジョン端末', role: 'ロジック設計・システム連調', period: '2025/09 - 2025/12', desc: '第8回全国組み込みチップ・システム設計大会 FPGA トラック — 決勝三等賞。安路 HX4S20 FPGA でエッジ検出・画像フィルタリング・HSV 認識をハードウェア高速化、多段パイプラインで 640×480@30fps リアルタイム処理、マルチクロックドメインのメタスタビリティ問題を解決' },
           { title: '四足ロボットドッグの知覚・運動制御システム', role: '知覚・運動制御開発', period: '2026/04 - 2026/07', desc: '第9回全国組み込みチップ・システム設計大会 チップ応用トラック — 全国決勝三等賞。RDK X5（BPU 10 TOPS）+ ROS2 で双目深度障害回避、MediaPipe ジェスチャー制御、3段優先度運動アービタを構築、歩容調整とシステム統合を完了' },
+          { title: '小智 MCP インテリジェント制御システム', role: 'チームリーダー', period: '2025/10 - 2025/12', desc: 'ESP32 ベースのマルチセンサーフュージョンシステム、MCP プロトコル統合により AI モデルとデバイスの効率的な連携を実現。天津「新工科」大会で省部級一等賞を受賞；マルチセンサーフュージョン設計を担当、3人チームを統括しリアルタイムデータ伝送とエッジコンピューティングリソースのバランスを最適化' },
+          { title: 'サービスアウトソーシングイノベーション大会 · スマートホーム IoT', role: '組み込み開発者', period: '2025/01 - 2025/06', desc: '鴻蒙 Hi3861 ベースのスマートホームセンサーデータ収集・無線通信システム。中国大学生サービスアウトソーシング大会で国家級三等賞を受賞；低電力シーン向けのセンサー収集・無線モジュールを開発、デバイス間プロトコルアダプトと信号安定性問題を解決' },
         ],
         passions: [
           { icon: '🤖', title: '具現化知能', desc: 'ロボットシステム統合の実戦経験（ROS2 双目視覚、ジェスチャー制御、運動制御）を持ち、AI とハードウェアの融合が未来の方向と信じる' },
@@ -190,6 +195,7 @@ function getResumeData(lang: string): ResumeData {
           { title: 'AI 能力', color: 'blue', skills: ['PyTorch', 'AI モデル組み込み展開', 'MCP プロトコル', 'AI ツール支援開発'] },
         ],
         awards: [
+          { award: '組み込みシステム設計エンジニア認定（初級）', date: '中国電子学会発行', emoji: '📜' },
           { award: '第9回全国組み込みチップ・システム設計大会 — 全国決勝三等賞', date: '2026/07', emoji: '🥉' },
           { award: '第8回全国組み込みチップ・システム設計大会 — 決勝三等賞（FPGA トラック）', date: '2025/12', emoji: '🥉' },
           { award: '天津第8回「新工科」大会 — 省部級一等賞（リーダー）', date: '2025/06', emoji: '🥇' },
@@ -238,6 +244,8 @@ function getResumeData(lang: string): ResumeData {
           { title: 'ReID 行人重识别科研项目', role: '共同第二作者', period: '2024/12 - 2026/02', desc: '论文 CATSANet 已被 Pattern Analysis and Applications（SCI 期刊）录用，代码已开源。基于 PyTorch/CLIP 构建数据预处理、训练与评估全流程，参与提出跨模态语义 Token 选择模块与基于 Sinkhorn 最优传输的部件对齐损失（PACL），通过消融实验验证其对检索精度的提升' },
           { title: '基于 FPGA 的边缘智能视觉终端', role: '协助逻辑设计与系统联调', period: '2025/09 - 2025/12', desc: '第八届全国大学生嵌入式芯片与系统设计竞赛 FPGA 创新设计赛道 · 决赛三等奖。基于安路 HX4S20 FPGA 实现边缘检测、图像滤波、HSV 色彩识别算法硬件加速，多级流水线支持 640×480@30fps 实时处理，解决多时钟域亚稳态问题' },
           { title: '四足机器狗感知与运动控制系统', role: '感知与运动控制系统开发', period: '2026/04 - 2026/07', desc: '第九届全国大学生嵌入式芯片与系统设计竞赛芯片应用赛道 · 全国总决赛三等奖。基于 RDK X5（BPU 10 TOPS）+ ROS2 开发双目深度避障、MediaPipe 手势控制与三级优先级运动仲裁器，完成步态调优与系统集成调试' },
+          { title: '小智 MCP 智能控制系统', role: '队长', period: '2025/10 - 2025/12', desc: '基于 ESP32 的多传感器融合系统，集成 MCP 协议实现 AI 模型与嵌入式设备高效交互。获天津市"新工科"工程实践创新技术竞赛省部级一等奖；设计多传感器融合方案，打通 AI 模型与硬件设备间的上下文交互链路，统筹 3 人团队，解决实时数据传输与边缘计算资源平衡问题' },
+          { title: '服务外包创新创业大赛 · 智能家居物联网', role: '嵌入式开发人员', period: '2025/01 - 2025/06', desc: '基于鸿蒙 Hi3861 的智能家居传感器数据采集与无线通信系统。获中国大学生服务外包创新创业大赛国家级三等奖；开发传感器数据采集模块与无线通信模块，适配低功耗场景需求，完成设备间通信协议适配，解决信号稳定性问题' },
         ],
         passions: [
           { icon: '🤖', title: '具身智能', desc: '拥有机器人系统集成实战经验（ROS2 双目视觉、手势控制、运动控制），坚信 AI 与硬件结合是未来方向' },
@@ -251,6 +259,7 @@ function getResumeData(lang: string): ResumeData {
           { title: 'AI 能力', color: 'blue', skills: ['PyTorch', 'AI 模型嵌入式落地', 'MCP 协议', 'AI 工具辅助开发'] },
         ],
         awards: [
+          { award: '嵌入式系统设计工程技术人员认证（初级）', date: '中国电子学会颁发', emoji: '📜' },
           { award: '第九届全国大学生嵌入式芯片与系统设计竞赛 全国总决赛三等奖', date: '2026/07', emoji: '🥉' },
           { award: '第八届全国大学生嵌入式芯片与系统设计竞赛 决赛三等奖', date: '2025/12', emoji: '🥉' },
           { award: '天津第八届"新工科"竞赛 省部级一等奖（队长）', date: '2025/06', emoji: '🥇' },

@@ -36,10 +36,10 @@
 **文件：`src/contexts/LanguageContext.tsx`**（这是全站文案中心，三份语言包从上到下依次是 zh-CN / en-US / ja-JP，**改一处记得三份同步**）
 
 - **竞赛卡片** → 搜 `competitions:`，三张卡是 `comp1`（最新）、`comp2`、`comp0`
-- **项目卡片** → 搜 `project1` / `project2` / `project3`
 - **首页自我介绍、求职描述** → 搜 `about:` 或 `career:`
 - **技术热情卡片** → 搜 `passions`
-- **获奖统计数字**（国家级 x2 / 总计 3）→ 搜 `stats`（在 `src/app/page.tsx` 里，第 200 行附近）
+- **核心优势统计**（国家级 x2 / 总计 3 / 职业认证 1）→ `src/app/page.tsx` 第 200 行附近
+- **项目详情页**（/projects/xxx）→ `src/app/projects/[id]/page.tsx` 顶部的 `projectsData`，加新项目就加一个条目
 
 ## 四、管理数据库数据（留言、用户、浏览量）
 

@@ -141,6 +141,7 @@ const translations = {
       // 统计
       stats: {
         totalAwards: '总计获奖',
+        certification: '职业认证',
         projects: '项目经历'
       },
       resume: {
@@ -510,6 +511,7 @@ const translations = {
       // Stats
       stats: {
         totalAwards: 'Total Awards',
+        certification: 'Certifications',
         projects: 'Projects'
       },
     },
@@ -839,6 +841,7 @@ const translations = {
       // Stats
       stats: {
         totalAwards: '総受賞数',
+        certification: '職業認定',
         projects: 'プロジェクト'
       },
     },
