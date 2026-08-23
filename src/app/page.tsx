@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  MapPin, GraduationCap, Mail, Phone,
+  MapPin, GraduationCap, Mail,
   Trophy, Briefcase,
   Calendar, Users,
   Star, MessageSquare, FileText
@@ -9,7 +9,6 @@ import {
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ResumeDownloadButton } from '@/components/ResumeDownloadButton';
 import { Reveal } from '@/components/Reveal';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -104,10 +103,6 @@ export default function Home() {
                   {/* 联系方式 */}
                   <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
                     <div className="flex items-center justify-center gap-2">
-                      <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500" />
-                      <span>150-2202-2976</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
                       <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500" />
                       <span>purplemist@qq.com</span>
                     </div>
@@ -116,9 +111,15 @@ export default function Home() {
                       <span>{t('home.university')}</span>
                     </div>
                   </div>
-                  
-                  {/* 简历下载按钮 */}
-                  <ResumeDownloadButton />
+
+                  {/* 留言按钮 */}
+                  <Link
+                    href="/messages"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    {t('messages.leaveMessage')}
+                  </Link>
                   
                   {/* 教育背景简述 */}
                   <div className="mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl bg-violet-50/80 dark:bg-violet-950/30 text-left border border-violet-100 dark:border-violet-900/50">

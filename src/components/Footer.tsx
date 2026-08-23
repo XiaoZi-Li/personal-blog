@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Code2, Github, Mail, Phone } from 'lucide-react';
+import { Code2, Github, Mail, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
@@ -48,10 +48,10 @@ export default function Footer() {
                 <Mail className="w-4 h-4" />
                 purplemist@qq.com
               </a>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                150-2202-2976
-              </div>
+              <Link href="/messages" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <MessageSquare className="w-4 h-4" />
+                {t('messages.leaveMessage')}
+              </Link>
               <a
                 href="https://github.com/XiaoZi-Li"
                 target="_blank"

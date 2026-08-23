@@ -92,10 +92,8 @@ const translations = {
       skills: '技术栈',
       projects: '项目经历',
       honors: '荣誉奖项',
-      viewResume: '下载简历',
       github: 'GitHub',
       email: '邮箱',
-      phone: '电话',
       university: '天津工业大学',
       major: '电子信息工程',
       grade: '大四',
@@ -157,7 +155,6 @@ const translations = {
       resume: {
         title: '个人简历与求职意向',
         subtitle: '实践驱动成长，热爱铸就方向',
-        downloadPdf: '下载简历 PDF',
         objective: {
           label: '求职意向',
           position: '嵌入式软硬件开发 / 具身智能方向实习',
@@ -300,6 +297,7 @@ const translations = {
     messages: {
       title: '留言墙',
       subtitle: '有什么想说的？给我留言吧！',
+      leaveMessage: '给我留言',
       postMessage: '发表留言',
       placeholder: '写下你的留言...',
       replyPlaceholder: '写下你的回复...',
@@ -459,10 +457,8 @@ const translations = {
       skills: 'Tech Stack',
       projects: 'Projects',
       honors: 'Honors',
-      viewResume: 'Download Resume',
       github: 'GitHub',
       email: 'Email',
-      phone: 'Phone',
       university: 'Tianjin Polytechnic University',
       major: 'Electronic Information Engineering',
       grade: 'Senior',
@@ -507,7 +503,6 @@ const translations = {
       resume: {
         title: 'Resume & Job Intentions',
         subtitle: 'Practice-Driven Developer | Embedded & Embodied AI',
-        downloadPdf: 'Download PDF Resume',
         intentTitle: 'Job Intentions',
         intentPosition: 'Position: Embedded Software Engineer / Embodied AI Engineer',
         intentDirection: 'Direction: ESP32 + Rust development, RDK X5 embodied intelligence, AI Agent application',
@@ -649,6 +644,7 @@ const translations = {
     messages: {
       title: 'Message Wall',
       subtitle: 'What would you like to say? Leave me a message!',
+      leaveMessage: 'Leave a Message',
       postMessage: 'Post Message',
       placeholder: 'Write your message...',
       replyPlaceholder: 'Write your reply...',
@@ -808,10 +804,8 @@ const translations = {
       skills: 'スキル',
       projects: 'プロジェクト',
       honors: '栄誉賞',
-      viewResume: '履歴書を見る',
       github: 'GitHub',
       email: 'メール',
-      phone: '電話',
       university: '天津工業大学',
       major: '電子情報工学',
       grade: '4年生',
@@ -856,7 +850,6 @@ const translations = {
       resume: {
         title: '履歴書・就職意向',
         subtitle: '実践重視の開発者｜組込み＆具身AI',
-        downloadPdf: 'PDF履歴書をダウンロード',
         intentTitle: '就職意向',
         intentPosition: '志望職種：組込みソフトウェアエンジニア／具身AIエンジニア',
         intentDirection: '方向：ESP32 + Rust開発、RDK X5具身知能、AI Agent応用',
@@ -998,6 +991,7 @@ const translations = {
     messages: {
       title: 'メッセージボード',
       subtitle: '何か言いたいことはありますか？メッセージを残してください！',
+      leaveMessage: 'メッセージを残す',
       postMessage: 'メッセージを投稿',
       placeholder: 'メッセージを書く...',
       replyPlaceholder: '返信を書く...',

@@ -1,9 +1,9 @@
 'use client';
 
 import { TechCityBackground } from '@/components/TechCityBackground';
-import { 
-  Download, MapPin, Mail, Phone, Briefcase, ArrowLeft, 
-  GraduationCap, Trophy, Zap, Heart, ExternalLink, Code, Brain
+import {
+  MapPin, Mail, Briefcase, ArrowLeft,
+  GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -52,7 +52,6 @@ interface EducationData {
 interface ResumeData {
   title: string;
   subtitle: string;
-  downloadPdf: string;
   personalInfo: string;
   techStack: string;
   awardsTitle: string;
@@ -67,7 +66,6 @@ interface ResumeData {
   educationStr: string;
   grade: string;
   location: string;
-  phone: string;
   email: string;
   intent: IntentData;
   practices: PracticeData[];
@@ -78,7 +76,7 @@ interface ResumeData {
   selfEval: string;
   educationLabel: string;
   selfAssessmentLabel: string;
-  techForumLabel: string;
+  leaveMessage: string;
   backToHome: string;
 }
 
@@ -88,7 +86,6 @@ function getResumeData(lang: string): ResumeData {
       return {
         title: 'Resume',
         subtitle: 'Practice drives growth, passion shapes direction',
-        downloadPdf: 'Download PDF',
         personalInfo: 'Personal Info',
         techStack: 'Tech Stack',
         awardsTitle: 'Awards',
@@ -103,7 +100,6 @@ function getResumeData(lang: string): ResumeData {
         educationStr: 'Tiangong University · Electronic Information Engineering',
         grade: 'Class of 2027 · Available for internship',
         location: 'Xiqing District, Tianjin',
-        phone: '150-2202-2976',
         email: 'purplemist@qq.com',
         intent: {
           primary: 'Embedded Software/Hardware Development · Embodied Intelligence Internship',
@@ -146,14 +142,13 @@ function getResumeData(lang: string): ResumeData {
         selfEval: 'Focusing on the intersection of embedded systems and embodied intelligence with full-stack "HW-SW-Algorithm-AI" capabilities. Proficient in PyTorch model training & validation, with SCI paper writing and open-source experience; skilled in FPGA, MCU development and PCB design, familiar with ROS2, MCP and MQTT; hands-on experience in on-device AI deployment and robotics system integration, combining technical delivery with project coordination skills.',
         educationLabel: 'Education',
         selfAssessmentLabel: 'Self Assessment',
-        techForumLabel: 'Tech Forum',
+        leaveMessage: 'Leave a Message',
         backToHome: 'Back to Home',
       };
     case 'ja-JP':
       return {
         title: '履歴書',
         subtitle: '実践が成長を推進し、情熱が方向を決める',
-        downloadPdf: 'PDF ダウンロード',
         personalInfo: '個人情報',
         techStack: '技術スタック',
         awardsTitle: '受賞歴',
@@ -168,7 +163,6 @@ function getResumeData(lang: string): ResumeData {
         educationStr: '天津工業大学 · 電子情報工学',
         grade: '2027年卒 · インターン可能',
         location: '天津市西青区',
-        phone: '150-2202-2976',
         email: 'purplemist@qq.com',
         intent: {
           primary: '組み込みソフトウェア/ハードウェア開発 · 具現化知能インターン',
@@ -211,14 +205,13 @@ function getResumeData(lang: string): ResumeData {
         selfEval: '組み込みと具現化知能の交差領域に注力し、「ハードウェア-ソフトウェア-アルゴリズム-AI」の全スタック実践能力を持つ。PyTorch によるモデル構築・訓練・検証が可能で、SCI 論文執筆とオープンソース経験あり。FPGA、マイコン開発、PCB 設計を習得し、ROS2、MCP、MQTT プロトコルに精通。AI の組み込み展開とロボットシステム統合の実戦蓄積があり、技術実装力とプロジェクト統括力を兼ね備える。',
         educationLabel: '学歴',
         selfAssessmentLabel: '自己評価',
-        techForumLabel: '技術交流',
+        leaveMessage: 'メッセージを残す',
         backToHome: 'ホームに戻る',
       };
     default: // cn
       return {
         title: '个人简历',
         subtitle: '实践驱动成长，热爱铸就方向',
-        downloadPdf: '下载简历 PDF',
         personalInfo: '个人信息',
         techStack: '技术栈',
         awardsTitle: '竞赛获奖',
@@ -233,7 +226,6 @@ function getResumeData(lang: string): ResumeData {
         educationStr: '天津工业大学 · 电子信息工程',
         grade: '2027届 · 随时可到岗实习',
         location: '天津市西青区',
-        phone: '150-2202-2976',
         email: 'purplemist@qq.com',
         intent: {
           primary: '嵌入式软硬件开发 / 具身智能方向实习',
@@ -276,7 +268,7 @@ function getResumeData(lang: string): ResumeData {
         selfEval: '聚焦嵌入式软硬件与具身智能交叉领域，具备「硬件-软件-算法-AI」全栈实践能力。能够使用 PyTorch 完成模型搭建、调参训练与实验验证，拥有 SCI 论文写作与项目开源经验；掌握 FPGA、单片机开发与 PCB 设计焊接，熟悉 ROS2 机器人框架及 MCP、MQTT 协议，具备 AI 嵌入式落地、机器人系统集成的实战积累，兼具技术落地能力与项目统筹意识。',
         educationLabel: '教育经历',
         selfAssessmentLabel: '自我评价',
-        techForumLabel: '技术交流',
+        leaveMessage: '给我留言',
         backToHome: '返回首页',
       };
   }
@@ -328,14 +320,13 @@ export default function ResumePage() {
                 <p className="text-violet-300 text-sm sm:text-lg">{r.subtitle}</p>
               </div>
               <div className="flex gap-2 sm:gap-3">
-                <a
-                  href="/resume.pdf"
-                  download
+                <Link
+                  href="/messages"
                   className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg shadow-violet-600/25"
                 >
-                  <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {r.downloadPdf}
-                </a>
+                  <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  {r.leaveMessage}
+                </Link>
                 <a
                   href="mailto:purplemist@qq.com"
                   className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
@@ -376,10 +367,6 @@ export default function ResumePage() {
                   <div className="flex items-center gap-2 text-gray-300">
                     <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400 shrink-0" />
                     <span>{r.email}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-300">
-                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400 shrink-0" />
-                    <span>{r.phone}</span>
                   </div>
                   <div className="flex items-center gap-2 text-gray-300">
                     <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400 shrink-0" />
@@ -553,28 +540,20 @@ export default function ResumePage() {
                 <p className="text-white text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">{r.contactTitle}</p>
                 <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4">{r.contactDesc}</p>
                 <div className="flex justify-center gap-2 sm:gap-4 flex-wrap">
+                  <Link
+                    href="/messages"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg shadow-violet-600/25"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    {r.leaveMessage}
+                  </Link>
                   <a
                     href="mailto:purplemist@qq.com"
-                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg shadow-violet-600/25"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
                   >
                     <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {r.sendEmail}
                   </a>
-                  <a
-                    href="/resume.pdf"
-                    download
-                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
-                  >
-                    <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    {r.downloadPdf}
-                  </a>
-                  <Link
-                    href="/messages"
-                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    {r.techForumLabel}
-                  </Link>
                 </div>
               </div>
             </div>
