@@ -31,6 +31,12 @@ export default function Footer() {
               <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('nav.home')}
               </Link>
+              <Link href="/tutorials" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                {t('nav.tutorials')}
+              </Link>
+              <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                {t('nav.blog')}
+              </Link>
               <Link href="/projects" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 {t('nav.projects')}
               </Link>

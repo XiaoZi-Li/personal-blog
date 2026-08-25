@@ -348,6 +348,16 @@ html {
   animation-delay: 4000ms;
 }
 
+/* 隐藏横向滚动条（分类筛选标签栏） */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* 打字机效果 */
 @keyframes typing {
   from {

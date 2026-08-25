@@ -93,6 +93,36 @@ CREATE TABLE IF NOT EXISTS page_views (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- 8. 内容表（教程 / 文章 / 日记 统一存储）
+CREATE TABLE IF NOT EXISTS posts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  type TEXT NOT NULL DEFAULT 'article' CHECK (type IN ('tutorial', 'article', 'diary')),
+  category TEXT,                -- 教程分区：'51mcu' | 'stm32' | 'esp32' | 'dcdc'（文章/日记为 NULL）
+  summary TEXT,
+  content TEXT NOT NULL,        -- Markdown 正文
+  cover TEXT,                   -- 封面 emoji
+  tags TEXT,                    -- 逗号分隔标签
+  difficulty TEXT,              -- 教程难度：'beginner' | 'intermediate' | 'advanced'
+  mood TEXT,                    -- 日记心情 emoji
+  weather TEXT,                 -- 日记天气
+  views INTEGER NOT NULL DEFAULT 0,
+  like_count INTEGER NOT NULL DEFAULT 0,
+  is_published BOOLEAN NOT NULL DEFAULT true,
+  is_pinned BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- 9. 内容点赞表
+CREATE TABLE IF NOT EXISTS post_likes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  post_id UUID NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(post_id, user_id)
+);
+
 -- =====================================================
 -- 索引（提升查询性能）
 -- =====================================================
@@ -107,6 +137,9 @@ CREATE INDEX IF NOT EXISTS idx_project_comment_likes_comment_user ON project_com
 CREATE INDEX IF NOT EXISTS idx_notifications_user_read ON notifications(user_id, is_read, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_page_views_page ON page_views(page, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_page_views_ip_page_time ON page_views(ip_address, page, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_posts_type_category ON posts(type, category, is_pinned DESC, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_posts_published ON posts(is_published, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_post_likes_post_user ON post_likes(post_id, user_id);
 
 -- =====================================================
 -- 自动更新 updated_at 触发器
@@ -131,6 +164,10 @@ DROP TRIGGER IF EXISTS update_project_comments_updated_at ON project_comments;
 CREATE TRIGGER update_project_comments_updated_at BEFORE UPDATE ON project_comments
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_posts_updated_at ON posts;
+CREATE TRIGGER update_posts_updated_at BEFORE UPDATE ON posts
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
 -- =====================================================
 -- 底层 GRANT 授权（新版 Supabase 项目不再自动授予，必须显式执行）
 -- =====================================================
@@ -153,6 +190,8 @@ ALTER TABLE project_comments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE project_comment_likes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
 ALTER TABLE page_views ENABLE ROW LEVEL SECURITY;
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE post_likes ENABLE ROW LEVEL SECURITY;
 
 -- users
 CREATE POLICY "允许注册" ON users FOR INSERT WITH CHECK (true);
@@ -189,6 +228,17 @@ CREATE POLICY "标记已读" ON notifications FOR UPDATE USING (true);
 -- page_views
 CREATE POLICY "记录访问" ON page_views FOR INSERT WITH CHECK (true);
 CREATE POLICY "查看统计" ON page_views FOR SELECT USING (true);
+
+-- posts
+CREATE POLICY "公开读取内容" ON posts FOR SELECT USING (is_published = true OR is_published = false);
+CREATE POLICY "管理内容" ON posts FOR INSERT WITH CHECK (true);
+CREATE POLICY "更新内容" ON posts FOR UPDATE USING (true);
+CREATE POLICY "删除内容" ON posts FOR DELETE USING (true);
+
+-- post_likes
+CREATE POLICY "查看内容点赞" ON post_likes FOR SELECT USING (true);
+CREATE POLICY "内容点赞" ON post_likes FOR INSERT WITH CHECK (true);
+CREATE POLICY "取消内容点赞" ON post_likes FOR DELETE USING (true);
 
 -- =====================================================
 -- Supabase Storage：头像存储桶（公开读，限 2MB、仅图片）

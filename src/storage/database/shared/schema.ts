@@ -105,3 +105,37 @@ export const pageViews = pgTable("page_views", {
 	index("page_views_page_idx").using("btree", table.page.asc().nullsLast().op("text_ops")),
 	index("page_views_user_id_idx").using("btree", table.userId.asc().nullsLast().op("int4_ops")),
 ]);
+
+// 内容表（教程 / 文章 / 日记）
+export const posts = pgTable("posts", {
+	id: varchar("id", { length: 36 }).primaryKey().notNull(),
+	title: varchar({ length: 500 }).notNull(),
+	type: varchar({ length: 20 }).default('article').notNull(), // 'tutorial' | 'article' | 'diary'
+	category: varchar({ length: 20 }), // '51mcu' | 'stm32' | 'esp32' | 'dcdc'
+	summary: text(),
+	content: text().notNull(),
+	cover: varchar({ length: 20 }),
+	tags: text(),
+	difficulty: varchar({ length: 20 }), // 'beginner' | 'intermediate' | 'advanced'
+	mood: varchar({ length: 20 }),
+	weather: varchar({ length: 20 }),
+	views: integer("views").default(0).notNull(),
+	likeCount: integer("like_count").default(0).notNull(),
+	isPublished: boolean("is_published").default(true).notNull(),
+	isPinned: boolean("is_pinned").default(false).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+}, (table) => [
+	index("posts_type_category_idx").using("btree", table.type.asc().nullsLast(), table.category.asc().nullsLast(), table.createdAt.desc().nullsFirst()),
+	index("posts_published_idx").using("btree", table.isPublished.asc().nullsLast(), table.createdAt.desc().nullsFirst()),
+]);
+
+// 内容点赞表
+export const postLikes = pgTable("post_likes", {
+	id: varchar("id", { length: 36 }).primaryKey().notNull(),
+	postId: varchar("post_id", { length: 36 }).notNull(),
+	userId: varchar("user_id", { length: 255 }).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+}, (table) => [
+	index("post_likes_post_user_idx").using("btree", table.postId.asc().nullsLast(), table.userId.asc().nullsLast()),
+]);
