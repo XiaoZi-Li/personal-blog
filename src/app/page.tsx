@@ -4,7 +4,7 @@ import {
   MapPin, GraduationCap, Mail,
   Trophy, Briefcase,
   Calendar, Users,
-  Star, MessageSquare, FileText
+  Star, MessageSquare, FileText, ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -199,7 +199,17 @@ export default function Home() {
               <CardContent className="pt-5 sm:pt-6 px-4 sm:px-8 pb-5 sm:pb-6">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
                   <div>
-                    <h3 className="text-base sm:text-xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{t('home.research.paper')}</h3>
+                    <h3 className="text-base sm:text-xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                      <a
+                        href="https://link.springer.com/article/10.1007/s10044-026-01761-5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 hover:underline underline-offset-4 decoration-violet-400"
+                      >
+                        {t('home.research.paper')}
+                        <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500 shrink-0" />
+                      </a>
+                    </h3>
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 text-xs sm:text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
