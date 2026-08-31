@@ -1,0 +1,40 @@
+name: Keep Alive
+
+# 每天北京时间 10:15 自动运行，防止 Supabase 免费项目因 7 天无活动被暂停
+on:
+  schedule:
+    - cron: '15 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 访问网站留言接口，会真实查询 Supabase 数据库，计入项目活跃度
+      - name: Ping website API
+        run: |
+          status=$(curl -s -o /tmp/body.json -w "%{http_code}" --max-time 90 "https://zenithfall.top/api/messages?page=1&limit=1")
+          echo "API status: $status"
+          head -c 200 /tmp/body.json; echo
+          if [ "$status" != "200" ]; then
+            echo "::error::API returned $status, check https://zenithfall.top and Supabase dashboard"
+            exit 1
+          fi
+
+      # GitHub 规则：仓库 60 天无提交会自动禁用定时工作流
+      # 超过 50 天没有提交时，自动补一个空提交保持仓库活跃
+      - name: Keep repository active
+        run: |
+          git config user.name "keep-alive-bot"
+          git config user.email "actions@users.noreply.github.com"
+          age=$(( ( $(date +%s) - $(git log -1 --format=%ct) ) / 86400 ))
+          echo "Last commit was $age day(s) ago"
+          if [ "$age" -ge 50 ]; then
+            git commit --allow-empty -m "chore: keep repo active [skip ci]"
+            git push
+          fi
