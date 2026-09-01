@@ -66,4 +66,6 @@
 
 - 本地预览：项目目录跑 `pnpm dev` → 浏览器开 http://localhost:3000
 - 构建失败就看 Vercel → Deployments → 点最新记录看日志，报错贴给 AI
+- **网站打开正常但留言板转圈/报错** → 多半是 Supabase 免费项目暂停了：去 supabase.com → 你的项目 → 点 "Restore project" 恢复（暂停后定时任务也叫不醒，必须手动恢复一次）
+- GitHub 每天会自动跑 Keep Alive 定时任务保活 Supabase（`.github/workflows/keep-alive.yml`），失败时会发邮件，按邮件里的提示处理即可
 - Supabase 一周没人访问会休眠，每周打开一次自己的网站即可保活

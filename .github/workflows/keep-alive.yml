@@ -16,13 +16,24 @@ jobs:
       - uses: actions/checkout@v4
 
       # 访问网站留言接口，会真实查询 Supabase 数据库，计入项目活跃度
+      # 临时网络抖动自动重试 3 次；若 Supabase 项目已被暂停，恢复前会持续失败
       - name: Ping website API
+        id: ping
         run: |
-          status=$(curl -s -o /tmp/body.json -w "%{http_code}" --max-time 90 "https://zenithfall.top/api/messages?page=1&limit=1")
-          echo "API status: $status"
-          head -c 200 /tmp/body.json; echo
-          if [ "$status" != "200" ]; then
-            echo "::error::API returned $status, check https://zenithfall.top and Supabase dashboard"
+          ok=false
+          for i in 1 2 3; do
+            status=$(curl -s -o /tmp/body.json -w "%{http_code}" --max-time 60 "https://zenithfall.top/api/messages?page=1&limit=1")
+            echo "Attempt $i: HTTP $status"
+            head -c 200 /tmp/body.json; echo
+            if [ "$status" = "200" ]; then
+              ok=true
+              break
+            fi
+            [ "$i" -lt 3 ] && sleep 60
+          done
+
+          if [ "$ok" != "true" ]; then
+            echo "::error::API 连续 3 次返回非 200。最常见原因：Supabase 免费项目已暂停(paused)，需到 supabase.com → 项目 → Restore project 手动恢复（每日定时请求无法唤醒已暂停的项目）。也可能是网站部署异常，检查 https://zenithfall.top 和 Vercel 日志。"
             exit 1
           fi
 
