@@ -208,9 +208,9 @@ const translations = {
         paper: 'CATSANet —— 跨模态行人重识别',
         period: '2024.12 - 2026.02',
         role: '共同第一作者',
-        status: 'SCI 已录用',
+        status: 'SCI 已正式发表',
         journal: 'Pattern Analysis and Applications',
-        desc: '论文被 SCI 期刊 Pattern Analysis and Applications 录用，代码已开源。提出跨模态语义 Token 选择模块与基于 Sinkhorn 最优传输的部件对齐损失（PACL），构建 PyTorch/CLIP 全流程训练评估管线，消融实验验证对检索精度的提升。'
+        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表并被 SCI 检索，代码已开源。提出跨模态语义 Token 选择模块与基于 Sinkhorn 最优传输的部件对齐损失（PACL），构建 PyTorch/CLIP 全流程训练评估管线，消融实验验证对检索精度的提升。'
       },
       resume: {
         title: '个人简历与求职意向',
@@ -333,7 +333,7 @@ const translations = {
         title: 'ReID行人重识别科研项目',
         period: '2024.12 - 2026.02',
         role: '共同第一作者',
-        description: '论文CATSANet已被SCI期刊Pattern Analysis and Applications录用，代码已开源；参与提出跨模态语义Token选择模块与基于最优传输的部件对齐损失',
+        description: '论文CATSANet已在SCI期刊Pattern Analysis and Applications正式发表并被SCI检索，代码已开源；参与提出跨模态语义Token选择模块与基于最优传输的部件对齐损失',
         tags: ['深度学习', '跨模态检索', 'PyTorch']
       },
       // Project 2
@@ -654,9 +654,9 @@ const translations = {
         paper: 'CATSANet — Cross-modal Person Re-identification',
         period: '2024.12 - 2026.02',
         role: 'Co-first Author',
-        status: 'SCI Accepted',
+        status: 'SCI Published',
         journal: 'Pattern Analysis and Applications',
-        desc: 'Paper accepted by SCI journal Pattern Analysis and Applications, code open-sourced. Proposed a cross-modal semantic token selection module and a Sinkhorn optimal-transport part alignment loss (PACL), built the full PyTorch/CLIP training and evaluation pipeline, with retrieval gains validated by ablation studies.'
+        desc: 'Paper officially published in the SCI journal Pattern Analysis and Applications (SCI-indexed), code open-sourced. Proposed a cross-modal semantic token selection module and a Sinkhorn optimal-transport part alignment loss (PACL), built the full PyTorch/CLIP training and evaluation pipeline, with retrieval gains validated by ablation studies.'
       },
     },
     // Skills
@@ -740,7 +740,7 @@ const translations = {
         title: 'ReID Person Re-identification Research Project',
         period: '2024.12 - 2026.02',
         role: 'Co-first Author',
-        description: 'Paper CATSANet accepted by SCI journal Pattern Analysis and Applications, code open-sourced; co-proposed cross-modal semantic token selection module and optimal-transport part alignment loss',
+        description: 'Paper CATSANet officially published in the SCI journal Pattern Analysis and Applications (SCI-indexed), code open-sourced; co-proposed cross-modal semantic token selection module and optimal-transport part alignment loss',
         tags: ['Deep Learning', 'Cross-modal Retrieval', 'PyTorch']
       },
       // Project 2
@@ -1061,9 +1061,9 @@ const translations = {
         paper: 'CATSANet — クロスモーダル歩行者再識別',
         period: '2024.12 - 2026.02',
         role: '共第一著者',
-        status: 'SCI 採録済み',
+        status: 'SCI 正式掲載済み',
         journal: 'Pattern Analysis and Applications',
-        desc: '論文が SCI ジャーナル Pattern Analysis and Applications に採録、コード公開済み。クロスモーダル意味トークン選択モジュールと Sinkhorn 最適輸送に基づく部位整合損失（PACL）を提案、PyTorch/CLIP による訓練・評価パイプラインを構築、消融実験で検索精度の向上を検証。'
+        desc: '論文が SCI ジャーナル Pattern Analysis and Applications に正式掲載され SCI 検索可能、コード公開済み。クロスモーダル意味トークン選択モジュールと Sinkhorn 最適輸送に基づく部位整合損失（PACL）を提案、PyTorch/CLIP による訓練・評価パイプラインを構築、消融実験で検索精度の向上を検証。'
       },
     },
     // Skills
@@ -1147,7 +1147,7 @@ const translations = {
         title: 'ReID歩行者再識別研究プロジェクト',
         period: '2024.12 - 2026.02',
         role: '共第一著者',
-        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に採録、コード公開済み；クロスモーダル意味トークン選択モジュールと最適輸送部位整合損失を共同提案',
+        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載され SCI 検索可能、コード公開済み；クロスモーダル意味トークン選択モジュールと最適輸送部位整合損失を共同提案',
         tags: ['ディープラーニング', 'クロスモーダル検索', 'PyTorch']
       },
       // Project 2
