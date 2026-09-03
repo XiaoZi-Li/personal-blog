@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
-import { Code2, FolderGit2, MessageSquare, LogOut, Settings, LogIn, UserPlus, UserCog, Menu, X, FileText, BookOpen, Newspaper } from 'lucide-react';
+import { Code2, FolderGit2, MessageSquare, LogOut, Settings, LogIn, UserPlus, UserCog, Menu, X, FileText, BookOpen, Newspaper, Camera } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import NotificationBell from '@/components/NotificationBell';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -24,6 +24,7 @@ export default function Navigation() {
     { href: '/', label: t('nav.home'), icon: Code2 },
     { href: '/tutorials', label: t('nav.tutorials'), icon: BookOpen },
     { href: '/blog', label: t('nav.blog'), icon: Newspaper },
+    { href: '/gallery', label: t('nav.gallery'), icon: Camera },
     { href: '/resume', label: t('nav.resume') || '简历', icon: FileText },
     { href: '/projects', label: t('nav.projects'), icon: FolderGit2 },
     { href: '/messages', label: t('nav.messages'), icon: MessageSquare },
@@ -67,7 +68,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {links.map((link) => {
               const Icon = link.icon;
               const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
@@ -197,7 +198,7 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-3 border-t border-border/50 animate-in slide-in-from-top duration-200">
+          <div className="lg:hidden py-3 border-t border-border/50 animate-in slide-in-from-top duration-200">
             <div className="flex flex-col gap-1">
               {links.map((link) => {
                 const Icon = link.icon;

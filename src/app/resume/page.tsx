@@ -3,7 +3,7 @@
 import { TechCityBackground } from '@/components/TechCityBackground';
 import {
   MapPin, Mail, Briefcase, ArrowLeft,
-  GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare, ExternalLink
+  GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare, ExternalLink, BadgeCheck, X
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -51,6 +51,13 @@ interface EducationData {
   courses: string;
 }
 
+interface CertData {
+  title: string;
+  issuer: string;
+  date: string;
+  viewHint: string;
+}
+
 interface ResumeData {
   title: string;
   subtitle: string;
@@ -75,6 +82,7 @@ interface ResumeData {
   techCategories: TechCategoryData[];
   awards: AwardData[];
   education: EducationData;
+  cert: CertData;
   selfEval: string;
   educationLabel: string;
   selfAssessmentLabel: string;
@@ -141,6 +149,12 @@ function getResumeData(lang: string): ResumeData {
           period: '2023/09 - 2027/06',
           courses: 'Circuit Theory, Analog Electronics, Digital Electronics, Signals & Systems, Electromagnetics, Embedded System Design',
         },
+        cert: {
+          title: 'Embedded System Design Engineer (Entry Level)',
+          issuer: 'Chinese Institute of Electronics · Professional Certificate',
+          date: '2026.08',
+          viewHint: 'View Certificate',
+        },
         selfEval: 'Focusing on the intersection of embedded systems and embodied intelligence with full-stack "HW-SW-Algorithm-AI" capabilities. Proficient in PyTorch model training & validation, with SCI paper writing and open-source experience; skilled in FPGA, MCU development and PCB design, familiar with ROS2, MCP and MQTT; hands-on experience in on-device AI deployment and robotics system integration, combining technical delivery with project coordination skills.',
         educationLabel: 'Education',
         selfAssessmentLabel: 'Self Assessment',
@@ -203,6 +217,12 @@ function getResumeData(lang: string): ResumeData {
           major: '電子情報工学',
           period: '2023/09 - 2027/06',
           courses: '回路理論、アナログ電子工学、デジタル電子工学、信号とシステム、電磁気学、組み込みシステム設計',
+        },
+        cert: {
+          title: '組込みシステム設計エンジニア（初級）',
+          issuer: '中国電子学会 · 専門技術証明書',
+          date: '2026.08',
+          viewHint: '証明書を見る',
         },
         selfEval: '組み込みと具現化知能の交差領域に注力し、「ハードウェア-ソフトウェア-アルゴリズム-AI」の全スタック実践能力を持つ。PyTorch によるモデル構築・訓練・検証が可能で、SCI 論文執筆とオープンソース経験あり。FPGA、マイコン開発、PCB 設計を習得し、ROS2、MCP、MQTT プロトコルに精通。AI の組み込み展開とロボットシステム統合の実戦蓄積があり、技術実装力とプロジェクト統括力を兼ね備える。',
         educationLabel: '学歴',
@@ -267,6 +287,12 @@ function getResumeData(lang: string): ResumeData {
           period: '2023/09 - 2027/06',
           courses: '电路原理、模拟电子技术、数字电子技术、信号与系统、电磁场与电磁波、嵌入式系统设计',
         },
+        cert: {
+          title: '嵌入式系统设计工程师（初级）',
+          issuer: '中国电子学会 · 专业技术证书',
+          date: '2026.08',
+          viewHint: '查看证书',
+        },
         selfEval: '聚焦嵌入式软硬件与具身智能交叉领域，具备「硬件-软件-算法-AI」全栈实践能力。能够使用 PyTorch 完成模型搭建、调参训练与实验验证，拥有 SCI 论文写作与项目开源经验；掌握 FPGA、单片机开发与 PCB 设计焊接，熟悉 ROS2 机器人框架及 MCP、MQTT 协议，具备 AI 嵌入式落地、机器人系统集成的实战积累，兼具技术落地能力与项目统筹意识。',
         educationLabel: '教育经历',
         selfAssessmentLabel: '自我评价',
@@ -279,6 +305,7 @@ function getResumeData(lang: string): ResumeData {
 export default function ResumePage() {
   const { language } = useLanguage();
   const [mounted, setMounted] = useState(false);
+  const [showCert, setShowCert] = useState(false);
   
   useEffect(() => {
     setMounted(true);
@@ -422,6 +449,27 @@ export default function ResumePage() {
                     </div>
                   ))}
                 </div>
+
+                {/* Professional Certificate */}
+                <button
+                  onClick={() => setShowCert(true)}
+                  className="mt-4 w-full group text-left rounded-xl border border-white/10 hover:border-violet-400/50 bg-gradient-to-br from-violet-500/10 to-purple-500/10 p-3 transition-all hover:shadow-lg hover:shadow-violet-500/10"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <BadgeCheck className="w-4 h-4 text-violet-400 shrink-0" />
+                    <span className="text-xs sm:text-sm font-medium text-white">{r.cert.title}</span>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/certificates/cie-embedded-cert.jpg"
+                    alt={r.cert.title}
+                    className="w-full rounded-lg border border-white/10 shadow-md group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                  <p className="mt-2 text-[10px] sm:text-xs text-gray-400 flex items-center justify-between">
+                    <span>{r.cert.issuer} · {r.cert.date}</span>
+                    <span className="text-violet-300 group-hover:text-violet-200">{r.cert.viewHint} →</span>
+                  </p>
+                </button>
               </div>
 
               {/* Education */}
@@ -573,6 +621,31 @@ export default function ResumePage() {
           </div>
         </div>
       </div>
+
+      {/* Certificate Lightbox */}
+      {showCert && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setShowCert(false)}
+        >
+          <button
+            onClick={() => setShowCert(false)}
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <div className="max-w-[92vw] max-h-[88vh] flex flex-col items-center gap-3" onClick={e => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/certificates/cie-embedded-cert.jpg"
+              alt={r.cert.title}
+              className="max-w-full max-h-[80vh] rounded-xl shadow-2xl border border-white/20"
+            />
+            <p className="text-xs sm:text-sm text-gray-300">{r.cert.title} · {r.cert.issuer}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

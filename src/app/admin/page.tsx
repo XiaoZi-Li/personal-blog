@@ -6,13 +6,14 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import {
   Users, MessageSquare, Eye, TrendingUp, LogOut, LayoutDashboard,
   Trash2, Pin, PinOff, RefreshCw, ChevronLeft, ChevronRight,
-  MessageCircle, UserX, UserCheck, Ban, BookOpen
+  MessageCircle, UserX, UserCheck, Ban, BookOpen, Camera
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { PostManager } from '@/components/admin/PostManager';
+import { MediaManager } from '@/components/admin/MediaManager';
 
 interface Stats {
   totalViews: number;
@@ -67,7 +68,7 @@ export default function AdminPage() {
   const { toast } = useToast();
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'stats' | 'messages' | 'users' | 'posts'>('stats');
+  const [activeTab, setActiveTab] = useState<'stats' | 'messages' | 'users' | 'posts' | 'media'>('stats');
   
   // 统计数据
   const [stats, setStats] = useState<Stats | null>(null);
@@ -338,6 +339,13 @@ export default function AdminPage() {
           >
             <BookOpen className="w-4 h-4 mr-2" />
             内容管理
+          </Button>
+          <Button
+            variant={activeTab === 'media' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('media')}
+          >
+            <Camera className="w-4 h-4 mr-2" />
+            作品管理
           </Button>
         </div>
 
@@ -712,6 +720,9 @@ export default function AdminPage() {
 
         {/* 内容管理标签页 */}
         {activeTab === 'posts' && <PostManager />}
+
+        {/* 作品管理标签页 */}
+        {activeTab === 'media' && <MediaManager />}
       </div>
     </div>
   );

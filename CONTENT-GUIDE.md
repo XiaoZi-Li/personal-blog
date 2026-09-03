@@ -47,7 +47,21 @@
 - **核心优势统计**（国家级 x2 / 总计 3 / 职业认证 1）→ `src/app/page.tsx` 第 200 行附近
 - **项目详情页**（/projects/xxx）→ `src/app/projects/[id]/page.tsx` 顶部的 `projectsData`，加新项目就加一个条目
 
-## 四、管理数据库数据（留言、用户、浏览量）
+## 四、上传照片 / 视频作品（作品集）
+
+**入口：网站导航栏 → 管理后台 → 「作品管理」标签页**
+
+- **上传文件**：选分类（作品 / 竞赛 / 生活）→ 选文件（支持多选，图片视频都行）→ 上传。标题默认取文件名
+- **外部链接**：贴 B 站 / YouTube 视频页链接（自动转成站内播放器）或任意图片、视频直链
+- 首次使用前两步：① Supabase → SQL Editor 执行一次 `supabase-migrate-add-media.sql`；② 到 Supabase → Settings → API 复制 `service_role` 密钥，在 Vercel → Settings → Environment Variables 添加 `SUPABASE_SERVICE_ROLE_KEY` 并 Redeploy（不配密钥也能用「外部链接」方式添加）
+- 前台页面：`/gallery`，支持分类筛选、灯箱浏览、键盘左右切换、B 站 / YouTube 视频站内播放
+- 删除作品会同时删除存储桶里的文件和数据库记录
+
+## 五、换证书图片
+
+证书文件在 `public/certificates/cie-embedded-cert.jpg`（已打码身份证号和证件照）。换新证书：处理好打码后同名覆盖，GitHub Desktop 提交推送即可，简历页获奖区的证书卡片会自动显示。
+
+## 六、管理数据库数据（留言、用户、浏览量）
 
 不碰代码，直接在 **Supabase 后台**操作（supabase.com → 你的项目）：
 
@@ -57,15 +71,15 @@
 
 网站后台 `/admin` 也能做日常管理（删评论、看数据）。
 
-## 五、翻译覆盖现状
+## 七、翻译覆盖现状
 
-- 已支持三语切换：首页、简历、项目、留言、登录注册、学习专区、博客
+- 已支持三语切换：首页、简历、项目、留言、登录注册、学习专区、博客、作品集
 - **暂未接入翻译**（固定中文）：`/admin` 后台、`/settings` 设置、`/notifications` 通知、`/robotics`——这几个是自用页面，如需翻译让 AI 补即可
 
-## 六、出问题时
+## 八、出问题时
 
 - 本地预览：项目目录跑 `pnpm dev` → 浏览器开 http://localhost:3000
 - 构建失败就看 Vercel → Deployments → 点最新记录看日志，报错贴给 AI
-- **网站打开正常但留言板转圈/报错** → 多半是 Supabase 免费项目暂停了：去 supabase.com → 你的项目 → 点 "Restore project" 恢复（暂停后定时任务也叫不醒，必须手动恢复一次）
-- GitHub 每天会自动跑 Keep Alive 定时任务保活 Supabase（`.github/workflows/keep-alive.yml`），失败时会发邮件，按邮件里的提示处理即可
-- Supabase 一周没人访问会休眠，每周打开一次自己的网站即可保活
+- **网站打开正常但留言板转圈/报错** → 多半是 Supabase 免费项目暂停了：去 supabase.com → 你的项目 → 点 "Restore project" 恢复
+- **Supabase 保活**（已取消自动定时任务）：免费项目 7 天无数据库活动会自动暂停，**每周打开一次自己的网站**（留言板/博客等会查库的页面）或登录一次 Supabase 后台即可保活；一旦暂停需手动 Restore
+- 上传文件报错提示缺少 SUPABASE_SERVICE_ROLE_KEY → 按第三节配置，或改用「外部链接」方式

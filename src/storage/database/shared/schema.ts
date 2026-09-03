@@ -139,3 +139,19 @@ export const postLikes = pgTable("post_likes", {
 }, (table) => [
 	index("post_likes_post_user_idx").using("btree", table.postId.asc().nullsLast(), table.userId.asc().nullsLast()),
 ]);
+
+// 媒体记录表（作品集照片/视频）
+export const media = pgTable("media", {
+	id: varchar("id", { length: 36 }).primaryKey().notNull(),
+	title: varchar({ length: 500 }).notNull(),
+	description: text(),
+	type: varchar({ length: 10 }).default('image').notNull(), // 'image' | 'video'
+	url: text().notNull(),
+	thumbnail: text(),
+	category: varchar({ length: 20 }).default('works').notNull(), // 'works' | 'competition' | 'life'
+	isPublished: boolean("is_published").default(true).notNull(),
+	sortOrder: integer("sort_order").default(0).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+}, (table) => [
+	index("media_category_idx").using("btree", table.category.asc().nullsLast(), table.isPublished.asc().nullsLast(), table.sortOrder.desc().nullsFirst()),
+]);

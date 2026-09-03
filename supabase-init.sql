@@ -123,6 +123,20 @@ CREATE TABLE IF NOT EXISTS post_likes (
   UNIQUE(post_id, user_id)
 );
 
+-- 10. 媒体记录表（作品集照片/视频）
+CREATE TABLE IF NOT EXISTS media (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  type TEXT NOT NULL DEFAULT 'image' CHECK (type IN ('image', 'video')),
+  url TEXT NOT NULL,
+  thumbnail TEXT,
+  category TEXT NOT NULL DEFAULT 'works',
+  is_published BOOLEAN NOT NULL DEFAULT true,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- =====================================================
 -- 索引（提升查询性能）
 -- =====================================================
@@ -239,6 +253,20 @@ CREATE POLICY "删除内容" ON posts FOR DELETE USING (true);
 CREATE POLICY "查看内容点赞" ON post_likes FOR SELECT USING (true);
 CREATE POLICY "内容点赞" ON post_likes FOR INSERT WITH CHECK (true);
 CREATE POLICY "取消内容点赞" ON post_likes FOR DELETE USING (true);
+
+-- media
+CREATE POLICY "公开读取媒体" ON media FOR SELECT USING (is_published = true OR is_published = false);
+CREATE POLICY "管理媒体" ON media FOR INSERT WITH CHECK (true);
+CREATE POLICY "更新媒体" ON media FOR UPDATE USING (true);
+CREATE POLICY "删除媒体" ON media FOR DELETE USING (true);
+
+-- 存储桶（公开可读，上传走服务端签名 URL）
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('media', 'media', true)
+ON CONFLICT (id) DO NOTHING;
+
+DROP POLICY IF EXISTS "公开读取媒体文件" ON storage.objects;
+CREATE POLICY "公开读取媒体文件" ON storage.objects FOR SELECT USING (bucket_id = 'media');
 
 -- =====================================================
 -- Supabase Storage：头像存储桶（公开读，限 2MB、仅图片）

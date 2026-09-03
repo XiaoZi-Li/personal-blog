@@ -66,6 +66,7 @@ const translations = {
       resume: '简历',
       tutorials: '学习专区',
       blog: '博客',
+      gallery: '作品集',
       admin: '管理后台',
       settings: '设置',
       notifications: '通知',
@@ -133,6 +134,16 @@ const translations = {
       mood: '今日心情',
       weather: '天气',
       latest: '最新发布',
+    },
+    // 作品集
+    gallery: {
+      badge: '作品集',
+      title: '照片与视频',
+      subtitle: '作品、竞赛与生活的影像记录',
+      all: '全部',
+      categories: { works: '作品', competition: '竞赛', life: '生活' },
+      empty: '还没有内容',
+      emptyDesc: '影像正在整理中，敬请期待',
     },
     // Language
     language: {
@@ -491,6 +502,7 @@ const translations = {
       resume: 'Resume',
       tutorials: 'Learn',
       blog: 'Blog',
+      gallery: 'Gallery',
       admin: 'Admin',
       settings: 'Settings',
       notifications: 'Notifications',
@@ -558,6 +570,16 @@ const translations = {
       mood: 'Mood',
       weather: 'Weather',
       latest: 'Latest',
+    },
+    // Gallery
+    gallery: {
+      badge: 'Gallery',
+      title: 'Photos & Videos',
+      subtitle: 'Visual records of works, competitions and life',
+      all: 'All',
+      categories: { works: 'Works', competition: 'Competition', life: 'Life' },
+      empty: 'Nothing here yet',
+      emptyDesc: 'More visuals are on the way — stay tuned',
     },
     // Language
     language: {
@@ -905,6 +927,7 @@ const translations = {
       resume: '履歴書',
       tutorials: '学習ゾーン',
       blog: 'ブログ',
+      gallery: 'ギャラリー',
       adminRole: '管理者',
       userRole: 'ユーザー',
     },
@@ -965,6 +988,16 @@ const translations = {
       mood: '今日の気分',
       weather: '天気',
       latest: '最新',
+    },
+    // ギャラリー
+    gallery: {
+      badge: 'ギャラリー',
+      title: '写真と動画',
+      subtitle: '作品・競技・暮らしの映像記録',
+      all: 'すべて',
+      categories: { works: '作品', competition: '競技', life: '暮らし' },
+      empty: 'まだありません',
+      emptyDesc: '準備中です、お楽しみに',
     },
     // Language
     language: {
