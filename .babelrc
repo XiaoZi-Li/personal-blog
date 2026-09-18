@@ -1,12 +1,3 @@
 {
-  "presets": [
-    [
-      "next/babel",
-      {
-        "preset-react": {
-          "development": true
-        }
-      }
-    ]
-  ]
+  "presets": ["next/babel"]
 }

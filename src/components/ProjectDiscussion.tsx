@@ -205,12 +205,12 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
   const hasMore = comments.length > 3;
 
   return (
-    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-card dark:bg-background backdrop-blur-sm rounded-xl border border-border dark:border-border">
       {/* 标题 */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-indigo-500" />
-          <span className="font-medium text-slate-700 dark:text-slate-300">项目讨论</span>
+          <MessageSquare className="w-5 h-5 text-[var(--neon-violet)]" />
+          <span className="font-medium text-muted-foreground dark:text-muted-foreground">项目讨论</span>
           <Badge variant="secondary" className="text-xs">
             {commentCount}
           </Badge>
@@ -218,7 +218,7 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
         {hasMore && (
           <Link 
             href={`/projects/${projectId}`}
-            className="flex items-center gap-1 text-xs text-indigo-500 hover:text-indigo-600 transition-colors"
+            className="flex items-center gap-1 text-xs text-[var(--neon-violet)] hover:text-[var(--neon-violet)] transition-colors"
           >
             查看更多评论
             <ChevronRight className="w-3 h-3" />
@@ -234,7 +234,7 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder={`分享你对 ${projectName} 的看法...`}
-              className="pr-10 bg-white/80 dark:bg-slate-800/80"
+              className="pr-10 bg-card dark:bg-card"
               maxLength={500}
             />
             <div className="absolute right-2 top-1/2 -translate-y-1/2">
@@ -245,7 +245,7 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
             type="submit" 
             disabled={submitting || !newComment.trim()}
             size="sm"
-            className="bg-indigo-500 hover:bg-indigo-600"
+            className="bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)]"
           >
             <Send className="w-4 h-4" />
           </Button>
@@ -254,9 +254,9 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
 
       {/* 评论列表 - 显示前3条 */}
       {loading ? (
-        <div className="py-3 text-center text-slate-400 text-sm">加载中...</div>
+        <div className="py-3 text-center text-muted-foreground text-sm">加载中...</div>
       ) : displayComments.length === 0 ? (
-        <div className="py-4 text-center text-slate-400">
+        <div className="py-4 text-center text-muted-foreground">
           <p className="text-sm">暂无讨论，来发表第一条吧！</p>
         </div>
       ) : (
@@ -269,20 +269,20 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
               <div key={comment.id} className="group">
                 {/* 主评论 */}
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xs font-medium flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] flex items-center justify-center text-slate-900 text-xs font-medium flex-shrink-0">
                     {comment.nickname.charAt(0).toUpperCase()}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{comment.nickname}</span>
-                      <span className="text-xs text-slate-400">{formatDate(comment.created_at)}</span>
+                      <span className="text-sm font-medium text-muted-foreground dark:text-muted-foreground">{comment.nickname}</span>
+                      <span className="text-xs text-muted-foreground">{formatDate(comment.created_at)}</span>
                     </div>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 break-words">{comment.content}</p>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground break-words">{comment.content}</p>
                     <div className="flex items-center gap-3 mt-1.5">
                       <button
                         onClick={() => handleLike(comment.id)}
                         className={`flex items-center gap-1 text-xs transition-colors ${
-                          isLiked ? 'text-pink-500' : 'text-slate-400 hover:text-pink-500'
+                          isLiked ? 'text-[var(--neon-magenta)]' : 'text-muted-foreground hover:text-[var(--neon-magenta)]'
                         }`}
                       >
                         <Heart className={`w-3 h-3 ${isLiked ? 'fill-current' : ''}`} />
@@ -290,7 +290,7 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
                       </button>
                       <button
                         onClick={() => setReplyingTo({ id: comment.id, nickname: comment.nickname, userId: comment.user_id })}
-                        className="flex items-center gap-1 text-xs text-slate-400 hover:text-indigo-500 transition-colors"
+                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-[var(--neon-violet)] transition-colors"
                       >
                         <Reply className="w-3 h-3" />
                         回复
@@ -298,7 +298,7 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
                       {user?.isAdmin && (
                         <button
                           onClick={() => handleDelete(comment.id)}
-                          className="flex items-center gap-1 text-xs text-slate-400 hover:text-red-500 transition-colors"
+                          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-red-500 transition-colors"
                         >
                           <Trash2 className="w-3 h-3" />
                           删除
@@ -315,14 +315,14 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
                       value={replyContent}
                       onChange={(e) => setReplyContent(e.target.value)}
                       placeholder={`回复 @${comment.nickname}...`}
-                      className="flex-1 bg-white/80 dark:bg-slate-800/80 text-sm"
+                      className="flex-1 bg-card dark:bg-card text-sm"
                       maxLength={300}
                     />
                     <Button 
                       size="sm" 
                       onClick={() => handleReply(comment.id)}
                       disabled={submitting || !replyContent.trim()}
-                      className="bg-indigo-500 hover:bg-indigo-600"
+                      className="bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)]"
                     >
                       发送
                     </Button>
@@ -341,15 +341,15 @@ export default function ProjectDiscussion({ projectId, projectName }: ProjectDis
                   <div className="ml-10 mt-2 space-y-2">
                     {commentReplies.map((reply) => (
                       <div key={reply.id} className="flex gap-2 text-sm">
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white text-[10px] font-medium flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--glow-lime)] to-[var(--glow-lime)] flex items-center justify-center text-slate-900 text-[10px] font-medium flex-shrink-0">
                           {reply.nickname.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1">
-                          <span className="font-medium text-slate-600 dark:text-slate-400">{reply.nickname}</span>
+                          <span className="font-medium text-muted-foreground dark:text-muted-foreground">{reply.nickname}</span>
                           {reply.reply_to_nickname && (
-                            <span className="text-slate-400 mx-1">回复 @{reply.reply_to_nickname}</span>
+                            <span className="text-muted-foreground mx-1">回复 @{reply.reply_to_nickname}</span>
                           )}
-                          <span className="text-slate-600 dark:text-slate-400">: {reply.content}</span>
+                          <span className="text-muted-foreground dark:text-muted-foreground">: {reply.content}</span>
                         </div>
                       </div>
                     ))}

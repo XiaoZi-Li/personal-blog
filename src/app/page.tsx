@@ -1,22 +1,251 @@
 'use client';
 
-import {
-  MapPin, GraduationCap, Mail,
-  Trophy, Briefcase,
-  Calendar, Users,
-  Star, MessageSquare, FileText, ExternalLink
-} from 'lucide-react';
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Reveal } from '@/components/Reveal';
+import {
+  MapPin,
+  GraduationCap,
+  Mail,
+  Trophy,
+  Code,
+  Brain,
+  Briefcase,
+  Calendar,
+  Users,
+  Cpu,
+  MessageSquare,
+  FileText,
+  Microchip,
+  Wrench,
+  Bot,
+  BookOpen,
+  Target,
+  ArrowUpRight,
+  Sparkles,
+  Braces,
+  Github,
+  Languages,
+  ExternalLink,
+} from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Reveal from '@/components/Reveal';
+import SectionHeading from '@/components/tech/SectionHeading';
+import GlassCard from '@/components/tech/GlassCard';
+import TiltCard from '@/components/tech/TiltCard';
+import Typewriter from '@/components/tech/Typewriter';
+import Marquee from '@/components/tech/Marquee';
+import OrbitalCore from '@/components/tech/OrbitalCore';
+import SectionRail, { type RailSection } from '@/components/tech/SectionRail';
+
+type Level = 'core' | 'familiar' | 'learning';
+
+const LEVEL_DOTS: Record<Level, number> = { core: 3, familiar: 2, learning: 1 };
+
+/** 论文外链：Springer 正式出版页面，全文唯一一处科研出处入口 */
+const PAPER_URL = 'https://link.springer.com/article/10.1007/s10044-026-01761-5';
+
+/**
+ * 熟练度指示器：三点式。
+ * 形状单独承载信息是不够的，所以补上 aria-label / title 作为文字替代。
+ */
+function LevelDots({ level, label }: { level: Level; label: string }) {
+  const filled = LEVEL_DOTS[level];
+  return (
+    <span
+      role="img"
+      aria-label={label}
+      title={label}
+      className="flex shrink-0 items-center gap-1"
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className={`h-1 w-2.5 rounded-full ${
+            i < filled
+              ? 'bg-[var(--neon-cyan)]'
+              : 'bg-[color-mix(in_oklab,var(--muted-foreground)_38%,transparent)]'
+          }`}
+        />
+      ))}
+    </span>
+  );
+}
+
+/** 细线网格：用 1px gap 露出底色当作分隔线，比给每个格子写边框可靠得多 */
+const HAIRLINE_GRID =
+  'grid gap-px bg-border [&>*]:bg-card [&>*]:transition-colors [&>*]:duration-300';
+
+/** 技术雷达：区分「已在项目里用过」和「正在学」，避免把计划当成熟练度展示 */
+const TECH_RADAR: Array<{ name: string; learning?: boolean }> = [
+  { name: 'C / C++' },
+  { name: 'Python' },
+  { name: 'Verilog' },
+  { name: 'FPGA' },
+  { name: 'ESP32' },
+  { name: 'STM32' },
+  { name: 'ROS 2' },
+  { name: 'dora-rs' },
+  { name: 'YOLO' },
+  { name: 'OpenCV' },
+  { name: 'PyTorch' },
+  { name: 'PCB 设计' },
+  { name: 'MCP' },
+  { name: 'AI Agent' },
+  { name: 'Next.js' },
+  { name: 'TypeScript' },
+  { name: 'Linux' },
+  { name: 'Rust', learning: true },
+  { name: 'MuJoCo', learning: true },
+  { name: 'Isaac Lab', learning: true },
+  { name: 'MPC', learning: true },
+  { name: 'WBC', learning: true },
+  { name: 'PPO / SAC', learning: true },
+  { name: 'Sim2Real', learning: true },
+  { name: 'OpenVLA', learning: true },
+  { name: 'π0', learning: true },
+  { name: 'Diffusion Policy', learning: true },
+];
 
 export default function Home() {
   const { t } = useLanguage();
 
-  // 竞赛经历
+  const roles = [
+    t('home.hero.roles.r1'),
+    t('home.hero.roles.r2'),
+    t('home.hero.roles.r3'),
+    t('home.hero.roles.r4'),
+  ];
+
+  const levelLabel: Record<Level, string> = {
+    core: t('home.skillLevels.core'),
+    familiar: t('home.skillLevels.familiar'),
+    learning: t('home.skillLevels.learning'),
+  };
+
+  // 章节轨：顺序与下方 DOM 顺序一致，编号与 kicker 对应
+  const railSections: RailSection[] = [
+    { id: 'research', label: t('home.rail.research') },
+    { id: 'about', label: t('home.rail.about') },
+    { id: 'stack', label: t('home.rail.stack') },
+    { id: 'honors', label: t('home.rail.honors') },
+    { id: 'roadmap', label: t('home.rail.roadmap') },
+    { id: 'traits', label: t('home.rail.traits') },
+    { id: 'contact', label: t('home.rail.contact') },
+  ];
+
+  // 技术栈：像数据手册一样按列排，而不是四张一模一样的卡片
+  const skillGroups: Array<{
+    title: string;
+    en: string;
+    icon: typeof Code;
+    glow: string;
+    skills: Array<{ name: string; level: Level }>;
+  }> = [
+    {
+      title: t('home.skillCategories.programming'),
+      en: 'LANGUAGES',
+      icon: Code,
+      glow: 'var(--glow-violet)',
+      skills: [
+        { name: 'C / C++', level: 'core' },
+        { name: 'Python', level: 'core' },
+        { name: 'Verilog', level: 'familiar' },
+        { name: 'Rust', level: 'learning' },
+        { name: t('skills.cangjie'), level: 'learning' },
+      ],
+    },
+    {
+      title: t('home.skillCategories.hardware'),
+      en: 'HARDWARE',
+      icon: Microchip,
+      glow: 'var(--glow-cyan)',
+      skills: [
+        { name: t('skills.fpga'), level: 'familiar' },
+        { name: t('skills.esp32'), level: 'familiar' },
+        { name: t('skills.stm32'), level: 'familiar' },
+        { name: t('skills.harmony'), level: 'familiar' },
+      ],
+    },
+    {
+      title: t('home.skillCategories.ai'),
+      en: 'AI TOOLCHAIN',
+      icon: Brain,
+      glow: 'var(--glow-magenta)',
+      skills: [
+        { name: t('skills.mcp'), level: 'familiar' },
+        { name: t('skills.aiSkills'), level: 'learning' },
+        { name: 'PyTorch · OpenCV', level: 'familiar' },
+      ],
+    },
+    {
+      title: t('common.more'),
+      en: 'PRACTICE',
+      icon: Wrench,
+      glow: 'var(--glow-lime)',
+      skills: [
+        { name: 'PCB 绘制', level: 'familiar' },
+        { name: '传感器融合', level: 'familiar' },
+        { name: '嵌入式全流程', level: 'familiar' },
+        { name: 'Next.js / TS 全栈', level: 'learning' },
+      ],
+    },
+  ];
+
+  const roadmap = [
+    {
+      index: '01',
+      status: 'doing' as const,
+      accent: 'var(--neon-cyan)',
+      name: t('home.roadmap.stage1.name'),
+      en: t('home.roadmap.stage1.en'),
+      desc: t('home.roadmap.stage1.desc'),
+      items: [
+        t('home.roadmap.stage1.items.i1'),
+        t('home.roadmap.stage1.items.i2'),
+        t('home.roadmap.stage1.items.i3'),
+        t('home.roadmap.stage1.items.i4'),
+      ],
+    },
+    {
+      index: '02',
+      status: 'next' as const,
+      accent: 'var(--neon-violet)',
+      name: t('home.roadmap.stage2.name'),
+      en: t('home.roadmap.stage2.en'),
+      desc: t('home.roadmap.stage2.desc'),
+      items: [
+        t('home.roadmap.stage2.items.i1'),
+        t('home.roadmap.stage2.items.i2'),
+        t('home.roadmap.stage2.items.i3'),
+        t('home.roadmap.stage2.items.i4'),
+      ],
+    },
+    {
+      index: '03',
+      status: 'next' as const,
+      accent: 'var(--neon-magenta)',
+      name: t('home.roadmap.stage3.name'),
+      en: t('home.roadmap.stage3.en'),
+      desc: t('home.roadmap.stage3.desc'),
+      items: [
+        t('home.roadmap.stage3.items.i1'),
+        t('home.roadmap.stage3.items.i2'),
+        t('home.roadmap.stage3.items.i3'),
+        t('home.roadmap.stage3.items.i4'),
+      ],
+    },
+  ];
+
+  // 竞赛：沿用线上完整列表（comp0 队长一等奖 → comp3 服务外包），不删减获奖记录
   const competitions = [
+    {
+      title: t('competitions.comp0.title'),
+      award: t('competitions.comp0.award'),
+      date: t('competitions.comp0.date'),
+      role: t('competitions.captain'),
+      track: t('competitions.comp0.track'),
+      details: [t('competitions.comp0.detail1'), t('competitions.comp0.detail2')],
+      accent: 'var(--neon-cyan)',
+    },
     {
       title: t('competitions.comp1.title'),
       award: t('competitions.comp1.award'),
@@ -24,8 +253,7 @@ export default function Home() {
       role: t('competitions.member'),
       track: t('competitions.comp1.track'),
       details: [t('competitions.comp1.detail1'), t('competitions.comp1.detail2')],
-      gradient: 'from-blue-500 to-cyan-500',
-      glow: 'shadow-blue-500/20',
+      accent: 'var(--neon-violet)',
     },
     {
       title: t('competitions.comp2.title'),
@@ -34,18 +262,7 @@ export default function Home() {
       role: t('competitions.member'),
       track: t('competitions.comp2.track'),
       details: [t('competitions.comp2.detail1'), t('competitions.comp2.detail2')],
-      gradient: 'from-emerald-500 to-teal-500',
-      glow: 'shadow-emerald-500/20',
-    },
-    {
-      title: t('competitions.comp0.title'),
-      award: t('competitions.comp0.award'),
-      date: t('competitions.comp0.date'),
-      role: t('competitions.captain'),
-      track: t('competitions.comp0.track'),
-      details: [t('competitions.comp0.detail1'), t('competitions.comp0.detail2')],
-      gradient: 'from-violet-500 to-purple-600',
-      glow: 'shadow-violet-500/20',
+      accent: 'var(--neon-magenta)',
     },
     {
       title: t('competitions.comp3.title'),
@@ -54,331 +271,703 @@ export default function Home() {
       role: t('competitions.member'),
       track: t('competitions.comp3.track'),
       details: [t('competitions.comp3.detail1'), t('competitions.comp3.detail2')],
-      gradient: 'from-amber-500 to-orange-500',
-      glow: 'shadow-amber-500/20',
+      accent: 'var(--neon-lime)',
     },
   ];
 
+  const traits = [
+    { title: t('home.evaluations.embodiedLove'), desc: t('home.evaluations.embodiedLoveDesc'), icon: Bot },
+    { title: t('home.evaluations.embeddedPassion'), desc: t('home.evaluations.embeddedPassionDesc'), icon: Cpu },
+    { title: t('home.evaluations.rustEnthusiast'), desc: t('home.evaluations.rustEnthusiastDesc'), icon: Braces },
+    { title: t('home.evaluations.humbleLearner'), desc: t('home.evaluations.humbleLearnerDesc'), icon: BookOpen },
+    { title: t('home.evaluations.teamWork'), desc: t('home.evaluations.teamWorkDesc'), icon: Users },
+    { title: t('home.evaluations.aiAssisted'), desc: t('home.evaluations.aiAssistedDesc'), icon: Target },
+  ];
+
+  const specialties = t('home.specialties');
+  const specialtyList: string[] = Array.isArray(specialties) ? specialties : [];
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
+    <div className="relative">
+      <SectionRail sections={railSections} />
+
+      {/* ============================================================
+          HERO
+         ============================================================ */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950" />
+        <div aria-hidden="true" className="tech-grid pointer-events-none absolute inset-0 opacity-70" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 60% 50% at 15% 0%, color-mix(in oklab, var(--glow-cyan) 16%, transparent), transparent 70%), radial-gradient(ellipse 50% 45% at 88% 22%, color-mix(in oklab, var(--glow-magenta) 14%, transparent), transparent 70%)',
+          }}
+        />
 
-        {/* 浮动装饰 - 移动端缩小 */}
-        <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-violet-300/20 dark:bg-violet-900/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-20 right-10 w-56 sm:w-80 h-56 sm:h-80 bg-indigo-300/20 dark:bg-indigo-900/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 w-40 sm:w-60 h-40 sm:h-60 bg-fuchsia-200/20 dark:bg-fuchsia-900/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
-        
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
-          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-            {/* 左侧：基本信息卡片 */}
-            <div className="lg:col-span-1">
-              <Card className="lg:sticky lg:top-24 border-0 shadow-2xl shadow-violet-500/10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500" />
-                
-                <CardContent className="pt-6 sm:pt-8 text-center">
-                  {/* 头像 - 移动端稍小 */}
-                  <div className="relative inline-block mb-4 sm:mb-6">
-                    <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 p-[3px] shadow-xl shadow-violet-500/30">
-                      <div className="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center">
-                        <span className="text-3xl sm:text-5xl">👨‍💻</span>
-                      </div>
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-6 h-6 sm:w-8 sm:h-8 bg-emerald-500 rounded-full border-3 sm:border-4 border-white dark:border-slate-800 flex items-center justify-center">
-                      <span className="text-white text-[10px] sm:text-xs">✓</span>
-                    </div>
-                  </div>
-                  
-                  {/* 姓名 */}
-                  <h1 className="text-xl sm:text-2xl font-bold mb-1.5 sm:mb-2 bg-gradient-to-r from-violet-700 to-indigo-600 dark:from-violet-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                    {t('home.name')}
-                  </h1>
-                  
-                  {/* 求职意向 */}
-                  <p className="text-xs sm:text-sm text-violet-600 dark:text-violet-400 font-medium mb-3 sm:mb-4">
-                    {t('home.subtitle')}
-                  </p>
-                  
-                  {/* 联系方式 */}
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
-                    <div className="flex items-center justify-center gap-2">
-                      <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500" />
-                      <span>purplemist@qq.com</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500" />
-                      <span>{t('home.university')}</span>
-                    </div>
-                  </div>
+        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 sm:pt-12 lg:px-8 lg:pb-16 lg:pt-16">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6">
+            <div>
+              <Reveal>
+                <div className="inline-flex items-center gap-2.5 rounded-full border border-[color-mix(in_oklab,var(--neon-cyan)_30%,transparent)] px-3 py-1.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--neon-lime)] opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--neon-lime)]" />
+                  </span>
+                  <span className="mono-label">{t('home.hero.kicker')}</span>
+                </div>
+              </Reveal>
 
-                  {/* 留言按钮 */}
+              <Reveal delay={80}>
+                <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+                  <span className="block text-base font-normal text-muted-foreground sm:text-lg">
+                    {t('home.greeting')}
+                  </span>
+                  <span className="text-aurora mt-1 block text-balance">{t('home.name')}</span>
+                </h1>
+              </Reveal>
+
+              <Reveal delay={160}>
+                <div className="mt-5 flex items-center gap-2 font-mono text-sm text-[var(--neon-cyan)] sm:text-base">
+                  <span className="text-[var(--neon-magenta)]">▸</span>
+                  <Typewriter phrases={roles} />
+                </div>
+              </Reveal>
+
+              <Reveal delay={240}>
+                <p className="mt-6 max-w-xl border-l-2 border-[color-mix(in_oklab,var(--glow-violet)_60%,transparent)] pl-4 text-sm leading-relaxed text-foreground sm:text-base">
+                  {t('home.hero.quote')}
+                </p>
+              </Reveal>
+
+              {/* 两个主行动：一个去看完整经历，一个去看向的方向 */}
+              <Reveal delay={320}>
+                <div className="mt-7 flex flex-wrap items-center gap-3">
                   <Link
-                    href="/messages"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+                    href="/resume"
+                    className="btn-neon inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm"
                   >
-                    <MessageSquare className="w-4 h-4" />
-                    {t('messages.leaveMessage')}
+                    <FileText className="h-4 w-4" />
+                    {t('home.hero.ctaPrimary')}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
                   </Link>
-                  
-                  {/* 教育背景简述 */}
-                  <div className="mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl bg-violet-50/80 dark:bg-violet-950/30 text-left border border-violet-100 dark:border-violet-900/50">
-                    <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
-                      <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-600 dark:text-violet-400" />
-                      <span className="font-medium text-xs sm:text-sm">{t('home.about')}</span>
-                    </div>
-                    <p className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">{t('home.university')}</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">{t('home.major')} · {t('home.grade')}</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">2023.09 - 2027.07</p>
-                  </div>
-                  
-                  {/* 语言能力 */}
-                  <div className="mt-3 sm:mt-4 flex justify-center gap-2 sm:gap-3">
-                    <Badge variant="secondary" className="bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 border-0 text-xs">
-                      CET-4
-                    </Badge>
-                    <Badge variant="secondary" className="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border-0 text-xs">
-                      普通话二乙
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
+                  <Link
+                    href="/robotics"
+                    className="btn-ghost-tech inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+                  >
+                    <Bot className="h-4 w-4 text-[var(--neon-cyan)]" />
+                    {t('home.hero.ctaSecondary')}
+                  </Link>
+                </div>
+              </Reveal>
+
+              <Reveal delay={400}>
+                <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-muted-foreground sm:text-sm">
+                  <span className="flex items-center gap-2">
+                    <GraduationCap className="h-4 w-4 text-[var(--neon-cyan)]" />
+                    {t('home.university')} · {t('home.major')} · {t('home.grade')}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-[var(--neon-violet)]" />
+                    2023.09 — 2027.07
+                  </span>
+                  <a
+                    href="https://github.com/XiaoZi-Li"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 transition-colors hover:text-[var(--neon-cyan)]"
+                  >
+                    <Github className="h-4 w-4 text-[var(--neon-magenta)]" />
+                    XiaoZi-Li
+                  </a>
+                </div>
+              </Reveal>
             </div>
-            
-            {/* 右侧：详细信息 */}
-            <div className="lg:col-span-2 space-y-5 sm:space-y-8">
-              {/* 自我介绍 */}
-              <Card className="border-0 shadow-lg shadow-violet-500/5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
-                <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6">
-                  <p className="text-sm sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {t('home.aboutContent')}
-                  </p>
-                </CardContent>
-              </Card>
-              
-              {/* 核心优势 */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-                {[
-                  { label: t('competitions.award.national') + ' ' + t('competitions.award.third'), value: '3', gradient: 'from-amber-500 to-orange-500', icon: '🏆' },
-                  { label: t('competitions.award.provincialTop') + ' ' + t('competitions.award.first'), value: '1', gradient: 'from-violet-500 to-purple-600', icon: '🥇' },
-                  { label: t('home.stats.totalAwards'), value: '4', gradient: 'from-fuchsia-500 to-pink-600', icon: '⭐' },
-                  { label: t('home.stats.certification'), value: '1', gradient: 'from-emerald-500 to-teal-500', icon: '📜' },
-                ].map((item, i) => (
-                  <Reveal key={i} delay={i * 120} y={16}>
-                    <Card className="group card-shimmer border-0 shadow-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1.5 hover:scale-[1.03] transition-all duration-300">
-                      <CardContent className="pt-4 sm:pt-6 pb-3 sm:pb-6 text-center px-2 sm:px-4">
-                        <div className="text-xl sm:text-3xl mb-1 sm:mb-2 group-hover:animate-wiggle inline-block transition-transform">{item.icon}</div>
-                        <p className={`text-2xl sm:text-3xl font-bold bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>
-                          {item.value}
-                        </p>
-                        <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 leading-tight">{item.label}</p>
-                      </CardContent>
-                    </Card>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
+
+            <Reveal dir="scale" delay={220} className="lg:pl-6">
+              <OrbitalCore />
+            </Reveal>
           </div>
+
+          {/* 联系带：只放可公开的渠道 —— 邮箱、学校、GitHub、站内留言，以及简历页入口。
+              手机号与简历文件下载已按隐私要求移除，联系方式一律走站内。 */}
+          <Reveal delay={480}>
+            <div className="panel mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl px-5 py-4 sm:flex-row">
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground sm:text-sm">
+                <a
+                  href="mailto:purplemist@qq.com"
+                  className="flex items-center gap-2 transition-colors hover:text-[var(--neon-cyan)]"
+                >
+                  <Mail className="h-3.5 w-3.5 text-[var(--neon-cyan)]" />
+                  purplemist@qq.com
+                </a>
+                <span className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-[var(--neon-cyan)]" />
+                  {t('home.university')}
+                </span>
+                <a
+                  href="https://github.com/XiaoZi-Li"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-[var(--neon-cyan)]"
+                >
+                  <Github className="h-3.5 w-3.5 text-[var(--neon-violet)]" />
+                  XiaoZi-Li
+                </a>
+                <Link
+                  href="/messages"
+                  className="flex items-center gap-2 transition-colors hover:text-[var(--neon-cyan)]"
+                >
+                  <MessageSquare className="h-3.5 w-3.5 text-[var(--neon-magenta)]" />
+                  {t('messages.leaveMessage')}
+                </Link>
+              </div>
+              <Link
+                href="/resume"
+                className="btn-ghost-tech inline-flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-medium sm:text-sm"
+              >
+                <FileText className="h-3.5 w-3.5 text-[var(--neon-cyan)]" />
+                {t('home.career.goToResume')}
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* 科研经历 */}
-      <section className="py-10 sm:py-16 bg-white dark:bg-slate-900 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-violet-50 via-transparent to-transparent dark:from-violet-950/20 dark:via-transparent dark:to-transparent" />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-              <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {t('home.research.badge')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">{t('home.research.title')}</h2>
-          </div>
+      {/* ============================================================
+          技术雷达
+         ============================================================ */}
+      <section className="relative border-y border-border/50 py-5">
+        <div className="mx-auto mb-3 flex max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
+          <Sparkles className="h-3.5 w-3.5 text-[var(--neon-cyan)]" />
+          <span className="mono-label">{t('home.marquee.label')}</span>
+          <span className="hairline-x flex-1" />
+          {/* 诚实标注：哪些是做过项目的，哪些还在学 */}
+          <span className="flex shrink-0 items-center gap-3 font-mono text-[9.5px] tracking-[0.12em] text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <span className="h-1 w-2.5 rounded-full bg-[var(--neon-cyan)]" />
+              {t('home.marquee.practiced')}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-1 w-2.5 rounded-full bg-[color-mix(in_oklab,var(--muted-foreground)_35%,transparent)]" />
+              {t('home.marquee.learning')}
+            </span>
+          </span>
+        </div>
+        <Marquee>
+          {TECH_RADAR.map((tag) => (
+            <span key={tag.name} className="mx-3 flex items-center gap-3 whitespace-nowrap">
+              <span
+                className={`font-mono text-[12px] tracking-wide transition-colors duration-300 ${
+                  tag.learning
+                    ? 'text-muted-foreground'
+                    : 'text-foreground hover:text-[var(--neon-cyan)]'
+                }`}
+              >
+                {tag.name}
+              </span>
+              <span
+                className={`h-1 w-1 rounded-full ${
+                  tag.learning
+                    ? 'bg-transparent ring-1 ring-inset ring-[color-mix(in_oklab,var(--muted-foreground)_60%,transparent)]'
+                    : 'bg-[var(--neon-violet)]'
+                }`}
+              />
+            </span>
+          ))}
+        </Marquee>
+      </section>
 
-          <Reveal>
-            <Card className="group card-shimmer animate-glow-pulse border-0 hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 hover:-translate-y-1">
-              <CardContent className="pt-5 sm:pt-6 px-4 sm:px-8 pb-5 sm:pb-6">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
-                  <div>
-                    <h3 className="text-base sm:text-xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                      <a
-                        href="https://link.springer.com/article/10.1007/s10044-026-01761-5"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 hover:underline underline-offset-4 decoration-violet-400"
-                      >
-                        {t('home.research.paper')}
-                        <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-500 shrink-0" />
-                      </a>
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 text-xs sm:text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
+      {/* ============================================================
+          科研经历：全站最硬的一条资历，放在履历之前先给证据
+         ============================================================ */}
+      <section id="research" className="relative scroll-mt-24 pb-14 pt-20 sm:pt-24">
+        <div aria-hidden="true" className="tech-grid-fade pointer-events-none absolute inset-0 opacity-50" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading kicker="RESEARCH / 01" title={t('home.research.title')} align="left" />
+
+          <Reveal delay={80}>
+            <GlassCard className="mt-10 p-6 sm:p-8">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, color-mix(in oklab, var(--glow-violet) 90%, white), color-mix(in oklab, var(--glow-violet) 55%, black))',
+                      }}
+                    >
+                      <FileText className="h-4 w-4 text-slate-900" />
+                    </span>
+                    <span className="mono-label">{t('home.research.badge')}</span>
+                  </div>
+
+                  {/* 论文标题即外链：Springer 正式出版页 */}
+                  <h3 className="mt-5 text-balance text-lg font-bold leading-snug sm:text-xl">
+                    <a
+                      href={PAPER_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-start gap-2 text-[var(--neon-violet)] underline-offset-4 transition-colors hover:text-[var(--neon-cyan)] hover:underline"
+                    >
+                      {t('home.research.paper')}
+                      <ExternalLink className="mt-1 h-4 w-4 shrink-0" />
+                    </a>
+                  </h3>
+
+                  <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground sm:text-sm">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5 text-[var(--neon-cyan)]" />
                       {t('home.research.period')}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="w-3 h-3" />
+                    <span className="flex items-center gap-1.5">
+                      <Users className="h-3.5 w-3.5 text-[var(--neon-violet)]" />
                       {t('home.research.role')}
                     </span>
-                    <span className="italic">{t('home.research.journal')}</span>
+                    <span className="flex items-center gap-1.5">
+                      <BookOpen className="h-3.5 w-3.5 text-[var(--neon-magenta)]" />
+                      <span className="italic">{t('home.research.journal')}</span>
+                    </span>
                   </div>
+
+                  <p className="mt-5 max-w-3xl text-pretty text-[13px] leading-[1.85] text-muted-foreground sm:text-sm">
+                    {t('home.research.desc')}
+                  </p>
                 </div>
-                <Badge className="bg-gradient-to-r from-violet-500 to-fuchsia-600 text-white border-0 shadow-md self-start whitespace-nowrap group-hover:scale-105 transition-transform">
+
+                {/* 状态徽标：不是装饰，是这条资历的可信度标记 */}
+                <span
+                  className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-mono text-[10px] tracking-[0.12em] text-[var(--neon-lime)]"
+                  style={{
+                    background: 'color-mix(in oklab, var(--glow-lime) 16%, transparent)',
+                    boxShadow:
+                      'inset 0 0 0 1px color-mix(in oklab, var(--neon-lime) 38%, transparent)',
+                  }}
+                >
+                  <Sparkles className="h-3 w-3" />
                   {t('home.research.status')}
-                </Badge>
+                </span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                {t('home.research.desc')}
-              </p>
-            </CardContent>
-          </Card>
-        </Reveal>
+            </GlassCard>
+          </Reveal>
         </div>
       </section>
 
-      {/* 竞赛与荣誉 */}
-      <section className="py-10 sm:py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-50 via-transparent to-transparent dark:from-violet-950/20 dark:via-transparent dark:to-transparent" />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-              <Trophy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {t('home.honors')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">竞赛经历</h2>
-          </div>
+      {/* ============================================================
+          关于我
+         ============================================================ */}
+      <section id="about" className="relative scroll-mt-24 py-14 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading kicker="PROFILE / 02" title={t('home.about')} align="left" />
 
-          <div className="space-y-4 sm:space-y-6">
-            {competitions.map((comp, i) => (
-              <Reveal key={i} delay={i * 100}>
-              <Card
-                className={`group card-shimmer relative border-0 shadow-lg ${comp.glow} hover:shadow-2xl transition-all duration-300 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl overflow-hidden hover:-translate-y-1 hover:scale-[1.01]`}
-              >
-                <div className={`absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 bg-gradient-to-b ${comp.gradient} group-hover:w-1.5 sm:group-hover:w-2 transition-all`} />
-                <CardContent className="pt-4 sm:pt-6 pl-4 sm:pl-6 px-4 sm:px-6 pb-4 sm:pb-6">
-                  <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-start sm:justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{comp.title}</h3>
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1 text-xs sm:text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {comp.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Users className="w-3 h-3" />
-                          {comp.role}
-                        </span>
-                        <Badge variant="outline" className="text-[10px] sm:text-xs border-violet-200 dark:border-violet-800 h-5 group-hover:border-violet-400 transition-colors">{comp.track}</Badge>
-                      </div>
-                    </div>
-                    <Badge className={`bg-gradient-to-r ${comp.gradient} text-white border-0 shadow-md text-xs sm:text-sm self-start group-hover:scale-105 transition-transform`}>
-                      <Trophy className="w-3 h-3 mr-1 group-hover:animate-wiggle" />
-                      {comp.award}
-                    </Badge>
-                  </div>
-                  <ul className="space-y-1.5 sm:space-y-2">
-                    {comp.details.map((detail, j) => (
-                      <li key={j} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                        <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${comp.gradient} mt-1.5 flex-shrink-0 group-hover:scale-150 transition-transform`} style={{ transitionDelay: `${j * 60}ms` }} />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 自我评价 */}
-      <section className="py-10 sm:py-16 bg-white dark:bg-slate-900 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-fuchsia-50 via-transparent to-transparent dark:from-fuchsia-950/10 dark:via-transparent dark:to-transparent" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-fuchsia-100 dark:bg-fuchsia-900/50 text-fuchsia-700 dark:text-fuchsia-300 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-              <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {t('home.about')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">个人特质</h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {[
-              { title: t('home.evaluations.embodiedLove'), desc: t('home.evaluations.embodiedLoveDesc'), icon: '🤖' },
-              { title: t('home.evaluations.embeddedPassion'), desc: t('home.evaluations.embeddedPassionDesc'), icon: '⚡' },
-              { title: t('home.evaluations.rustEnthusiast'), desc: t('home.evaluations.rustEnthusiastDesc'), icon: '🦀' },
-              { title: t('home.evaluations.humbleLearner'), desc: t('home.evaluations.humbleLearnerDesc'), icon: '📚' },
-              { title: t('home.evaluations.teamWork'), desc: t('home.evaluations.teamWorkDesc'), icon: '🤝' },
-              { title: t('home.evaluations.aiAssisted'), desc: t('home.evaluations.aiAssistedDesc'), icon: '🎯' },
-            ].map((item, i) => (
-              <Reveal key={i} delay={(i % 3) * 100} y={20}>
-                <Card className="group card-shimmer border-0 shadow-md bg-white dark:bg-slate-900 hover:shadow-xl hover:-translate-y-1.5 hover:scale-[1.02] transition-all duration-300">
-                  <CardContent className="pt-4 sm:pt-5 px-3 sm:px-6 pb-3 sm:pb-5">
-                    <div className="text-xl sm:text-2xl mb-2 sm:mb-3 group-hover:animate-float-soft inline-block">{item.icon}</div>
-                    <h4 className="font-semibold text-violet-700 dark:text-violet-400 mb-1 sm:mb-2 text-sm sm:text-base">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{item.desc}</p>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 求职与交流 */}
-      <section className="py-10 sm:py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/20 dark:to-fuchsia-950/30" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-              <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              {t('home.career.title')}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">{t('home.career.heading')}</h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-            <Reveal delay={0}>
-            <Card className="group card-shimmer border-0 shadow-lg bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6 pb-4 sm:pb-6">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-lg sm:text-xl shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                    💼
-                  </div>
-                  <h3 className="font-bold text-base sm:text-lg">{t('home.career.internship')}</h3>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {t('home.career.internshipDesc')}
+          <div className="mt-10 grid gap-4 lg:grid-cols-6">
+            {/* 自我介绍：长篇只出现一次 */}
+            <Reveal className="lg:col-span-4" delay={60}>
+              <GlassCard className="h-full p-6 sm:p-8">
+                <p className="text-pretty text-base leading-[1.85] text-foreground/90 sm:text-[17px]">
+                  {t('home.aboutContent')}
                 </p>
-                <a href="/resume" className="mt-3 sm:mt-4 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 text-white text-xs sm:text-sm font-medium shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                  <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  {t('home.career.goToResume')}
-                </a>
-              </CardContent>
-            </Card>
+              </GlassCard>
             </Reveal>
 
-            <Reveal delay={120}>
-            <Card className="group card-shimmer border-0 shadow-lg bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <CardContent className="pt-5 sm:pt-6 px-4 sm:px-6 pb-4 sm:pb-6">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-fuchsia-500 to-pink-600 flex items-center justify-center text-white text-lg sm:text-xl shadow-md group-hover:scale-110 group-hover:-rotate-3 transition-transform">
-                    🌐
-                  </div>
-                  <h3 className="font-bold text-base sm:text-lg">{t('home.career.community')}</h3>
+            {/* 教育 */}
+            <Reveal className="lg:col-span-2" delay={120}>
+              <GlassCard className="flex h-full flex-col justify-between p-6">
+                <span className="index-chip">EDUCATION</span>
+                <div className="mt-6">
+                  <p className="text-lg font-semibold">{t('home.university')}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {t('home.major')} · {t('home.grade')}
+                  </p>
+                  <p className="mt-3 font-mono text-xs text-[var(--neon-cyan)]">
+                    2023.09 — 2027.07
+                  </p>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              </GlassCard>
+            </Reveal>
+
+            {/* 语言与证书 */}
+            <Reveal className="lg:col-span-2" delay={160}>
+              <GlassCard className="h-full p-6">
+                <div className="flex items-center gap-2">
+                  <Languages className="h-4 w-4 text-[var(--neon-cyan)]" />
+                  <span className="index-chip">LANGUAGES</span>
+                </div>
+                <dl className="mt-5 space-y-3 text-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <dt className="text-muted-foreground">英语</dt>
+                    <dd className="font-medium">CET-4</dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <dt className="text-muted-foreground">普通话</dt>
+                    <dd className="font-medium">二级乙等</dd>
+                  </div>
+                </dl>
+              </GlassCard>
+            </Reveal>
+
+            {/* 专业领域 */}
+            <Reveal className="lg:col-span-4" delay={200}>
+              <GlassCard className="h-full p-6">
+                <span className="index-chip">DOMAINS</span>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {specialtyList.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] tracking-wide text-muted-foreground transition-colors duration-300 hover:border-[color-mix(in_oklab,var(--neon-cyan)_45%,transparent)] hover:text-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          技术栈：一张数据手册，而不是四张同款卡片
+         ============================================================ */}
+      <section id="stack" className="relative scroll-mt-24 py-14 sm:py-20">
+        <div aria-hidden="true" className="tech-grid-fade pointer-events-none absolute inset-0 opacity-60" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            kicker="STACK / 03"
+            title={t('home.skills')}
+            description="从寄存器到策略网络，我尽量让每一层都亲手碰过。右侧三点表示投入程度，不是自评分。"
+            align="left"
+          />
+
+          <Reveal delay={80}>
+            <GlassCard className="mt-8 p-0" hud={false} spotlight={false} lift={false}>
+              <div className={`${HAIRLINE_GRID} sm:grid-cols-2 lg:grid-cols-4`}>
+                {skillGroups.map((group) => {
+                  const Icon = group.icon;
+                  return (
+                    <div key={group.title} className="p-6">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className="flex h-8 w-8 items-center justify-center rounded-lg"
+                          style={{
+                            background: `linear-gradient(135deg, color-mix(in oklab, ${group.glow} 90%, white), color-mix(in oklab, ${group.glow} 55%, black))`,
+                          }}
+                        >
+                          <Icon className="h-4 w-4 text-slate-900" />
+                        </span>
+                        <span>
+                          <span className="block text-[13px] font-semibold leading-tight">
+                            {group.title}
+                          </span>
+                          <span className="block font-mono text-[9px] tracking-[0.14em] text-muted-foreground">
+                            {group.en}
+                          </span>
+                        </span>
+                      </div>
+
+                      <ul className="mt-5 space-y-3">
+                        {group.skills.map((skill) => (
+                          <li key={skill.name} className="flex items-center justify-between gap-3">
+                            <span className="truncate text-[13px] text-foreground/90">
+                              {skill.name}
+                            </span>
+                            <LevelDots level={skill.level} label={levelLabel[skill.level]} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+
+                {/* 图例：说明三点代表什么，并声明这不是自评分 */}
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 p-6 sm:col-span-2 lg:col-span-4">
+                  {(['core', 'familiar', 'learning'] as Level[]).map((level) => (
+                    <span
+                      key={level}
+                      className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] text-muted-foreground"
+                    >
+                      <LevelDots level={level} label={levelLabel[level]} />
+                      {levelLabel[level]}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </GlassCard>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================
+          竞赛与荣誉（先给证据）
+         ============================================================ */}
+      <section id="honors" className="relative scroll-mt-24 py-14 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading kicker="HONORS / 04" title={t('competitions.title')} align="left" />
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {competitions.map((comp, i) => (
+              <Reveal key={comp.title} delay={i * 90}>
+                <TiltCard max={4}>
+                  <GlassCard className="flex h-full flex-col p-6">
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-0 top-0 h-full w-[3px]"
+                      style={{
+                        background: `linear-gradient(180deg, ${comp.accent}, transparent)`,
+                      }}
+                    />
+                    <div className="flex items-start justify-between gap-3">
+                      <span
+                        className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[11px] font-semibold"
+                        style={{
+                          background: `color-mix(in oklab, ${comp.accent} 16%, transparent)`,
+                          color: `color-mix(in oklab, ${comp.accent} 92%, var(--foreground))`,
+                          boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${comp.accent} 38%, transparent)`,
+                        }}
+                      >
+                        <Trophy className="h-3 w-3" />
+                        {comp.award}
+                      </span>
+                      <span className="index-chip">{comp.date}</span>
+                    </div>
+
+                    <h3 className="mt-5 text-balance text-[15px] font-bold leading-snug">
+                      {comp.title}
+                    </h3>
+
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center gap-1.5">
+                        <Users className="h-3 w-3" />
+                        {comp.role}
+                      </span>
+                      <span className="font-mono">·</span>
+                      <span className="font-mono">{comp.track}</span>
+                    </div>
+
+                    <ul className="mt-5 space-y-2.5 border-t border-border/60 pt-5">
+                      {comp.details.map((detail) => (
+                        <li
+                          key={detail}
+                          className="flex items-start gap-2.5 text-[12.5px] leading-relaxed text-muted-foreground"
+                        >
+                          <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--neon-cyan)]" />
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  </GlassCard>
+                </TiltCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          具身智能路线图：一条链，不是三张等权卡片
+         ============================================================ */}
+      <section id="roadmap" className="relative scroll-mt-24 overflow-hidden py-14 sm:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in oklab, var(--glow-violet) 16%, transparent), transparent 70%)',
+          }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            kicker={`${t('home.roadmap.kicker')} / 05`}
+            title={t('home.roadmap.title')}
+            description={t('home.roadmap.subtitle')}
+            align="left"
+          />
+
+          <Reveal delay={80}>
+            <GlassCard className="mt-8 p-0" hud={false} spotlight={false} lift={false}>
+              <div className={`${HAIRLINE_GRID} lg:grid-cols-3`}>
+                {roadmap.map((stage) => (
+                  <div key={stage.index} className="p-6 lg:p-7">
+                    {/* 站点：圆点 + 延伸到下一站的信号线 */}
+                    <div className="flex items-center gap-3">
+                      <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
+                        <span
+                          className="absolute inset-0 rounded-full opacity-35"
+                          style={{ background: stage.accent }}
+                        />
+                        {stage.status === 'doing' && (
+                          <span
+                            className="animate-ping-ring absolute inset-0 rounded-full"
+                            style={{ background: stage.accent }}
+                          />
+                        )}
+                        <span
+                          className="relative h-2 w-2 rounded-full"
+                          style={{ background: stage.accent }}
+                        />
+                      </span>
+                      <span className="index-chip">{stage.index}</span>
+                      <span
+                        aria-hidden="true"
+                        className="hidden h-px flex-1 lg:block"
+                        style={{
+                          background: `linear-gradient(90deg, color-mix(in oklab, ${stage.accent} 55%, transparent), transparent)`,
+                        }}
+                      />
+                      <span
+                        className="ml-auto rounded-full px-2.5 py-1 font-mono text-[9.5px] tracking-[0.14em] lg:ml-0"
+                        style={{
+                          background: `color-mix(in oklab, ${stage.accent} 14%, transparent)`,
+                          color: `color-mix(in oklab, ${stage.accent} 96%, var(--foreground))`,
+                          boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${stage.accent} 32%, transparent)`,
+                        }}
+                      >
+                        {stage.status === 'doing'
+                          ? t('home.roadmap.status.doing')
+                          : t('home.roadmap.status.next')}
+                      </span>
+                    </div>
+
+                    <p className="mt-5 font-mono text-[10px] tracking-[0.18em] text-muted-foreground">
+                      {stage.en}
+                    </p>
+                    <h3 className="mt-1.5 text-lg font-bold">{stage.name}</h3>
+                    <p className="mt-3 text-pretty text-[13px] leading-relaxed text-muted-foreground">
+                      {stage.desc}
+                    </p>
+
+                    <ul className="mt-5 space-y-2.5">
+                      {stage.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5 text-[13px]">
+                          <span
+                            className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full"
+                            style={{ background: stage.accent }}
+                          />
+                          <span className="text-foreground/90">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </GlassCard>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/robotics"
+                className="btn-ghost-tech inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+              >
+                <Bot className="h-4 w-4 text-[var(--neon-cyan)]" />
+                {t('home.hero.ctaSecondary')}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+              <p className="max-w-md text-pretty text-xs leading-relaxed text-muted-foreground">
+                {t('home.roadmap.note')}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================
+          个人特质：密集行，代替六张同款卡片
+         ============================================================ */}
+      <section id="traits" className="relative scroll-mt-24 py-14 sm:py-20">
+        <div aria-hidden="true" className="tech-grid-fade pointer-events-none absolute inset-0 opacity-50" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading kicker="TRAITS / 06" title="个人特质" align="left" />
+
+          <Reveal delay={80}>
+            <GlassCard className="mt-8 p-0" hud={false} spotlight={false} lift={false}>
+              <div className={`${HAIRLINE_GRID} sm:grid-cols-2 lg:grid-cols-3`}>
+                {traits.map((trait) => {
+                  const Icon = trait.icon;
+                  return (
+                    <div
+                      key={trait.title}
+                      className="group flex gap-3.5 p-6 hover:bg-[color-mix(in_oklab,var(--glow-cyan)_6%,transparent)]"
+                    >
+                      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--neon-cyan)] transition-transform duration-300 group-hover:scale-110" />
+                      <div className="min-w-0">
+                        <h4 className="text-[13.5px] font-semibold">{trait.title}</h4>
+                        <p className="mt-1.5 text-pretty text-[12.5px] leading-relaxed text-muted-foreground">
+                          {trait.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </GlassCard>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================
+          求职与交流
+         ============================================================ */}
+      <section id="contact" className="relative scroll-mt-24 overflow-hidden pb-24 pt-14 sm:pt-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 60% 60% at 50% 100%, color-mix(in oklab, var(--glow-cyan) 16%, transparent), transparent 72%)',
+          }}
+        />
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            kicker={t('home.career.title')}
+            title={t('home.career.heading')}
+            align="left"
+          />
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            <Reveal delay={60}>
+              <GlassCard className="h-full p-6 sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--glow-cyan)] to-[var(--glow-violet)]">
+                    <Briefcase className="h-5 w-5 text-slate-900" />
+                  </span>
+                  <h3 className="font-bold">{t('home.career.internship')}</h3>
+                </div>
+                <p className="mt-4 text-pretty text-[13px] leading-relaxed text-muted-foreground">
+                  {t('home.career.internshipDesc')}
+                </p>
+                <Link
+                  href="/resume"
+                  className="btn-neon mt-5 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-[13px]"
+                >
+                  <FileText className="h-3.5 w-3.5" />
+                  {t('home.career.goToResume')}
+                </Link>
+              </GlassCard>
+            </Reveal>
+
+            <Reveal delay={130}>
+              <GlassCard className="h-full p-6 sm:p-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--glow-magenta)] to-[var(--glow-violet)]">
+                    <MessageSquare className="h-5 w-5 text-slate-900" />
+                  </span>
+                  <h3 className="font-bold">{t('home.career.community')}</h3>
+                </div>
+                <p className="mt-4 text-pretty text-[13px] leading-relaxed text-muted-foreground">
                   {t('home.career.communityDesc')}
                 </p>
-                <Link href="/messages" className="inline-flex items-center gap-1.5 mt-2 sm:mt-3 text-xs sm:text-sm font-medium text-violet-600 hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300 transition-colors">
-                  <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <Link
+                  href="/messages"
+                  className="mt-5 inline-flex items-center gap-2 text-[13px] font-medium text-[var(--neon-cyan)] transition-colors hover:text-[var(--neon-magenta)]"
+                >
+                  <MessageSquare className="h-3.5 w-3.5" />
                   {t('home.career.goToForum')}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
-              </CardContent>
-            </Card>
+              </GlassCard>
             </Reveal>
           </div>
         </div>

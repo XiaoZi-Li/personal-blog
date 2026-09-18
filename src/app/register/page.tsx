@@ -181,7 +181,7 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -205,7 +205,7 @@ export default function RegisterPage() {
               <Label htmlFor="captcha">{t('auth.captcha')} *</Label>
               <div className="flex gap-2 items-center">
                 <div className="flex-1 flex items-center gap-2">
-                  <div className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg font-mono text-lg min-w-[120px] text-center">
+                  <div className="px-4 py-2 bg-muted dark:bg-card rounded-lg font-mono text-lg min-w-[120px] text-center">
                     {captchaQuestion || t('auth.loadingCaptcha') || 'Loading...'}
                   </div>
                   <Button
@@ -245,9 +245,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-slate-500">
+          <div className="mt-6 text-center text-sm text-muted-foreground">
             {t('auth.hasAccount')}{' '}
-            <Link href="/login" className="text-indigo-600 hover:text-indigo-700 font-medium">
+            <Link href="/login" className="text-[var(--neon-violet)] hover:text-[var(--neon-violet)] font-medium">
               {t('auth.goToLogin')}
             </Link>
           </div>

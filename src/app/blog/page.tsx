@@ -85,15 +85,15 @@ export default function BlogPage() {
     <div className="min-h-screen pt-16">
       {/* Hero */}
       <section className="relative overflow-hidden py-12 sm:py-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-rose-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/30" />
-        <div className="absolute top-10 right-1/4 w-72 h-72 bg-indigo-300/30 dark:bg-indigo-900/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-rose-300/30 dark:bg-rose-900/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-violet)] via-white to-[var(--glow-magenta)] dark:from-slate-950 dark:via-slate-900 dark:to-[var(--glow-violet)]" />
+        <div className="absolute top-10 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] rounded-full blur-3xl animate-blob" />
+        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
             <Newspaper className="w-4 h-4" />
             {t('blog.badge')}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-[var(--glow-violet)] via-[var(--glow-violet)] to-[var(--glow-magenta)] bg-clip-text text-transparent">
             {t('blog.title')}
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
@@ -115,8 +115,8 @@ export default function BlogPage() {
                   onClick={() => setTab(key)}
                   className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                     active
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/25'
-                      : 'bg-muted text-muted-foreground hover:bg-indigo-100 hover:text-indigo-700 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300'
+                      ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
+                      : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export default function BlogPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder={t('blog.searchPlaceholder')}
-              className="w-full pl-9 pr-4 py-2 rounded-xl border border-border bg-white/70 dark:bg-slate-900/70 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all"
+              className="w-full pl-9 pr-4 py-2 rounded-xl border border-border bg-card dark:bg-background text-sm focus:outline-none focus:ring-2 focus:ring-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] focus:border-[var(--neon-violet)] transition-all"
             />
           </div>
         </div>
@@ -160,10 +160,10 @@ export default function BlogPage() {
             {featured && (
               <Reveal>
                 <Link href={`/blog/${featured.id}`} className="group block mb-6">
-                  <div className="relative overflow-hidden rounded-2xl border border-border bg-white dark:bg-slate-900 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 dark:from-indigo-500/10 dark:to-purple-500/10" />
+                  <div className="relative overflow-hidden rounded-2xl border border-border bg-card dark:bg-background shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-violet)] via-transparent to-[var(--glow-violet)] dark:from-[var(--glow-violet)] dark:to-[var(--glow-violet)]" />
                     <div className="relative md:flex">
-                      <div className="md:w-1/3 bg-gradient-to-br from-indigo-500 via-purple-500 to-rose-400 p-8 flex items-center justify-center min-h-[140px]">
+                      <div className="md:w-1/3 bg-gradient-to-br from-[var(--glow-violet)] via-[var(--glow-violet)] to-[var(--glow-magenta)] p-8 flex items-center justify-center min-h-[140px]">
                         <span className="text-6xl group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 select-none">
                           {featured.cover || (featured.type === 'diary' ? (featured.mood || '📝') : '📄')}
                         </span>
@@ -172,16 +172,16 @@ export default function BlogPage() {
                         <div className="flex flex-wrap items-center gap-2 mb-2.5">
                           <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-medium ${
                             featured.type === 'diary'
-                              ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300'
-                              : 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300'
+                              ? 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
+                              : 'bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
                           }`}>
                             {featured.type === 'diary' ? t('blog.diary') : t('blog.article')}
                           </span>
-                          <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 text-[11px] font-medium">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] text-[11px] font-medium">
                             {t('blog.latest')}
                           </span>
                         </div>
-                        <h2 className="text-lg sm:text-2xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-2 line-clamp-1">
+                        <h2 className="text-lg sm:text-2xl font-bold text-foreground dark:text-muted-foreground group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors mb-2 line-clamp-1">
                           {featured.title}
                         </h2>
                         <p className="text-sm text-muted-foreground line-clamp-2 mb-4 leading-relaxed">
@@ -205,11 +205,11 @@ export default function BlogPage() {
               {restPosts.map((post, idx) => (
                 <Reveal key={post.id} delay={Math.min(idx, 6) * 50}>
                   <Link href={`/blog/${post.id}`} className="group block">
-                    <div className="flex gap-4 sm:gap-5 rounded-2xl border border-border bg-white dark:bg-slate-900 p-4 sm:p-5 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300 hover:-translate-y-0.5">
+                    <div className="flex gap-4 sm:gap-5 rounded-2xl border border-border bg-card dark:bg-background p-4 sm:p-5 hover:shadow-xl hover:border-[var(--neon-violet)] dark:hover:border-[var(--neon-violet)] transition-all duration-300 hover:-translate-y-0.5">
                       <div className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform ${
                         post.type === 'diary'
-                          ? 'bg-gradient-to-br from-rose-50 to-orange-50 dark:from-rose-950/30 dark:to-orange-950/20'
-                          : 'bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/20'
+                          ? 'bg-gradient-to-br from-[var(--glow-magenta)] to-[var(--glow-amber)] dark:from-[var(--glow-magenta)] dark:to-[var(--glow-amber)]'
+                          : 'bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] dark:from-[var(--glow-violet)] dark:to-[var(--glow-violet)]'
                       }`}>
                         {post.cover || (post.type === 'diary' ? (post.mood || '📝') : '📄')}
                       </div>
@@ -217,8 +217,8 @@ export default function BlogPage() {
                         <div className="flex flex-wrap items-center gap-2 mb-1.5">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                             post.type === 'diary'
-                              ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300'
-                              : 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300'
+                              ? 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
+                              : 'bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
                           }`}>
                             {post.type === 'diary' ? t('blog.diary') : t('blog.article')}
                           </span>
@@ -226,7 +226,7 @@ export default function BlogPage() {
                             <span className="text-[11px] text-muted-foreground">{post.weather}</span>
                           )}
                         </div>
-                        <h3 className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1 mb-1">
+                        <h3 className="font-bold text-sm sm:text-base text-foreground dark:text-muted-foreground group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors line-clamp-1 mb-1">
                           {post.title}
                         </h3>
                         <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-2.5">
@@ -252,7 +252,7 @@ export default function BlogPage() {
             <button
               onClick={() => fetchPosts(page + 1, true)}
               disabled={loadingMore}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium shadow-lg shadow-indigo-500/25 hover:shadow-xl transition-all disabled:opacity-60"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 text-sm font-medium shadow-lg hover:shadow-xl transition-all disabled:opacity-60"
             >
               {loadingMore ? '...' : t('blog.loadMore')}
             </button>

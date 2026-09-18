@@ -210,8 +210,8 @@ export function MediaManager() {
               onClick={() => setCategoryFilter(key)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 categoryFilter === key
-                  ? 'bg-rose-500 text-white'
-                  : 'bg-muted text-muted-foreground hover:bg-rose-100 hover:text-rose-700 dark:hover:bg-rose-900/40'
+                  ? 'bg-[var(--glow-magenta)] text-white'
+                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)]'
               }`}
             >
               {label}
@@ -225,7 +225,7 @@ export function MediaManager() {
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
         </div>
-        <Button onClick={() => { setMode('upload'); setDialogOpen(true); }} className="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600">
+        <Button onClick={() => { setMode('upload'); setDialogOpen(true); }} className="bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)] hover:from-[var(--glow-magenta)] hover:to-[var(--glow-amber)]">
           <Plus className="w-4 h-4 mr-2" />
           添加作品
         </Button>
@@ -233,12 +233,12 @@ export function MediaManager() {
 
       {/* 列表 */}
       {loading ? (
-        <div className="py-16 text-center text-slate-500">加载中...</div>
+        <div className="py-16 text-center text-muted-foreground">加载中...</div>
       ) : filtered.length === 0 ? (
         <Card>
           <CardContent className="py-16 text-center">
-            <Camera className="w-10 h-10 mx-auto text-slate-300 mb-3" />
-            <p className="text-slate-500">还没有作品，点击「添加作品」上传第一张照片或视频吧</p>
+            <Camera className="w-10 h-10 mx-auto text-muted-foreground mb-3" />
+            <p className="text-muted-foreground">还没有作品，点击「添加作品」上传第一张照片或视频吧</p>
           </CardContent>
         </Card>
       ) : (
@@ -267,14 +267,14 @@ export function MediaManager() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
+                    className="p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors"
                     title="打开原文件"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
                   <button
                     onClick={() => handleToggle(item)}
-                    className="p-2.5 rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
+                    className="p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors"
                     title={item.is_published ? '下架' : '发布'}
                   >
                     {item.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -316,8 +316,8 @@ export function MediaManager() {
               onClick={() => setMode('upload')}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                 mode === 'upload'
-                  ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300'
-                  : 'border-border text-muted-foreground hover:border-rose-300'
+                  ? 'border-[var(--neon-magenta)] bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
+                  : 'border-border text-muted-foreground hover:border-[var(--neon-magenta)]'
               }`}
             >
               <Upload className="w-4 h-4" />
@@ -327,8 +327,8 @@ export function MediaManager() {
               onClick={() => setMode('link')}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                 mode === 'link'
-                  ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300'
-                  : 'border-border text-muted-foreground hover:border-rose-300'
+                  ? 'border-[var(--neon-magenta)] bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
+                  : 'border-border text-muted-foreground hover:border-[var(--neon-magenta)]'
               }`}
             >
               <Link2 className="w-4 h-4" />
@@ -347,7 +347,7 @@ export function MediaManager() {
                       key={key}
                       onClick={() => setUploadCategory(key)}
                       className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        uploadCategory === key ? 'bg-rose-500 text-white' : 'bg-muted text-muted-foreground hover:bg-rose-100'
+                        uploadCategory === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                       }`}
                     >
                       {label}
@@ -365,7 +365,7 @@ export function MediaManager() {
                   multiple
                   accept="image/*,video/*"
                   onChange={e => setFileList(Array.from(e.target.files || []))}
-                  className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border-0 file:bg-rose-100 file:text-rose-700 dark:file:bg-rose-950/50 dark:file:text-rose-300 file:text-sm file:font-medium"
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border-0 file:bg-[var(--glow-magenta)] file:text-slate-900 file:text-sm file:font-semibold"
                 />
                 {fileList.length > 0 && (
                   <div className="mt-2 space-y-1 max-h-32 overflow-y-auto">
@@ -388,7 +388,7 @@ export function MediaManager() {
                   </p>
                   <div className="h-1.5 rounded-full bg-border mt-2 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-rose-500 to-orange-500 transition-all"
+                      className="h-full bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)] transition-all"
                       style={{ width: `${(uploadProgress.done / uploadProgress.total) * 100}%` }}
                     />
                   </div>
@@ -397,7 +397,7 @@ export function MediaManager() {
 
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={() => setDialogOpen(false)} disabled={uploading}>取消</Button>
-                <Button onClick={handleUpload} disabled={uploading || fileList.length === 0} className="bg-gradient-to-r from-rose-500 to-orange-500">
+                <Button onClick={handleUpload} disabled={uploading || fileList.length === 0} className="bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)]">
                   {uploading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                   上传 {fileList.length > 0 ? `(${fileList.length})` : ''}
                 </Button>
@@ -433,7 +433,7 @@ export function MediaManager() {
                         key={key}
                         onClick={() => setLinkForm(f => ({ ...f, type: key }))}
                         className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                          linkForm.type === key ? 'bg-rose-500 text-white' : 'bg-muted text-muted-foreground hover:bg-rose-100'
+                          linkForm.type === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                         }`}
                       >
                         {label}
@@ -449,7 +449,7 @@ export function MediaManager() {
                         key={key}
                         onClick={() => setLinkForm(f => ({ ...f, category: key }))}
                         className={`px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                          linkForm.category === key ? 'bg-rose-500 text-white' : 'bg-muted text-muted-foreground hover:bg-rose-100'
+                          linkForm.category === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                         }`}
                       >
                         {label}
@@ -469,7 +469,7 @@ export function MediaManager() {
               </div>
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={() => setDialogOpen(false)}>取消</Button>
-                <Button onClick={handleAddLink} disabled={savingLink} className="bg-gradient-to-r from-rose-500 to-orange-500">
+                <Button onClick={handleAddLink} disabled={savingLink} className="bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)]">
                   {savingLink && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                   添加
                 </Button>

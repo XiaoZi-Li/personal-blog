@@ -287,7 +287,7 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 pt-20 flex items-center justify-center">
-        <div className="text-slate-500">加载中...</div>
+        <div className="text-muted-foreground">加载中...</div>
       </div>
     );
   }
@@ -302,7 +302,7 @@ export default function AdminPage() {
               <LayoutDashboard className="w-6 h-6" />
               管理后台
             </h1>
-            <p className="text-slate-500">欢迎，{user?.nickname || user?.username}</p>
+            <p className="text-muted-foreground">欢迎，{user?.nickname || user?.username}</p>
           </div>
           <Button variant="outline" onClick={handleLogout}>
             <LogOut className="w-4 h-4 mr-2" />
@@ -358,11 +358,11 @@ export default function AdminPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-slate-500">总访问量</p>
+                      <p className="text-sm text-muted-foreground">总访问量</p>
                       <p className="text-3xl font-bold">{stats?.totalViews || 0}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                      <Eye className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="w-12 h-12 rounded-full bg-[var(--glow-cyan)] dark:bg-[var(--glow-cyan)] flex items-center justify-center">
+                      <Eye className="w-6 h-6 text-[var(--neon-cyan)] dark:text-[var(--neon-cyan)]" />
                     </div>
                   </div>
                 </CardContent>
@@ -372,11 +372,11 @@ export default function AdminPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-slate-500">今日访问</p>
+                      <p className="text-sm text-muted-foreground">今日访问</p>
                       <p className="text-3xl font-bold">{stats?.todayViews || 0}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+                    <div className="w-12 h-12 rounded-full bg-[var(--glow-lime)] dark:bg-[var(--glow-lime)] flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-[var(--neon-lime)] dark:text-[var(--neon-lime)]" />
                     </div>
                   </div>
                 </CardContent>
@@ -386,11 +386,11 @@ export default function AdminPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-slate-500">注册用户</p>
+                      <p className="text-sm text-muted-foreground">注册用户</p>
                       <p className="text-3xl font-bold">{stats?.totalUsers || 0}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                      <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                    <div className="w-12 h-12 rounded-full bg-[var(--glow-violet)] dark:bg-[var(--glow-violet)] flex items-center justify-center">
+                      <Users className="w-6 h-6 text-[var(--neon-violet)] dark:text-[var(--neon-violet)]" />
                     </div>
                   </div>
                 </CardContent>
@@ -400,11 +400,11 @@ export default function AdminPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-slate-500">留言总数</p>
+                      <p className="text-sm text-muted-foreground">留言总数</p>
                       <p className="text-3xl font-bold">{stats?.totalMessages || 0}</p>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center">
-                      <MessageSquare className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                    <div className="w-12 h-12 rounded-full bg-[var(--glow-amber)] dark:bg-[var(--glow-amber)] flex items-center justify-center">
+                      <MessageSquare className="w-6 h-6 text-[var(--neon-amber)] dark:text-[var(--neon-amber)]" />
                     </div>
                   </div>
                 </CardContent>
@@ -429,7 +429,7 @@ export default function AdminPage() {
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <div className="h-[300px] flex items-center justify-center text-slate-400">
+                    <div className="h-[300px] flex items-center justify-center text-muted-foreground">
                       暂无数据
                     </div>
                   )}
@@ -444,19 +444,19 @@ export default function AdminPage() {
                   {topPages.length > 0 ? (
                     <div className="space-y-3">
                       {topPages.map((page, index) => (
-                        <div key={page.page} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                        <div key={page.page} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-card rounded-lg">
                           <div className="flex items-center gap-3">
-                            <span className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm font-medium">
+                            <span className="w-6 h-6 rounded-full bg-[var(--glow-violet)] dark:bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] flex items-center justify-center text-sm font-medium">
                               {index + 1}
                             </span>
                             <span className="text-sm font-mono">{page.page}</span>
                           </div>
-                          <span className="text-sm text-slate-500">{page.count} 次</span>
+                          <span className="text-sm text-muted-foreground">{page.count} 次</span>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="h-[300px] flex items-center justify-center text-slate-400">
+                    <div className="h-[300px] flex items-center justify-center text-muted-foreground">
                       暂无数据
                     </div>
                   )}
@@ -478,13 +478,13 @@ export default function AdminPage() {
             </CardHeader>
             <CardContent>
               {messages.length === 0 ? (
-                <div className="py-12 text-center text-slate-500">暂无留言</div>
+                <div className="py-12 text-center text-muted-foreground">暂无留言</div>
               ) : (
                 <div className="space-y-4">
                   {messages.map((msg) => (
                     <div 
                       key={msg.id} 
-                      className={`p-4 rounded-lg border ${msg.is_pinned ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950' : 'border-slate-200 dark:border-slate-700'}`}
+                      className={`p-4 rounded-lg border ${msg.is_pinned ? 'border-[var(--neon-violet)] bg-[var(--glow-violet)] dark:bg-[var(--glow-violet)]' : 'border-border dark:border-border'}`}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
@@ -492,7 +492,7 @@ export default function AdminPage() {
                             <span className="font-medium">{msg.nickname}</span>
                             {/* 管理员可见邮箱 */}
                             {msg.user_email && (
-                              <span className="text-xs text-slate-400">({msg.user_email})</span>
+                              <span className="text-xs text-muted-foreground">({msg.user_email})</span>
                             )}
                             {msg.is_pinned && (
                               <Badge variant="secondary" className="text-xs">
@@ -503,29 +503,29 @@ export default function AdminPage() {
                             {!msg.is_public && (
                               <Badge variant="destructive" className="text-xs">私密</Badge>
                             )}
-                            <span className="text-xs text-slate-400">
+                            <span className="text-xs text-muted-foreground">
                               {formatDate(msg.created_at)}
                             </span>
                           </div>
-                          <p className="text-slate-600 dark:text-slate-300 whitespace-pre-wrap">{msg.content}</p>
+                          <p className="text-muted-foreground dark:text-muted-foreground whitespace-pre-wrap">{msg.content}</p>
 
                           {/* 显示回复 */}
                           {replies.filter(r => r.parent_id === msg.id).map((reply) => (
-                            <div key={reply.id} className="mt-3 ml-4 pl-4 border-l-2 border-slate-200 dark:border-slate-700">
+                            <div key={reply.id} className="mt-3 ml-4 pl-4 border-l-2 border-border dark:border-border">
                               <div className="flex items-center gap-2 mb-1">
                                 <span className="text-sm font-medium">{reply.nickname}</span>
                                 {/* 管理员可见回复者邮箱 */}
                                 {reply.user_email && (
-                                  <span className="text-xs text-slate-400">({reply.user_email})</span>
+                                  <span className="text-xs text-muted-foreground">({reply.user_email})</span>
                                 )}
                                 {reply.is_admin_reply && (
-                                  <Badge variant="default" className="text-xs bg-indigo-600">博主</Badge>
+                                  <Badge variant="default" className="text-xs bg-[var(--glow-violet)]">博主</Badge>
                                 )}
                                 {!reply.is_public && (
                                   <Badge variant="destructive" className="text-xs">私密</Badge>
                                 )}
                               </div>
-                              <p className="text-sm text-slate-500">{reply.content}</p>
+                              <p className="text-sm text-muted-foreground">{reply.content}</p>
                             </div>
                           ))}
                         </div>
@@ -576,7 +576,7 @@ export default function AdminPage() {
                     <ChevronLeft className="w-4 h-4" />
                     上一页
                   </Button>
-                  <span className="text-sm text-slate-500">
+                  <span className="text-sm text-muted-foreground">
                     第 {messagePage} / {messageTotalPages} 页
                   </span>
                   <Button
@@ -606,12 +606,12 @@ export default function AdminPage() {
             </CardHeader>
             <CardContent>
               {users.length === 0 ? (
-                <div className="py-12 text-center text-slate-500">暂无用户</div>
+                <div className="py-12 text-center text-muted-foreground">暂无用户</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-slate-200 dark:border-slate-700">
+                      <tr className="border-b border-border dark:border-border">
                         <th className="text-left py-3 px-4">昵称</th>
                         <th className="text-left py-3 px-4">邮箱</th>
                         <th className="text-left py-3 px-4">角色</th>
@@ -623,11 +623,11 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {users.map((u) => (
-                        <tr key={u.id} className="border-b border-slate-100 dark:border-slate-800">
+                        <tr key={u.id} className="border-b border-border dark:border-border">
                           <td className="py-3 px-4">
                             <span className="font-medium">{u.nickname || u.username}</span>
                           </td>
-                          <td className="py-3 px-4 text-sm text-slate-500">{u.email}</td>
+                          <td className="py-3 px-4 text-sm text-muted-foreground">{u.email}</td>
                           <td className="py-3 px-4">
                             <Badge variant={u.role === 'admin' ? 'default' : 'secondary'}>
                               {u.role === 'admin' ? '管理员' : '用户'}
@@ -635,14 +635,14 @@ export default function AdminPage() {
                           </td>
                           <td className="py-3 px-4">
                             <Badge variant={u.is_active ? 'default' : 'destructive'} 
-                              className={u.is_active ? 'bg-green-600' : ''}>
+                              className={u.is_active ? 'bg-[var(--glow-lime)]' : ''}>
                               {u.is_active ? '正常' : '已禁用'}
                             </Badge>
                           </td>
-                          <td className="py-3 px-4 text-sm text-slate-500">
+                          <td className="py-3 px-4 text-sm text-muted-foreground">
                             {formatDate(u.created_at)}
                           </td>
-                          <td className="py-3 px-4 text-sm text-slate-500">
+                          <td className="py-3 px-4 text-sm text-muted-foreground">
                             {u.last_login_at ? formatDate(u.last_login_at) : '从未登录'}
                           </td>
                           <td className="py-3 px-4 text-right">
@@ -677,7 +677,7 @@ export default function AdminPage() {
                                 </>
                               )}
                               {u.id === user?.id && (
-                                <span className="text-xs text-slate-400">当前账号</span>
+                                <span className="text-xs text-muted-foreground">当前账号</span>
                               )}
                             </div>
                           </td>
@@ -700,7 +700,7 @@ export default function AdminPage() {
                     <ChevronLeft className="w-4 h-4" />
                     上一页
                   </Button>
-                  <span className="text-sm text-slate-500">
+                  <span className="text-sm text-muted-foreground">
                     第 {userPage} / {userTotalPages} 页
                   </span>
                   <Button

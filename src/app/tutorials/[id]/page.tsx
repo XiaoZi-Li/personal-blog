@@ -44,16 +44,16 @@ interface RelatedPost {
 }
 
 const CATEGORY_CONFIG: Record<string, { key: string; icon: typeof Cpu; gradient: string; emoji: string }> = {
-  '51mcu': { key: 'c51', icon: Cpu, gradient: 'from-amber-500 to-orange-600', emoji: '🔧' },
-  stm32: { key: 'stm32', icon: CircuitBoard, gradient: 'from-sky-500 to-blue-600', emoji: '⚡' },
-  esp32: { key: 'esp32', icon: Wifi, gradient: 'from-emerald-500 to-teal-600', emoji: '📡' },
-  dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-violet-500 to-purple-600', emoji: '🔋' },
+  '51mcu': { key: 'c51', icon: Cpu, gradient: 'from-[var(--glow-amber)] to-[var(--glow-amber)]', emoji: '🔧' },
+  stm32: { key: 'stm32', icon: CircuitBoard, gradient: 'from-[var(--glow-cyan)] to-[var(--glow-cyan)]', emoji: '⚡' },
+  esp32: { key: 'esp32', icon: Wifi, gradient: 'from-[var(--glow-lime)] to-[var(--glow-lime)]', emoji: '📡' },
+  dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-[var(--glow-violet)] to-[var(--glow-violet)]', emoji: '🔋' },
 };
 
 const DIFFICULTY_STYLES: Record<string, string> = {
-  beginner: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
-  intermediate: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border-amber-200 dark:border-amber-800',
-  advanced: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+  beginner: 'bg-[var(--glow-lime)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
+  intermediate: 'bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
+  advanced: 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
 };
 
 function formatDate(dateStr: string): string {
@@ -185,7 +185,7 @@ export default function TutorialDetailPage() {
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('tutorials.empty')}</h1>
-          <Link href="/tutorials" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 text-white text-sm font-medium hover:bg-violet-500 transition-colors">
+          <Link href="/tutorials" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-white text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
             <ArrowLeft className="w-4 h-4" />
             {t('tutorials.backToList')}
           </Link>
@@ -199,13 +199,13 @@ export default function TutorialDetailPage() {
       {/* 阅读进度条 */}
       <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-transparent pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 transition-[width] duration-150"
+          className="h-full bg-gradient-to-r from-[var(--glow-violet)] via-[var(--glow-violet)] to-[var(--glow-magenta)] transition-[width] duration-150"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* 头部横幅 */}
-      <section className={`relative overflow-hidden py-10 sm:py-14 bg-gradient-to-br ${config?.gradient || 'from-violet-500 to-purple-600'}`}>
+      <section className={`relative overflow-hidden py-10 sm:py-14 bg-gradient-to-br ${config?.gradient || 'from-[var(--glow-violet)] to-[var(--glow-violet)]'}`}>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.2),transparent_50%)]" />
         <div className="absolute -right-6 -bottom-10 text-[120px] sm:text-[160px] opacity-20 select-none rotate-[-8deg]">
           {post.cover || config?.emoji || '📖'}
@@ -217,7 +217,7 @@ export default function TutorialDetailPage() {
           </Link>
           <div className="flex flex-wrap items-center gap-2 mb-3">
             {config && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card backdrop-blur-sm text-white text-xs font-medium">
                 {(() => { const Icon = config.icon; return <Icon className="w-3.5 h-3.5" />; })()}
                 {t(`tutorials.categories.${config.key}`)}
               </span>
@@ -228,8 +228,8 @@ export default function TutorialDetailPage() {
               </span>
             )}
             {post.is_pinned && (
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-400/90 text-yellow-900 text-xs font-medium">
-                <Pin className="w-3 h-3 fill-yellow-900" />
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[color-mix(in_oklab,var(--neon-amber)_12%,transparent)] text-[var(--neon-amber)] text-xs font-medium">
+                <Pin className="w-3 h-3 fill-[var(--neon-amber)]" />
                 TOP
               </span>
             )}
@@ -263,12 +263,12 @@ export default function TutorialDetailPage() {
       {/* 正文 */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="lg:grid lg:grid-cols-[1fr_240px] lg:gap-10">
-          <article className="max-w-3xl bg-white dark:bg-slate-900 rounded-2xl border border-border shadow-sm p-5 sm:p-10">
+          <article className="max-w-3xl bg-card dark:bg-background rounded-2xl border border-border shadow-sm p-5 sm:p-10">
             <MarkdownRenderer content={post.content} />
 
             {/* 底部互动 */}
             <div className="mt-10 pt-6 border-t border-border flex items-center justify-between">
-              <Link href="/tutorials" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
+              <Link href="/tutorials" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[var(--neon-violet)] dark:hover:text-[var(--neon-violet)] transition-colors">
                 <ArrowLeft className="w-4 h-4" />
                 {t('tutorials.backToList')}
               </Link>
@@ -276,8 +276,8 @@ export default function TutorialDetailPage() {
                 onClick={handleLike}
                 className={`relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   liked
-                    ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30'
-                    : 'bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/40 border border-rose-200 dark:border-rose-800'
+                    ? 'bg-[var(--glow-magenta)] text-white shadow-lg '
+                    : 'bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] hover:bg-[var(--glow-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] border border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]'
                 }`}
               >
                 <Heart className={`w-4 h-4 ${liked ? 'fill-white' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
@@ -290,9 +290,9 @@ export default function TutorialDetailPage() {
           <aside className="hidden lg:block">
             <div className="sticky top-24">
               {headings.length > 0 && (
-                <nav className="rounded-2xl border border-border bg-white dark:bg-slate-900 p-4 shadow-sm">
-                  <h4 className="flex items-center gap-2 text-sm font-semibold mb-3 text-slate-800 dark:text-slate-200">
-                    <List className="w-4 h-4 text-violet-500" />
+                <nav className="rounded-2xl border border-border bg-card dark:bg-background p-4 shadow-sm">
+                  <h4 className="flex items-center gap-2 text-sm font-semibold mb-3 text-foreground dark:text-muted-foreground">
+                    <List className="w-4 h-4 text-[var(--neon-violet)]" />
                     {t('tutorials.toc')}
                   </h4>
                   <div className="relative">
@@ -304,13 +304,13 @@ export default function TutorialDetailPage() {
                             onClick={() => scrollTo(h.id)}
                             className={`relative w-full text-left text-xs leading-relaxed pl-5 py-1 rounded-md transition-all ${
                               activeHeading === h.id
-                                ? 'text-violet-600 dark:text-violet-400 font-medium'
+                                ? 'text-[var(--neon-violet)] dark:text-[var(--neon-violet)] font-medium'
                                 : 'text-muted-foreground hover:text-foreground'
                             } ${h.level === 3 ? 'pl-8' : ''}`}
                           >
                             <span className={`absolute left-0 top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full transition-all ${
                               activeHeading === h.id
-                                ? 'bg-violet-500 scale-125 ring-4 ring-violet-500/15'
+                                ? 'bg-[var(--glow-violet)] scale-125 ring-4 ring-[color-mix(in_oklab,var(--neon-violet)_15%,transparent)]'
                                 : 'bg-border'
                             } ${h.level === 3 ? 'left-2' : ''}`} />
                             {h.text}
@@ -329,7 +329,7 @@ export default function TutorialDetailPage() {
         {related.length > 0 && (
           <div className="mt-14">
             <h2 className="text-lg sm:text-xl font-bold mb-5 flex items-center gap-2">
-              <span className="w-1.5 h-6 rounded-full bg-gradient-to-b from-violet-500 to-purple-500" />
+              <span className="w-1.5 h-6 rounded-full bg-gradient-to-b from-[var(--glow-violet)] to-[var(--glow-violet)]" />
               {t('tutorials.related')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -337,11 +337,11 @@ export default function TutorialDetailPage() {
                 const rc = rp.category ? CATEGORY_CONFIG[rp.category] : null;
                 return (
                   <Link key={rp.id} href={`/tutorials/${rp.id}`} className="group">
-                    <div className="h-full rounded-2xl border border-border bg-white dark:bg-slate-900 p-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                      <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${rc?.gradient || 'from-violet-500 to-purple-600'} flex items-center justify-center text-white text-lg mb-3 group-hover:scale-110 transition-transform`}>
+                    <div className="h-full rounded-2xl border border-border bg-card dark:bg-background p-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                      <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${rc?.gradient || 'from-[var(--glow-violet)] to-[var(--glow-violet)]'} flex items-center justify-center text-white text-lg mb-3 group-hover:scale-110 transition-transform`}>
                         {rp.cover || rc?.emoji || '📖'}
                       </div>
-                      <h3 className="font-semibold text-sm text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-2 mb-1.5">
+                      <h3 className="font-semibold text-sm text-foreground dark:text-muted-foreground group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors line-clamp-2 mb-1.5">
                         {rp.title}
                       </h3>
                       <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{rp.summary}</p>

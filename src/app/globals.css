@@ -3,6 +3,37 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   字体：Outfit（标题/拉丁）+ JetBrains Mono（技术标注）+ 系统中文字体
+   ============================================================ */
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -35,6 +66,22 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* 霓虹强调色（科技风核心色板）
+     --neon-*  = 墨色档：用于文字、边框、细线、指示点，两个主题都需满足 WCAG AA
+     --glow-*  = 亮色档：用于渐变填充、按钮底色、光晕，允许更高明度
+     两档分离的原因：亮色主题下鲜艳的霓虹做文字只有 2.2:1，而做填充刚刚好。 */
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-violet: var(--neon-violet);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-lime: var(--neon-lime);
+  --color-neon-amber: var(--neon-amber);
+  --color-glow-cyan: var(--glow-cyan);
+  --color-glow-violet: var(--glow-violet);
+  --color-glow-magenta: var(--glow-magenta);
+  --color-glow-lime: var(--glow-lime);
+  --color-glow-amber: var(--glow-amber);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -43,100 +90,209 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   --font-sans:
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', ui-sans-serif,
-    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+    'Outfit', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
   --font-serif:
     'Noto Serif SC', 'Songti SC', 'SimSun', ui-serif, Georgia, Cambria,
     'Times New Roman', Times, serif;
 }
 
+/* ============================================================
+   亮色模式 —— 「晨雾极光」：干净、微凉、留白通透
+   ============================================================ */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --radius: 0.875rem;
+
+  --background: oklch(0.985 0.006 265);
+  --foreground: oklch(0.21 0.03 268);
+  --card: oklch(1 0 0 / 90%);
+  --card-foreground: oklch(0.21 0.03 268);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.21 0.03 268);
+  --primary: oklch(0.55 0.2 285);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.012 275);
+  --secondary-foreground: oklch(0.3 0.03 270);
+  --muted: oklch(0.955 0.012 275);
+  --muted-foreground: oklch(0.52 0.022 270);
+  --accent: oklch(0.94 0.03 285);
+  --accent-foreground: oklch(0.35 0.08 285);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.9 0.012 275);
+  --input: oklch(0.92 0.012 275);
+  --ring: oklch(0.62 0.14 285);
+  --chart-1: oklch(0.62 0.19 262);
+  --chart-2: oklch(0.7 0.15 190);
+  --chart-3: oklch(0.55 0.2 300);
+  --chart-4: oklch(0.75 0.16 340);
+  --chart-5: oklch(0.72 0.15 155);
+  --sidebar: oklch(0.99 0.004 265);
+  --sidebar-foreground: oklch(0.21 0.03 268);
+  --sidebar-primary: oklch(0.55 0.2 285);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.955 0.012 275);
+  --sidebar-accent-foreground: oklch(0.3 0.03 270);
+  --sidebar-border: oklch(0.9 0.012 275);
+  --sidebar-ring: oklch(0.62 0.14 285);
+
+  /* 墨色档：亮色主题下实测 6.0 / 7.8 / 7.0 / 6.0 / 5.9 : 1（对 --background） */
+  --neon-cyan: oklch(0.47 0.11 213);
+  --neon-violet: oklch(0.45 0.2 288);
+  --neon-magenta: oklch(0.48 0.19 350);
+  --neon-lime: oklch(0.47 0.12 163);
+  --neon-amber: oklch(0.5 0.13 70);
+
+  /* 亮色档：只做填充。渐变端点的最低明度按「近黑按钮文字 >= 4.5:1」反推得到 */
+  --glow-cyan: oklch(0.74 0.14 202);
+  --glow-violet: oklch(0.63 0.19 290);
+  --glow-magenta: oklch(0.7 0.19 348);
+  --glow-lime: oklch(0.74 0.15 165);
+  --glow-amber: oklch(0.79 0.15 78);
+
+  --surface-glow: 0 0 0 1px oklch(0.9 0.012 275 / 70%);
+  --shadow-soft: 0 1px 2px oklch(0.3 0.05 275 / 6%), 0 12px 32px -12px oklch(0.4 0.1 280 / 18%);
 }
 
+/* ============================================================
+   暗色模式 —— 「深空具身」：主推模式，深空底 + 极光霓虹
+   ============================================================ */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --background: oklch(0.145 0.024 272);
+  --foreground: oklch(0.955 0.01 265);
+  --card: oklch(0.19 0.028 272 / 90%);
+  --card-foreground: oklch(0.955 0.01 265);
+  --popover: oklch(0.19 0.028 272);
+  --popover-foreground: oklch(0.955 0.01 265);
+  --primary: oklch(0.78 0.15 195);
+  --primary-foreground: oklch(0.16 0.03 265);
+  --secondary: oklch(0.26 0.032 272);
+  --secondary-foreground: oklch(0.95 0.01 265);
+  --muted: oklch(0.25 0.03 272);
+  --muted-foreground: oklch(0.72 0.025 268);
+  --accent: oklch(0.3 0.05 285);
+  --accent-foreground: oklch(0.96 0.01 265);
+  --destructive: oklch(0.7 0.19 22);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.75 0.14 200);
+  --chart-1: oklch(0.78 0.15 195);
+  --chart-2: oklch(0.7 0.2 290);
+  --chart-3: oklch(0.75 0.19 345);
+  --chart-4: oklch(0.78 0.16 160);
+  --chart-5: oklch(0.82 0.15 85);
+  --sidebar: oklch(0.18 0.026 272);
+  --sidebar-foreground: oklch(0.955 0.01 265);
+  --sidebar-primary: oklch(0.78 0.15 195);
+  --sidebar-primary-foreground: oklch(0.16 0.03 265);
+  --sidebar-accent: oklch(0.26 0.032 272);
+  --sidebar-accent-foreground: oklch(0.955 0.01 265);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.75 0.14 200);
+
+  /* 墨色档：深色主题下实测 12.6 / 6.6 / 8.3 / 12.1 / 12.4 : 1（对 --background） */
+  --neon-cyan: oklch(0.83 0.15 195);
+  --neon-violet: oklch(0.7 0.21 290);
+  --neon-magenta: oklch(0.76 0.19 345);
+  --neon-lime: oklch(0.82 0.16 160);
+  --neon-amber: oklch(0.85 0.15 82);
+
+  /* 亮色档：深色主题下与墨色档同值即可 */
+  --glow-cyan: oklch(0.83 0.15 195);
+  --glow-violet: oklch(0.7 0.21 290);
+  --glow-magenta: oklch(0.76 0.19 345);
+  --glow-lime: oklch(0.82 0.16 160);
+  --glow-amber: oklch(0.85 0.15 82);
+
+  --surface-glow: 0 0 0 1px oklch(1 0 0 / 8%);
+  --shadow-soft: 0 1px 0 oklch(1 0 0 / 4%) inset, 0 24px 60px -24px oklch(0.05 0.05 275 / 80%);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    background-color: var(--background);
+  }
+  /* body 保持透明，让底层 AuroraField 画布透出来 */
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: transparent;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--glow-cyan) 40%, transparent);
+    color: var(--foreground);
+  }
+
+  /* 键盘焦点：两个主题下都清晰可见（墨色档对背景 6.0:1 / 12.6:1） */
+  :where(a, button, [role='button'], [tabindex], input, textarea, select, summary):focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
   }
 }
 
 body {
   @apply font-sans;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Background Grid Pattern */
+/* ============================================================
+   全局滚动条 / 滚动行为
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: color-mix(in oklab, var(--background) 92%, transparent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--neon-violet) 55%, transparent),
+    color-mix(in oklab, var(--neon-cyan) 45%, transparent)
+  );
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--neon-magenta) 65%, transparent),
+    color-mix(in oklab, var(--neon-cyan) 60%, transparent)
+  );
+  background-clip: padding-box;
+}
+
+/* 隐藏横向滚动条（分类筛选标签栏） */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   背景网格 / 噪点 / 扫描线
+   ============================================================ */
 .bg-grid-slate-100 {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 }
@@ -145,35 +301,244 @@ body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 }
 
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
+.tech-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--neon-cyan) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--neon-violet) 14%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 10%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 10%, transparent 78%);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.tech-grid-fade {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--neon-cyan) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--neon-violet) 10%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 75%);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
 
-::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
-  border-radius: 4px;
+/* ============================================================
+   表面：默认面板用近乎不透明的「磨砂纸」，只在少数位置才用玻璃
+   ============================================================ */
+
+/* 内容面板：不透明底 + 发丝边。比玻璃更省 GPU（无 backdrop-filter），
+   文字对比度也更可预测；极光仍会从 90% 的 alpha 里透出一点点。 */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+/* 玻璃：只留给导航、Hero 主面板这类真正需要「浮在场景之上」的少数元素 */
+.glass {
+  background: color-mix(in oklab, var(--card) 86%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 100%, transparent);
 }
 
-/* ========================================
-   留言墙动画效果
-   ======================================== */
+.glass-strong {
+  background: color-mix(in oklab, var(--card) 96%, transparent);
+  backdrop-filter: blur(26px) saturate(150%);
+  -webkit-backdrop-filter: blur(26px) saturate(150%);
+  border: 1px solid color-mix(in oklab, var(--border) 100%, transparent);
+}
 
-/* 浮动球体动画 */
+/* 四角 HUD 装饰（科技仪表盘感） */
+.hud-frame {
+  position: relative;
+}
+
+.hud-frame::before,
+.hud-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: color-mix(in oklab, var(--neon-cyan) 65%, transparent);
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  opacity: 0;
+}
+
+.hud-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid;
+  border-left: 1.5px solid;
+  border-top-left-radius: 6px;
+}
+
+.hud-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid;
+  border-right: 1.5px solid;
+  border-bottom-right-radius: 6px;
+}
+
+.hud-frame:hover::before,
+.hud-frame:hover::after,
+.hud-frame.is-active::before,
+.hud-frame.is-active::after {
+  opacity: 1;
+}
+
+/* 渐变流光描边卡片 */
+.neon-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    transparent 0deg,
+    color-mix(in oklab, var(--neon-cyan) 90%, transparent) 60deg,
+    color-mix(in oklab, var(--neon-violet) 90%, transparent) 130deg,
+    transparent 200deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.neon-border:hover::before,
+.neon-border.is-active::before {
+  opacity: 1;
+  animation: border-angle-spin 3.2s linear infinite;
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-angle-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* 文字渐变 */
+.text-aurora {
+  background-image: linear-gradient(
+    100deg,
+    var(--neon-cyan) 0%,
+    var(--neon-violet) 42%,
+    var(--neon-magenta) 78%,
+    var(--neon-cyan) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 7s ease infinite;
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 22px color-mix(in oklab, var(--neon-cyan) 45%, transparent);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+}
+
+/* 鼠标跟随光晕卡片 */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--glow-cyan) 18%, transparent),
+    transparent 62%
+  );
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ============================================================
+   滚动渐显
+   失败要「开」：默认可见，只有确认 JS 跑起来（html.js）才隐藏并等待入场。
+   这样 JS 被禁用、报错或脚本没跑，内容依然读得到。
+   ============================================================ */
+.reveal {
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.75s ease;
+}
+
+html.js .reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 26px), 0);
+  filter: blur(6px);
+  will-change: opacity, transform;
+}
+
+html.js .reveal[data-dir='left'] {
+  transform: translate3d(-32px, 0, 0);
+}
+
+html.js .reveal[data-dir='right'] {
+  transform: translate3d(32px, 0, 0);
+}
+
+html.js .reveal[data-dir='scale'] {
+  transform: scale(0.94);
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* ============================================================
+   基础动效
+   ============================================================ */
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
@@ -193,9 +558,9 @@ html {
   animation: blob 7s infinite;
 }
 
-/* 渐变文字动画 */
 @keyframes gradient-x {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -208,9 +573,9 @@ html {
   animation: gradient-x 3s ease infinite;
 }
 
-/* 缓慢弹跳 */
 @keyframes bounce-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -222,7 +587,6 @@ html {
   animation: bounce-slow 2s ease-in-out infinite;
 }
 
-/* 淡入上升动画 */
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -239,14 +603,24 @@ html {
   opacity: 0;
 }
 
-/* 动画延迟 */
-.animation-delay-500 {
-  animation-delay: 500ms;
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1s ease-in-out infinite;
 }
 
 /* 悬浮微动效（卡片内图标等） */
 @keyframes float-soft {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -258,9 +632,42 @@ html {
   animation: float-soft 4s ease-in-out infinite;
 }
 
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-y 11s ease-in-out infinite;
+}
+
+@keyframes drift-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(18px);
+  }
+}
+
+.animate-drift {
+  animation: drift-x 14s ease-in-out infinite;
+}
+
 /* 奖牌/徽章轻微摇摆 */
 @keyframes wiggle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-6deg);
   }
   50% {
@@ -321,13 +728,14 @@ html {
   animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* 呼吸光晕（科研卡等高亮元素） */
+/* 呼吸光晕（科研卡等高亮元素）：走亮色档，亮/暗主题都成立 */
 @keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 10px 30px -10px color-mix(in oklab, #8b5cf6 35%, transparent);
+  0%,
+  100% {
+    box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--glow-violet) 35%, transparent);
   }
   50% {
-    box-shadow: 0 10px 42px -8px color-mix(in oklab, #8b5cf6 55%, transparent);
+    box-shadow: 0 10px 42px -8px color-mix(in oklab, var(--glow-violet) 55%, transparent);
   }
 }
 
@@ -335,90 +743,124 @@ html {
   animation: glow-pulse 3.5s ease-in-out infinite;
 }
 
-
-.animation-delay-1000 {
-  animation-delay: 1000ms;
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.animation-delay-2000 {
-  animation-delay: 2000ms;
+.animate-spin-slow {
+  animation: spin-slow 26s linear infinite;
 }
 
-.animation-delay-4000 {
-  animation-delay: 4000ms;
+.animate-spin-slower {
+  animation: spin-slow 60s linear infinite;
 }
 
-/* 隐藏横向滚动条（分类筛选标签栏） */
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.animate-spin-reverse {
+  animation: spin-slow 34s linear infinite reverse;
 }
 
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-
-/* 打字机效果 */
-@keyframes typing {
+@keyframes marquee-x {
   from {
-    width: 0;
+    transform: translateX(0);
   }
   to {
-    width: 100%;
+    transform: translateX(-50%);
   }
 }
 
-/* 闪烁光标 */
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
+.animate-marquee {
+  animation: marquee-x 38s linear infinite;
 }
 
-/* 心跳动画 */
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+.animate-marquee-fast {
+  animation: marquee-x 22s linear infinite;
 }
 
-.animate-heartbeat {
-  animation: heartbeat 1s ease-in-out infinite;
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
 
-/* 涟漪效果 */
-@keyframes ripple {
+.group-marquee:hover .animate-marquee,
+.group-marquee:hover .animate-marquee-fast {
+  animation-play-state: paused;
+}
+
+@keyframes scan-y {
   0% {
-    transform: scale(0.8);
-    opacity: 1;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.9;
   }
   100% {
-    transform: scale(2);
+    transform: translateY(1200%);
     opacity: 0;
   }
 }
 
-/* 渐变边框动画 */
-@keyframes border-gradient {
-  0%, 100% {
-    border-color: #c084fc;
+.animate-scan {
+  animation: scan-y 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
   }
   50% {
-    border-color: #f472b6;
+    opacity: 0.85;
+    transform: scale(1.06);
   }
 }
 
-/* 卡片悬浮效果 */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.animate-pulse-glow {
+  animation: pulse-glow 4.2s ease-in-out infinite;
 }
 
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+@keyframes ping-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+.animate-ping-ring {
+  animation: ping-ring 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+.animate-dash {
+  stroke-dasharray: 6 10;
+  animation: dash-flow 7s linear infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-caret {
+  animation: caret-blink 1.05s step-end infinite;
 }
 
 /* 光泽扫过效果 */
@@ -443,12 +885,7 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   animation: shine 2s infinite;
 }
 
@@ -471,4 +908,170 @@ html {
   border-radius: inherit;
   background: inherit;
   animation: pulse-ring 2s ease-out infinite;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1000ms;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2000ms;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3000ms;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4000ms;
+}
+
+/* ============================================================
+   卡片交互
+   ============================================================ */
+.hover-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.tilt-wrap {
+  perspective: 1000px;
+}
+
+.tilt-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.tilt-wrap.is-tilting .tilt-inner {
+  transition: transform 0.1s linear;
+}
+
+/* 按钮：霓虹描边 + 扫光 */
+.btn-neon {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--glow-cyan) 92%, transparent),
+    color-mix(in oklab, var(--glow-violet) 92%, transparent) 55%,
+    color-mix(in oklab, var(--glow-magenta) 88%, transparent)
+  );
+  background-size: 200% 100%;
+  color: #04121a;
+  font-weight: 600;
+  box-shadow:
+    0 10px 30px -10px color-mix(in oklab, var(--glow-violet) 70%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--glow-cyan) 30%, transparent) inset;
+  transition:
+    background-position 0.6s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+
+.btn-neon:hover {
+  background-position: 100% 0%;
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 40px -14px color-mix(in oklab, var(--glow-magenta) 75%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--glow-cyan) 55%, transparent) inset;
+}
+
+/* 按下时往下沉一点，像真的被按到 */
+.btn-neon:active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 0.08s;
+}
+
+.btn-neon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 45%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-neon:hover::after {
+  transform: translateX(130%);
+}
+
+.btn-ghost-tech {
+  border: 1px solid color-mix(in oklab, var(--neon-cyan) 28%, transparent);
+  background: color-mix(in oklab, var(--card) 60%, transparent);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-ghost-tech:hover {
+  border-color: color-mix(in oklab, var(--neon-cyan) 65%, transparent);
+  box-shadow: 0 0 24px -6px color-mix(in oklab, var(--glow-cyan) 45%, transparent);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-tech:active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 0.08s;
+}
+
+/* 分隔线 */
+.hairline-x {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--neon-cyan) 40%, transparent),
+    color-mix(in oklab, var(--neon-violet) 40%, transparent),
+    transparent
+  );
+}
+
+/* 角标数字 / 索引 */
+.index-chip {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  color: var(--neon-cyan);
+}
+
+/* ============================================================
+   无障碍：尊重「减少动效」偏好
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }

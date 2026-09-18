@@ -98,15 +98,15 @@ export default function GalleryPage() {
     <div className="min-h-screen pt-16">
       {/* Hero */}
       <section className="relative overflow-hidden py-12 sm:py-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50 dark:from-slate-950 dark:via-slate-900 dark:to-rose-950/20" />
-        <div className="absolute top-10 left-1/4 w-72 h-72 bg-rose-300/30 dark:bg-rose-900/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-amber-300/30 dark:bg-amber-900/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-magenta)] via-[var(--glow-amber)] to-[var(--glow-amber)] dark:from-slate-950 dark:via-slate-900 dark:to-[var(--glow-magenta)]" />
+        <div className="absolute top-10 left-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)] rounded-full blur-3xl animate-blob" />
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-amber)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] text-xs sm:text-sm font-medium mb-4">
             <Camera className="w-4 h-4" />
             {t('gallery.badge')}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-[var(--glow-magenta)] via-[var(--glow-amber)] to-[var(--glow-amber)] bg-clip-text text-transparent">
             {t('gallery.title')}
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
@@ -130,8 +130,8 @@ export default function GalleryPage() {
                 onClick={() => setCategory(key)}
                 className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   category === key
-                    ? 'bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-md shadow-rose-500/25'
-                    : 'bg-muted text-muted-foreground hover:bg-rose-100 hover:text-rose-700 dark:hover:bg-rose-900/40 dark:hover:text-rose-300'
+                    ? 'bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)] text-slate-900 shadow-md '
+                    : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:hover:text-[var(--neon-magenta)]'
                 }`}
               >
                 {label}
@@ -204,8 +204,8 @@ export default function GalleryPage() {
                     {/* 视频播放按钮 */}
                     {isVideo && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-rose-500/80 transition-all duration-300">
-                          <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                        <div className="w-14 h-14 rounded-full bg-card backdrop-blur-md border border-border flex items-center justify-center group-hover:scale-110 group-hover:bg-[color-mix(in_oklab,var(--neon-magenta)_14%,var(--card))] transition-all duration-300">
+                          <Play className="w-6 h-6 text-foreground fill-foreground ml-0.5" />
                         </div>
                       </div>
                     )}
@@ -236,7 +236,7 @@ export default function GalleryPage() {
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -246,14 +246,14 @@ export default function GalleryPage() {
             <>
               <button
                 onClick={e => { e.stopPropagation(); prev(); }}
-                className="absolute left-2 sm:left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+                className="absolute left-2 sm:left-4 p-3 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
                 aria-label="Previous"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
               <button
                 onClick={e => { e.stopPropagation(); next(); }}
-                className="absolute right-2 sm:right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+                className="absolute right-2 sm:right-4 p-3 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
                 aria-label="Next"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -293,9 +293,9 @@ export default function GalleryPage() {
             <div className="text-center">
               <p className="text-white text-sm sm:text-base font-medium">{current.title}</p>
               {current.description && (
-                <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-xl">{current.description}</p>
+                <p className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-xl">{current.description}</p>
               )}
-              <p className="text-gray-500 text-[11px] mt-1.5">
+              <p className="text-muted-foreground text-[11px] mt-1.5">
                 {lightboxIndex + 1} / {items.length} · {t(`gallery.categories.${current.category}`)} · {formatDate(current.created_at)}
               </p>
             </div>

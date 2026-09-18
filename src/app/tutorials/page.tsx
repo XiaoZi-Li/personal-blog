@@ -32,16 +32,16 @@ interface Post {
 const CATEGORY_CONFIG: Record<string, {
   key: string; icon: typeof Cpu; gradient: string; lightBg: string; emoji: string;
 }> = {
-  '51mcu': { key: 'c51', icon: Cpu, gradient: 'from-amber-500 to-orange-600', lightBg: 'from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/20', emoji: '🔧' },
-  stm32: { key: 'stm32', icon: CircuitBoard, gradient: 'from-sky-500 to-blue-600', lightBg: 'from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/20', emoji: '⚡' },
-  esp32: { key: 'esp32', icon: Wifi, gradient: 'from-emerald-500 to-teal-600', lightBg: 'from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/20', emoji: '📡' },
-  dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-violet-500 to-purple-600', lightBg: 'from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/20', emoji: '🔋' },
+  '51mcu': { key: 'c51', icon: Cpu, gradient: 'from-[var(--glow-amber)] to-[var(--glow-amber)]', lightBg: 'from-[var(--glow-amber)] to-[var(--glow-amber)] dark:from-[var(--glow-amber)] dark:to-[var(--glow-amber)]', emoji: '🔧' },
+  stm32: { key: 'stm32', icon: CircuitBoard, gradient: 'from-[var(--glow-cyan)] to-[var(--glow-cyan)]', lightBg: 'from-[var(--glow-cyan)] to-[var(--glow-cyan)] dark:from-[var(--glow-cyan)] dark:to-[var(--glow-cyan)]', emoji: '⚡' },
+  esp32: { key: 'esp32', icon: Wifi, gradient: 'from-[var(--glow-lime)] to-[var(--glow-lime)]', lightBg: 'from-[var(--glow-lime)] to-[var(--glow-lime)] dark:from-[var(--glow-lime)] dark:to-[var(--glow-lime)]', emoji: '📡' },
+  dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-[var(--glow-violet)] to-[var(--glow-violet)]', lightBg: 'from-[var(--glow-violet)] to-[var(--glow-violet)] dark:from-[var(--glow-violet)] dark:to-[var(--glow-violet)]', emoji: '🔋' },
 };
 
 const DIFFICULTY_STYLES: Record<string, string> = {
-  beginner: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800',
-  intermediate: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 border-amber-200 dark:border-amber-800',
-  advanced: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+  beginner: 'bg-[var(--glow-lime)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
+  intermediate: 'bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
+  advanced: 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
 };
 
 function readingTime(content?: string | null): number {
@@ -96,16 +96,16 @@ export default function TutorialsPage() {
     <div className="min-h-screen pt-16">
       {/* Hero */}
       <section className="relative overflow-hidden py-12 sm:py-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-white to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950/30" />
-        <div className="absolute top-10 left-1/4 w-72 h-72 bg-violet-300/30 dark:bg-violet-900/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple-300/30 dark:bg-purple-900/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-violet)] via-white to-[var(--glow-violet)] dark:from-slate-950 dark:via-slate-900 dark:to-[var(--glow-violet)]" />
+        <div className="absolute top-10 left-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] rounded-full blur-3xl animate-blob" />
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
             <BookOpen className="w-4 h-4" />
             {t('tutorials.badge')}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-[var(--glow-violet)] via-[var(--glow-violet)] to-[var(--glow-magenta)] bg-clip-text text-transparent">
             {t('tutorials.title')}
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
@@ -126,15 +126,15 @@ export default function TutorialsPage() {
                   onClick={() => setCategory(isActive ? '' : catId)}
                   className={`group relative w-full text-left rounded-2xl border p-4 sm:p-5 transition-all duration-300 overflow-hidden ${
                     isActive
-                      ? 'border-violet-400 dark:border-violet-600 shadow-lg shadow-violet-500/10 scale-[1.02]'
-                      : 'border-border bg-white/70 dark:bg-slate-900/70 hover:border-violet-300 dark:hover:border-violet-700 hover:-translate-y-1 hover:shadow-xl'
+                      ? 'border-[var(--neon-violet)] dark:border-[var(--neon-violet)] shadow-lg scale-[1.02]'
+                      : 'border-border bg-card dark:bg-background hover:border-[var(--neon-violet)] dark:hover:border-[var(--neon-violet)] hover:-translate-y-1 hover:shadow-xl'
                   }`}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${config.lightBg} opacity-0 ${isActive ? 'opacity-100' : 'group-hover:opacity-100'} transition-opacity`} />
                   <div className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${config.gradient} flex items-center justify-center text-white shadow-lg mb-3 group-hover:scale-110 group-hover:rotate-3 transition-transform`}>
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="relative font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 mb-1">
+                  <h3 className="relative font-bold text-sm sm:text-base text-foreground dark:text-muted-foreground mb-1">
                     {t(`tutorials.categories.${config.key}`)}
                   </h3>
                   <p className="relative text-[11px] sm:text-xs text-muted-foreground leading-relaxed line-clamp-2">
@@ -156,8 +156,8 @@ export default function TutorialsPage() {
               onClick={() => setCategory('')}
               className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                 !category
-                  ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-md shadow-violet-500/25'
-                  : 'bg-muted text-muted-foreground hover:bg-violet-100 hover:text-violet-700 dark:hover:bg-violet-900/40 dark:hover:text-violet-300'
+                  ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
+                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
               }`}
             >
               {t('tutorials.all')}
@@ -168,8 +168,8 @@ export default function TutorialsPage() {
                 onClick={() => setCategory(catId)}
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   category === catId
-                    ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-md shadow-violet-500/25'
-                    : 'bg-muted text-muted-foreground hover:bg-violet-100 hover:text-violet-700 dark:hover:bg-violet-900/40 dark:hover:text-violet-300'
+                    ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
+                    : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
                 }`}
               >
                 {t(`tutorials.categories.${config.key}`)}
@@ -198,7 +198,7 @@ export default function TutorialsPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder={t('tutorials.searchPlaceholder')}
-              className="w-full pl-9 pr-4 py-2 rounded-xl border border-border bg-white/70 dark:bg-slate-900/70 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-400 transition-all"
+              className="w-full pl-9 pr-4 py-2 rounded-xl border border-border bg-card dark:bg-background text-sm focus:outline-none focus:ring-2 focus:ring-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] focus:border-[var(--neon-violet)] transition-all"
             />
           </div>
         </div>
@@ -244,11 +244,11 @@ export default function TutorialsPage() {
                       {/* 封面 */}
                       <div className={`relative h-32 sm:h-36 bg-gradient-to-br ${config.gradient} overflow-hidden`}>
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.25),transparent_60%)]" />
-                        <div className="absolute -right-4 -bottom-6 w-28 h-28 rounded-full bg-white/10 blur-sm group-hover:scale-125 transition-transform duration-500" />
+                        <div className="absolute -right-4 -bottom-6 w-28 h-28 rounded-full bg-card blur-sm group-hover:scale-125 transition-transform duration-500" />
                         <div className="absolute right-3 bottom-2 text-5xl opacity-30 group-hover:opacity-50 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500">
                           {post.cover || config.emoji}
                         </div>
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium">
+                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-card backdrop-blur-sm text-white text-xs font-medium">
                           <Icon className="w-3.5 h-3.5" />
                           {t(`tutorials.categories.${config.key}`)}
                         </div>
@@ -271,7 +271,7 @@ export default function TutorialsPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors line-clamp-2 mb-1.5">
+                        <h3 className="font-bold text-sm sm:text-base text-foreground dark:text-muted-foreground group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors line-clamp-2 mb-1.5">
                           {post.title}
                         </h3>
                         <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-3">
@@ -316,7 +316,7 @@ export default function TutorialsPage() {
             <button
               onClick={() => fetchPosts(page + 1, true)}
               disabled={loadingMore}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white text-sm font-medium shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/30 transition-all disabled:opacity-60"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 text-sm font-medium shadow-lg hover:shadow-xl hover:transition-all disabled:opacity-60"
             >
               <Layers className="w-4 h-4" />
               {loadingMore ? '...' : t('tutorials.loadMore')}
@@ -329,7 +329,7 @@ export default function TutorialsPage() {
       </section>
 
       {/* 底部装饰 */}
-      <div className="text-center pb-12 text-muted-foreground/50">
+      <div className="text-center pb-12 text-muted-foreground">
         <GraduationCap className="w-8 h-8 mx-auto mb-2" />
       </div>
     </div>

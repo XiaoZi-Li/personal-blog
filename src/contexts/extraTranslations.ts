@@ -1,0 +1,396 @@
+/**
+ * 新增文案（与 LanguageContext 里既有的 translations 互补）。
+ *
+ * 单独放一个文件而不是直接改那个 57KB 的 translations：既有的 key 一律不动，
+ * `t()` 在 translations 里找不到时再回落到这里，风险最小。
+ */
+export type ExtraLanguage = 'zh-CN' | 'en-US' | 'ja-JP';
+
+export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> = {
+  'zh-CN': {
+    nav: {
+      robotics: '具身智能',
+    },
+    home: {
+      hero: {
+        kicker: 'EMBODIED AI · ROBOTICS · EMBEDDED',
+        quote: '把智能装进一副会动的身体里 —— 这是我理解具身智能的方式。',
+        ctaPrimary: '查看我的简历',
+        ctaSecondary: '具身智能方向',
+        roles: {
+          r1: '机器人运动控制 · MPC / WBC',
+          r2: 'Vision-Language-Action',
+          r3: '强化学习 · Sim2Real',
+          r4: '嵌入式软硬件全栈',
+        },
+      },
+      marquee: {
+        label: '技术雷达',
+        practiced: '已实践',
+        learning: '在学',
+      },
+      rail: {
+        research: '科研',
+        about: '关于',
+        stack: '技术栈',
+        honors: '荣誉',
+        roadmap: '路线',
+        traits: '特质',
+        contact: '联系',
+      },
+      roadmap: {
+        kicker: 'ROADMAP',
+        title: '通往具身智能的三段路',
+        subtitle:
+          '先让机器人稳稳地动起来，再让语言和视觉指挥它做事，最后让它在试错中自己学会更聪明的策略。这是我给自己排的顺序。',
+        note: '这三段路我还没走完，进度会随着实际推进更新，而不是一次性列完。',
+        status: {
+          doing: '正在推进',
+          next: '计划中',
+          base: '已有基础',
+        },
+        stage1: {
+          name: '机器人运动控制',
+          en: 'MOTION CONTROL',
+          desc: '理解刚体动力学、接触与摩擦，用优化把「想动」翻译成「怎么使劲」。这是所有上层智能的地基。',
+          items: {
+            i1: '刚体动力学与浮动基座建模',
+            i2: 'MPC 滚动时域优化 / 全身控制 WBC',
+            i3: 'MuJoCo · Isaac Lab 仿真验证',
+            i4: 'ROS 2 部署与实时性调优',
+          },
+        },
+        stage2: {
+          name: '视觉-语言-动作模型',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: '把视觉与语言统一到同一个动作空间里，让机器人能听懂「把杯子拿起来」这类指令并直接输出动作。',
+          items: {
+            i1: 'RT-2 动作即 token 的范式',
+            i2: 'OpenVLA 开源 7B 模型微调',
+            i3: 'π0 流匹配与连续动作生成',
+            i4: 'GR00T 人形机器人基础模型',
+          },
+        },
+        stage3: {
+          name: '强化学习与迁移',
+          en: 'RL & SIM2REAL',
+          desc: '让策略在大量并行仿真中自己试错，再用域随机化把仿真里学会的本事带进真实世界。',
+          items: {
+            i1: 'PPO / SAC 连续控制策略',
+            i2: '模仿学习 · 行为克隆 · Diffusion Policy',
+            i3: '域随机化与 Sim2Real 迁移',
+            i4: '大规模并行环境训练调参',
+          },
+        },
+      },
+    },
+    footer: {
+      tagline:
+        '在物理世界里写代码。从底层驱动到运动控制，再到 VLA 与强化学习，一步一步把智能装进会动的身体里。',
+      navigate: 'NAVIGATE',
+      focus: 'RESEARCH FOCUS',
+      contact: 'CONTACT',
+      built: 'for embodied intelligence',
+    },
+    embodied: {
+      back: '返回项目列表',
+      kicker: 'EMBODIED INTELLIGENCE',
+      title: 'RDK X5 具身智能系统',
+      subtitle:
+        '基于 RDK X5 边缘计算开发板与 dora-rs 数据流框架，搭建一套「感知 — 决策 — 行动」的实时机器人系统。',
+      tagline: 'Perception → Policy → Action，全程跑在端侧',
+      overviewTitle: '项目概述',
+      overview1:
+        '具身智能的关键不在于模型多大，而在于智能体能否在真实物理环境里完成感知、决策与行动的闭环。这个项目从端侧算力出发，把视觉、语音、控制三条链路接在一起。',
+      overview2:
+        '项目覆盖传感器数据采集、视觉感知、语音交互到运动控制的端到端能力，为自主导航、目标抓取与人机交互提供可复用的技术底座。',
+      featuresTitle: '核心能力',
+      f1: { title: '实时视觉感知', desc: '基于 YOLO 系列模型完成多目标检测与跟踪，支持实时视频流处理。' },
+      f2: { title: '智能语音交互', desc: '集成 Whisper 完成高精度语音识别，并做自然语言指令的意图解析。' },
+      f3: { title: '运动规划控制', desc: '在 ROS 2 框架下完成路径规划与运动控制，支持多种机器人平台。' },
+      f4: { title: '多传感器融合', desc: '融合摄像头、激光雷达与 IMU 数据，构建一致的环境表征。' },
+      archTitle: '系统数据流',
+      archDesc: 'dora-rs 负责把节点串成一条低延迟的数据流管道，每个节点可以独立替换与压测。',
+      hardware: '硬件平台',
+      software: '软件框架',
+      algo: '核心算法',
+      hw1: { name: 'RDK X5', desc: '瑞芯微 RK3588 SoC，8 核 CPU + 6 TOPS NPU' },
+      hw2: { name: '摄像头模组', desc: 'IMX415 / OV5640 高清摄像头' },
+      hw3: { name: '麦克风阵列', desc: '4 麦克风阵列，支持声源定位' },
+      sw1: { name: 'dora-rs', desc: '基于 Rust 的数据流框架，面向实时数据流处理' },
+      sw2: { name: 'ROS 2', desc: '节点通信与消息传递骨架，负责部署与调度' },
+      progressTitle: '开发进度',
+      status: { completed: '已完成', inProgress: '进行中', planned: '计划中' },
+      p1: '环境搭建与配置',
+      p2: '摄像头图像采集与处理',
+      p3: 'YOLO 目标检测模型部署',
+      p4: '语音识别模块集成',
+      p5: '数据流管道优化',
+      p6: '运动控制算法实现',
+      p7: '系统集成与测试',
+      nextTitle: '下一步',
+      next1: '把运动控制从仿真搬到实机，先跑通关节空间的位置控制',
+      next2: '接入模仿学习做示教复现，积累第一批真实操作数据',
+      next3: '尝试微调一个开源 VLA 模型，验证语言指令到动作的链路',
+      links: { code: '查看源代码', issues: '提交问题' },
+    },
+  },
+
+  'en-US': {
+    nav: {
+      robotics: 'Embodied AI',
+    },
+    home: {
+      hero: {
+        kicker: 'EMBODIED AI · ROBOTICS · EMBEDDED',
+        quote: 'Putting intelligence into a body that can move — that is how I read embodied AI.',
+        ctaPrimary: 'View my resume',
+        ctaSecondary: 'Embodied AI',
+        roles: {
+          r1: 'Robot Motion Control · MPC / WBC',
+          r2: 'Vision-Language-Action',
+          r3: 'Reinforcement Learning · Sim2Real',
+          r4: 'Embedded Hardware & Software',
+        },
+      },
+      marquee: {
+        label: 'Tech Radar',
+        practiced: 'Practiced',
+        learning: 'Learning',
+      },
+      rail: {
+        research: 'Research',
+        about: 'About',
+        stack: 'Stack',
+        honors: 'Honors',
+        roadmap: 'Roadmap',
+        traits: 'Traits',
+        contact: 'Contact',
+      },
+      roadmap: {
+        kicker: 'ROADMAP',
+        title: 'Three legs of the road to embodied AI',
+        subtitle:
+          'First make the robot move reliably, then let vision and language command it, and finally let it learn better policies through trial and error. This is the order I set for myself.',
+        note: 'I have not finished these three legs yet. Progress updates as I actually move forward, rather than being listed all at once.',
+        status: {
+          doing: 'In progress',
+          next: 'Planned',
+          base: 'Foundation',
+        },
+        stage1: {
+          name: 'Robot Motion Control',
+          en: 'MOTION CONTROL',
+          desc: 'Understand rigid-body dynamics, contact and friction, then turn "I want to move" into "how much torque" through optimization. This is the ground floor of every layer above.',
+          items: {
+            i1: 'Rigid-body dynamics & floating base modeling',
+            i2: 'MPC receding-horizon optimization / whole-body control',
+            i3: 'Validation in MuJoCo · Isaac Lab',
+            i4: 'ROS 2 deployment & real-time tuning',
+          },
+        },
+        stage2: {
+          name: 'Vision-Language-Action',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: 'Unify vision and language into one action space, so a robot can take an instruction like "pick up the cup" and directly emit actions.',
+          items: {
+            i1: 'RT-2: actions as text tokens',
+            i2: 'Fine-tuning the open 7B OpenVLA model',
+            i3: 'π0 flow matching for continuous actions',
+            i4: 'GR00T humanoid foundation models',
+          },
+        },
+        stage3: {
+          name: 'RL & Transfer',
+          en: 'RL & SIM2REAL',
+          desc: 'Let policies learn by trial and error in massively parallel simulation, then use domain randomization to carry that skill into the real world.',
+          items: {
+            i1: 'PPO / SAC for continuous control',
+            i2: 'Imitation learning · behavior cloning · Diffusion Policy',
+            i3: 'Domain randomization & Sim2Real transfer',
+            i4: 'Tuning large-scale parallel training',
+          },
+        },
+      },
+    },
+    footer: {
+      tagline:
+        'Writing code for the physical world. From low-level drivers to motion control, then VLA and reinforcement learning — putting intelligence into a body that moves.',
+      navigate: 'NAVIGATE',
+      focus: 'RESEARCH FOCUS',
+      contact: 'CONTACT',
+      built: 'for embodied intelligence',
+    },
+    embodied: {
+      back: 'Back to projects',
+      kicker: 'EMBODIED INTELLIGENCE',
+      title: 'RDK X5 Embodied AI System',
+      subtitle:
+        'A real-time "perception — policy — action" robot system built on the RDK X5 edge board and the dora-rs dataflow framework.',
+      tagline: 'Perception → Policy → Action, running entirely on-device',
+      overviewTitle: 'Overview',
+      overview1:
+        'What matters in embodied AI is not how large the model is, but whether the agent can close the loop of perception, decision and action in the real world. This project starts from on-device compute and wires vision, speech and control into one system.',
+      overview2:
+        'It covers the end-to-end path from sensor acquisition and visual perception to speech interaction and motion control, providing a reusable base for autonomous navigation, grasping and human-robot interaction.',
+      featuresTitle: 'Core Capabilities',
+      f1: { title: 'Real-time Vision', desc: 'Multi-object detection and tracking with the YOLO family, supporting live video streams.' },
+      f2: { title: 'Speech Interaction', desc: 'High-accuracy speech recognition with Whisper plus intent parsing for natural language commands.' },
+      f3: { title: 'Motion Planning', desc: 'Path planning and motion control under ROS 2, portable across several robot platforms.' },
+      f4: { title: 'Sensor Fusion', desc: 'Fusing camera, LiDAR and IMU data into a consistent representation of the environment.' },
+      archTitle: 'System Dataflow',
+      archDesc: 'dora-rs chains the nodes into a low-latency dataflow pipeline, so each node can be replaced and stress-tested independently.',
+      hardware: 'Hardware',
+      software: 'Software',
+      algo: 'Core Algorithms',
+      hw1: { name: 'RDK X5', desc: 'Rockchip RK3588 SoC, 8-core CPU + 6 TOPS NPU' },
+      hw2: { name: 'Camera Module', desc: 'IMX415 / OV5640 high-definition camera' },
+      hw3: { name: 'Mic Array', desc: '4-microphone array with sound source localization' },
+      sw1: { name: 'dora-rs', desc: 'Rust-based dataflow framework for real-time streaming' },
+      sw2: { name: 'ROS 2', desc: 'Node communication and messaging backbone for deployment' },
+      progressTitle: 'Progress',
+      status: { completed: 'Done', inProgress: 'In progress', planned: 'Planned' },
+      p1: 'Environment setup',
+      p2: 'Camera capture and processing',
+      p3: 'YOLO detection model deployment',
+      p4: 'Speech recognition integration',
+      p5: 'Dataflow pipeline optimization',
+      p6: 'Motion control implementation',
+      p7: 'System integration and testing',
+      nextTitle: 'Next steps',
+      next1: 'Move motion control from simulation to hardware, starting with joint-space position control',
+      next2: 'Add imitation learning for demonstration replay and collect the first real manipulation data',
+      next3: 'Try fine-tuning an open-source VLA model to validate the language-to-action path',
+      links: { code: 'View source', issues: 'Open an issue' },
+    },
+  },
+
+  'ja-JP': {
+    nav: {
+      robotics: '身体性 AI',
+    },
+    home: {
+      hero: {
+        kicker: 'EMBODIED AI · ROBOTICS · EMBEDDED',
+        quote: '知能を、動ける身体に載せる —— それが私の考える身体性 AI です。',
+        ctaPrimary: '履歴書を見る',
+        ctaSecondary: '身体性 AI 分野',
+        roles: {
+          r1: 'ロボット運動制御 · MPC / WBC',
+          r2: 'Vision-Language-Action',
+          r3: '強化学習 · Sim2Real',
+          r4: '組込みソフト・ハード全般',
+        },
+      },
+      marquee: {
+        label: '技術レーダー',
+        practiced: '実践済み',
+        learning: '学習中',
+      },
+      rail: {
+        research: '研究',
+        about: '概要',
+        stack: '技術',
+        honors: '受賞',
+        roadmap: '計画',
+        traits: '資質',
+        contact: '連絡',
+      },
+      roadmap: {
+        kicker: 'ROADMAP',
+        title: '身体性 AI へ向かう三つの道',
+        subtitle:
+          'まずロボットを安定して動かし、次に視覚と言語で指示できるようにし、最後に試行錯誤から賢い方策を自ら学ばせる。これが私が定めた順番です。',
+        note: 'この三つの道はまだ途中です。進捗は実際の前進に合わせて更新し、一度に全部を並べることはしません。',
+        status: {
+          doing: '進行中',
+          next: '計画中',
+          base: '基礎あり',
+        },
+        stage1: {
+          name: 'ロボット運動制御',
+          en: 'MOTION CONTROL',
+          desc: '剛体力学・接触・摩擦を理解し、最適化によって「動きたい」を「どれだけ力を出すか」に翻訳します。上位の知能すべての土台です。',
+          items: {
+            i1: '剛体力学と浮遊基底のモデリング',
+            i2: 'MPC 再帰的ホライズン最適化 / 全身制御 WBC',
+            i3: 'MuJoCo · Isaac Lab での検証',
+            i4: 'ROS 2 への実装とリアルタイム調整',
+          },
+        },
+        stage2: {
+          name: '視覚・言語・行動モデル',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: '視覚と言語を一つの行動空間に統合し、「カップを取って」といった指示から直接行動を出力できるようにします。',
+          items: {
+            i1: 'RT-2：行動をトークンとして扱う枠組み',
+            i2: 'オープンソース 7B モデル OpenVLA の微調整',
+            i3: 'π0 のフローマッチングによる連続行動生成',
+            i4: 'GR00T ヒューマノイド基盤モデル',
+          },
+        },
+        stage3: {
+          name: '強化学習と転移',
+          en: 'RL & SIM2REAL',
+          desc: '大規模並列シミュレーションで方策を試行錯誤させ、ドメインランダム化で実世界へ持ち込みます。',
+          items: {
+            i1: 'PPO / SAC による連続制御',
+            i2: '模倣学習 · 行動クローニング · Diffusion Policy',
+            i3: 'ドメインランダム化と Sim2Real 転移',
+            i4: '大規模並列環境の学習チューニング',
+          },
+        },
+      },
+    },
+    footer: {
+      tagline:
+        '物理世界のためにコードを書く。低レイヤのドライバから運動制御、そして VLA と強化学習へ —— 知能を動く身体に載せていく。',
+      navigate: 'NAVIGATE',
+      focus: 'RESEARCH FOCUS',
+      contact: 'CONTACT',
+      built: 'for embodied intelligence',
+    },
+    embodied: {
+      back: 'プロジェクト一覧へ',
+      kicker: 'EMBODIED INTELLIGENCE',
+      title: 'RDK X5 身体性 AI システム',
+      subtitle:
+        'RDK X5 エッジコンピューティングボードと dora-rs データフローフレームワークによる、リアルタイムな「知覚 — 判断 — 行動」システム。',
+      tagline: 'Perception → Policy → Action をすべてエッジ側で',
+      overviewTitle: 'プロジェクト概要',
+      overview1:
+        '身体性 AI で重要なのはモデルの大きさではなく、実世界で知覚・判断・行動のループを閉じられるかどうかです。本プロジェクトはエッジ側の計算資源を出発点に、視覚・音声・制御の三つの経路を一つに繋ぎます。',
+      overview2:
+        'センサー取得から視覚知覚、音声対話、運動制御までのエンドツーエンドをカバーし、自律移動・把持・ヒューマンロボットインタラクションの土台を提供します。',
+      featuresTitle: '主要な能力',
+      f1: { title: 'リアルタイム視覚知覚', desc: 'YOLO 系モデルによる多対象の検出と追跡、ライブ映像ストリームに対応。' },
+      f2: { title: '音声インタラクション', desc: 'Whisper による高精度な音声認識と、自然言語指示の意図解析。' },
+      f3: { title: '運動計画制御', desc: 'ROS 2 上での経路計画と運動制御。複数のロボットプラットフォームに対応。' },
+      f4: { title: 'マルチセンサー融合', desc: 'カメラ・LiDAR・IMU を融合し、一貫した環境表現を構築。' },
+      archTitle: 'システムデータフロー',
+      archDesc: 'dora-rs がノードを低遅延のデータフローパイプラインに繋ぎ、各ノードを独立に差し替え・負荷試験できます。',
+      hardware: 'ハードウェア',
+      software: 'ソフトウェア',
+      algo: '主要アルゴリズム',
+      hw1: { name: 'RDK X5', desc: 'Rockchip RK3588 SoC、8コア CPU + 6 TOPS NPU' },
+      hw2: { name: 'カメラモジュール', desc: 'IMX415 / OV5640 高解像度カメラ' },
+      hw3: { name: 'マイクアレイ', desc: '4マイクアレイ、音源定位に対応' },
+      sw1: { name: 'dora-rs', desc: 'Rust 製データフローフレームワーク、リアルタイム処理向け' },
+      sw2: { name: 'ROS 2', desc: 'ノード通信とメッセージングの基盤、デプロイとスケジューリングを担当' },
+      progressTitle: '開発進捗',
+      status: { completed: '完了', inProgress: '進行中', planned: '計画中' },
+      p1: '環境構築と設定',
+      p2: 'カメラ画像の取得と処理',
+      p3: 'YOLO 検出モデルのデプロイ',
+      p4: '音声認識モジュールの統合',
+      p5: 'データフローパイプラインの最適化',
+      p6: '運動制御アルゴリズムの実装',
+      p7: 'システム統合とテスト',
+      nextTitle: '次のステップ',
+      next1: '運動制御をシミュレーションから実機へ。まず関節空間の位置制御を動かす',
+      next2: '模倣学習で教示の再現に取り組み、最初の実機操作データを集める',
+      next3: 'オープンソース VLA モデルの微調整を試し、言語指示から行動への経路を検証する',
+      links: { code: 'ソースコード', issues: 'Issue を送る' },
+    },
+  },
+};

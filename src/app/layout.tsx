@@ -5,6 +5,10 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/components/Providers';
+import AuroraField from '@/components/tech/AuroraField';
+import CursorAura from '@/components/tech/CursorAura';
+import ScrollProgress from '@/components/tech/ScrollProgress';
+import BackToTop from '@/components/tech/BackToTop';
 
 export const metadata: Metadata = {
   title: {
@@ -73,13 +77,24 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className={`antialiased`}>
+        {/* 滚动渐显的「失败要开」开关：只有这个脚本跑起来，.reveal 才会先隐藏。
+            JS 被禁用或脚本报错时 html 上没有 .js，所有内容默认可见。 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
         <Providers>
           {isDev && <Inspector />}
+          <AuroraField />
+          <CursorAura />
+          <ScrollProgress />
           <Navigation />
-          <main className="pt-16 min-h-screen">
+          <main className="relative z-10 min-h-screen pt-20">
             {children}
           </main>
           <Footer />
+          <BackToTop />
           <Toaster />
         </Providers>
       </body>

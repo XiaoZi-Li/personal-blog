@@ -133,7 +133,7 @@ export default function NotificationsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 pt-20 flex items-center justify-center">
-        <div className="text-slate-500">加载中...</div>
+        <div className="text-muted-foreground">加载中...</div>
       </div>
     );
   }
@@ -144,7 +144,7 @@ export default function NotificationsPage() {
         {/* 返回按钮 */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-700 mb-6"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-muted-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           返回首页
@@ -170,7 +170,7 @@ export default function NotificationsPage() {
           </CardHeader>
           <CardContent>
             {notifications.length === 0 ? (
-              <div className="py-12 text-center text-slate-500">
+              <div className="py-12 text-center text-muted-foreground">
                 暂无通知
               </div>
             ) : (
@@ -180,17 +180,17 @@ export default function NotificationsPage() {
                     key={notification.id}
                     className={`p-4 rounded-lg border transition-all ${
                       notification.is_read
-                        ? 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'
-                        : 'border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/30'
+                        ? 'border-border dark:border-border bg-card dark:bg-card'
+                        : 'border-[var(--neon-violet)] dark:border-[var(--neon-violet)] bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           {!notification.is_read && (
-                            <span className="w-2 h-2 bg-indigo-500 rounded-full" />
+                            <span className="w-2 h-2 bg-[var(--glow-violet)] rounded-full" />
                           )}
-                          <span className={`font-medium ${!notification.is_read ? '' : 'text-slate-600 dark:text-slate-300'}`}>
+                          <span className={`font-medium ${!notification.is_read ? '' : 'text-muted-foreground dark:text-muted-foreground'}`}>
                             {notification.title}
                           </span>
                           {notification.type === 'reply' && (
@@ -198,9 +198,9 @@ export default function NotificationsPage() {
                           )}
                         </div>
                         {notification.content && (
-                          <p className="text-sm text-slate-500 mb-2">{notification.content}</p>
+                          <p className="text-sm text-muted-foreground mb-2">{notification.content}</p>
                         )}
-                        <p className="text-xs text-slate-400">{formatTime(notification.created_at)}</p>
+                        <p className="text-xs text-muted-foreground">{formatTime(notification.created_at)}</p>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -240,7 +240,7 @@ export default function NotificationsPage() {
                   <ChevronLeft className="w-4 h-4" />
                   上一页
                 </Button>
-                <span className="text-sm text-slate-500">
+                <span className="text-sm text-muted-foreground">
                   第 {page} / {totalPages} 页
                 </span>
                 <Button

@@ -153,22 +153,22 @@ export default function NotificationBell({ onNotificationCountChange }: Notifica
 
       {/* 下拉通知面板 */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-80 bg-card dark:bg-card rounded-lg shadow-lg border border-border dark:border-border z-50 overflow-hidden">
           {/* 头部 */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border dark:border-border">
             <h3 className="font-semibold">通知</h3>
             <div className="flex items-center gap-2">
               {unreadCount > 0 && (
                 <button
                   onClick={handleMarkAllAsRead}
-                  className="text-xs text-indigo-600 hover:text-indigo-700"
+                  className="text-xs text-[var(--neon-violet)] hover:text-[var(--neon-violet)]"
                 >
                   全部已读
                 </button>
               )}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded"
+                className="p-1 hover:bg-muted dark:hover:bg-card rounded"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -178,15 +178,15 @@ export default function NotificationBell({ onNotificationCountChange }: Notifica
           {/* 通知列表 */}
           <div className="max-h-80 overflow-y-auto">
             {loading ? (
-              <div className="py-8 text-center text-slate-500">加载中...</div>
+              <div className="py-8 text-center text-muted-foreground">加载中...</div>
             ) : notifications.length === 0 ? (
-              <div className="py-8 text-center text-slate-500">暂无通知</div>
+              <div className="py-8 text-center text-muted-foreground">暂无通知</div>
             ) : (
               notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`relative px-4 py-3 border-b border-slate-100 dark:border-slate-700 last:border-b-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer ${
-                    !notification.is_read ? 'bg-indigo-50/50 dark:bg-indigo-950/30' : ''
+                  className={`relative px-4 py-3 border-b border-border dark:border-border last:border-b-0 hover:bg-slate-50 dark:hover:bg-card cursor-pointer ${
+                    !notification.is_read ? 'bg-[color-mix(in_oklab,var(--neon-cyan)_9%,transparent)]' : ''
                   }`}
                   onClick={() => {
                     if (!notification.is_read) {
@@ -199,26 +199,26 @@ export default function NotificationBell({ onNotificationCountChange }: Notifica
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         {!notification.is_read && (
-                          <span className="w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0" />
+                          <span className="w-2 h-2 bg-[var(--glow-violet)] rounded-full flex-shrink-0" />
                         )}
                         <p className={`text-sm ${!notification.is_read ? 'font-medium' : ''}`}>
                           {notification.title}
                         </p>
                       </div>
                       {notification.content && (
-                        <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
                           {notification.content}
                         </p>
                       )}
-                      <p className="text-xs text-slate-400 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         {formatTime(notification.created_at)}
                       </p>
                     </div>
                     <button
                       onClick={(e) => handleDelete(notification.id, e)}
-                      className="p-1 hover:bg-slate-200 dark:hover:bg-slate-600 rounded opacity-0 group-hover:opacity-100"
+                      className="p-1 hover:bg-muted dark:hover:bg-muted rounded opacity-0 group-hover:opacity-100"
                     >
-                      <Trash2 className="w-3 h-3 text-slate-400" />
+                      <Trash2 className="w-3 h-3 text-muted-foreground" />
                     </button>
                   </div>
                 </div>
@@ -229,7 +229,7 @@ export default function NotificationBell({ onNotificationCountChange }: Notifica
           {/* 底部 */}
           <Link
             href="/notifications"
-            className="block py-2 text-center text-sm text-indigo-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 border-t border-slate-200 dark:border-slate-700"
+            className="block py-2 text-center text-sm text-[var(--neon-violet)] hover:bg-slate-50 dark:hover:bg-card border-t border-border dark:border-border"
             onClick={() => setIsOpen(false)}
           >
             查看全部通知

@@ -29,9 +29,9 @@ export function ThemeToggle() {
       className="w-9 h-9"
     >
       {theme === 'dark' ? (
-        <Sun className="w-5 h-5 text-yellow-500" />
+        <Sun className="w-5 h-5 text-[var(--neon-amber)]" />
       ) : (
-        <Moon className="w-5 h-5 text-slate-700" />
+        <Moon className="w-5 h-5 text-muted-foreground" />
       )}
       <span className="sr-only">切换主题</span>
     </Button>

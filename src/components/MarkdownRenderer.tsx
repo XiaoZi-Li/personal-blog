@@ -21,19 +21,19 @@ function CodeBlock({ children, className }: { children: ReactNode; className?: s
   };
 
   return (
-    <div className="group relative my-5 rounded-xl overflow-hidden border border-border bg-slate-950 dark:bg-black/60">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800 bg-slate-900/80">
-        <span className="text-xs font-mono text-slate-400 tracking-wide lowercase">{lang}</span>
+    <div className="group relative my-5 rounded-xl overflow-hidden border border-border bg-background dark:bg-black/60">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background">
+        <span className="text-xs font-mono text-muted-foreground tracking-wide lowercase">{lang}</span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-muted-foreground hover:bg-card transition-colors"
           aria-label="复制代码"
         >
-          {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+          {copied ? <Check className="w-3.5 h-3.5 text-[var(--neon-lime)]" /> : <Copy className="w-3.5 h-3.5" />}
           {copied ? '已复制' : '复制'}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-200">
+      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-muted-foreground">
         <code className={className}>{children}</code>
       </pre>
     </div>
@@ -52,40 +52,40 @@ function extractText(node: ReactNode): string {
 
 export const MarkdownRenderer = memo(function MarkdownRenderer({ content }: { content: string }) {
   return (
-    <div className="markdown-body text-sm sm:text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+    <div className="markdown-body text-sm sm:text-[15px] leading-relaxed text-muted-foreground dark:text-muted-foreground">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 id={slugify(children)} className="text-2xl font-bold mt-8 mb-4 pb-2 border-b border-border text-slate-900 dark:text-slate-100 scroll-mt-24">
+            <h1 id={slugify(children)} className="text-2xl font-bold mt-8 mb-4 pb-2 border-b border-border text-foreground dark:text-muted-foreground scroll-mt-24">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 id={slugify(children)} className="group text-xl sm:text-2xl font-bold mt-10 mb-4 flex items-center gap-2.5 text-slate-900 dark:text-slate-100 scroll-mt-24">
-              <span className="w-1.5 h-6 rounded-full bg-gradient-to-b from-violet-500 to-purple-500 shrink-0" />
+            <h2 id={slugify(children)} className="group text-xl sm:text-2xl font-bold mt-10 mb-4 flex items-center gap-2.5 text-foreground dark:text-muted-foreground scroll-mt-24">
+              <span className="w-1.5 h-6 rounded-full bg-gradient-to-b from-[var(--glow-violet)] to-[var(--glow-violet)] shrink-0" />
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 id={slugify(children)} className="text-lg font-semibold mt-7 mb-3 text-slate-800 dark:text-slate-200 scroll-mt-24">
+            <h3 id={slugify(children)} className="text-lg font-semibold mt-7 mb-3 text-foreground dark:text-muted-foreground scroll-mt-24">
               {children}
             </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-base font-semibold mt-5 mb-2 text-slate-800 dark:text-slate-200">{children}</h4>
+            <h4 className="text-base font-semibold mt-5 mb-2 text-foreground dark:text-muted-foreground">{children}</h4>
           ),
           p: ({ children }) => <p className="my-4 leading-7">{children}</p>,
           a: ({ children, href }) => (
-            <a href={href} target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:underline underline-offset-4 font-medium">
+            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[var(--neon-violet)] dark:text-[var(--neon-violet)] hover:underline underline-offset-4 font-medium">
               {children}
             </a>
           ),
-          ul: ({ children }) => <ul className="my-4 space-y-1.5 pl-6 list-disc marker:text-violet-400">{children}</ul>,
-          ol: ({ children }) => <ol className="my-4 space-y-1.5 pl-6 list-decimal marker:text-violet-500 marker:font-semibold">{children}</ol>,
+          ul: ({ children }) => <ul className="my-4 space-y-1.5 pl-6 list-disc marker:text-[var(--neon-violet)]">{children}</ul>,
+          ol: ({ children }) => <ol className="my-4 space-y-1.5 pl-6 list-decimal marker:text-[var(--neon-violet)] marker:font-semibold">{children}</ol>,
           li: ({ children }) => <li className="leading-7">{children}</li>,
           blockquote: ({ children }) => (
-            <blockquote className="my-5 pl-4 py-1 border-l-4 border-violet-400 bg-violet-50/60 dark:bg-violet-950/20 rounded-r-lg text-slate-600 dark:text-slate-400 italic">
+            <blockquote className="my-5 pl-4 py-1 border-l-4 border-[var(--neon-violet)] bg-[color-mix(in_oklab,var(--neon-violet)_10%,transparent)] rounded-r-lg text-muted-foreground italic">
               {children}
             </blockquote>
           ),
@@ -93,7 +93,7 @@ export const MarkdownRenderer = memo(function MarkdownRenderer({ content }: { co
             const isBlock = /language-/.test(className || '');
             if (isBlock) return <CodeBlock className={className}>{children}</CodeBlock>;
             return (
-              <code className="px-1.5 py-0.5 rounded-md bg-violet-100/80 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-[13px] font-mono">
+              <code className="px-1.5 py-0.5 rounded-md bg-[color-mix(in_oklab,var(--neon-violet)_12%,transparent)] text-[var(--neon-violet)] text-[13px] font-mono">
                 {children}
               </code>
             );
@@ -117,7 +117,7 @@ export const MarkdownRenderer = memo(function MarkdownRenderer({ content }: { co
             </span>
           ),
           hr: () => <hr className="my-8 border-border" />,
-          strong: ({ children }) => <strong className="font-semibold text-slate-900 dark:text-slate-100">{children}</strong>,
+          strong: ({ children }) => <strong className="font-semibold text-foreground dark:text-muted-foreground">{children}</strong>,
         }}
       >
         {content}

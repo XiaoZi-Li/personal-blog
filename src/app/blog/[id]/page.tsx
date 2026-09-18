@@ -146,7 +146,7 @@ export default function BlogDetailPage() {
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('blog.empty')}</h1>
-          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 transition-colors">
+          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-white text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
             <ArrowLeft className="w-4 h-4" />
             {t('blog.backToBlog')}
           </Link>
@@ -160,7 +160,7 @@ export default function BlogDetailPage() {
       {/* 阅读进度条 */}
       <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-transparent pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 transition-[width] duration-150"
+          className="h-full bg-gradient-to-r from-[var(--glow-violet)] via-[var(--glow-violet)] to-[var(--glow-magenta)] transition-[width] duration-150"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -168,8 +168,8 @@ export default function BlogDetailPage() {
       {/* 头部 */}
       <section className={`relative overflow-hidden py-10 sm:py-14 ${
         isDiary
-          ? 'bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50 dark:from-slate-950 dark:via-rose-950/20 dark:to-orange-950/10'
-          : 'bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-950 dark:via-indigo-950/20 dark:to-purple-950/10'
+          ? 'bg-gradient-to-br from-[var(--glow-magenta)] via-[var(--glow-amber)] to-[var(--glow-amber)] dark:from-slate-950 dark:via-[var(--glow-magenta)] dark:to-[var(--glow-amber)]'
+          : 'bg-gradient-to-br from-[var(--glow-violet)] via-white to-[var(--glow-violet)] dark:from-slate-950 dark:via-[var(--glow-violet)] dark:to-[var(--glow-violet)]'
       }`}>
         <div className="absolute -right-4 -bottom-8 text-[100px] sm:text-[140px] opacity-10 select-none rotate-[-6deg]">
           {post.cover || (isDiary ? (post.mood || '📝') : '📄')}
@@ -180,26 +180,26 @@ export default function BlogDetailPage() {
             {t('blog.backToBlog')}
           </Link>
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-white text-xs font-medium ${
-              isDiary ? 'bg-gradient-to-r from-rose-500 to-orange-500' : 'bg-gradient-to-r from-indigo-500 to-purple-600'
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-slate-900 text-xs font-medium ${
+              isDiary ? 'bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)]' : 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)]'
             }`}>
               {isDiary ? <PenLine className="w-3.5 h-3.5" /> : <BookOpen className="w-3.5 h-3.5" />}
               {isDiary ? t('blog.diary') : t('blog.article')}
             </span>
             {isDiary && post.mood && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-slate-900/70 border border-border text-xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card dark:bg-background border border-border text-xs">
                 <span>{post.mood}</span>
                 <span className="text-muted-foreground">{t('blog.mood')}</span>
               </span>
             )}
             {isDiary && post.weather && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 dark:bg-slate-900/70 border border-border text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card dark:bg-background border border-border text-xs text-muted-foreground">
                 <CloudSun className="w-3.5 h-3.5" />
                 {post.weather}
               </span>
             )}
           </div>
-          <h1 className="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 leading-tight mb-4">
+          <h1 className="text-2xl sm:text-4xl font-bold text-foreground dark:text-muted-foreground leading-tight mb-4">
             {post.title}
           </h1>
           <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-xs sm:text-sm">
@@ -221,13 +221,13 @@ export default function BlogDetailPage() {
 
       {/* 正文 */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
-        <article className="bg-white dark:bg-slate-900 rounded-2xl border border-border shadow-sm p-5 sm:p-10">
+        <article className="bg-card dark:bg-background rounded-2xl border border-border shadow-sm p-5 sm:p-10">
           <MarkdownRenderer content={post.content} />
 
           {post.tags && (
             <div className="mt-8 pt-6 border-t border-border flex flex-wrap gap-2">
               {post.tags.split(',').map((tag, i) => (
-                <span key={i} className="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-xs">
+                <span key={i} className="px-2.5 py-1 rounded-lg bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs">
                   #{tag.trim()}
                 </span>
               ))}
@@ -235,7 +235,7 @@ export default function BlogDetailPage() {
           )}
 
           <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
-            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[var(--neon-violet)] dark:hover:text-[var(--neon-violet)] transition-colors">
               <ArrowLeft className="w-4 h-4" />
               {t('blog.backToBlog')}
             </Link>
@@ -243,8 +243,8 @@ export default function BlogDetailPage() {
               onClick={handleLike}
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 liked
-                  ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30'
-                  : 'bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/40 border border-rose-200 dark:border-rose-800'
+                  ? 'bg-[var(--glow-magenta)] text-white shadow-lg '
+                  : 'bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] hover:bg-[var(--glow-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] border border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]'
               }`}
             >
               <Heart className={`w-4 h-4 ${liked ? 'fill-white' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
@@ -260,12 +260,12 @@ export default function BlogDetailPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {related.map(rp => (
                 <Link key={rp.id} href={`/blog/${rp.id}`} className="group">
-                  <div className="flex gap-3 rounded-2xl border border-border bg-white dark:bg-slate-900 p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 flex items-center justify-center text-2xl">
+                  <div className="flex gap-3 rounded-2xl border border-border bg-card dark:bg-background p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] dark:from-[var(--glow-violet)] dark:to-[var(--glow-violet)] flex items-center justify-center text-2xl">
                       {rp.cover || (rp.type === 'diary' ? (rp.mood || '📝') : '📄')}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
+                      <h3 className="font-semibold text-sm text-foreground dark:text-muted-foreground group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors line-clamp-1">
                         {rp.title}
                       </h3>
                       <p className="text-xs text-muted-foreground line-clamp-1 mt-1">{rp.summary}</p>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { extraTranslations } from './extraTranslations';
 
 type Language = 'zh-CN' | 'en-US' | 'ja-JP';
 
@@ -31,13 +32,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: any = translations[language];
 
-    for (const k of keys) {
-      value = value?.[k];
-    }
+    const lookup = (source: unknown): unknown => {
+      let value: unknown = source;
+      for (const k of keys) {
+        value = (value as Record<string, unknown> | undefined)?.[k];
+      }
+      return value;
+    };
 
-    return value || key;
+    // 主表优先；主表没有的 key 回落到新增文案表（extraTranslations）
+    const found = lookup(translations[language]) ?? lookup(extraTranslations[language]);
+    return (found ?? key) as string;
   };
 
   return (

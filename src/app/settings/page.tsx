@@ -177,7 +177,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 pt-20 flex items-center justify-center">
-        <div className="text-slate-500">加载中...</div>
+        <div className="text-muted-foreground">加载中...</div>
       </div>
     );
   }
@@ -188,7 +188,7 @@ export default function SettingsPage() {
         {/* 返回按钮 */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-700 mb-6"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-muted-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           返回首页
@@ -209,7 +209,7 @@ export default function SettingsPage() {
               <div className="flex items-center gap-4">
                 <div 
                   onClick={handleAvatarClick}
-                  className="relative w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center cursor-pointer group overflow-hidden"
+                  className="relative w-20 h-20 rounded-full bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] flex items-center justify-center cursor-pointer group overflow-hidden"
                 >
                   {avatar ? (
                     <img 
@@ -230,7 +230,7 @@ export default function SettingsPage() {
                     )}
                   </div>
                 </div>
-                <div className="text-sm text-slate-500">
+                <div className="text-sm text-muted-foreground">
                   <p>点击头像更换</p>
                   <p>支持 JPG、PNG、GIF、WebP 格式</p>
                   <p>最大 2MB</p>
@@ -250,7 +250,7 @@ export default function SettingsPage() {
               <div className="space-y-2">
                 <Label>邮箱</Label>
                 <Input value={profile?.email || ''} disabled className="bg-slate-50" />
-                <p className="text-xs text-slate-400">邮箱为账号唯一凭证，不可修改</p>
+                <p className="text-xs text-muted-foreground">邮箱为账号唯一凭证，不可修改</p>
               </div>
 
               <div className="space-y-2">
@@ -268,19 +268,19 @@ export default function SettingsPage() {
                     {saving ? '保存中...' : '保存'}
                   </Button>
                 </div>
-                <p className="text-xs text-slate-400">昵称将在留言、评论时显示</p>
+                <p className="text-xs text-muted-foreground">昵称将在留言、评论时显示</p>
               </div>
 
               <div className="space-y-2">
                 <Label>角色</Label>
-                <div className="text-sm text-slate-600">
+                <div className="text-sm text-muted-foreground">
                   {profile?.role === 'admin' ? '管理员' : '普通用户'}
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label>注册时间</Label>
-                <div className="text-sm text-slate-600">
+                <div className="text-sm text-muted-foreground">
                   {profile?.created_at ? new Date(profile.created_at).toLocaleString('zh-CN') : '-'}
                 </div>
               </div>

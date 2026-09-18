@@ -200,15 +200,15 @@ export function PostManager() {
               onClick={() => setTypeFilter(type)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 typeFilter === type
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-muted text-muted-foreground hover:bg-violet-100 hover:text-violet-700 dark:hover:bg-violet-900/40'
+                  ? 'bg-[var(--glow-violet)] text-white'
+                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)]'
               }`}
             >
               {type === 'all' ? `全部 (${total})` : TYPE_LABELS[type].label}
             </button>
           ))}
         </div>
-        <Button onClick={openCreate} className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700">
+        <Button onClick={openCreate} className="bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] hover:from-[var(--glow-violet)] hover:to-[var(--glow-violet)]">
           <Plus className="w-4 h-4 mr-2" />
           新建内容
         </Button>
@@ -216,12 +216,12 @@ export function PostManager() {
 
       {/* 列表 */}
       {loading ? (
-        <div className="py-16 text-center text-slate-500">加载中...</div>
+        <div className="py-16 text-center text-muted-foreground">加载中...</div>
       ) : posts.length === 0 ? (
         <Card>
           <CardContent className="py-16 text-center">
-            <BookOpen className="w-10 h-10 mx-auto text-slate-300 mb-3" />
-            <p className="text-slate-500">还没有内容，点击「新建内容」发布第一篇教程或文章吧</p>
+            <BookOpen className="w-10 h-10 mx-auto text-muted-foreground mb-3" />
+            <p className="text-muted-foreground">还没有内容，点击「新建内容」发布第一篇教程或文章吧</p>
           </CardContent>
         </Card>
       ) : (
@@ -231,20 +231,20 @@ export function PostManager() {
             return (
               <Card key={post.id} className="group">
                 <CardContent className="p-4 flex items-center gap-4">
-                  <div className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-white ${
-                    post.type === 'tutorial' ? 'bg-gradient-to-br from-violet-500 to-purple-600'
-                    : post.type === 'diary' ? 'bg-gradient-to-br from-rose-500 to-orange-500'
-                    : 'bg-gradient-to-br from-indigo-500 to-purple-500'
+                  <div className={`shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-slate-900 ${
+                    post.type === 'tutorial' ? 'bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)]'
+                    : post.type === 'diary' ? 'bg-gradient-to-br from-[var(--glow-magenta)] to-[var(--glow-amber)]'
+                    : 'bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)]'
                   }`}>
                     {post.cover || <TypeIcon className="w-5 h-5" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="font-semibold text-sm truncate max-w-xs">{post.title}</h3>
-                      {post.is_pinned && <Pin className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />}
+                      {post.is_pinned && <Pin className="w-3.5 h-3.5 text-[var(--neon-amber)] fill-[var(--neon-amber)]" />}
                       {!post.is_published && <Badge variant="secondary" className="text-[10px]">未发布</Badge>}
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-500 mt-1 flex-wrap">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1 flex-wrap">
                       <Badge variant="outline" className="text-[10px] px-1.5">{TYPE_LABELS[post.type]?.label}</Badge>
                       {post.category && <Badge variant="outline" className="text-[10px] px-1.5">{CATEGORY_LABELS[post.category]}</Badge>}
                       <span>{post.views} 浏览 · {post.like_count} 赞</span>
@@ -256,28 +256,28 @@ export function PostManager() {
                       href={detailHref(post)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg hover:bg-muted text-slate-500 transition-colors"
+                      className="p-2 rounded-lg hover:bg-muted text-muted-foreground transition-colors"
                       title="查看"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
                     <button
                       onClick={() => handleToggle(post, 'is_pinned')}
-                      className="p-2 rounded-lg hover:bg-muted text-slate-500 transition-colors"
+                      className="p-2 rounded-lg hover:bg-muted text-muted-foreground transition-colors"
                       title={post.is_pinned ? '取消置顶' : '置顶'}
                     >
                       {post.is_pinned ? <PinOff className="w-4 h-4" /> : <Pin className="w-4 h-4" />}
                     </button>
                     <button
                       onClick={() => handleToggle(post, 'is_published')}
-                      className="p-2 rounded-lg hover:bg-muted text-slate-500 transition-colors"
+                      className="p-2 rounded-lg hover:bg-muted text-muted-foreground transition-colors"
                       title={post.is_published ? '下架' : '发布'}
                     >
                       {post.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                     <button
                       onClick={() => openEdit(post)}
-                      className="p-2 rounded-lg hover:bg-muted text-violet-600 transition-colors"
+                      className="p-2 rounded-lg hover:bg-muted text-[var(--neon-violet)] transition-colors"
                       title="编辑"
                     >
                       <Pencil className="w-4 h-4" />
@@ -313,8 +313,8 @@ export function PostManager() {
                   onClick={() => setForm(f => ({ ...f, type }))}
                   className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                     form.type === type
-                      ? 'border-violet-500 bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300'
-                      : 'border-border text-muted-foreground hover:border-violet-300'
+                      ? 'border-[var(--neon-violet)] bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)]'
+                      : 'border-border text-muted-foreground hover:border-[var(--neon-violet)]'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -362,7 +362,7 @@ export function PostManager() {
                         key={m}
                         onClick={() => setForm(f => ({ ...f, mood: f.mood === m ? '' : m }))}
                         className={`w-9 h-9 rounded-lg text-lg transition-all ${
-                          form.mood === m ? 'bg-rose-100 dark:bg-rose-900/50 ring-2 ring-rose-400 scale-110' : 'hover:bg-muted'
+                          form.mood === m ? 'bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_50%,transparent)] ring-2 ring-[var(--neon-magenta)] scale-110' : 'hover:bg-muted'
                         }`}
                       >
                         {m}
@@ -381,7 +381,7 @@ export function PostManager() {
                         key={w}
                         onClick={() => setForm(f => ({ ...f, weather: f.weather === w ? '' : w }))}
                         className={`px-2.5 py-1.5 rounded-lg text-xs transition-all ${
-                          form.weather === w ? 'bg-sky-100 dark:bg-sky-900/50 ring-2 ring-sky-400' : 'hover:bg-muted'
+                          form.weather === w ? 'bg-[var(--glow-cyan)] dark:bg-[color-mix(in_oklab,var(--neon-cyan)_50%,transparent)] ring-2 ring-[var(--neon-cyan)]' : 'hover:bg-muted'
                         }`}
                       >
                         {w}
@@ -443,14 +443,14 @@ export function PostManager() {
                 <button
                   onClick={() => setPreviewMode(!previewMode)}
                   className={`px-2.5 py-1 rounded-md text-xs transition-colors ${
-                    previewMode ? 'bg-violet-600 text-white' : 'bg-muted text-muted-foreground hover:bg-violet-100'
+                    previewMode ? 'bg-[var(--glow-violet)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)]'
                   }`}
                 >
                   {previewMode ? '编辑' : '预览'}
                 </button>
               </div>
               {previewMode ? (
-                <div className="min-h-[240px] max-h-[420px] overflow-y-auto rounded-lg border border-border bg-white dark:bg-slate-900 p-4">
+                <div className="min-h-[240px] max-h-[420px] overflow-y-auto rounded-lg border border-border bg-card dark:bg-background p-4">
                   {form.content.trim() ? (
                     <MarkdownRenderer content={form.content} />
                   ) : (

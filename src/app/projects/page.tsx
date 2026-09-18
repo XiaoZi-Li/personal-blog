@@ -58,11 +58,11 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 mb-4 sm:mb-6">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] mb-4 sm:mb-6">
             <Github className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
           </div>
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">{t('projects.title')}</h1>
@@ -77,15 +77,15 @@ export default function ProjectsPage() {
             {[1, 2, 3, 4].map((i) => (
               <Card key={i} className="animate-pulse">
                 <CardHeader>
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                  <div className="h-6 bg-muted dark:bg-card rounded w-3/4 mb-2" />
                   <div className="flex gap-4">
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20" />
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
+                    <div className="h-4 bg-muted dark:bg-card rounded w-20" />
+                    <div className="h-4 bg-muted dark:bg-card rounded w-16" />
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+                  <div className="h-4 bg-muted dark:bg-card rounded w-full mb-2" />
+                  <div className="h-4 bg-muted dark:bg-card rounded w-2/3" />
                 </CardContent>
               </Card>
             ))}
@@ -95,12 +95,12 @@ export default function ProjectsPage() {
             {repos.map((repo) => {
               const projectInfo = getProjectInfo(repo.name);
               return (
-                <Card key={repo.id} className="group hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-violet-500/20">
+                <Card key={repo.id} className="group hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)]">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <CardTitle className="text-xl group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                          <CardTitle className="text-xl group-hover:text-[var(--neon-violet)] dark:group-hover:text-[var(--neon-violet)] transition-colors">
                             {repo.name}
                           </CardTitle>
                           {projectInfo?.status && (
@@ -159,14 +159,14 @@ export default function ProjectsPage() {
                     {/* 技术亮点 */}
                     {projectInfo?.highlights && projectInfo.highlights.length > 0 && (
                       <div>
-                        <div className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                          <Sparkles className="w-4 h-4 text-violet-500" />
+                        <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground dark:text-muted-foreground mb-2">
+                          <Sparkles className="w-4 h-4 text-[var(--neon-violet)]" />
                           {t('common.more')}
                         </div>
                         <ul className="space-y-1">
                           {projectInfo.highlights.map((highlight, i) => (
-                            <li key={i} className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
-                              <span className="w-1 h-1 rounded-full bg-violet-500 mt-1.5 flex-shrink-0" />
+                            <li key={i} className="text-sm text-muted-foreground dark:text-muted-foreground flex items-start gap-2">
+                              <span className="w-1 h-1 rounded-full bg-[var(--glow-violet)] mt-1.5 flex-shrink-0" />
                               {highlight}
                             </li>
                           ))}
@@ -199,8 +199,8 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <Github className="w-10 h-10 text-gray-400" />
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted dark:bg-card flex items-center justify-center">
+              <Github className="w-10 h-10 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-2">{t('projects.noRepos')}</h3>
             <p className="text-muted-foreground max-w-md mx-auto">
