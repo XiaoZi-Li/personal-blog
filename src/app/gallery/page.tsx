@@ -95,7 +95,7 @@ export default function GalleryPage() {
   const videoCount = items.filter(m => m.type === 'video').length;
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden py-12 sm:py-16">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-magenta)] via-[var(--glow-amber)] to-[var(--glow-amber)] dark:from-slate-950 dark:via-slate-900 dark:to-[var(--glow-magenta)]" />

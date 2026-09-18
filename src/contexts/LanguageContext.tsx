@@ -9,7 +9,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
-  translations: Record<Language, any>;
+  translations: typeof translations;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -19,10 +19,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Load language from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('language') as Language;
-    if (saved && (saved === 'zh-CN' || saved === 'en-US' || saved === 'ja-JP')) {
-      setLanguageState(saved);
-    }
+    // 放进 setTimeout 异步执行：首屏仍以 'zh-CN' 完成 hydration，挂载后再应用
+    // 已保存的语言，避免同步 setState 触发级联渲染，同时保持原有语义不变。
+    const timer = setTimeout(() => {
+      const saved = localStorage.getItem('language') as Language;
+      if (saved && (saved === 'zh-CN' || saved === 'en-US' || saved === 'ja-JP')) {
+        setLanguageState(saved);
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const setLanguage = (lang: Language) => {

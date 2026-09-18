@@ -47,8 +47,9 @@ export function Reveal({ children, delay = 0, className = '', y = 24, dir }: Rev
       obs.observe(el);
       return () => obs.disconnect();
     } catch {
-      setVisible(true);
-      return;
+      // 与上面的降级分支一致：用异步方式显示，避免在 effect 体内同步 setState
+      const id = window.setTimeout(() => setVisible(true), 0);
+      return () => window.clearTimeout(id);
     }
   }, []);
 

@@ -4,6 +4,18 @@ import { jwtVerify } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
+// wall_messages 表回复行，字段与下方 select 列表一一对应
+interface WallMessageReply {
+  id: number;
+  user_id: number | null;
+  nickname: string;
+  content: string;
+  parent_id: number | null;
+  is_admin_reply: boolean;
+  is_public: boolean;
+  created_at: string;
+}
+
 // 获取所有留言（管理员用，包括私密留言和用户邮箱）
 export async function GET(request: NextRequest) {
   try {
@@ -47,7 +59,7 @@ export async function GET(request: NextRequest) {
 
     // 获取所有回复
     const messageIds = messages?.map(m => m.id) || [];
-    let replies: any[] = [];
+    let replies: WallMessageReply[] = [];
     if (messageIds.length > 0) {
       const { data: repliesData } = await client
         .from('wall_messages')
@@ -64,7 +76,7 @@ export async function GET(request: NextRequest) {
     ];
     const uniqueUserIds = [...new Set(allUserIds)] as number[];
 
-    let userEmails: Record<number, string> = {};
+    const userEmails: Record<number, string> = {};
     if (uniqueUserIds.length > 0) {
       const { data: usersData } = await client
         .from('users')

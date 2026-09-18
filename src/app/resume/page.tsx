@@ -1,6 +1,5 @@
 'use client';
 
-import { TechCityBackground } from '@/components/TechCityBackground';
 import {
   MapPin, Mail, Briefcase, ArrowLeft,
   GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare, ExternalLink, BadgeCheck, X
@@ -308,13 +307,16 @@ export default function ResumePage() {
   const [showCert, setShowCert] = useState(false);
   
   useEffect(() => {
-    setMounted(true);
+    const id = window.setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   const r = getResumeData(language || 'cn');
 
   if (!mounted) {
-    return <div className="min-h-screen bg-background" />;
+    return <div className="min-h-screen" />;
   }
 
   const colorMap: Record<string, { bg: string; text: string; border: string }> = {
@@ -325,8 +327,7 @@ export default function ResumePage() {
   };
 
   return (
-    <div className="dark min-h-screen relative">
-      <TechCityBackground />
+    <div className="min-h-screen relative">
       <div className="relative z-10">
         {/* Header */}
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-2 sm:pb-4">
@@ -342,23 +343,23 @@ export default function ResumePage() {
         {/* Main Content */}
         <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 pb-10 sm:pb-16">
           {/* Title Card */}
-          <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6">
+          <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
               <div>
-                <h1 className="text-2xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">{r.title}</h1>
+                <h1 className="text-2xl sm:text-4xl font-bold text-foreground mb-1 sm:mb-2">{r.title}</h1>
                 <p className="text-[var(--neon-violet)] text-sm sm:text-lg">{r.subtitle}</p>
               </div>
               <div className="flex gap-2 sm:gap-3">
                 <Link
                   href="/messages"
-                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)] text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)] text-slate-900 rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg"
                 >
                   <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   {r.leaveMessage}
                 </Link>
                 <a
                   href="mailto:purplemist@qq.com"
-                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-card hover:bg-card text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-card hover:bg-card text-foreground rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-border"
                 >
                   <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span className="hidden sm:inline">{r.sendEmail}</span>
@@ -372,8 +373,8 @@ export default function ResumePage() {
             {/* Left Column - Sidebar */}
             <div className="lg:col-span-1 space-y-3 sm:space-y-6">
               {/* Personal Info */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-violet)]" />
                   {r.personalInfo}
                 </h2>
@@ -381,7 +382,7 @@ export default function ResumePage() {
                   <div className="flex items-center gap-2 sm:gap-3 text-muted-foreground">
                     <span className="text-sm sm:text-base">👤</span>
                     <div>
-                      <p className="font-medium text-white">{r.name}</p>
+                      <p className="font-medium text-foreground">{r.name}</p>
                       <p className="text-[10px] sm:text-xs text-[var(--neon-violet)]">{r.position}</p>
                     </div>
                   </div>
@@ -405,8 +406,8 @@ export default function ResumePage() {
               </div>
 
               {/* Tech Stack */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Code className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-violet)]" />
                   {r.techStack}
                 </h2>
@@ -433,8 +434,8 @@ export default function ResumePage() {
               </div>
 
               {/* Awards */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-amber)]" />
                   {r.awardsTitle}
                 </h2>
@@ -443,7 +444,7 @@ export default function ResumePage() {
                     <div key={idx} className="flex items-start gap-2 sm:gap-2.5">
                       <span className="text-sm sm:text-base mt-0.5">{a.emoji}</span>
                       <div>
-                        <p className="text-xs sm:text-sm text-white leading-snug">{a.award}</p>
+                        <p className="text-xs sm:text-sm text-foreground leading-snug">{a.award}</p>
                         <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{a.date}</p>
                       </div>
                     </div>
@@ -453,17 +454,17 @@ export default function ResumePage() {
                 {/* Professional Certificate */}
                 <button
                   onClick={() => setShowCert(true)}
-                  className="mt-4 w-full group text-left rounded-xl border border-white/10 hover:border-[color-mix(in_oklab,var(--neon-violet)_50%,transparent)] bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] p-3 transition-all hover:shadow-lg hover:"
+                  className="mt-4 w-full group text-left rounded-xl border border-border hover:border-[color-mix(in_oklab,var(--neon-violet)_50%,transparent)] bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] p-3 transition-all hover:shadow-lg hover:"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <BadgeCheck className="w-4 h-4 text-[var(--neon-violet)] shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-white">{r.cert.title}</span>
+                    <span className="text-xs sm:text-sm font-medium text-foreground">{r.cert.title}</span>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/certificates/cie-embedded-cert.jpg"
                     alt={r.cert.title}
-                    className="w-full rounded-lg border border-white/10 shadow-md group-hover:scale-[1.02] transition-transform duration-300"
+                    className="w-full rounded-lg border border-border shadow-md group-hover:scale-[1.02] transition-transform duration-300"
                   />
                   <p className="mt-2 text-[10px] sm:text-xs text-muted-foreground flex items-center justify-between">
                     <span>{r.cert.issuer} · {r.cert.date}</span>
@@ -473,13 +474,13 @@ export default function ResumePage() {
               </div>
 
               {/* Education */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-cyan)]" />
                   {r.educationLabel}
                 </h2>
                 <div className="text-xs sm:text-sm space-y-1.5 sm:space-y-2">
-                  <p className="text-white font-medium">{r.education.school}</p>
+                  <p className="text-foreground font-medium">{r.education.school}</p>
                   <p className="text-[var(--neon-violet)]">{r.education.major}</p>
                   <p className="text-muted-foreground">{r.education.period}</p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed mt-1.5 sm:mt-2">{r.education.courses}</p>
@@ -490,8 +491,8 @@ export default function ResumePage() {
             {/* Right Column - Main Content */}
             <div className="lg:col-span-2 space-y-3 sm:space-y-6">
               {/* Job Intentions */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-violet)]" />
                   {r.intentTitle}
                 </h2>
@@ -520,8 +521,8 @@ export default function ResumePage() {
               </div>
 
               {/* Core Practice */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-amber)]" />
                   {r.practiceTitle}
                 </h2>
@@ -534,7 +535,7 @@ export default function ResumePage() {
                         </span>
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
-                            <h3 className="text-white font-semibold text-xs sm:text-sm group-hover:text-[var(--neon-violet)] transition-colors">
+                            <h3 className="text-foreground font-semibold text-xs sm:text-sm group-hover:text-[var(--neon-violet)] transition-colors">
                               {practice.title}
                             </h3>
                             <span className="px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] text-[var(--neon-violet)] rounded text-[10px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]">
@@ -564,8 +565,8 @@ export default function ResumePage() {
               </div>
 
               {/* What Drives Me */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
                   <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-magenta)]" />
                   {r.passionTitle}
                 </h2>
@@ -579,7 +580,7 @@ export default function ResumePage() {
                     return (
                       <div key={idx} className={`bg-gradient-to-br ${gradients[idx]} rounded-lg sm:rounded-xl p-3 sm:p-4 border`}>
                         <span className="text-xl sm:text-2xl mb-1.5 sm:mb-2 block">{passion.icon}</span>
-                        <p className="text-white font-medium text-xs sm:text-sm mb-1">{passion.title}</p>
+                        <p className="text-foreground font-medium text-xs sm:text-sm mb-1">{passion.title}</p>
                         <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed">{passion.desc}</p>
                       </div>
                     );
@@ -588,8 +589,8 @@ export default function ResumePage() {
               </div>
 
               {/* Self Evaluation */}
-              <div className="bg-card backdrop-blur-xl border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-                <h2 className="text-sm sm:text-lg font-semibold text-white mb-2 sm:mb-3 flex items-center gap-2">
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-2 sm:mb-3 flex items-center gap-2">
                   <Brain className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-cyan)]" />
                   {r.selfAssessmentLabel}
                 </h2>
@@ -598,19 +599,19 @@ export default function ResumePage() {
 
               {/* CTA */}
               <div className="bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] backdrop-blur-xl border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
-                <p className="text-white text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">{r.contactTitle}</p>
+                <p className="text-foreground text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">{r.contactTitle}</p>
                 <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">{r.contactDesc}</p>
                 <div className="flex justify-center gap-2 sm:gap-4 flex-wrap">
                   <Link
                     href="/messages"
-                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)] text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-[var(--glow-violet)] hover:bg-[var(--glow-violet)] text-slate-900 rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all hover:scale-105 shadow-lg"
                   >
                     <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {r.leaveMessage}
                   </Link>
                   <a
                     href="mailto:purplemist@qq.com"
-                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-card hover:bg-card text-white rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-white/10"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-card hover:bg-card text-foreground rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all border border-border"
                   >
                     <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {r.sendEmail}
@@ -630,7 +631,7 @@ export default function ResumePage() {
         >
           <button
             onClick={() => setShowCert(false)}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-card hover:bg-card text-foreground transition-colors"
             aria-label="Close"
           >
             <X className="w-5 h-5" />

@@ -10,7 +10,6 @@ import { useToast } from '@/hooks/use-toast';
 import EmojiPicker from '@/components/EmojiPicker';
 import { useUser } from '@/contexts/UserContext';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { TechCityBackground } from '@/components/TechCityBackground';
 
 interface Message {
   id: number;
@@ -228,9 +227,7 @@ export default function MessagesPage() {
 
   if (loading) {
     return (
-      <div className="dark min-h-screen relative overflow-hidden">
-        <TechCityBackground />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-800/70 to-[var(--glow-violet)] backdrop-blur-sm" />
+      <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
             <div className="w-8 h-8 border-3 border-[var(--neon-violet)] border-t-transparent rounded-full animate-spin" />
@@ -242,9 +239,7 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="dark min-h-screen relative overflow-hidden">
-      <TechCityBackground />
-
+    <div className="min-h-screen relative overflow-hidden">
       {/* 内容 */}
       <div className="relative z-10 pt-2 sm:pt-6 pb-8 sm:pb-12">
         <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">

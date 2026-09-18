@@ -15,6 +15,12 @@ function loadEnv(): void {
 
   try {
     try {
+      // 这里刻意保留 require 而不是静态 import：dotenv 是「可选」依赖，
+      // loadEnv() 是请求期按需调用的兜底逻辑（拿不到环境变量时继续走下面的
+      // coze_workload_identity 方案）。静态 import 会在模块求值阶段就强制解析
+      // 并加载 dotenv，一旦它缺失/不可用，本模块会直接加载失败，导致所有
+      // API 路由启动即崩，同时也会让本文件从「惰性加载」变成「导入即加载」。
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('dotenv').config();
       if (process.env.COZE_SUPABASE_URL && process.env.COZE_SUPABASE_ANON_KEY) {
         envLoaded = true;

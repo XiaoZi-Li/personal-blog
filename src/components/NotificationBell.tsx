@@ -43,10 +43,15 @@ export default function NotificationBell({ onNotificationCountChange }: Notifica
   }, [onNotificationCountChange]);
 
   useEffect(() => {
-    fetchNotifications();
+    const id = window.setTimeout(() => {
+      fetchNotifications();
+    }, 0);
     // 每30秒刷新一次通知
     const interval = setInterval(fetchNotifications, 30000);
-    return () => clearInterval(interval);
+    return () => {
+      window.clearTimeout(id);
+      clearInterval(interval);
+    };
   }, [fetchNotifications]);
 
   // 点击外部关闭下拉框

@@ -167,7 +167,7 @@ export default function TutorialDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="min-h-screen max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <Skeleton className="h-8 w-64 mb-4" />
         <Skeleton className="h-12 w-full mb-6" />
         <div className="space-y-4">
@@ -181,7 +181,7 @@ export default function TutorialDetailPage() {
 
   if (notFound || !post) {
     return (
-      <div className="min-h-screen pt-16 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('tutorials.empty')}</h1>
@@ -195,7 +195,7 @@ export default function TutorialDetailPage() {
   }
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       {/* 阅读进度条 */}
       <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-transparent pointer-events-none">
         <div

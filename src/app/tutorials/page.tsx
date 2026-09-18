@@ -93,7 +93,7 @@ export default function TutorialsPage() {
   const hasMore = posts.length < total;
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden py-12 sm:py-16">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--glow-violet)] via-white to-[var(--glow-violet)] dark:from-slate-950 dark:via-slate-900 dark:to-[var(--glow-violet)]" />

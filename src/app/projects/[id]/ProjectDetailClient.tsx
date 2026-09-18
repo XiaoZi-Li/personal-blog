@@ -19,7 +19,6 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import EmojiPicker from '@/components/EmojiPicker';
-import { TechCityBackground } from '@/components/TechCityBackground';
 import { useUser } from '@/contexts/UserContext';
 
 interface ProjectComment {
@@ -250,30 +249,24 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
   const commentCount = comments.length + replies.length;
 
   return (
-    <div className="dark min-h-screen relative overflow-hidden">
-      {/* 科技风粒子背景 */}
-      <TechCityBackground />
-      
-      {/* 毛玻璃遮罩 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-800/70 to-[var(--glow-violet)] backdrop-blur-sm" />
-      
+    <div className="min-h-screen relative overflow-hidden">
       {/* 内容 */}
       <div className="relative z-10 max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* 返回按钮 */}
-        <Link href="/projects" className="inline-flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-white mb-4 sm:mb-6 transition-colors text-sm">
+        <Link href="/projects" className="inline-flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-foreground mb-4 sm:mb-6 transition-colors text-sm">
           <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           返回项目列表
         </Link>
 
         {/* 项目信息卡片 */}
         <div className="bg-card backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/20 p-4 sm:p-8 mb-4 sm:mb-8">
-          <h1 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">{project.name}</h1>
+          <h1 className="text-xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">{project.name}</h1>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">{project.description}</p>
           
           {/* 技术标签 */}
           <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
             {project.tech.map((tech) => (
-              <Badge key={tech} variant="secondary" className="bg-card text-white border-white/20 text-xs">
+              <Badge key={tech} variant="secondary" className="bg-card text-foreground border-white/20 text-xs">
                 {tech}
               </Badge>
             ))}
@@ -286,7 +279,7 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
                 href={project.github} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-card hover:bg-card text-white transition-colors text-xs sm:text-sm"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-card hover:bg-card text-foreground transition-colors text-xs sm:text-sm"
               >
                 <Github className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 查看源码
@@ -310,8 +303,8 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
         <div className="bg-card backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/20 p-3 sm:p-6">
           <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-violet)]" />
-            <h2 className="text-base sm:text-xl font-semibold text-white">评论区</h2>
-            <Badge variant="secondary" className="bg-card text-white border-white/20 text-xs">
+            <h2 className="text-base sm:text-xl font-semibold text-foreground">评论区</h2>
+            <Badge variant="secondary" className="bg-card text-foreground border-white/20 text-xs">
               {commentCount} 条讨论
             </Badge>
           </div>
@@ -324,7 +317,7 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="分享你的想法或问题..."
-                  className="pr-10 bg-card border-white/20 text-white placeholder:text-muted-foreground text-sm"
+                  className="pr-10 bg-card border-white/20 text-foreground placeholder:text-muted-foreground text-sm"
                   maxLength={500}
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -364,7 +357,7 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium text-white text-sm">{comment.nickname}</span>
+                          <span className="font-medium text-foreground text-sm">{comment.nickname}</span>
                           <span className="text-[10px] sm:text-xs text-muted-foreground">{formatDate(comment.created_at)}</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-2">{comment.content}</p>
@@ -405,7 +398,7 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
                           value={replyContent}
                           onChange={(e) => setReplyContent(e.target.value)}
                           placeholder={`回复 @${comment.nickname}...`}
-                          className="flex-1 bg-card border-white/20 text-white placeholder:text-muted-foreground text-sm"
+                          className="flex-1 bg-card border-white/20 text-foreground placeholder:text-muted-foreground text-sm"
                           maxLength={300}
                         />
                         <Button 
@@ -420,7 +413,7 @@ export default function ProjectDetailClient({ params }: { params: Promise<{ id: 
                           size="sm" 
                           variant="ghost"
                           onClick={() => { setReplyingTo(null); setReplyContent(''); }}
-                          className="text-muted-foreground hover:text-white"
+                          className="text-muted-foreground hover:text-foreground"
                         >
                           取消
                         </Button>

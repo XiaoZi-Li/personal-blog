@@ -128,7 +128,7 @@ export default function BlogDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-16 max-w-3xl mx-auto px-4 sm:px-6 py-10">
+      <div className="min-h-screen max-w-3xl mx-auto px-4 sm:px-6 py-10">
         <Skeleton className="h-10 w-full mb-4" />
         <Skeleton className="h-4 w-48 mb-8" />
         <div className="space-y-4">
@@ -142,7 +142,7 @@ export default function BlogDetailPage() {
 
   if (notFound || !post) {
     return (
-      <div className="min-h-screen pt-16 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('blog.empty')}</h1>
@@ -156,7 +156,7 @@ export default function BlogDetailPage() {
   }
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen">
       {/* 阅读进度条 */}
       <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-transparent pointer-events-none">
         <div

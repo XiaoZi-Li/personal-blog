@@ -4,6 +4,20 @@ import { jwtVerify } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
+// 相关推荐查询（posts 表）返回的行，字段与下方 select 列表一一对应
+interface RelatedPost {
+  id: string;
+  title: string;
+  type: string;
+  category: string | null;
+  summary: string | null;
+  cover: string | null;
+  difficulty: string | null;
+  views: number | null;
+  like_count: number | null;
+  created_at: string;
+}
+
 async function verifyAdmin(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get('auth_token')?.value;
   if (!token) return false;
@@ -59,7 +73,7 @@ export async function GET(
     }
 
     // 相关推荐：同类型同分区，排除自身
-    let related: any[] = [];
+    let related: RelatedPost[] = [];
     const relatedQuery = client
       .from('posts')
       .select('id, title, type, category, summary, cover, difficulty, views, like_count, created_at')
