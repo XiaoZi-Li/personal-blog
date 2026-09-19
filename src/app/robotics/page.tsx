@@ -57,11 +57,11 @@ export default function RoboticsPage() {
 
   // 信号链：颜色只用于图标描边和低透明度底纹，属于墨色档 ink
   const pipeline = [
-    { label: 'Sensors', sub: 'IMX415 · IMU · Mic', icon: Camera, ink: 'var(--neon-cyan)' },
-    { label: 'Perception', sub: 'YOLO · Whisper', icon: Eye, ink: 'var(--neon-lime)' },
-    { label: 'Scheduler', sub: 'dora-rs dataflow', icon: Workflow, ink: 'var(--neon-violet)' },
-    { label: 'Policy', sub: 'VLA / RL', icon: BrainCircuit, ink: 'var(--neon-magenta)' },
-    { label: 'Actuators', sub: 'Motion Cmd', icon: Zap, ink: 'var(--neon-amber)' },
+    { label: 'Sensors', sub: '双目相机 · 本体状态', icon: Camera, ink: 'var(--neon-cyan)' },
+    { label: 'Perception', sub: '深度估计 · 手势', icon: Eye, ink: 'var(--neon-lime)' },
+    { label: 'Decision', sub: '状态机 · 优先级仲裁', icon: Workflow, ink: 'var(--neon-violet)' },
+    { label: 'Policy', sub: 'VLA / RL（规划中）', icon: BrainCircuit, ink: 'var(--neon-magenta)' },
+    { label: 'Actuators', sub: '运动指令', icon: Zap, ink: 'var(--neon-amber)' },
   ];
 
   // 核心能力：图标块是「渐变填充 + text-slate-900 近黑字形」，填充必须用亮色档 glow；
@@ -84,7 +84,7 @@ export default function RoboticsPage() {
     { icon: Workflow, name: t('embodied.sw2.name'), desc: t('embodied.sw2.desc') },
   ];
 
-  const algorithms = ['YOLOv8', 'YOLO-NAS', 'Whisper-Large-v3', 'SAM', 'OpenCV', 'NumPy', 'PyTorch', 'ROS 2'];
+  const algorithms = ['StereoNet', 'MediaPipe', 'OpenCV', 'PyTorch', 'NumPy', 'ROS 2'];
 
   const progress = [
     { name: t('embodied.p1'), status: 'completed' },
@@ -102,10 +102,11 @@ export default function RoboticsPage() {
     planned: { icon: Circle, color: 'var(--muted-foreground)', label: t('embodied.status.planned') },
   } as const;
 
-  // 指标：数字与图标都是「文字/描边」用途，走墨色档
+  // 指标：数字与图标都是「文字/描边」用途，走墨色档。
+  // 只放硬件平台的客观规格，不放没有实测支撑的性能数字。
   const metrics = [
-    { label: 'NPU', value: 6, suffix: ' TOPS', icon: Gauge, ink: 'var(--neon-cyan)' },
-    { label: 'DATAFLOW NODES', value: 12, suffix: '+', icon: GitBranch, ink: 'var(--neon-violet)' },
+    { label: 'BPU', value: 10, suffix: ' TOPS', icon: Gauge, ink: 'var(--neon-cyan)' },
+    { label: 'CPU CORES', value: 8, suffix: '', icon: GitBranch, ink: 'var(--neon-violet)' },
     { label: 'ON-DEVICE', value: 100, suffix: '%', icon: Layers, ink: 'var(--neon-magenta)' },
   ];
 
@@ -439,7 +440,7 @@ export default function RoboticsPage() {
           <Reveal delay={200}>
             <div className="mt-12 flex flex-wrap justify-center gap-3">
               <a
-                href="https://github.com/XiaoZi-Li/rdk-x5-robotics"
+                href="https://github.com/XiaoZi-Li/robot-dog"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-neon inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm"
@@ -449,7 +450,7 @@ export default function RoboticsPage() {
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
               <a
-                href="https://github.com/XiaoZi-Li/rdk-x5-robotics/issues"
+                href="https://github.com/XiaoZi-Li/robot-dog/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost-tech inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
@@ -464,7 +465,7 @@ export default function RoboticsPage() {
       {/* 底部技术跑马灯 */}
       <section className="relative border-t border-border/50 py-5">
         <Marquee reverse fast>
-          {[...algorithms, 'dora-rs', 'RDK X5', 'RK3588', 'ROS 2', 'VLA', 'Sim2Real'].map((tag) => (
+          {[...algorithms, 'RDK X5', 'ROS 2', 'VLA', 'Sim2Real'].map((tag) => (
             <span key={tag} className="mx-3 flex items-center gap-3 whitespace-nowrap">
               <span className="font-mono text-[11px] tracking-wide text-muted-foreground">
                 {tag}

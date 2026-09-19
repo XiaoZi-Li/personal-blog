@@ -81,11 +81,11 @@ const TECH_RADAR: Array<{ name: string; learning?: boolean }> = [
   { name: 'Verilog' },
   { name: 'FPGA' },
   { name: 'ESP32' },
-  { name: 'STM32' },
+  { name: 'RDK X5' },
   { name: 'ROS 2' },
-  { name: 'dora-rs' },
-  { name: 'YOLO' },
+  { name: 'StereoNet' },
   { name: 'OpenCV' },
+  { name: 'MediaPipe' },
   { name: 'PyTorch' },
   { name: 'PCB 设计' },
   { name: 'MCP' },
@@ -161,7 +161,7 @@ export default function Home() {
       skills: [
         { name: t('skills.fpga'), level: 'familiar' },
         { name: t('skills.esp32'), level: 'familiar' },
-        { name: t('skills.stm32'), level: 'familiar' },
+        { name: t('skills.rdkx5'), level: 'familiar' },
         { name: t('skills.harmony'), level: 'familiar' },
       ],
     },
@@ -369,7 +369,7 @@ export default function Home() {
                   </span>
                   <span className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-[var(--neon-violet)]" />
-                    2023.09 — 2027.07
+                    2023.09 — 2027.06
                   </span>
                   <a
                     href="https://github.com/XiaoZi-Li"
@@ -581,7 +581,7 @@ export default function Home() {
                     {t('home.major')} · {t('home.grade')}
                   </p>
                   <p className="mt-3 font-mono text-xs text-[var(--neon-cyan)]">
-                    2023.09 — 2027.07
+                    2023.09 — 2027.06
                   </p>
                 </div>
               </GlassCard>

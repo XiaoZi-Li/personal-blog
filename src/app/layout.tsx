@@ -16,24 +16,24 @@ export const metadata: Metadata = {
     template: '%s | 李俊杰',
   },
   description:
-    '天津工业大学电子信息工程专业大三学生李俊杰，专注于嵌入式开发、Rust语言、AI工程化。拥有多项国家级/省级竞赛获奖经历。',
+    '天津工业大学电子信息工程专业大四学生李俊杰，专注于端侧 AI 部署、嵌入式开发与具身智能。拥有多项国家级/省级竞赛获奖经历。',
   keywords: [
     '李俊杰',
     'XiaoZi-Li',
     '天津工业大学',
     '电子信息工程',
     '嵌入式开发',
-    'Rust',
+    '具身智能',
+    '端侧 AI 部署',
     'ESP32',
     'MCP',
-    'RAG',
     'FPGA',
   ],
   authors: [{ name: '李俊杰', url: 'https://github.com/XiaoZi-Li' }],
   openGraph: {
     title: '李俊杰 | 嵌入式开发工程师 - 具身智能技术',
     description:
-      '电子信息工程专业大三学生，聚焦嵌入式开发与具身智能交叉领域，具备"硬件-软件-算法-AI"的综合技术视角。获得多项国家级竞赛奖项。',
+      '电子信息工程专业大四学生，聚焦端侧 AI 部署与具身智能交叉领域，具备"硬件-软件-算法"的综合技术视角。获得多项国家级竞赛奖项。',
     type: 'website',
     url: process.env.COZE_PROJECT_DOMAIN_DEFAULT 
       ? `https://${process.env.COZE_PROJECT_DOMAIN_DEFAULT}` 
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: '李俊杰 | 嵌入式开发工程师',
     description:
-      '电子信息工程专业大三学生，聚焦嵌入式开发与具身智能交叉领域',
+      '电子信息工程专业大四学生，聚焦端侧 AI 部署与具身智能交叉领域',
     images: process.env.COZE_PROJECT_DOMAIN_DEFAULT 
       ? [`https://${process.env.COZE_PROJECT_DOMAIN_DEFAULT}/og-image.jpg`]
       : ['/og-image.jpg'],

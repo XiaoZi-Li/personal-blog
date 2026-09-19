@@ -228,11 +228,11 @@ const translations = {
         badge: '论文发表',
         title: '科研经历',
         paper: 'CATSANet —— 跨模态行人重识别',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: '共同第一作者',
         status: 'SCI 已正式发表',
         journal: 'Pattern Analysis and Applications',
-        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表并被 SCI 检索，代码已开源。提出跨模态语义 Token 选择模块与基于 Sinkhorn 最优传输的部件对齐损失（PACL），构建 PyTorch/CLIP 全流程训练评估管线，消融实验验证对检索精度的提升。'
+        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名共同第一作者（脚注注明与第三作者同等贡献），配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。'
       },
       resume: {
         title: '个人简历与求职意向',
@@ -253,8 +253,8 @@ const translations = {
           rustDesc: '正在学习 Rust 在嵌入式领域的应用，关注嵌入式 Rust 生态（embassy、esp-rs），追求安全可靠的系统级编程',
           pcb: 'PCB 绘制能力',
           pcbDesc: '具备 PCB 电路板绘制能力，能完成原理图设计、布局布线和打样验证全流程',
-          stm32: 'STM32 开发经验',
-          stm32Desc: '使用过 STM32 进行嵌入式开发，了解 HAL 库和中断机制，但更倾向于 ESP32 + Rust 技术路线',
+          rdkx5: 'RDK X5 端侧部署',
+          rdkx5Desc: '在 RDK X5（BPU 10 TOPS）上完成双目深度模型的端侧部署并打通实时推理链路',
         },
         passion: {
           label: '技术热情',
@@ -283,7 +283,7 @@ const translations = {
       cangjie: '仓颉',
       fpga: 'FPGA',
       esp32: 'ESP32',
-      stm32: 'STM32',
+      rdkx5: 'RDK X5',
       harmony: '鸿蒙Hi3861',
       mcp: 'MCP协议',
       aiSkills: 'AI Agent'
@@ -305,7 +305,7 @@ const translations = {
       comp0: {
         title: '天津第八届大学生信息技术"新工科"工程实践创新技术竞赛',
         award: '省部级一等奖',
-        date: '2025年6月',
+        date: '2025年12月',
         track: '智能系统赛道',
         detail1: '基于小智AI与MCP协议开发多设备智能管家系统',
         detail2: '担任队长，负责系统架构设计与核心功能开发'
@@ -313,26 +313,26 @@ const translations = {
       // Competition 1 (第九届 机器狗)
       comp1: {
         title: '全国大学生嵌入式芯片与系统设计竞赛（第九届）',
-        award: '全国总决赛三等奖',
-        date: '2026年7月',
+        award: '国家级三等奖',
+        date: '2026年8月',
         track: '芯片应用赛道',
         detail1: '基于RDK X5（BPU 10 TOPS）+ ROS2开发机器狗双目深度避障、MediaPipe手势控制与三级优先级运动仲裁器',
-        detail2: '负责感知与运动控制系统开发，完成步态参数整定与系统集成调试'
+        detail2: '承担感知与运动控制系统开发，完成步态参数整定与系统集成调试'
       },
       // Competition 2 (第八届 FPGA)
       comp2: {
         title: '全国大学生嵌入式芯片与系统设计竞赛（第八届）',
-        award: '决赛三等奖',
+        award: '国家级三等奖',
         date: '2025年12月',
         track: 'FPGA创新设计赛道',
         detail1: '基于安路HX4S20 FPGA实现边缘检测、图像滤波、HSV色彩识别硬件加速，多级流水线支持640×480@30fps实时处理',
-        detail2: '负责核心逻辑设计、时序约束与资源优化，解决多时钟域信号跨域传输的亚稳态问题'
+        detail2: '承担系统联调与技术报告撰写，独立完成竞赛技术报告全文（方案论证、架构说明、时序与资源数据分析）'
       },
       // Competition 3 (服务外包)
       comp3: {
         title: '中国大学生服务外包创新创业大赛',
         award: '国家级三等奖',
-        date: '2025年6月',
+        date: '2025年8月',
         track: '智能家居物联网',
         detail1: '基于鸿蒙Hi3861开发智能家居传感器数据采集与无线通信系统，适配低功耗场景需求',
         detail2: '完成设备间通信协议适配，解决信号稳定性问题'
@@ -353,9 +353,9 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID行人重识别科研项目',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: '共同第一作者',
-        description: '论文CATSANet已在SCI期刊Pattern Analysis and Applications正式发表并被SCI检索，代码已开源；参与提出跨模态语义Token选择模块与基于最优传输的部件对齐损失',
+        description: '论文CATSANet已在SCI期刊Pattern Analysis and Applications正式发表，署名共同第一作者（论文注明与第三作者同等贡献），配套代码由团队开源；本人负责消融实验设计与结果分析',
         tags: ['深度学习', '跨模态检索', 'PyTorch']
       },
       // Project 2
@@ -660,7 +660,7 @@ const translations = {
         intentPosition: 'Position: Embedded Software Engineer / Embodied AI Engineer',
         intentDirection: 'Direction: ESP32 + Rust development, RDK X5 embodied intelligence, AI Agent application',
         intentAlso: 'Also Consider: PCB design, hardware development',
-        intentNote: 'Note: Have used STM32 but not preferred direction',
+        intentNote: 'Note: Focused on on-device model deployment on RDK X5 (BPU)',
         intentAvailability: 'Availability: Immediately available for internship',
         practiceTitle: 'Practice Highlights',
         practices: [
@@ -685,11 +685,11 @@ const translations = {
         badge: 'Publication',
         title: 'Research Experience',
         paper: 'CATSANet — Cross-modal Person Re-identification',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: 'Co-first Author',
         status: 'SCI Published',
         journal: 'Pattern Analysis and Applications',
-        desc: 'Paper officially published in the SCI journal Pattern Analysis and Applications (SCI-indexed), code open-sourced. Proposed a cross-modal semantic token selection module and a Sinkhorn optimal-transport part alignment loss (PACL), built the full PyTorch/CLIP training and evaluation pipeline, with retrieval gains validated by ablation studies.'
+        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as co-first author (the paper footnote states equal contribution with the third author); the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.'
       },
     },
     // Skills
@@ -701,7 +701,7 @@ const translations = {
       cangjie: 'Cangjie',
       fpga: 'FPGA',
       esp32: 'ESP32',
-      stm32: 'STM32',
+      rdkx5: 'RDK X5',
       harmony: 'HarmonyOS Hi3861',
       mcp: 'MCP Protocol',
       aiSkills: 'AI Agent'
@@ -723,7 +723,7 @@ const translations = {
       comp0: {
         title: 'Tianjin 8th College Student Information Technology "New Engineering" Practice Innovation Competition',
         award: 'Provincial-Ministerial First Prize',
-        date: 'June 2025',
+        date: 'December 2025',
         track: 'Intelligent Systems Track',
         detail1: 'Developed multi-device smart home system based on Xiaozhi AI and MCP protocol',
         detail2: 'Served as team captain, responsible for system architecture design and core functionality development'
@@ -731,26 +731,26 @@ const translations = {
       // Competition 1 (9th, Robot Dog)
       comp1: {
         title: 'National College Student Embedded Chip and System Design Competition (9th)',
-        award: 'National Final Third Prize',
-        date: 'July 2026',
+        award: 'National 3rd Prize',
+        date: 'August 2026',
         track: 'Chip Application Track',
         detail1: 'Developed stereo depth obstacle avoidance, MediaPipe gesture control and 3-level priority motion arbiter for a quadruped robot dog on RDK X5 (BPU 10 TOPS) + ROS2',
-        detail2: 'Responsible for perception and motion control system development, completed gait parameter tuning and system integration'
+        detail2: 'Delivered the perception and motion control subsystem, completed gait parameter tuning and system integration'
       },
       // Competition 2 (8th, FPGA)
       comp2: {
         title: 'National College Student Embedded Chip and System Design Competition (8th)',
-        award: 'Final Third Prize',
+        award: 'National 3rd Prize',
         date: 'December 2025',
         track: 'FPGA Innovation Design Track',
         detail1: 'Hardware acceleration of edge detection, image filtering and HSV color recognition on Anlu HX4S20 FPGA, multi-stage pipeline supporting 640×480@30fps real-time processing',
-        detail2: 'Responsible for core logic design, timing constraints and resource optimization, resolved multi-clock-domain metastability issues'
+        detail2: 'Delivered system integration and wrote the full competition technical report (solution rationale, architecture description, timing and resource analysis)'
       },
       // Competition 3 (Service Outsourcing)
       comp3: {
         title: 'China College Student Service Outsourcing Innovation Competition',
         award: 'National 3rd Prize',
-        date: 'June 2025',
+        date: 'August 2025',
         track: 'Smart Home IoT',
         detail1: 'Smart home sensor data acquisition & wireless communication system based on HarmonyOS Hi3861, adapted for low-power scenarios',
         detail2: 'Completed device protocol adaptation, solved signal stability issues'
@@ -771,9 +771,9 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID Person Re-identification Research Project',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: 'Co-first Author',
-        description: 'Paper CATSANet officially published in the SCI journal Pattern Analysis and Applications (SCI-indexed), code open-sourced; co-proposed cross-modal semantic token selection module and optimal-transport part alignment loss',
+        description: 'Paper CATSANet officially published in the SCI journal Pattern Analysis and Applications, credited as co-first author (the paper footnote states equal contribution with the third author); the companion code is open-sourced by the team. My part covered ablation study design and result analysis',
         tags: ['Deep Learning', 'Cross-modal Retrieval', 'PyTorch']
       },
       // Project 2
@@ -1078,7 +1078,7 @@ const translations = {
         intentPosition: '志望職種：組込みソフトウェアエンジニア／具身AIエンジニア',
         intentDirection: '方向：ESP32 + Rust開発、RDK X5具身知能、AI Agent応用',
         intentAlso: 'その他：PCB設計、ハードウェア開発も検討可能',
-        intentNote: '補足：STM32の使用経験はありますが、主な志望方向ではありません',
+        intentNote: '補足：RDK X5（BPU）でのエッジ側モデル配備が中心',
         intentAvailability: '勤務可能：インターン即日可能',
         practiceTitle: '実践ハイライト',
         practices: [
@@ -1103,11 +1103,11 @@ const translations = {
         badge: '論文発表',
         title: '研究経歴',
         paper: 'CATSANet — クロスモーダル歩行者再識別',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: '共第一著者',
         status: 'SCI 正式掲載済み',
         journal: 'Pattern Analysis and Applications',
-        desc: '論文が SCI ジャーナル Pattern Analysis and Applications に正式掲載され SCI 検索可能、コード公開済み。クロスモーダル意味トークン選択モジュールと Sinkhorn 最適輸送に基づく部位整合損失（PACL）を提案、PyTorch/CLIP による訓練・評価パイプラインを構築、消融実験で検索精度の向上を検証。'
+        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、共第一著者として署名（脚注に第三著者と同等の貢献と明記）、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。'
       },
     },
     // Skills
@@ -1119,7 +1119,7 @@ const translations = {
       cangjie: '倉頡言語',
       fpga: 'FPGA',
       esp32: 'ESP32',
-      stm32: 'STM32',
+      rdkx5: 'RDK X5',
       harmony: '鴻蒙Hi3861',
       mcp: 'MCPプロトコル',
       aiSkills: 'AI Skills',
@@ -1141,7 +1141,7 @@ const translations = {
       comp0: {
         title: '天津第八回大学生情報技術「新工科」エンジニアリング実践イノベーションコンテスト',
         award: '省部級一等賞',
-        date: '2025年6月',
+        date: '2025年12月',
         track: 'インテリジェントシステムトラック',
         detail1: '小智AIとMCPプロトコルに基づくマルチデバイス智能管家システムを担当',
         detail2: 'キャプテンとして、システムアーキテクチャ設計とコア機能開発を担当'
@@ -1149,26 +1149,26 @@ const translations = {
       // Competition 1 (第9回 ロボットドッグ)
       comp1: {
         title: '全国大学生組込みチップ・システム設計コンテスト（第9回）',
-        award: '全国決勝三等賞',
-        date: '2026年7月',
+        award: '国家級三等賞',
+        date: '2026年8月',
         track: 'チップ応用トラック',
         detail1: 'RDK X5（BPU 10 TOPS）+ ROS2 で四足ロボットドッグの双目深度障害回避、MediaPipe ジェスチャー制御、3段優先度運動アービタを開発',
-        detail2: '知覚・運動制御システム開発を担当、歩容パラメータ調整とシステム統合デバッグを完了'
+        detail2: '知覚・運動制御サブシステムを担当、歩容パラメータ調整とシステム統合デバッグを完了'
       },
       // Competition 2 (第8回 FPGA)
       comp2: {
         title: '全国大学生組込みチップ・システム設計コンテスト（第8回）',
-        award: '決勝三等賞',
+        award: '国家級三等賞',
         date: '2025年12月',
         track: 'FPGAイノベーション設計トラック',
         detail1: '安路 HX4S20 FPGA でエッジ検出・画像フィルタ・HSV色彩認識のハードウェア高速化を実現、多段パイプラインで 640×480@30fps リアルタイム処理をサポート',
-        detail2: 'コアロジック設計、タイミング制約とリソース最適化を担当、マルチクロックドメインのメタスタビリティ問題を解決'
+        detail2: 'システム連調と技術報告書の執筆を担当、競技技術報告書の全文（方案論証・アーキテクチャ説明・タイミングとリソース分析）を独立完成'
       },
       // Competition 3 (サービス外包)
       comp3: {
         title: '中国大学生サービス外包イノベーション大会',
         award: '国家級三等賞',
-        date: '2025年6月',
+        date: '2025年8月',
         track: 'スマートホームIoT',
         detail1: 'OpenHarmonyと鴻蒙Hi3861によるスマートホームシーン制御システム、小智AIアシスタントをMCPプロトコルで接続し音声によるデバイス情報照会・制御指令を実現',
         detail2: '開発ボード構築とソフト・ハード連携を担当、センサー収集・低電力無線通信・デバイスプロトコル適合を完了'
@@ -1189,9 +1189,9 @@ const translations = {
       // Project 1
       project1: {
         title: 'ReID歩行者再識別研究プロジェクト',
-        period: '2024.12 - 2026.02',
+        period: '2026.08',
         role: '共第一著者',
-        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載され SCI 検索可能、コード公開済み；クロスモーダル意味トークン選択モジュールと最適輸送部位整合損失を共同提案',
+        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載、共第一著者として署名（脚注に第三著者と同等の貢献と明記）、付属コードはチームにより公開。本人の担当は消融実験の設計と結果分析',
         tags: ['ディープラーニング', 'クロスモーダル検索', 'PyTorch']
       },
       // Project 2
