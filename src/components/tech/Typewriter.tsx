@@ -16,7 +16,7 @@ interface TypewriterProps {
 
 /**
  * Typewriter —— 终端式打字机。
- * 用在 Hero 的职位副标题上：一行行打出「运动控制 → VLA → 强化学习」的成长路径。
+ * 用在 Hero 的职位副标题上：一行行打出「运动控制 → 强化学习 → VLA」的成长路径。
  */
 export default function Typewriter({
   phrases,

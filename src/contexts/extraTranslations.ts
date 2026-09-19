@@ -19,8 +19,8 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         ctaSecondary: '具身智能方向',
         roles: {
           r1: '机器人运动控制 · MPC / WBC',
-          r2: 'Vision-Language-Action',
-          r3: '强化学习 · Sim2Real',
+          r2: '强化学习 · Sim2Real',
+          r3: 'Vision-Language-Action',
           r4: '嵌入式软硬件全栈',
         },
       },
@@ -42,7 +42,7 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         kicker: 'ROADMAP',
         title: '通往具身智能的三段路',
         subtitle:
-          '先让机器人稳稳地动起来，再让语言和视觉指挥它做事，最后让它在试错中自己学会更聪明的策略。这是我给自己排的顺序。',
+          '先让机器人稳稳地动起来；再让它在海量试错里自己长出策略 —— 强化学习比 VLA 好上手，反馈也更直接；最后才把语言和视觉接进来，让它听得懂人话。这是我给自己排的顺序。',
         note: '这三段路我还没走完，进度会随着实际推进更新，而不是一次性列完。',
         status: {
           doing: '正在推进',
@@ -61,20 +61,9 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
           },
         },
         stage2: {
-          name: '视觉-语言-动作模型',
-          en: 'VISION-LANGUAGE-ACTION',
-          desc: '把视觉与语言统一到同一个动作空间里，让机器人能听懂「把杯子拿起来」这类指令并直接输出动作。',
-          items: {
-            i1: 'RT-2 动作即 token 的范式',
-            i2: 'OpenVLA 开源 7B 模型微调',
-            i3: 'π0 流匹配与连续动作生成',
-            i4: 'GR00T 人形机器人基础模型',
-          },
-        },
-        stage3: {
           name: '强化学习与迁移',
           en: 'RL & SIM2REAL',
-          desc: '让策略在大量并行仿真中自己试错，再用域随机化把仿真里学会的本事带进真实世界。',
+          desc: '让策略在大量并行仿真中自己试错，再用域随机化把仿真里学会的本事带进真实世界。这是目前门槛最低、迭代最快的一段。',
           items: {
             i1: 'PPO / SAC 连续控制策略',
             i2: '模仿学习 · 行为克隆 · Diffusion Policy',
@@ -82,11 +71,22 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
             i4: '大规模并行环境训练调参',
           },
         },
+        stage3: {
+          name: '视觉-语言-动作模型',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: '把视觉与语言统一到同一个动作空间里，让机器人能听懂「把杯子拿起来」这类指令并直接输出动作。这一步依赖前两段的积累。',
+          items: {
+            i1: 'RT-2 动作即 token 的范式',
+            i2: 'OpenVLA 开源 7B 模型微调',
+            i3: 'π0 流匹配与连续动作生成',
+            i4: 'GR00T 人形机器人基础模型',
+          },
+        },
       },
     },
     footer: {
       tagline:
-        '在物理世界里写代码。从底层驱动到运动控制，再到 VLA 与强化学习，一步一步把智能装进会动的身体里。',
+        '在物理世界里写代码。从底层驱动到运动控制，再到强化学习与 VLA，一步一步把智能装进会动的身体里。',
       navigate: 'NAVIGATE',
       focus: 'RESEARCH FOCUS',
       contact: 'CONTACT',
@@ -148,8 +148,8 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         ctaSecondary: 'Embodied AI',
         roles: {
           r1: 'Robot Motion Control · MPC / WBC',
-          r2: 'Vision-Language-Action',
-          r3: 'Reinforcement Learning · Sim2Real',
+          r2: 'Reinforcement Learning · Sim2Real',
+          r3: 'Vision-Language-Action',
           r4: 'Embedded Hardware & Software',
         },
       },
@@ -171,7 +171,7 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         kicker: 'ROADMAP',
         title: 'Three legs of the road to embodied AI',
         subtitle:
-          'First make the robot move reliably, then let vision and language command it, and finally let it learn better policies through trial and error. This is the order I set for myself.',
+          'First make the robot move reliably; then let it grow its own policy through massive trial and error — reinforcement learning is easier to pick up than VLA and pays back faster; only then bring in language and vision so it understands what people ask for. This is the order I set for myself.',
         note: 'I have not finished these three legs yet. Progress updates as I actually move forward, rather than being listed all at once.',
         status: {
           doing: 'In progress',
@@ -190,20 +190,9 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
           },
         },
         stage2: {
-          name: 'Vision-Language-Action',
-          en: 'VISION-LANGUAGE-ACTION',
-          desc: 'Unify vision and language into one action space, so a robot can take an instruction like "pick up the cup" and directly emit actions.',
-          items: {
-            i1: 'RT-2: actions as text tokens',
-            i2: 'Fine-tuning the open 7B OpenVLA model',
-            i3: 'π0 flow matching for continuous actions',
-            i4: 'GR00T humanoid foundation models',
-          },
-        },
-        stage3: {
           name: 'RL & Transfer',
           en: 'RL & SIM2REAL',
-          desc: 'Let policies learn by trial and error in massively parallel simulation, then use domain randomization to carry that skill into the real world.',
+          desc: 'Let policies learn by trial and error in massively parallel simulation, then use domain randomization to carry that skill into the real world. Currently the lowest-barrier, fastest-iterating leg.',
           items: {
             i1: 'PPO / SAC for continuous control',
             i2: 'Imitation learning · behavior cloning · Diffusion Policy',
@@ -211,11 +200,22 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
             i4: 'Tuning large-scale parallel training',
           },
         },
+        stage3: {
+          name: 'Vision-Language-Action',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: 'Unify vision and language into one action space, so a robot can take an instruction like "pick up the cup" and directly emit actions. This leg builds on the previous two.',
+          items: {
+            i1: 'RT-2: actions as text tokens',
+            i2: 'Fine-tuning the open 7B OpenVLA model',
+            i3: 'π0 flow matching for continuous actions',
+            i4: 'GR00T humanoid foundation models',
+          },
+        },
       },
     },
     footer: {
       tagline:
-        'Writing code for the physical world. From low-level drivers to motion control, then VLA and reinforcement learning — putting intelligence into a body that moves.',
+        'Writing code for the physical world. From low-level drivers to motion control, then reinforcement learning and VLA — putting intelligence into a body that moves.',
       navigate: 'NAVIGATE',
       focus: 'RESEARCH FOCUS',
       contact: 'CONTACT',
@@ -277,8 +277,8 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         ctaSecondary: '身体性 AI 分野',
         roles: {
           r1: 'ロボット運動制御 · MPC / WBC',
-          r2: 'Vision-Language-Action',
-          r3: '強化学習 · Sim2Real',
+          r2: '強化学習 · Sim2Real',
+          r3: 'Vision-Language-Action',
           r4: '組込みソフト・ハード全般',
         },
       },
@@ -300,7 +300,7 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
         kicker: 'ROADMAP',
         title: '身体性 AI へ向かう三つの道',
         subtitle:
-          'まずロボットを安定して動かし、次に視覚と言語で指示できるようにし、最後に試行錯誤から賢い方策を自ら学ばせる。これが私が定めた順番です。',
+          'まずロボットを安定して動かす。次に、大量の試行錯誤から方策を自分で育てさせる —— 強化学習は VLA より取りかかりやすく、成果も早く返ってきます。最後に視覚と言語を組み込み、人の指示が分かるようにする。これが私が定めた順番です。',
         note: 'この三つの道はまだ途中です。進捗は実際の前進に合わせて更新し、一度に全部を並べることはしません。',
         status: {
           doing: '進行中',
@@ -319,20 +319,9 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
           },
         },
         stage2: {
-          name: '視覚・言語・行動モデル',
-          en: 'VISION-LANGUAGE-ACTION',
-          desc: '視覚と言語を一つの行動空間に統合し、「カップを取って」といった指示から直接行動を出力できるようにします。',
-          items: {
-            i1: 'RT-2：行動をトークンとして扱う枠組み',
-            i2: 'オープンソース 7B モデル OpenVLA の微調整',
-            i3: 'π0 のフローマッチングによる連続行動生成',
-            i4: 'GR00T ヒューマノイド基盤モデル',
-          },
-        },
-        stage3: {
           name: '強化学習と転移',
           en: 'RL & SIM2REAL',
-          desc: '大規模並列シミュレーションで方策を試行錯誤させ、ドメインランダム化で実世界へ持ち込みます。',
+          desc: '大規模並列シミュレーションで方策を試行錯誤させ、ドメインランダム化で実世界へ持ち込みます。現在もっとも敷居が低く、反復が速い段階です。',
           items: {
             i1: 'PPO / SAC による連続制御',
             i2: '模倣学習 · 行動クローニング · Diffusion Policy',
@@ -340,11 +329,22 @@ export const extraTranslations: Record<ExtraLanguage, Record<string, unknown>> =
             i4: '大規模並列環境の学習チューニング',
           },
         },
+        stage3: {
+          name: '視覚・言語・行動モデル',
+          en: 'VISION-LANGUAGE-ACTION',
+          desc: '視覚と言語を一つの行動空間に統合し、「カップを取って」といった指示から直接行動を出力できるようにします。この段階は前の二段の蓄積に支えられます。',
+          items: {
+            i1: 'RT-2：行動をトークンとして扱う枠組み',
+            i2: 'オープンソース 7B モデル OpenVLA の微調整',
+            i3: 'π0 のフローマッチングによる連続行動生成',
+            i4: 'GR00T ヒューマノイド基盤モデル',
+          },
+        },
       },
     },
     footer: {
       tagline:
-        '物理世界のためにコードを書く。低レイヤのドライバから運動制御、そして VLA と強化学習へ —— 知能を動く身体に載せていく。',
+        '物理世界のためにコードを書く。低レイヤのドライバから運動制御、そして強化学習と VLA へ —— 知能を動く身体に載せていく。',
       navigate: 'NAVIGATE',
       focus: 'RESEARCH FOCUS',
       contact: 'CONTACT',

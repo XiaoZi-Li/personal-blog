@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Cpu, Eye, Footprints } from 'lucide-react';
 
 /**
@@ -46,9 +46,58 @@ export default function OrbitalCore() {
 
   const vertex = ['210,60', '340,285', '80,285'];
   const [active, setActive] = useState<number | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  /*
+   * 指针视差：整块视觉朝阳鼠标方向轻轻偏一点。
+   * 刻意做得极小（±3.2° / ±6px）—— 想要的是「这块画面是活的」，
+   * 而不是给光标做替身。触摸设备与「减少动效」偏好下直接不启动。
+   */
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const el = rootRef.current;
+    if (!el) return;
+
+    const cur = { x: 0, y: 0 };
+    const dst = { x: 0, y: 0 };
+    let raf = 0;
+    let running = false;
+
+    const onMove = (e: PointerEvent) => {
+      // 以视口中心为原点归一化到 -1..1
+      dst.x = Math.max(-1, Math.min(1, (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)));
+      dst.y = Math.max(-1, Math.min(1, (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2)));
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    const tick = () => {
+      cur.x += (dst.x - cur.x) * 0.075;
+      cur.y += (dst.y - cur.y) * 0.075;
+      el.style.setProperty('--px', cur.x.toFixed(4));
+      el.style.setProperty('--py', cur.y.toFixed(4));
+      if (Math.abs(dst.x - cur.x) < 0.0015 && Math.abs(dst.y - cur.y) < 0.0015) {
+        running = false;
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', onMove);
+    };
+  }, []);
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[430px] select-none">
+    <div
+      ref={rootRef}
+      className="parallax-soft relative mx-auto aspect-square w-full max-w-[430px] select-none"
+    >
       {/* 背景光晕 */}
       <div className="animate-pulse-glow absolute inset-[12%] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--glow-violet)_28%,transparent),transparent_70%)] blur-2xl" />
 

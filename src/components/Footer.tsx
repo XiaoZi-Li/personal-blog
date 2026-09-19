@@ -3,14 +3,15 @@
 import Link from 'next/link';
 import { Github, Heart, Mail, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import LocalClock from '@/components/tech/LocalClock';
 
 const GITHUB_URL = 'https://github.com/XiaoZi-Li';
 const EMAIL = 'purplemist@qq.com';
 
 const FOCUS = [
   { label: 'Robot Motion Control', sub: 'MPC · WBC · MuJoCo' },
-  { label: 'Vision-Language-Action', sub: 'OpenVLA · π0 · GR00T' },
   { label: 'Reinforcement Learning', sub: 'PPO · SAC · Sim2Real' },
+  { label: 'Vision-Language-Action', sub: 'OpenVLA · π0 · GR00T' },
   { label: 'Embedded Systems', sub: 'Rust · ESP32 · FPGA' },
 ];
 
@@ -155,6 +156,7 @@ export default function Footer() {
           <p className="font-mono text-[11px] tracking-wide text-muted-foreground">
             © {new Date().getFullYear()} {t('home.name')} · Next.js + TypeScript + Supabase
           </p>
+          <LocalClock />
           <p className="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-muted-foreground">
             Built with
             <Heart className="h-3 w-3 animate-heartbeat text-[var(--neon-magenta)]" />

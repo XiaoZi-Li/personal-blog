@@ -40,17 +40,28 @@ export default function GlassCard({
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!spotlight) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    el.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width) * 100}%`);
-    el.style.setProperty('--my', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+
+    if (spotlight) {
+      el.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+      el.style.setProperty('--my', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+    }
+
+    // 描边流光从指针进来的方向起转，而不是每次都从 0° 开始。
+    // 动画只定义了 to 关键帧，所以起转点就是这里的当前值。
+    const cx = e.clientX - (rect.left + rect.width / 2);
+    const cy = e.clientY - (rect.top + rect.height / 2);
+    if (cx !== 0 || cy !== 0) {
+      el.style.setProperty('--border-angle', `${(Math.atan2(cy, cx) * 180) / Math.PI + 90}deg`);
+    }
   };
 
   return (
     <div
       ref={ref}
+      onMouseEnter={handleMove}
       onMouseMove={handleMove}
       className={[
         surface === 'glass' ? 'glass' : 'panel',

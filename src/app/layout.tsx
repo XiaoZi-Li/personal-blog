@@ -8,6 +8,7 @@ import Providers from '@/components/Providers';
 import AuroraField from '@/components/tech/AuroraField';
 import CursorAura from '@/components/tech/CursorAura';
 import ScrollProgress from '@/components/tech/ScrollProgress';
+import RouteFade from '@/components/tech/RouteFade';
 import BackToTop from '@/components/tech/BackToTop';
 
 export const metadata: Metadata = {
@@ -89,6 +90,7 @@ export default function RootLayout({
           <AuroraField />
           <CursorAura />
           <ScrollProgress />
+          <RouteFade />
           <Navigation />
           <main className="relative z-10 min-h-screen pt-20">
             {children}

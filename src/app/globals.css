@@ -1055,6 +1055,39 @@ html.js .reveal.is-visible {
 }
 
 /* ============================================================
+   指针视差：让 Hero 的核心视觉「活」起来
+   幅度刻意做得极小（±3.2° / ±6px）—— 目标是生命感，不是光标替身。
+   --px / --py 由 JS 逐帧缓动写入，取值 -1..1。
+   ============================================================ */
+.parallax-soft {
+  --px: 0;
+  --py: 0;
+  transform: perspective(1100px) rotateY(calc(var(--px) * 3.2deg))
+    rotateX(calc(var(--py) * -3.2deg))
+    translate3d(calc(var(--px) * -6px), calc(var(--py) * -6px), 0);
+}
+
+/* ============================================================
+   路由切换：极简淡入，只在切页那一瞬间出现。
+   只动 opacity + 少量位移，且不加 fill-mode ——
+   动画结束后不留 transform，避免给 fixed 定位的后代造出 containing block。
+   ============================================================ */
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+main.route-enter {
+  animation: route-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
    无障碍：尊重「减少动效」偏好
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {

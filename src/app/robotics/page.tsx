@@ -60,7 +60,7 @@ export default function RoboticsPage() {
     { label: 'Sensors', sub: '双目相机 · 本体状态', icon: Camera, ink: 'var(--neon-cyan)' },
     { label: 'Perception', sub: '深度估计 · 手势', icon: Eye, ink: 'var(--neon-lime)' },
     { label: 'Decision', sub: '状态机 · 优先级仲裁', icon: Workflow, ink: 'var(--neon-violet)' },
-    { label: 'Policy', sub: 'VLA / RL（规划中）', icon: BrainCircuit, ink: 'var(--neon-magenta)' },
+    { label: 'Policy', sub: 'RL / VLA（规划中）', icon: BrainCircuit, ink: 'var(--neon-magenta)' },
     { label: 'Actuators', sub: '运动指令', icon: Zap, ink: 'var(--neon-amber)' },
   ];
 
@@ -465,7 +465,7 @@ export default function RoboticsPage() {
       {/* 底部技术跑马灯 */}
       <section className="relative border-t border-border/50 py-5">
         <Marquee reverse fast>
-          {[...algorithms, 'RDK X5', 'ROS 2', 'VLA', 'Sim2Real'].map((tag) => (
+          {[...algorithms, 'RDK X5', 'ROS 2', 'Sim2Real', 'VLA'].map((tag) => (
             <span key={tag} className="mx-3 flex items-center gap-3 whitespace-nowrap">
               <span className="font-mono text-[11px] tracking-wide text-muted-foreground">
                 {tag}
