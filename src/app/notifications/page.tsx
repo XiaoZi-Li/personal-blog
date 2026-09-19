@@ -181,7 +181,7 @@ export default function NotificationsPage() {
                     className={`p-4 rounded-lg border transition-all ${
                       notification.is_read
                         ? 'border-border dark:border-border bg-card dark:bg-card'
-                        : 'border-[var(--neon-violet)] dark:border-[var(--neon-violet)] bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]'
+                        : 'border-[var(--neon-violet)] dark:border-[var(--neon-violet)] bg-[color-mix(in_oklab,var(--neon-violet)_12%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">

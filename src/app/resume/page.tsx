@@ -380,7 +380,7 @@ export default function ResumePage() {
                     <span className="text-sm sm:text-base">👤</span>
                     <div>
                       <p className="font-medium text-foreground">{r.name}</p>
-                      <p className="text-[10px] sm:text-xs text-[var(--neon-violet)]">{r.position}</p>
+                      <p className="text-[11px] sm:text-xs text-[var(--neon-violet)]">{r.position}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
@@ -413,12 +413,12 @@ export default function ResumePage() {
                     const colors = colorMap[cat.color] || colorMap.violet;
                     return (
                       <div key={cat.title}>
-                        <p className={`text-[10px] sm:text-xs ${colors.text} mb-1.5 sm:mb-2 font-medium`}>{cat.title}</p>
+                        <p className={`text-[11px] sm:text-xs ${colors.text} mb-1.5 sm:mb-2 font-medium`}>{cat.title}</p>
                         <div className="flex flex-wrap gap-1 sm:gap-1.5">
                           {cat.skills.map((s) => (
                             <span
                               key={s}
-                              className={`px-1.5 sm:px-2 py-0.5 ${colors.bg} ${colors.text} rounded text-[10px] sm:text-xs border ${colors.border}`}
+                              className={`px-1.5 sm:px-2 py-0.5 ${colors.bg} ${colors.text} rounded text-[11px] sm:text-xs border ${colors.border}`}
                             >
                               {s}
                             </span>
@@ -442,7 +442,7 @@ export default function ResumePage() {
                       <span className="text-sm sm:text-base mt-0.5">{a.emoji}</span>
                       <div>
                         <p className="text-xs sm:text-sm text-foreground leading-snug">{a.award}</p>
-                        <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{a.date}</p>
+                        <p className="text-[11px] sm:text-xs text-muted-foreground mt-0.5">{a.date}</p>
                       </div>
                     </div>
                   ))}
@@ -451,7 +451,8 @@ export default function ResumePage() {
                 {/* Professional Certificate */}
                 <button
                   onClick={() => setShowCert(true)}
-                  className="mt-4 w-full group text-left rounded-xl border border-border hover:border-[color-mix(in_oklab,var(--neon-violet)_50%,transparent)] bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] p-3 transition-all hover:shadow-lg hover:"
+                  className="mt-4 w-full group text-left rounded-xl border border-border hover:border-[color-mix(in_oklab,var(--neon-violet)_50%,transparent)] p-3 transition-all hover:shadow-lg"
+                  style={{ background: 'color-mix(in oklab, var(--neon-violet) 8%, var(--card))' }}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <BadgeCheck className="w-4 h-4 text-[var(--neon-violet)] shrink-0" />
@@ -463,7 +464,7 @@ export default function ResumePage() {
                     alt={r.cert.title}
                     className="w-full rounded-lg border border-border shadow-md group-hover:scale-[1.02] transition-transform duration-300"
                   />
-                  <p className="mt-2 text-[10px] sm:text-xs text-muted-foreground flex items-center justify-between">
+                  <p className="mt-2 text-[11px] sm:text-xs text-muted-foreground flex items-center justify-between">
                     <span>{r.cert.issuer} · {r.cert.date}</span>
                     <span className="text-[var(--neon-violet)] group-hover:text-[var(--neon-violet)]">{r.cert.viewHint} →</span>
                   </p>
@@ -480,7 +481,7 @@ export default function ResumePage() {
                   <p className="text-foreground font-medium">{r.education.school}</p>
                   <p className="text-[var(--neon-violet)]">{r.education.major}</p>
                   <p className="text-muted-foreground">{r.education.period}</p>
-                  <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed mt-1.5 sm:mt-2">{r.education.courses}</p>
+                  <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed mt-1.5 sm:mt-2">{r.education.courses}</p>
                 </div>
               </div>
             </div>
@@ -535,7 +536,7 @@ export default function ResumePage() {
                             <h3 className="text-foreground font-semibold text-xs sm:text-sm group-hover:text-[var(--neon-violet)] transition-colors">
                               {practice.title}
                             </h3>
-                            <span className="px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] text-[var(--neon-violet)] rounded text-[10px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]">
+                            <span className="px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] text-[var(--neon-violet)] rounded text-[11px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]">
                               {practice.role}
                             </span>
                             {practice.link && (
@@ -543,14 +544,14 @@ export default function ResumePage() {
                                 href={practice.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-cyan)_20%,transparent)] text-[var(--neon-cyan)] rounded text-[10px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-cyan)_30%,transparent)] hover:bg-[color-mix(in_oklab,var(--neon-cyan)_40%,transparent)] hover:text-[var(--neon-cyan)] transition-colors"
+                                className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-cyan)_20%,transparent)] text-[var(--neon-cyan)] rounded text-[11px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-cyan)_30%,transparent)] hover:bg-[color-mix(in_oklab,var(--neon-cyan)_40%,transparent)] hover:text-[var(--neon-cyan)] transition-colors"
                               >
                                 <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                                 {practice.linkLabel}
                               </a>
                             )}
                           </div>
-                          <p className="text-muted-foreground text-[10px] sm:text-xs mb-1 sm:mb-1.5">{practice.period}</p>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-1.5">{practice.period}</p>
                           <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                             {practice.desc}
                           </p>
@@ -569,16 +570,32 @@ export default function ResumePage() {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   {r.passions.map((passion, idx) => {
-                    const gradients = [
-                      'from-[var(--glow-violet)] to-[var(--glow-violet)] border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)]',
-                      'from-[var(--glow-amber)] to-red-500/20 border-[color-mix(in_oklab,var(--neon-amber)_30%,transparent)]',
-                      'from-[var(--glow-cyan)] to-[var(--glow-cyan)] border-[color-mix(in_oklab,var(--neon-cyan)_30%,transparent)]',
-                    ];
+                    /*
+                     * --glow-* 是「亮色档」，设计系统里写明了只做填充、且只配近黑文字。
+                     * 正文压在上面两个主题都会掉对比度：亮色主题下灰字在亮底上偏淡，
+                     * 暗色主题下 --glow-* 与 --muted-foreground 明度几乎相同，基本看不见。
+                     * 所以底色改用墨色档低透明度（叠加在 --card 上），
+                     * 颜色身份保留在顶部强调条与描边上。
+                     */
+                    const accents = ['var(--neon-violet)', 'var(--neon-amber)', 'var(--neon-cyan)'];
+                    const accent = accents[idx] ?? accents[0];
                     return (
-                      <div key={idx} className={`bg-gradient-to-br ${gradients[idx]} rounded-lg sm:rounded-xl p-3 sm:p-4 border`}>
+                      <div
+                        key={idx}
+                        className="relative overflow-hidden rounded-lg sm:rounded-xl border p-3 sm:p-4 transition-colors duration-300"
+                        style={{
+                          borderColor: `color-mix(in oklab, ${accent} 30%, transparent)`,
+                          background: `color-mix(in oklab, ${accent} 9%, var(--card))`,
+                        }}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-x-0 top-0 h-[2px]"
+                          style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
+                        />
                         <span className="text-xl sm:text-2xl mb-1.5 sm:mb-2 block">{passion.icon}</span>
                         <p className="text-foreground font-medium text-xs sm:text-sm mb-1">{passion.title}</p>
-                        <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed">{passion.desc}</p>
+                        <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed">{passion.desc}</p>
                       </div>
                     );
                   })}
@@ -594,8 +611,14 @@ export default function ResumePage() {
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{r.selfEval}</p>
               </div>
 
-              {/* CTA */}
-              <div className="bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] backdrop-blur-xl border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+              {/* CTA：底同样不能用亮色档满填充 —— 标题与副文案都会被压掉 */}
+              <div
+                className="backdrop-blur-xl border rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center"
+                style={{
+                  borderColor: 'color-mix(in oklab, var(--neon-violet) 32%, transparent)',
+                  background: 'color-mix(in oklab, var(--neon-violet) 9%, var(--card))',
+                }}
+              >
                 <p className="text-foreground text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">{r.contactTitle}</p>
                 <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">{r.contactDesc}</p>
                 <div className="flex justify-center gap-2 sm:gap-4 flex-wrap">

@@ -63,7 +63,7 @@ export default function ProjectsPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[var(--glow-violet)] to-[var(--glow-violet)] mb-4 sm:mb-6">
-            <Github className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            <Github className="w-6 h-6 sm:w-8 sm:h-8 text-slate-900" />
           </div>
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">{t('projects.title')}</h1>
           <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">

@@ -102,7 +102,7 @@ export default function GalleryPage() {
         <div className="absolute top-10 left-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)] rounded-full blur-3xl animate-blob" />
         <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-amber)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] text-xs sm:text-sm font-medium mb-4">
             <Camera className="w-4 h-4" />
             {t('gallery.badge')}
           </div>
@@ -131,7 +131,7 @@ export default function GalleryPage() {
                 className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   category === key
                     ? 'bg-gradient-to-r from-[var(--glow-magenta)] to-[var(--glow-amber)] text-slate-900 shadow-md '
-                    : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:hover:text-[var(--neon-magenta)]'
+                    : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:hover:text-[var(--neon-magenta)]'
                 }`}
               >
                 {label}
@@ -236,7 +236,7 @@ export default function GalleryPage() {
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white transition-colors z-10"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -246,14 +246,14 @@ export default function GalleryPage() {
             <>
               <button
                 onClick={e => { e.stopPropagation(); prev(); }}
-                className="absolute left-2 sm:left-4 p-3 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
+                className="absolute left-2 sm:left-4 p-3 rounded-full bg-black/60 hover:bg-black/80 text-white transition-colors z-10"
                 aria-label="Previous"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
               <button
                 onClick={e => { e.stopPropagation(); next(); }}
-                className="absolute right-2 sm:right-4 p-3 rounded-full bg-card hover:bg-card text-white transition-colors z-10"
+                className="absolute right-2 sm:right-4 p-3 rounded-full bg-black/60 hover:bg-black/80 text-white transition-colors z-10"
                 aria-label="Next"
               >
                 <ChevronRight className="w-6 h-6" />

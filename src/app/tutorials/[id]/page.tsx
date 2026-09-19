@@ -50,10 +50,11 @@ const CATEGORY_CONFIG: Record<string, { key: string; icon: typeof Cpu; gradient:
   dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-[var(--glow-violet)] to-[var(--glow-violet)]', emoji: '🔋' },
 };
 
+// 同 tutorials 列表页：亮色档底 + 同色小字对比度不足，底改用墨色档低透明度
 const DIFFICULTY_STYLES: Record<string, string> = {
-  beginner: 'bg-[var(--glow-lime)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
-  intermediate: 'bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
-  advanced: 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
+  beginner: 'bg-[color-mix(in_oklab,var(--neon-lime)_16%,transparent)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
+  intermediate: 'bg-[color-mix(in_oklab,var(--neon-amber)_16%,transparent)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
+  advanced: 'bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
 };
 
 function formatDate(dateStr: string): string {
@@ -185,7 +186,7 @@ export default function TutorialDetailPage() {
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('tutorials.empty')}</h1>
-          <Link href="/tutorials" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-white text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
+          <Link href="/tutorials" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-slate-900 text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
             <ArrowLeft className="w-4 h-4" />
             {t('tutorials.backToList')}
           </Link>
@@ -204,9 +205,11 @@ export default function TutorialDetailPage() {
         />
       </div>
 
-      {/* 头部横幅 */}
+      {/* 头部横幅：底色是亮色档（--glow-*），白字直接压上去只有 ~2:1，
+          所以先盖一层压暗蒙版，再让白色文字落在它上面 */}
       <section className={`relative overflow-hidden py-10 sm:py-14 bg-gradient-to-br ${config?.gradient || 'from-[var(--glow-violet)] to-[var(--glow-violet)]'}`}>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.2),transparent_50%)]" />
+        <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
         <div className="absolute -right-6 -bottom-10 text-[120px] sm:text-[160px] opacity-20 select-none rotate-[-8deg]">
           {post.cover || config?.emoji || '📖'}
         </div>
@@ -217,7 +220,7 @@ export default function TutorialDetailPage() {
           </Link>
           <div className="flex flex-wrap items-center gap-2 mb-3">
             {config && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-card backdrop-blur-sm text-white text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/35 backdrop-blur-sm text-white text-xs font-medium">
                 {(() => { const Icon = config.icon; return <Icon className="w-3.5 h-3.5" />; })()}
                 {t(`tutorials.categories.${config.key}`)}
               </span>
@@ -276,11 +279,11 @@ export default function TutorialDetailPage() {
                 onClick={handleLike}
                 className={`relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   liked
-                    ? 'bg-[var(--glow-magenta)] text-white shadow-lg '
-                    : 'bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] hover:bg-[var(--glow-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] border border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]'
+                    ? 'bg-[var(--glow-magenta)] text-slate-900 shadow-lg border border-transparent'
+                    : 'bg-[color-mix(in_oklab,var(--neon-magenta)_12%,transparent)] text-[var(--neon-magenta)] border border-[color-mix(in_oklab,var(--neon-magenta)_35%,transparent)] hover:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)]'
                 }`}
               >
-                <Heart className={`w-4 h-4 ${liked ? 'fill-white' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
+                <Heart className={`w-4 h-4 ${liked ? 'fill-slate-900' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
                 {liked ? t('tutorials.likeBtn') : t('tutorials.likeBtn')} {likeCount}
               </button>
             </div>

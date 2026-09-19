@@ -146,7 +146,7 @@ export default function BlogDetailPage() {
         <div className="text-center">
           <div className="text-5xl mb-4">🔍</div>
           <h1 className="text-xl font-bold mb-3">{t('blog.empty')}</h1>
-          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-white text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
+          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--glow-violet)] text-slate-900 text-sm font-medium hover:bg-[var(--glow-violet)] transition-colors">
             <ArrowLeft className="w-4 h-4" />
             {t('blog.backToBlog')}
           </Link>
@@ -227,7 +227,7 @@ export default function BlogDetailPage() {
           {post.tags && (
             <div className="mt-8 pt-6 border-t border-border flex flex-wrap gap-2">
               {post.tags.split(',').map((tag, i) => (
-                <span key={i} className="px-2.5 py-1 rounded-lg bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs">
+                <span key={i} className="px-2.5 py-1 rounded-lg bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs">
                   #{tag.trim()}
                 </span>
               ))}
@@ -243,11 +243,11 @@ export default function BlogDetailPage() {
               onClick={handleLike}
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 liked
-                  ? 'bg-[var(--glow-magenta)] text-white shadow-lg '
-                  : 'bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)] hover:bg-[var(--glow-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] border border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]'
+                  ? 'bg-[var(--glow-magenta)] text-slate-900 shadow-lg border border-transparent'
+                  : 'bg-[color-mix(in_oklab,var(--neon-magenta)_12%,transparent)] text-[var(--neon-magenta)] border border-[color-mix(in_oklab,var(--neon-magenta)_35%,transparent)] hover:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)]'
               }`}
             >
-              <Heart className={`w-4 h-4 ${liked ? 'fill-white' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
+              <Heart className={`w-4 h-4 ${liked ? 'fill-slate-900' : ''} ${likeAnimating ? 'animate-bounce' : ''}`} />
               {t('tutorials.likeBtn')} {likeCount}
             </button>
           </div>

@@ -200,8 +200,8 @@ export function PostManager() {
               onClick={() => setTypeFilter(type)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 typeFilter === type
-                  ? 'bg-[var(--glow-violet)] text-white'
-                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)]'
+                  ? 'bg-[var(--glow-violet)] text-slate-900'
+                  : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)]'
               }`}
             >
               {type === 'all' ? `全部 (${total})` : TYPE_LABELS[type].label}
@@ -313,7 +313,7 @@ export function PostManager() {
                   onClick={() => setForm(f => ({ ...f, type }))}
                   className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                     form.type === type
-                      ? 'border-[var(--neon-violet)] bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)]'
+                      ? 'border-[var(--neon-violet)] bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)]'
                       : 'border-border text-muted-foreground hover:border-[var(--neon-violet)]'
                   }`}
                 >
@@ -443,7 +443,7 @@ export function PostManager() {
                 <button
                   onClick={() => setPreviewMode(!previewMode)}
                   className={`px-2.5 py-1 rounded-md text-xs transition-colors ${
-                    previewMode ? 'bg-[var(--glow-violet)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)]'
+                    previewMode ? 'bg-[var(--glow-violet)] text-slate-900' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)]'
                   }`}
                 >
                   {previewMode ? '编辑' : '预览'}

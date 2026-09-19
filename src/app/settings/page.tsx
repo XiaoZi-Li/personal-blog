@@ -218,7 +218,7 @@ export default function SettingsPage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-white text-2xl font-medium">
+                    <span className="text-slate-900 text-2xl font-medium">
                       {profile?.nickname?.charAt(0) || profile?.username?.charAt(0).toUpperCase()}
                     </span>
                   )}

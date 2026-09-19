@@ -452,7 +452,7 @@ export default function AdminPage() {
                       {topPages.map((page, index) => (
                         <div key={page.page} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-card rounded-lg">
                           <div className="flex items-center gap-3">
-                            <span className="w-6 h-6 rounded-full bg-[var(--glow-violet)] dark:bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] flex items-center justify-center text-sm font-medium">
+                            <span className="w-6 h-6 rounded-full bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] flex items-center justify-center text-sm font-medium">
                               {index + 1}
                             </span>
                             <span className="text-sm font-mono">{page.page}</span>

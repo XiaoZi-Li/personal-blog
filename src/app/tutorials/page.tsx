@@ -38,10 +38,12 @@ const CATEGORY_CONFIG: Record<string, {
   dcdc: { key: 'dcdc', icon: Zap, gradient: 'from-[var(--glow-violet)] to-[var(--glow-violet)]', lightBg: 'from-[var(--glow-violet)] to-[var(--glow-violet)] dark:from-[var(--glow-violet)] dark:to-[var(--glow-violet)]', emoji: '🔋' },
 };
 
+// 难度标签的底用墨色档低透明度：亮色档（--glow-*）明度太高，
+// 同色系的小字压在上面只有 ~1.9:1，浅色主题下基本读不出来。
 const DIFFICULTY_STYLES: Record<string, string> = {
-  beginner: 'bg-[var(--glow-lime)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
-  intermediate: 'bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
-  advanced: 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
+  beginner: 'bg-[color-mix(in_oklab,var(--neon-lime)_16%,transparent)] text-[var(--neon-lime)] dark:bg-[color-mix(in_oklab,var(--neon-lime)_40%,transparent)] dark:text-[var(--neon-lime)] border-[var(--neon-lime)] dark:border-[var(--neon-lime)]',
+  intermediate: 'bg-[color-mix(in_oklab,var(--neon-amber)_16%,transparent)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] border-[var(--neon-amber)] dark:border-[var(--neon-amber)]',
+  advanced: 'bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)] border-[var(--neon-magenta)] dark:border-[var(--neon-magenta)]',
 };
 
 function readingTime(content?: string | null): number {
@@ -101,7 +103,7 @@ export default function TutorialsPage() {
         <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
             <BookOpen className="w-4 h-4" />
             {t('tutorials.badge')}
           </div>
@@ -131,7 +133,7 @@ export default function TutorialsPage() {
                   }`}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${config.lightBg} opacity-0 ${isActive ? 'opacity-100' : 'group-hover:opacity-100'} transition-opacity`} />
-                  <div className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${config.gradient} flex items-center justify-center text-white shadow-lg mb-3 group-hover:scale-110 group-hover:rotate-3 transition-transform`}>
+                  <div className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${config.gradient} flex items-center justify-center text-slate-900 shadow-lg mb-3 group-hover:scale-110 group-hover:rotate-3 transition-transform`}>
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="relative font-bold text-sm sm:text-base text-foreground dark:text-muted-foreground mb-1">
@@ -157,7 +159,7 @@ export default function TutorialsPage() {
               className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                 !category
                   ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
-                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
+                  : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
               }`}
             >
               {t('tutorials.all')}
@@ -169,7 +171,7 @@ export default function TutorialsPage() {
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   category === catId
                     ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
-                    : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
+                    : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
                 }`}
               >
                 {t(`tutorials.categories.${config.key}`)}
@@ -248,7 +250,7 @@ export default function TutorialsPage() {
                         <div className="absolute right-3 bottom-2 text-5xl opacity-30 group-hover:opacity-50 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500">
                           {post.cover || config.emoji}
                         </div>
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-card backdrop-blur-sm text-white text-xs font-medium">
+                        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/35 backdrop-blur-sm text-white text-xs font-medium">
                           <Icon className="w-3.5 h-3.5" />
                           {t(`tutorials.categories.${config.key}`)}
                         </div>

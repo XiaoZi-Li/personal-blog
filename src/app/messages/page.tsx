@@ -247,7 +247,7 @@ export default function MessagesPage() {
         <div className="mb-4 sm:mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-lg sm:text-2xl font-bold text-white flex items-center gap-1.5 sm:gap-2">
+              <h1 className="text-lg sm:text-2xl font-bold text-foreground flex items-center gap-1.5 sm:gap-2">
                 <MessageSquare className="w-5 h-5 sm:w-7 sm:h-7 text-[var(--neon-violet)]" />
                 技术交流区
               </h1>
@@ -269,7 +269,7 @@ export default function MessagesPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   placeholder="分享你的技术见解或问题..."
-                  className="w-full min-h-[80px] p-3 pr-12 rounded-xl border border-white/20 bg-card text-white placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-[var(--neon-violet)] focus:border-transparent transition-all"
+                  className="w-full min-h-[80px] p-3 pr-12 rounded-xl border border-white/20 bg-card text-foreground placeholder:text-muted-foreground resize-none focus:outline-none focus:ring-2 focus:ring-[var(--neon-violet)] focus:border-transparent transition-all"
                   maxLength={500}
                 />
                 <div className="absolute bottom-2 right-2">
@@ -327,7 +327,7 @@ export default function MessagesPage() {
                     <div className="flex-1 min-w-0">
                       {/* 用户信息行 */}
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className="font-medium text-white">{msg.nickname}</span>
+                        <span className="font-medium text-foreground">{msg.nickname}</span>
                         {msg.is_pinned && (
                           <Badge className="text-[10px] px-1.5 py-0 bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 border-0">
                             <Pin className="w-2.5 h-2.5 mr-0.5" />

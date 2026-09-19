@@ -89,7 +89,7 @@ export default function BlogPage() {
         <div className="absolute top-10 right-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] rounded-full blur-3xl animate-blob" />
         <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[color-mix(in_oklab,var(--neon-magenta)_30%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_20%,transparent)] rounded-full blur-3xl animate-blob animation-delay-2000" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--glow-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] text-[var(--neon-violet)] dark:text-[var(--neon-violet)] text-xs sm:text-sm font-medium mb-4">
             <Newspaper className="w-4 h-4" />
             {t('blog.badge')}
           </div>
@@ -116,7 +116,7 @@ export default function BlogPage() {
                   className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all ${
                     active
                       ? 'bg-gradient-to-r from-[var(--glow-violet)] to-[var(--glow-violet)] text-slate-900 shadow-md '
-                      : 'bg-muted text-muted-foreground hover:bg-[var(--glow-violet)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
+                      : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] hover:text-[var(--neon-violet)] dark:hover:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:hover:text-[var(--neon-violet)]'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -172,12 +172,12 @@ export default function BlogPage() {
                         <div className="flex flex-wrap items-center gap-2 mb-2.5">
                           <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-medium ${
                             featured.type === 'diary'
-                              ? 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
-                              : 'bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
+                              ? 'bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
+                              : 'bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
                           }`}>
                             {featured.type === 'diary' ? t('blog.diary') : t('blog.article')}
                           </span>
-                          <span className="px-2.5 py-0.5 rounded-full bg-[var(--glow-amber)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] text-[11px] font-medium">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[color-mix(in_oklab,var(--neon-amber)_16%,transparent)] text-[var(--neon-amber)] dark:bg-[color-mix(in_oklab,var(--neon-amber)_40%,transparent)] dark:text-[var(--neon-amber)] text-[11px] font-medium">
                             {t('blog.latest')}
                           </span>
                         </div>
@@ -217,8 +217,8 @@ export default function BlogPage() {
                         <div className="flex flex-wrap items-center gap-2 mb-1.5">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
                             post.type === 'diary'
-                              ? 'bg-[var(--glow-magenta)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
-                              : 'bg-[var(--glow-violet)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
+                              ? 'bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] text-[var(--neon-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] dark:text-[var(--neon-magenta)]'
+                              : 'bg-[color-mix(in_oklab,var(--neon-violet)_16%,transparent)] text-[var(--neon-violet)] dark:bg-[color-mix(in_oklab,var(--neon-violet)_40%,transparent)] dark:text-[var(--neon-violet)]'
                           }`}>
                             {post.type === 'diary' ? t('blog.diary') : t('blog.article')}
                           </span>

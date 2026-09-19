@@ -210,8 +210,8 @@ export function MediaManager() {
               onClick={() => setCategoryFilter(key)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 categoryFilter === key
-                  ? 'bg-[var(--glow-magenta)] text-white'
-                  : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)]'
+                  ? 'bg-[var(--glow-magenta)] text-slate-900'
+                  : 'bg-muted text-muted-foreground hover:bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] hover:text-[var(--neon-magenta)] dark:hover:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)]'
               }`}
             >
               {label}
@@ -267,14 +267,14 @@ export function MediaManager() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors"
+                    className="p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white transition-colors"
                     title="打开原文件"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
                   <button
                     onClick={() => handleToggle(item)}
-                    className="p-2.5 rounded-full bg-card hover:bg-card text-white transition-colors"
+                    className="p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white transition-colors"
                     title={item.is_published ? '下架' : '发布'}
                   >
                     {item.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -316,7 +316,7 @@ export function MediaManager() {
               onClick={() => setMode('upload')}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                 mode === 'upload'
-                  ? 'border-[var(--neon-magenta)] bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
+                  ? 'border-[var(--neon-magenta)] bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
                   : 'border-border text-muted-foreground hover:border-[var(--neon-magenta)]'
               }`}
             >
@@ -327,7 +327,7 @@ export function MediaManager() {
               onClick={() => setMode('link')}
               className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                 mode === 'link'
-                  ? 'border-[var(--neon-magenta)] bg-[var(--glow-magenta)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
+                  ? 'border-[var(--neon-magenta)] bg-[color-mix(in_oklab,var(--neon-magenta)_16%,transparent)] dark:bg-[color-mix(in_oklab,var(--neon-magenta)_40%,transparent)] text-[var(--neon-magenta)] dark:text-[var(--neon-magenta)]'
                   : 'border-border text-muted-foreground hover:border-[var(--neon-magenta)]'
               }`}
             >
@@ -347,7 +347,7 @@ export function MediaManager() {
                       key={key}
                       onClick={() => setUploadCategory(key)}
                       className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        uploadCategory === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
+                        uploadCategory === key ? 'bg-[var(--glow-magenta)] text-slate-900' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                       }`}
                     >
                       {label}
@@ -433,7 +433,7 @@ export function MediaManager() {
                         key={key}
                         onClick={() => setLinkForm(f => ({ ...f, type: key }))}
                         className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                          linkForm.type === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
+                          linkForm.type === key ? 'bg-[var(--glow-magenta)] text-slate-900' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                         }`}
                       >
                         {label}
@@ -449,7 +449,7 @@ export function MediaManager() {
                         key={key}
                         onClick={() => setLinkForm(f => ({ ...f, category: key }))}
                         className={`px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                          linkForm.category === key ? 'bg-[var(--glow-magenta)] text-white' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
+                          linkForm.category === key ? 'bg-[var(--glow-magenta)] text-slate-900' : 'bg-muted text-muted-foreground hover:bg-[var(--glow-magenta)]'
                         }`}
                       >
                         {label}
