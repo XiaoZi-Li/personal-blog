@@ -2,7 +2,8 @@
 
 import {
   MapPin, Mail, Briefcase, ArrowLeft,
-  GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare, ExternalLink, BadgeCheck, X
+  GraduationCap, Trophy, Zap, Heart, Code, Brain, MessageSquare, ExternalLink, BadgeCheck, X,
+  Building2, FileText
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -57,6 +58,27 @@ interface CertData {
   viewHint: string;
 }
 
+interface InternshipData {
+  company: string;
+  role: string;
+  period: string;
+  desc: string;
+}
+
+interface AcademicData {
+  title: string;
+  role: string;
+  period: string;
+  link?: string;
+  linkLabel?: string;
+  desc: string;
+}
+
+interface SkillDetailData {
+  label: string;
+  content: string;
+}
+
 interface ResumeData {
   title: string;
   subtitle: string;
@@ -65,6 +87,11 @@ interface ResumeData {
   awardsTitle: string;
   intentTitle: string;
   practiceTitle: string;
+  internshipTitle: string;
+  academicTitle: string;
+  skillDetails: SkillDetailData[];
+  internships: InternshipData[];
+  academic: AcademicData[];
   passionTitle: string;
   contactTitle: string;
   contactDesc: string;
@@ -96,10 +123,12 @@ function getResumeData(lang: string): ResumeData {
         title: 'Resume',
         subtitle: 'Practice drives growth, passion shapes direction',
         personalInfo: 'Personal Info',
-        techStack: 'Tech Stack',
-        awardsTitle: 'Awards',
+        techStack: 'Professional Skills',
+        awardsTitle: 'Honors & Awards',
         intentTitle: 'Career Objective',
-        practiceTitle: 'Key Projects',
+        practiceTitle: 'Projects',
+        internshipTitle: 'Internship',
+        academicTitle: 'Academic Work',
         passionTitle: 'Passions',
         contactTitle: "Let's Connect",
         contactDesc: 'Seeking embedded / embodied intelligence internship opportunities. Feel free to reach out!',
@@ -110,6 +139,19 @@ function getResumeData(lang: string): ResumeData {
         grade: 'Class of 2027 · Available for internship',
         location: 'Xiqing District, Tianjin',
         email: 'purplemist@qq.com',
+        skillDetails: [
+          { label: 'Robotics & On-device Deployment', content: 'On-device deployment on RDK X5 (BPU 10 TOPS) and real-time inference pipeline integration; stereo depth-estimation model deployment and application; ROS2 (project experience)' },
+          { label: 'Embedded & Hardware', content: 'Board-level peripheral development and sensor data acquisition on ESP32-S3 / HarmonyOS Hi3861; 4-layer PCB design and fabrication with JLC EDA (board brought up and working); able to read Verilog logic' },
+          { label: 'Languages', content: 'C (primary, have written complete project code by hand), Python (scripting and prototyping), Rust (learning)' },
+          { label: 'Cloud & Protocols', content: 'Huawei Cloud IoT (product / device / thing-model setup, MQTT reporting), MQTT, RTSP streaming, MCP server (LLM tool calling)' },
+          { label: 'Tooling & Hands-on', content: 'Heavy user of AI coding tools such as Codex / Trae / Claude for system integration and debugging; skilled at soldering 0402 / QFP packages, capable of multimeter-level hardware troubleshooting' },
+        ],
+        internships: [
+          { company: 'Zhijia Artificial Intelligence Technology (Tianjin) Co., Ltd.', role: 'Hardware Development Engineer (Intern)', period: '2026.09 - Present', desc: 'Communication links: mapped out the multiple communication channels of the wheeled robot (message queue / HTTP / real-time pose / video stream) and reused them in the in-house host application, enabling map loading, route management and real-time status display; Feature integration: wired up route execution, waypoint event scheduling, voice announcements and scheduled patrols, implementing mutual exclusion between concurrent tasks and cleanup of stale tasks; Full-stack development: built the console and operations panel on Next.js with a Python subprocess, including permission checks, audit logging and data backup.' },
+        ],
+        academic: [
+          { title: 'CATSANet: Text-to-Image Person Re-identification', role: 'Co-first Author', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: 'Paper', desc: 'Co-first author, published in the SCI journal Pattern Analysis and Applications (2026, 29:176), on text-to-image person re-identification; responsible for ablation studies and hyper-parameter tuning: ran multiple comparative experiments in a PyTorch / CLIP environment and assisted with hyper-parameter tuning, model training and ablation comparisons, then organised the experimental data and analysed the results; took part in solution discussions and idea generation, and handled literature review and writing of several sections.' },
+        ],
         intent: {
           primary: 'Embedded Software/Hardware Development · Embodied Intelligence Internship',
           direction: 'Embedded development workflow, 4-layer PCB design through fabrication and soldering, stereo vision and on-device model deployment',
@@ -118,10 +160,9 @@ function getResumeData(lang: string): ResumeData {
           available: 'Available immediately, remote or Tianjin/Beijing area',
         },
         practices: [
-          { title: 'ReID Person Re-identification Research', role: 'Co-first Author', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: 'Paper', desc: 'Paper CATSANet officially published in Pattern Analysis and Applications (SCI-indexed journal), credited as co-first author (the paper footnote states equal contribution with the third author); the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript' },
-          { title: 'FPGA-based Edge Intelligent Vision Terminal', role: 'System Integration & Documentation', period: '2025/09 - 2025/12', desc: '8th National Embedded Chip & System Design Competition, FPGA Track — National 3rd Prize. The project hardware-accelerates edge detection, image filtering and HSV colour recognition on an Anlu HX4S20 FPGA, with a multi-stage pipeline supporting 640×480@30fps real-time processing; I took part in system integration and documentation, able to read Verilog FSM logic and got the edge-detection function working by following the tutorials' },
-          { title: 'Quadruped Robot Dog Multimodal Perception & Control System', role: 'System Definition & Integration', period: '2026/04 - 2026/07', desc: '9th National Embedded Chip & System Design Competition, Chip Application Track — National 3rd Prize (about 700–800 teams nationwide). Defined the gesture-to-action mapping rules and a three-level motion priority (emergency avoidance > gesture > voice), and scoped the boundaries of the perception pipeline; used AI coding tools to deploy the stereo depth-estimation model on-device, integrate MediaPipe gesture recognition and the voice Q&A link, and get the real-time chain working: camera capture → BPU inference → depth map → region judgement → control command; designed multi-frame confirmation and command filtering against accidental gesture triggers; wrote the full competition technical report independently' },
-          { title: 'XiaoZhi AI & MCP Multi-device Smart Butler System', role: 'Independent Development', period: '2025/03 - 2025/12', desc: 'Tianjin 8th "New Engineering" Competition — Provincial 1st Prize (team lead) | China College Student Service Outsourcing Innovation & Entrepreneurship Competition — National 3rd Prize. Independently built the device-cloud voice control chain: microphone capture → speech-to-text → cloud LLM intent understanding → self-built MCP server (Python) running device control scripts → cloud platform issuing commands → device executes and reports back; delivered HarmonyOS Hi3861 board-level peripheral development (RGB LED / buzzer / fan) and Huawei Cloud IoT integration (thing model and MQTT data reporting)' },
+          { title: 'Quadruped Robot Dog Multimodal Perception & Control System', role: 'System Definition & Integration', period: '2026/04 - 2026/07', desc: '9th National Embedded Chip & System Design Competition (Chip Application Track) — National 3rd Prize. RDK X5 (BPU 10 TOPS) / stereo vision / MediaPipe / ROS2 / Python. System definition & integration: defined the gesture-to-action mapping rules (open palm / scissors / fist → forward / turn left / lie down) and a three-level motion priority (emergency avoidance > gesture > voice), and scoped the boundaries of the perception pipeline; Perception pipeline: used AI coding tools to deploy the stereo depth-estimation model on-device, integrate MediaPipe gesture recognition and the voice Q&A link, and get the real-time chain working: camera capture → BPU inference → depth map → region judgement → control command; Command safety layer: designed multi-frame confirmation and command filtering against accidental gesture triggers (a hand sweeping past used to fire a command), reducing false actions; Technical documentation: wrote and organised the competition technical report (solution rationale, system architecture, test data).' },
+          { title: 'XiaoZhi AI & MCP Multi-device Smart Butler System', role: 'Independent Development', period: '2025/03 - 2025/12', desc: 'Tianjin "New Engineering" Engineering Practice Innovation Competition — Undergraduate Group 1st Prize | China College Student Service Outsourcing Innovation & Entrepreneurship Competition — National 3rd Prize. HarmonyOS Hi3861 + JLC ESP32-S3 / XiaoZhi AI / self-built MCP server (Python) / Huawei Cloud IoT. Board & cloud platform: developed and debugged peripherals (RGB LED / buzzer / fan) on HarmonyOS Hi3861 and integrated sensor data acquisition for temperature-humidity, PIR and light sensors; set up products, devices and thing-model properties on Huawei Cloud IoT and reported device status and sensor data over MQTT; Device-cloud voice chain: deployed the XiaoZhi AI firmware on ESP32-S3 and built a Python MCP server exposing device data reads and control commands, connecting a cloud LLM for intent recognition and tool calling to close the loop: voice input → intent understanding → tool execution → device response → result feedback; Multi-device control: unified cross-device control interface supporting status queries and on/off control for lights, fans, buzzers and more.' },
+          { title: 'FPGA-based Edge Intelligent Vision Terminal', role: 'System Integration & Documentation', period: '2025/09 - 2025/12', desc: '8th National Embedded Chip & System Design Competition, FPGA Track — National 3rd Prize. The project hardware-accelerates edge detection, image filtering and HSV colour recognition on an Anlu HX4S20 FPGA, with a multi-stage pipeline supporting 640×480@30fps real-time processing; I took part in system integration and documentation, able to read Verilog FSM logic and got the edge-detection function working by following the tutorials.' },
         ],
         passions: [
           { icon: '🤖', title: 'Embodied Intelligence', desc: 'Hands-on robotics integration experience (ROS2 stereo vision, gesture control, motion control), believing AI + hardware is the future direction' },
@@ -136,16 +177,17 @@ function getResumeData(lang: string): ResumeData {
         ],
         awards: [
           { award: 'Embedded System Design Engineer Certification (Elementary)', date: 'Issued by China Institute of Electronics', emoji: '📜' },
-          { award: '9th National Embedded Chip & System Design Competition — National 3rd Prize', date: '2026/08', emoji: '🥉' },
-          { award: '8th National Embedded Chip & System Design Competition — National 3rd Prize (FPGA Track)', date: '2025/12', emoji: '🥉' },
-          { award: 'China Service Outsourcing Innovation Competition — National 3rd Prize (Smart Home IoT)', date: '2025/08', emoji: '🥉' },
-          { award: 'Tianjin 8th "New Engineering" Competition — Provincial 1st Prize (Team Leader)', date: '2025/12', emoji: '🥇' },
+          { award: 'World Vocational College Skills Competition · AI Track · National Finals Bronze Award', date: '2026/09', emoji: '🥉' },
+          { award: '9th National Embedded Chip & System Design Competition · Chip Application Track · National 3rd Prize', date: '2026/08', emoji: '🥉' },
+          { award: '8th National Embedded Chip & System Design Competition · FPGA Track · National 3rd Prize', date: '2025/12', emoji: '🥉' },
+          { award: 'China College Student Service Outsourcing Innovation & Entrepreneurship Competition · National 3rd Prize', date: '2025/08', emoji: '🥉' },
+          { award: 'Tianjin "New Engineering" Engineering Practice Innovation Competition · Provincial 1st Prize', date: '2025/12', emoji: '🥇' },
         ],
         education: {
           school: 'Tiangong University',
           major: 'Electronic Information Engineering',
           period: '2023/09 - 2027/06',
-          courses: 'Circuit Theory, Analog Electronics, Digital Electronics, Signals & Systems, Electromagnetics, Embedded System Design',
+          courses: 'Embedded System Design Innovation Practice 93 | C Programming 91 | AVR Microcontroller Programming & Practice 95 | Sensors & Detection Technology 88',
         },
         cert: {
           title: 'Embedded System Design Engineer (Entry Level)',
@@ -153,7 +195,7 @@ function getResumeData(lang: string): ResumeData {
           date: '2026.08',
           viewHint: 'View Certificate',
         },
-        selfEval: 'Focused on the intersection of embedded development and embodied intelligence, with a comprehensive "hardware-software-algorithm-AI" perspective. Familiar with AI engineering concepts such as RAG and MCP, with hands-on experience bringing AI technology into embedded devices; through high-value competitions I have built project delivery capability in FPGA and IoT scenarios, served as a competition team lead, and developed solid coordination and problem-solving skills.',
+        selfEval: 'Undergraduate in Electronic Information Engineering, focused on embodied intelligence and on-device AI deployment. Experienced in deploying a stereo depth-estimation model on-board and getting the real-time inference pipeline working, and able to independently complete 4-layer PCB design, fabrication and hardware troubleshooting; I use AI coding tools as my main development method and am good at system architecture and module decomposition. I prefer evidence before action: when something breaks I locate the root cause with experiments and data rather than guessing. A fast self-learner with strong adaptability — from embedded competitions to robot perception I have picked everything up by digging through the material myself — and I hold a long-term view of and commitment to embodied intelligence.',
         educationLabel: 'Education',
         selfAssessmentLabel: 'Self Assessment',
         leaveMessage: 'Leave a Message',
@@ -164,10 +206,12 @@ function getResumeData(lang: string): ResumeData {
         title: '履歴書',
         subtitle: '実践が成長を推進し、情熱が方向を決める',
         personalInfo: '個人情報',
-        techStack: '技術スタック',
+        techStack: '専門スキル',
         awardsTitle: '受賞歴',
         intentTitle: '就職希望',
-        practiceTitle: '主要プロジェクト',
+        practiceTitle: 'プロジェクト経験',
+        internshipTitle: 'インターンシップ',
+        academicTitle: '学術成果',
         passionTitle: '技術への情熱',
         contactTitle: 'お問い合わせ',
         contactDesc: '組み込み / 具現化知能方向のインターンシップを探しています。お気軽にご連絡ください！',
@@ -178,6 +222,19 @@ function getResumeData(lang: string): ResumeData {
         grade: '2027年卒 · インターン可能',
         location: '天津市西青区',
         email: 'purplemist@qq.com',
+        skillDetails: [
+          { label: 'ロボティクス・エッジ配備', content: 'RDK X5（BPU 10 TOPS）へのボード側配備とリアルタイム推論経路の構築；双目深度推定モデルの配備と応用；ROS2（プロジェクトでの使用）' },
+          { label: '組み込み・ハードウェア', content: 'ESP32-S3 / 鴻蒙 Hi3861 のボード側ペリフェラル開発とセンサーデータ収集；嘉立創 EDA による四層基板の設計・試作（点灯確認済み）；Verilog ロジックの読解が可能' },
+          { label: '開発言語', content: 'C（主力、プロジェクトコードを一通り自身で記述）、Python（スクリプト・プロトタイプ開発）、Rust（学習中）' },
+          { label: 'クラウド・プロトコル', content: 'Huawei Cloud IoT（製品 / デバイス / 物模型の構築、MQTT 送信）、MQTT、RTSP ストリーミング、MCP サーバー（大規模モデルのツール呼び出し）' },
+          { label: 'ツール・実作業', content: 'Codex / Trae / Claude などの AI コーディングツールを多用してシステム統合とデバッグを実施；0402 / QFP パッケージのはんだ付けが熟練、テスターを用いたハードウェア切り分けが可能' },
+        ],
+        internships: [
+          { company: '智嘉人工智能科技（天津）有限責任会社', role: 'ハードウェア開発エンジニア（インターン）', period: '2026.09 - 現在', desc: '通信経路の構築：車輪型ロボットの複数通信経路（メッセージキュー / HTTP / リアルタイム姿勢 / 映像ストリーム）を整理し、自社開発の上位アプリで再利用、地図読み込み・ルート管理・リアルタイム状態表示を実現；機能統合：ルート実行、ウェイポイントイベントの編成、音声アナウンス、定時巡回を接続し、複数タスクの相互排他と残留タスクのクリアを実装；フロントエンド／バックエンド開発：Next.js + Python サブプロセスでコンソールと運用パネルを実装（権限チェック、監査ログ、データバックアップを含む）。' },
+        ],
+        academic: [
+          { title: 'CATSANet テキストtoイメージ人物再識別', role: '共同第一著者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '論文', desc: '共同第一著者として SCI ジャーナル Pattern Analysis and Applications（2026, 29:176）に掲載、研究方向はテキストtoイメージ人物再識別；消融実験とパラメータ調整を担当：PyTorch / CLIP 環境で複数案の比較実験を行い、パラメータ調整・モデル学習・消融実験の比較を補助し、実験データの整理と結果分析を担当；方針検討とアイデア提案に参加し、文献調査と一部章の執筆を担当。' },
+        ],
         intent: {
           primary: '組み込みソフトウェア/ハードウェア開発 · 具現化知能インターン',
           direction: '組み込み開発の流れ、四層 PCB の設計から基板製造・はんだ付けまで、双目ステレオビジョンとエッジ側モデル配備',
@@ -186,10 +243,9 @@ function getResumeData(lang: string): ResumeData {
           available: 'すぐに勤務可能、リモートまたは天津/北京エリア',
         },
         practices: [
-          { title: 'ReID 人物再識別研究プロジェクト', role: '共第一著者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '論文', desc: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載、共第一著者として署名（脚注に第三著者と同等の貢献と明記）、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆' },
-          { title: 'FPGA ベースのエッジインテリジェントビジョン端末', role: 'システム連調・ドキュメント整理', period: '2025/09 - 2025/12', desc: '第8回全国組み込みチップ・システム設計大会 FPGA トラック — 国家級三等賞。本プロジェクトは安路 HX4S20 FPGA でエッジ検出・画像フィルタリング・HSV 色彩認識のハードウェア高速化を実現し、多段パイプラインで 640×480@30fps のリアルタイム処理をサポート。本人はシステム連調とドキュメント整理を担当し、Verilog のステートマシンロジックを読解でき、チュートリアルに沿ってエッジ検出機能を動作させた' },
-          { title: '四足ロボットドッグのマルチモーダル知覚・制御システム', role: 'システム定義・統合', period: '2026/04 - 2026/07', desc: '第9回全国組み込みチップ・システム設計大会 チップ応用トラック — 国家級三等賞（全国約700〜800チーム）。ジェスチャー—動作のマッピング規則と三段階の運動優先度（緊急障害回避 > ジェスチャー > 音声）を定義し、知覚パイプラインの機能境界を切り分け；AI コーディングツールを活用して双目深度推定モデルの端側配備、MediaPipe ジェスチャー認識、音声 Q&A リンクの統合・デバッグを行い、「カメラ取り込み → BPU 推論 → 深度マップ → 領域判定 → 制御指令」のリアルタイム経路を開通；ジェスチャーの誤作動に対して多フレーム確認と指令フィルタ機構を設計；競技技術報告書の全文を独立して執筆' },
-          { title: '小智 AI と MCP によるマルチデバイス・スマートバトラーシステム', role: '独立開発', period: '2025/03 - 2025/12', desc: '天津第8回「新工科」大会 — 省部級一等賞（チームリーダー）｜中国大学生サービス外包イノベーション・起業大会 — 国家級三等賞。端雲音声制御チェーンを独立構築：マイク収音 → 音声テキスト化 → クラウド大規模モデルによる意図理解 → 自前 MCP サーバー（Python）がデバイス制御スクリプトを実行 → クラウドプラットフォームが指令を送信 → デバイスが実行し結果を返送；鴻蒙 Hi3861 のボード側ペリフェラル開発（RGB ライト／ブザー／ファン）と Huawei Cloud IoT 接続（物模型と MQTT データ送信）を担当' },
+          { title: '四足ロボットドッグのマルチモーダル知覚・制御システム', role: 'システム定義・統合', period: '2026/04 - 2026/07', desc: '第9回全国組み込みチップ・システム設計大会（チップ応用トラック）— 国家級三等賞。RDK X5（BPU 10 TOPS）/ 双目ステレオビジョン / MediaPipe / ROS2 / Python。システム定義・統合：ジェスチャー—動作のマッピング規則（五指開き / チョキ / グー → 前進 / 左折 / 伏せ）と三段階の運動優先度（緊急障害回避 > ジェスチャー > 音声）を定義し、知覚パイプラインの機能境界を切り分け；知覚パイプライン構築：AI コーディングツールを活用して双目深度推定モデルの端側配備、MediaPipe ジェスチャー認識、音声 Q&A リンクの統合・デバッグを行い、「カメラ取り込み → BPU 推論 → 深度マップ → 領域判定 → 制御指令」のリアルタイム経路を開通；指令安全層：ジェスチャーの誤作動（手が横切っただけで反応）に対して多フレーム確認と指令フィルタ機構を設計し、誤動作を低減；技術文書：競技技術報告書の執筆と整理（方案論証、システムアーキテクチャ、テストデータ）を担当。' },
+          { title: '小智 AI と MCP によるマルチデバイス・スマートバトラーシステム', role: '独立開発', period: '2025/03 - 2025/12', desc: '天津市「新工科」工程実践創新技術大会 — 学部生部門一等賞｜中国大学生サービス外包イノベーション・起業大会 — 国家級三等賞。鴻蒙 Hi3861 + 嘉立創 ESP32-S3 / 小智 AI / 自前 MCP サーバー（Python）/ Huawei Cloud IoT。ボード側とクラウド：鴻蒙 Hi3861 で RGB ライト・ブザー・ファンのペリフェラルドライバをデバッグし、温湿度・人感赤外・照度などのセンサーデータ収集を接続；Huawei Cloud IoT で製品・デバイス構築と物模型属性の定義を行い、MQTT でデバイス状態とセンサーデータを送信；端雲音声チェーン：ESP32-S3 に小智 AI ファームウェアを配備し、自前 MCP サーバー（Python）でデバイスデータ読み取りと制御指令送信をラップ、クラウド大規模モデルに接続して意図認識とツール呼び出しを実現し、「音声入力 → 意図理解 → ツール実行 → デバイス応答 → 結果返送」の閉ループを構築；マルチデバイス制御：デバイス横断の統合制御インターフェースを用意し、ライト・ファン・ブザーなどの状態照会とオンオフ制御に対応。' },
+          { title: 'FPGA ベースのエッジインテリジェントビジョン端末', role: 'システム連調・ドキュメント整理', period: '2025/09 - 2025/12', desc: '第8回全国組み込みチップ・システム設計大会 FPGA トラック — 国家級三等賞。本プロジェクトは安路 HX4S20 FPGA でエッジ検出・画像フィルタリング・HSV 色彩認識のハードウェア高速化を実現し、多段パイプラインで 640×480@30fps のリアルタイム処理をサポート。本人はシステム連調とドキュメント整理を担当し、Verilog のステートマシンロジックを読解でき、チュートリアルに沿ってエッジ検出機能を動作させた。' },
         ],
         passions: [
           { icon: '🤖', title: '具現化知能', desc: 'ロボットシステム統合の実戦経験（ROS2 双目視覚、ジェスチャー制御、運動制御）を持ち、AI とハードウェアの融合が未来の方向と信じる' },
@@ -204,16 +260,17 @@ function getResumeData(lang: string): ResumeData {
         ],
         awards: [
           { award: '組み込みシステム設計エンジニア認定（初級）', date: '中国電子学会発行', emoji: '📜' },
-          { award: '第9回全国組み込みチップ・システム設計大会 — 国家級三等賞', date: '2026/08', emoji: '🥉' },
-          { award: '第8回全国組み込みチップ・システム設計大会 — 国家級三等賞（FPGA トラック）', date: '2025/12', emoji: '🥉' },
-          { award: '中国サービスアウトソーシングイノベーション大会 — 国家級三等賞（スマートホーム IoT）', date: '2025/08', emoji: '🥉' },
-          { award: '天津第8回「新工科」大会 — 省部級一等賞（リーダー）', date: '2025/12', emoji: '🥇' },
+          { award: '世界職業院校技能大会 · 人工知能トラック · 決勝戦銅賞', date: '2026/09', emoji: '🥉' },
+          { award: '第9回全国組み込みチップ・システム設計大会 · チップ応用トラック · 国家級三等賞', date: '2026/08', emoji: '🥉' },
+          { award: '第8回全国組み込みチップ・システム設計大会 · FPGA トラック · 国家級三等賞', date: '2025/12', emoji: '🥉' },
+          { award: '中国大学生サービス外包イノベーション・起業大会 · 国家級三等賞', date: '2025/08', emoji: '🥉' },
+          { award: '天津市「新工科」工程実践創新技術大会 · 省部級一等賞', date: '2025/12', emoji: '🥇' },
         ],
         education: {
           school: '天津工業大学',
           major: '電子情報工学',
           period: '2023/09 - 2027/06',
-          courses: '回路理論、アナログ電子工学、デジタル電子工学、信号とシステム、電磁気学、組み込みシステム設計',
+          courses: '組み込みシステム設計創新実践 93 ｜ C 言語プログラミング 91 ｜ AVR マイコン プログラミングと実践 95 ｜ センサー・検出技術 88',
         },
         cert: {
           title: '組込みシステム設計エンジニア（初級）',
@@ -221,7 +278,7 @@ function getResumeData(lang: string): ResumeData {
           date: '2026.08',
           viewHint: '証明書を見る',
         },
-        selfEval: '組み込み開発と Embodied AI の交差領域に注力し、「ハードウェア-ソフトウェア-アルゴリズム-AI」を俯瞰する総合的な視点を持つ。RAG、MCP などの AI エンジニアリング概念に精通し、AI 技術を組み込み機器へ実装した実戦経験を有する。高難度の競技を通じて FPGA・IoT などの領域でプロジェクトを完遂する力を培い、競技ではチームリーダーを務めた経験があり、調整力と問題解決能力に優れる。',
+        selfEval: '電子情報工学の学部生で、具現化知能とエッジ側 AI 配備に注力。双目深度推定モデルのボード側配備とリアルタイム推論経路の構築経験を持ち、四層基板の設計・試作・ハードウェア切り分けまで独力で対応可能；AI コーディングツールを主要な開発手段とし、システムアーキテクチャ設計とモジュール分割を得意とする。物事はまず証拠を取ってから動く習慣があり、問題が起きたら勘で推測せず実験とデータで真因を突き止める；自学と適応力が高く、組み込み競技からロボット知覚まで自分で資料を探して身につけてきた。具現化知能に対して長期的な見立てと投資意欲を持つ。',
         educationLabel: '学歴',
         selfAssessmentLabel: '自己評価',
         leaveMessage: 'メッセージを残す',
@@ -232,10 +289,12 @@ function getResumeData(lang: string): ResumeData {
         title: '个人简历',
         subtitle: '实践驱动成长，热爱铸就方向',
         personalInfo: '个人信息',
-        techStack: '技术栈',
-        awardsTitle: '竞赛获奖',
+        techStack: '专业技能',
+        awardsTitle: '荣誉奖项',
         intentTitle: '求职意向',
-        practiceTitle: '核心实践',
+        practiceTitle: '项目经历',
+        internshipTitle: '实习经历',
+        academicTitle: '学术成果',
         passionTitle: '技术热情',
         contactTitle: '期待与您交流',
         contactDesc: '正在寻找嵌入式 / 具身智能方向实习机会，欢迎联系！',
@@ -246,6 +305,19 @@ function getResumeData(lang: string): ResumeData {
         grade: '2027届 · 随时可到岗实习',
         location: '天津市西青区',
         email: 'purplemist@qq.com',
+        skillDetails: [
+          { label: '机器人与端侧部署', content: 'RDK X5（BPU 10 TOPS）板端部署与实时推理链路打通；双目深度估计模型部署与应用；ROS2（项目使用）' },
+          { label: '嵌入式与硬件', content: 'ESP32-S3 / 鸿蒙 Hi3861 板端外设开发与传感器数据采集；嘉立创 EDA 四层板设计与打样（已点亮）；能读懂 Verilog 逻辑' },
+          { label: '开发语言', content: 'C（主力，手写过完整项目代码）、Python（脚本与原型开发）、Rust（学习中）' },
+          { label: '云与协议', content: '华为云 IoT（产品 / 设备 / 物模型建设、MQTT 上报）、MQTT、RTSP 拉流、MCP 服务端（大模型工具调用）' },
+          { label: '工程工具与动手', content: '重度使用 Codex / Trae / Claude 等 AI 编程工具完成系统集成与调试；熟练焊接 0402 / QFP 封装，具备万用表级硬件排障能力' },
+        ],
+        internships: [
+          { company: '智嘉人工智能科技（天津）有限责任公司', role: '硬件开发工程师（实习）', period: '2026.09 - 至今', desc: '通信链路打通：梳理轮式机器人多路通信链路（消息队列 / HTTP / 实时位姿 / 视频流）并在自研上位机中复用，实现地图加载、路线管理与实时状态显示；功能集成：接入路线执行、点位事件编排、语音播报与定时巡检，实现多路任务互斥与残留任务清理；前后端开发：基于 Next.js + Python 子进程实现控制台与运维面板，含权限校验、审计日志与数据备份。' },
+        ],
+        academic: [
+          { title: 'CATSANet 文本到图像行人重识别', role: '共同第一作者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '查看论文', desc: '共同第一作者，发表于 SCI 期刊 Pattern Analysis and Applications（2026, 29:176），研究方向为文本到图像行人重识别；负责消融实验与参数调优：基于 PyTorch / CLIP 环境完成多组方案对比实验，辅助参数调优、模型训练与消融实验对比，并整理实验数据、分析实验结果；参与方案讨论与思路提出，负责文献调研与部分章节撰写。' },
+        ],
         intent: {
           primary: '嵌入式软硬件开发 / 端侧 AI 部署方向实习',
           direction: '熟悉嵌入式系统开发流程，具备四层 PCB 设计、打样与焊接能力，掌握双目立体视觉与端侧模型部署',
@@ -254,10 +326,9 @@ function getResumeData(lang: string): ResumeData {
           available: '随时到岗，接受远程或天津/北京地区',
         },
         practices: [
-          { title: 'ReID 行人重识别科研项目', role: '共同第一作者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '查看论文', desc: '论文 CATSANet 已在 Pattern Analysis and Applications（SCI 期刊）正式发表，署名共同第一作者（脚注注明与第三作者同等贡献），配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写' },
-          { title: '基于 FPGA 的边缘智能视觉终端', role: '系统联调与文档整理', period: '2025/09 - 2025/12', desc: '第八届全国大学生嵌入式芯片与系统设计竞赛 FPGA 创新设计赛道 · 国家级三等奖。项目基于安路 HX4S20 FPGA 实现边缘检测、图像滤波、HSV 色彩识别算法硬件加速，多级流水线支持 640×480@30fps 实时处理；本人参与系统联调与文档整理，能读懂 Verilog 状态机逻辑，配合教程调通边缘检测功能' },
-          { title: '四足机器狗多模态感知与控制系统', role: '系统定义与集成', period: '2026/04 - 2026/07', desc: '第九届全国大学生嵌入式芯片与系统设计竞赛芯片应用赛道 · 国家级三等奖（全国约七八百支参赛队）。定义手势—动作映射规则与三级运动优先级（紧急避障 > 手势 > 语音），划分感知链路的功能边界；借助 AI 编程工具完成双目深度估计模型的端侧部署、MediaPipe 手势识别与语音问答链路的集成调试，打通「摄像头取流 → BPU 推理 → 深度图 → 区域判定 → 控制指令」的实时链路；针对手势误触发设计多帧确认与指令过滤机制；独立完成竞赛技术报告全文撰写' },
-          { title: '基于小智 AI 与 MCP 的多设备智能管家系统', role: '独立开发', period: '2025/03 - 2025/12', desc: '天津市第八届"新工科"竞赛 · 省级一等奖（队长）｜中国大学生服务外包创新创业大赛 · 国家级三等奖。独立完成端云语音控制链路：麦克风采集 → 语音转文字 → 云端大模型意图理解 → 自建 MCP 服务端（Python）执行设备控制脚本 → 云平台下发指令 → 设备执行并回传结果；完成鸿蒙 Hi3861 板端外设开发（RGB 灯 / 蜂鸣器 / 风扇）与华为云 IoT 接入（物模型与 MQTT 数据上报）' },
+          { title: '四足机器狗多模态感知与控制系统', role: '系统定义与集成', period: '2026/04 - 2026/07', desc: '第九届全国大学生嵌入式芯片与系统设计竞赛（芯片应用赛道）· 国家级三等奖。RDK X5（BPU 10 TOPS）/ 双目立体视觉 / MediaPipe / ROS2 / Python。系统定义与集成：定义手势—动作映射规则（五指张开 / 剪刀手 / 拳头 → 直行 / 左转 / 趴下）与三级运动优先级（紧急避障 > 手势 > 语音），划分感知链路的功能边界；感知链路搭建：借助 AI 编程工具完成双目深度估计模型的端侧部署、MediaPipe 手势识别与语音问答链路的集成调试，打通「摄像头取流 → BPU 推理 → 深度图 → 区域判定 → 控制指令」的实时链路；指令安全层：针对手势误触发（手部划过即响应）设计多帧确认与指令过滤机制，降低误动作；技术文档：负责竞赛技术报告的撰写与整理（方案论证、系统架构、测试数据）。' },
+          { title: '基于小智 AI 与 MCP 的多设备智能管家系统', role: '独立开发', period: '2025/03 - 2025/12', desc: '天津市"新工科"工程实践创新技术竞赛 · 本科组一等奖｜中国大学生服务外包创新创业大赛 · 国家级三等奖。鸿蒙 Hi3861 + 嘉立创 ESP32-S3 / 小智 AI / 自建 MCP 服务端（Python）/ 华为云 IoT。板端与云平台：基于鸿蒙 Hi3861 完成 RGB 灯光、蜂鸣器、风扇的外设驱动调试，接入温湿度、人体红外、光照等传感器数据采集；在华为云 IoT 完成产品与设备建设、物模型属性定义，通过 MQTT 上报设备状态与传感器数据；端云语音链路：在 ESP32-S3 上部署小智 AI 固件，自建 MCP 服务端（Python）封装设备数据读取与控制指令下发，接入云端大模型完成意图识别与工具调用，实现「语音输入 → 意图理解 → 工具执行 → 设备响应 → 结果回传」闭环；多设备控制：统一跨设备控制接口，支持灯光、风扇、蜂鸣器等设备的状态查询与开关控制。' },
+          { title: '基于 FPGA 的边缘智能视觉终端', role: '系统联调与文档整理', period: '2025/09 - 2025/12', desc: '第八届全国大学生嵌入式芯片与系统设计竞赛 FPGA 创新设计赛道 · 国家级三等奖。项目基于安路 HX4S20 FPGA 实现边缘检测、图像滤波、HSV 色彩识别算法硬件加速，多级流水线支持 640×480@30fps 实时处理；本人参与系统联调与文档整理，能读懂 Verilog 状态机逻辑，配合教程调通边缘检测功能。' },
         ],
         passions: [
           { icon: '🤖', title: '具身智能', desc: '拥有机器人系统集成实战经验（ROS2 双目视觉、手势控制、运动控制），坚信 AI 与硬件结合是未来方向' },
@@ -272,16 +343,17 @@ function getResumeData(lang: string): ResumeData {
         ],
         awards: [
           { award: '嵌入式系统设计工程技术人员认证（初级）', date: '中国电子学会颁发', emoji: '📜' },
-          { award: '第九届全国大学生嵌入式芯片与系统设计竞赛 国家级三等奖', date: '2026/08', emoji: '🥉' },
-          { award: '第八届全国大学生嵌入式芯片与系统设计竞赛 国家级三等奖', date: '2025/12', emoji: '🥉' },
-          { award: '中国大学生服务外包创新创业大赛 国家级三等奖（智能家居物联网）', date: '2025/08', emoji: '🥉' },
-          { award: '天津第八届"新工科"竞赛 省部级一等奖（队长）', date: '2025/12', emoji: '🥇' },
+          { award: '世界职业院校技能大赛 · 人工智能赛道 · 总决赛争夺赛铜奖', date: '2026/09', emoji: '🥉' },
+          { award: '第九届全国大学生嵌入式芯片与系统设计竞赛 · 芯片应用赛道 · 国家级三等奖', date: '2026/08', emoji: '🥉' },
+          { award: '第八届全国大学生嵌入式芯片与系统设计竞赛 · FPGA 创新设计赛道 · 国家级三等奖', date: '2025/12', emoji: '🥉' },
+          { award: '中国大学生服务外包创新创业大赛 · 国家级三等奖', date: '2025/08', emoji: '🥉' },
+          { award: '天津市"新工科"工程实践创新技术竞赛 · 省级一等奖', date: '2025/12', emoji: '🥇' },
         ],
         education: {
           school: '天津工业大学',
           major: '电子信息工程',
           period: '2023/09 - 2027/06',
-          courses: '电路原理、模拟电子技术、数字电子技术、信号与系统、电磁场与电磁波、嵌入式系统设计',
+          courses: '嵌入式系统设计创新实践 93 ｜ C 语言程序设计 91 ｜ AVR 单片机程序设计与实践 95 ｜ 传感器与检测技术 88',
         },
         cert: {
           title: '嵌入式系统设计工程师（初级）',
@@ -289,7 +361,7 @@ function getResumeData(lang: string): ResumeData {
           date: '2026.08',
           viewHint: '查看证书',
         },
-        selfEval: '聚焦嵌入式开发与具身智能交叉领域，具备「硬件-软件-算法-AI」综合视角，熟悉 RAG、MCP 等 AI 工程化概念，拥有 AI 技术嵌入式落地实战经验；通过高含金量竞赛积累了 FPGA、物联网等场景的项目落地能力，曾担任竞赛队长，具备良好的统筹协调与问题解决能力。',
+        selfEval: '电子信息工程本科，专注具身智能与端侧 AI 部署。具备双目深度估计模型的板端部署与实时推理链路打通经验，能独立完成四层板设计、打样与硬件排障；以 AI 编程工具为主要开发手段，擅长系统架构设计与模块划分。做事习惯先取证再动手，遇到问题先用实验和数据定位真因而不是凭感觉猜；自学与适应能力强，从嵌入式竞赛到机器人感知都是自己找资料啃下来的，对具身智能有长期判断与投入意愿。',
         educationLabel: '教育经历',
         selfAssessmentLabel: '自我评价',
         leaveMessage: '给我留言',
@@ -428,6 +500,16 @@ export default function ResumePage() {
                     );
                   })}
                 </div>
+
+                {/* Detailed skill lines */}
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border space-y-2 sm:space-y-2.5">
+                  {r.skillDetails.map((s, idx) => (
+                    <div key={idx}>
+                      <p className="text-[11px] sm:text-xs text-[var(--neon-violet)] font-medium mb-0.5">{s.label}</p>
+                      <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed">{s.content}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Awards */}
@@ -518,6 +600,28 @@ export default function ResumePage() {
                 </div>
               </div>
 
+              {/* Internship */}
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
+                  <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-lime)]" />
+                  {r.internshipTitle}
+                </h2>
+                <div className="space-y-2 sm:space-y-4">
+                  {r.internships.map((it, idx) => (
+                    <div key={idx} className="rounded-lg sm:rounded-xl p-3 sm:p-5 border border-white/5" style={{ background: 'color-mix(in oklab, var(--neon-lime) 7%, var(--card))' }}>
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
+                        <h3 className="text-foreground font-semibold text-xs sm:text-sm">{it.company}</h3>
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-lime)_20%,transparent)] text-[var(--neon-lime)] rounded text-[11px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-lime)_30%,transparent)]">
+                          {it.role}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-1.5">{it.period}</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{it.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Core Practice */}
               <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
                 <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
@@ -557,6 +661,39 @@ export default function ResumePage() {
                           </p>
                         </div>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Academic */}
+              <div className="bg-card backdrop-blur-xl border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <h2 className="text-sm sm:text-lg font-semibold text-foreground mb-3 sm:mb-4 flex items-center gap-2">
+                  <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--neon-cyan)]" />
+                  {r.academicTitle}
+                </h2>
+                <div className="space-y-2 sm:space-y-4">
+                  {r.academic.map((a, idx) => (
+                    <div key={idx} className="rounded-lg sm:rounded-xl p-3 sm:p-5 border border-white/5" style={{ background: 'color-mix(in oklab, var(--neon-cyan) 7%, var(--card))' }}>
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
+                        <h3 className="text-foreground font-semibold text-xs sm:text-sm">{a.title}</h3>
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-cyan)_20%,transparent)] text-[var(--neon-cyan)] rounded text-[11px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-cyan)_30%,transparent)]">
+                          {a.role}
+                        </span>
+                        {a.link && (
+                          <a
+                            href={a.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-[color-mix(in_oklab,var(--neon-violet)_20%,transparent)] text-[var(--neon-violet)] rounded text-[11px] sm:text-xs border border-[color-mix(in_oklab,var(--neon-violet)_30%,transparent)] transition-colors"
+                          >
+                            <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                            {a.linkLabel}
+                          </a>
+                        )}
+                      </div>
+                      <p className="text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-1.5">{a.period}</p>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{a.desc}</p>
                     </div>
                   ))}
                 </div>
