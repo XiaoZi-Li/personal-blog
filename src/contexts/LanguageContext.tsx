@@ -180,11 +180,6 @@ const translations = {
       major: '电子信息工程',
       grade: '大四',
       // Skills
-      skillLevels: {
-        core: '有所实践',
-        familiar: '了解使用',
-        learning: '正在学习'
-      },
       skillCategories: {
         programming: '编程语言',
         hardware: '硬件平台',
@@ -308,7 +303,7 @@ const translations = {
         date: '2025年12月',
         track: '智能系统赛道',
         detail1: '基于小智AI与MCP协议开发多设备智能管家系统',
-        detail2: '担任队长，负责系统架构设计与核心功能开发'
+        detail2: '担任队长，独立完成自建 MCP 服务端与端云控制链路开发'
       },
       // Competition 1 (第九届 机器狗)
       comp1: {
@@ -316,8 +311,8 @@ const translations = {
         award: '国家级三等奖',
         date: '2026年8月',
         track: '芯片应用赛道',
-        detail1: '基于RDK X5（BPU 10 TOPS）+ ROS2开发机器狗双目深度避障、MediaPipe手势控制与三级优先级运动仲裁器',
-        detail2: '承担感知与运动控制系统开发，完成步态参数整定与系统集成调试'
+        detail1: '基于 RDK X5（BPU 10 TOPS）+ ROS2 的四足机器狗多模态感知与控制系统：双目深度估计端侧部署、MediaPipe 手势识别与三级运动优先级仲裁',
+        detail2: '担任系统定义与集成，定义手势—动作映射与三级运动优先级，完成感知链路集成调试与竞赛技术报告撰写'
       },
       // Competition 2 (第八届 FPGA)
       comp2: {
@@ -326,7 +321,7 @@ const translations = {
         date: '2025年12月',
         track: 'FPGA创新设计赛道',
         detail1: '基于安路HX4S20 FPGA实现边缘检测、图像滤波、HSV色彩识别硬件加速，多级流水线支持640×480@30fps实时处理',
-        detail2: '承担系统联调与技术报告撰写，独立完成竞赛技术报告全文（方案论证、架构说明、时序与资源数据分析）'
+        detail2: '参与系统联调与文档整理，能读懂 Verilog 状态机逻辑，配合教程调通边缘检测功能'
       },
       // Competition 3 (服务外包)
       comp3: {
@@ -360,10 +355,10 @@ const translations = {
       },
       // Project 2
       project2: {
-        title: '四足机器狗感知与运动控制系统',
+        title: '四足机器狗多模态感知与控制系统',
         period: '2026.04 - 2026.07',
-        role: '感知与运动控制开发',
-        description: '基于RDK X5与ROS2开发双目深度避障、手势控制与三级优先级运动仲裁器，获全国总决赛三等奖',
+        role: '系统定义与集成',
+        description: '基于 RDK X5 与 ROS2 的四足机器狗多模态感知与控制项目，完成双目深度估计端侧部署与 MediaPipe 手势识别集成，定义三级运动优先级，获全国总决赛三等奖',
         tags: ['具身智能', 'ROS2', 'RDK X5']
       },
       // Project 3
@@ -616,11 +611,6 @@ const translations = {
       major: 'Electronic Information Engineering',
       grade: 'Senior',
       // Skills
-      skillLevels: {
-        core: 'Practiced',
-        familiar: 'Used Before',
-        learning: 'Currently Learning'
-      },
       skillCategories: {
         programming: 'Programming Languages',
         hardware: 'Hardware Platforms',
@@ -725,8 +715,8 @@ const translations = {
         award: 'Provincial-Ministerial First Prize',
         date: 'December 2025',
         track: 'Intelligent Systems Track',
-        detail1: 'Developed multi-device smart home system based on Xiaozhi AI and MCP protocol',
-        detail2: 'Served as team captain, responsible for system architecture design and core functionality development'
+        detail1: 'Multi-device smart butler system built on XiaoZhi AI and the MCP protocol',
+        detail2: 'Team lead; independently built the self-hosted MCP server and the device-cloud control chain'
       },
       // Competition 1 (9th, Robot Dog)
       comp1: {
@@ -734,8 +724,8 @@ const translations = {
         award: 'National 3rd Prize',
         date: 'August 2026',
         track: 'Chip Application Track',
-        detail1: 'Developed stereo depth obstacle avoidance, MediaPipe gesture control and 3-level priority motion arbiter for a quadruped robot dog on RDK X5 (BPU 10 TOPS) + ROS2',
-        detail2: 'Delivered the perception and motion control subsystem, completed gait parameter tuning and system integration'
+        detail1: 'Quadruped robot dog multimodal perception & control system on RDK X5 (BPU 10 TOPS) + ROS2: on-device stereo depth estimation, MediaPipe gesture recognition and 3-level motion priority arbitration',
+        detail2: 'Owned system definition and integration — defined the gesture-to-action mapping and 3-level motion priority, integrated and debugged the perception chain, and wrote the competition technical report'
       },
       // Competition 2 (8th, FPGA)
       comp2: {
@@ -744,7 +734,7 @@ const translations = {
         date: 'December 2025',
         track: 'FPGA Innovation Design Track',
         detail1: 'Hardware acceleration of edge detection, image filtering and HSV color recognition on Anlu HX4S20 FPGA, multi-stage pipeline supporting 640×480@30fps real-time processing',
-        detail2: 'Delivered system integration and wrote the full competition technical report (solution rationale, architecture description, timing and resource analysis)'
+        detail2: 'Took part in system integration and documentation; able to read Verilog FSM logic and got the edge-detection function working by following the tutorials'
       },
       // Competition 3 (Service Outsourcing)
       comp3: {
@@ -778,10 +768,10 @@ const translations = {
       },
       // Project 2
       project2: {
-        title: 'Quadruped Robot Dog Perception & Motion Control System',
+        title: 'Quadruped Robot Dog Multimodal Perception & Control System',
         period: '2026.04 - 2026.07',
-        role: 'Perception & Motion Control Developer',
-        description: 'Developed stereo depth obstacle avoidance, gesture control and motion arbiter on RDK X5 + ROS2, won National Final Third Prize',
+        role: 'System Definition & Integration',
+        description: 'Quadruped robot dog multimodal perception & control project on RDK X5 + ROS2: on-device stereo depth estimation and MediaPipe gesture recognition integrated, with a 3-level motion priority defined; won National Final Third Prize',
         tags: ['Embodied Intelligence', 'ROS2', 'RDK X5']
       },
       // Project 3
@@ -1034,11 +1024,6 @@ const translations = {
       major: '電子情報工学',
       grade: '4年生',
       // Skills
-      skillLevels: {
-        core: '実践経験あり',
-        familiar: '使用経験あり',
-        learning: '現在学習中'
-      },
       skillCategories: {
         programming: 'プログラミング言語',
         hardware: 'ハードウェアプラットフォーム',
@@ -1143,8 +1128,8 @@ const translations = {
         award: '省部級一等賞',
         date: '2025年12月',
         track: 'インテリジェントシステムトラック',
-        detail1: '小智AIとMCPプロトコルに基づくマルチデバイス智能管家システムを担当',
-        detail2: 'キャプテンとして、システムアーキテクチャ設計とコア機能開発を担当'
+        detail1: '小智 AI と MCP プロトコルによるマルチデバイス・スマートバトラーシステム',
+        detail2: 'チームリーダーとして、自前の MCP サーバーと端雲制御チェーンを独立構築'
       },
       // Competition 1 (第9回 ロボットドッグ)
       comp1: {
@@ -1152,8 +1137,8 @@ const translations = {
         award: '国家級三等賞',
         date: '2026年8月',
         track: 'チップ応用トラック',
-        detail1: 'RDK X5（BPU 10 TOPS）+ ROS2 で四足ロボットドッグの双目深度障害回避、MediaPipe ジェスチャー制御、3段優先度運動アービタを開発',
-        detail2: '知覚・運動制御サブシステムを担当、歩容パラメータ調整とシステム統合デバッグを完了'
+        detail1: 'RDK X5（BPU 10 TOPS）+ ROS2 による四足ロボットドッグのマルチモーダル知覚・制御システム：双目深度推定の端側配備、MediaPipe ジェスチャー認識、三段階の運動優先度アービタ',
+        detail2: 'システム定義と統合を担当 —— ジェスチャー—動作マッピングと三段階の運動優先度を定義し、知覚チェーンの統合・デバッグと競技技術報告書の執筆を実施'
       },
       // Competition 2 (第8回 FPGA)
       comp2: {
@@ -1162,7 +1147,7 @@ const translations = {
         date: '2025年12月',
         track: 'FPGAイノベーション設計トラック',
         detail1: '安路 HX4S20 FPGA でエッジ検出・画像フィルタ・HSV色彩認識のハードウェア高速化を実現、多段パイプラインで 640×480@30fps リアルタイム処理をサポート',
-        detail2: 'システム連調と技術報告書の執筆を担当、競技技術報告書の全文（方案論証・アーキテクチャ説明・タイミングとリソース分析）を独立完成'
+        detail2: 'システム連調とドキュメント整理を担当；Verilog のステートマシンロジックを読解でき、チュートリアルに沿ってエッジ検出機能を動作させた'
       },
       // Competition 3 (サービス外包)
       comp3: {
@@ -1196,10 +1181,10 @@ const translations = {
       },
       // Project 2
       project2: {
-        title: '四足ロボットドッグ知覚・運動制御システム',
+        title: '四足ロボットドッグのマルチモーダル知覚・制御システム',
         period: '2026.04 - 2026.07',
-        role: '知覚・運動制御開発',
-        description: 'RDK X5 + ROS2 で双目深度障害回避、ジェスチャー制御、運動アービタを開発、全国決勝三等賞を受賞',
+        role: 'システム定義・統合',
+        description: 'RDK X5 + ROS2 による四足ロボットドッグのマルチモーダル知覚・制御プロジェクト：双目深度推定の端側配備と MediaPipe ジェスチャー認識を統合し、三段階の運動優先度を定義、全国決勝三等賞を受賞',
         tags: ['具現化知能', 'ROS2', 'RDK X5']
       },
       // Project 3

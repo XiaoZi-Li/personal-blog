@@ -51,15 +51,15 @@ const projectsData: Record<string, {
   demo?: string;
 }> = {
   'reid-system': {
-    name: 'ReID行人重识别系统',
-    description: '基于深度学习的行人重识别系统，用于跨摄像头场景下的行人追踪与识别。项目采用ResNet50作为骨干网络，结合PCB（Part-based Convolutional Baseline）策略进行局部特征提取，有效提升不同姿态、光照条件下的识别准确率。',
-    tech: ['Python', 'PyTorch', 'OpenCV', 'ResNet50', 'PCB'],
+    name: 'ReID 行人重识别科研项目',
+    description: '基于深度学习的 text-to-image 行人重识别研究项目。论文 CATSANet 已在 SCI 期刊 Pattern Analysis and Applications 正式发表，本人署名共同第一作者，负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写；配套代码由团队开源。',
+    tech: ['Python', 'PyTorch', '跨模态检索', '深度学习'],
     github: 'https://github.com/purplemist/reid-system',
   },
   'smart-mcp-assistant': {
-    name: '小智MCP智能控制系统',
-    description: '基于ESP32和MCP协议构建的智能家居控制系统，实现AI模型与硬件设备的高效交互。系统支持语音控制、传感器数据采集、设备状态监控等功能，通过MCP协议实现与AI助手的无缝对接。',
-    tech: ['ESP32', 'MCP协议', 'Python', 'TypeScript', 'IoT'],
+    name: '基于小智 AI 与 MCP 的多设备智能管家系统',
+    description: '基于小智 AI 与 MCP 协议构建的多设备智能管家系统：语音指令经云端大模型理解意图后，由自建 MCP 服务端（Python）调用设备控制脚本，云平台下发指令给设备执行并回传结果；完成鸿蒙 Hi3861 板端外设（RGB 灯 / 蜂鸣器 / 风扇）与华为云 IoT 接入（物模型与 MQTT 数据上报）。',
+    tech: ['ESP32-S3', 'MCP 协议', 'Python', '鸿蒙 Hi3861', '华为云 IoT'],
     github: 'https://github.com/purplemist/smart-mcp-assistant',
   },
   'personal-blog': {

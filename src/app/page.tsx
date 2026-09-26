@@ -36,39 +36,8 @@ import Marquee from '@/components/tech/Marquee';
 import OrbitalCore from '@/components/tech/OrbitalCore';
 import SectionRail, { type RailSection } from '@/components/tech/SectionRail';
 
-type Level = 'core' | 'familiar' | 'learning';
-
-const LEVEL_DOTS: Record<Level, number> = { core: 3, familiar: 2, learning: 1 };
-
 /** 论文外链：Springer 正式出版页面，全文唯一一处科研出处入口 */
 const PAPER_URL = 'https://link.springer.com/article/10.1007/s10044-026-01761-5';
-
-/**
- * 熟练度指示器：三点式。
- * 形状单独承载信息是不够的，所以补上 aria-label / title 作为文字替代。
- */
-function LevelDots({ level, label }: { level: Level; label: string }) {
-  const filled = LEVEL_DOTS[level];
-  return (
-    <span
-      role="img"
-      aria-label={label}
-      title={label}
-      className="flex shrink-0 items-center gap-1"
-    >
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          className={`h-1 w-2.5 rounded-full ${
-            i < filled
-              ? 'bg-[var(--neon-cyan)]'
-              : 'bg-[color-mix(in_oklab,var(--muted-foreground)_38%,transparent)]'
-          }`}
-        />
-      ))}
-    </span>
-  );
-}
 
 /** 细线网格：用 1px gap 露出底色当作分隔线，比给每个格子写边框可靠得多 */
 const HAIRLINE_GRID =
@@ -115,12 +84,6 @@ export default function Home() {
     t('home.hero.roles.r4'),
   ];
 
-  const levelLabel: Record<Level, string> = {
-    core: t('home.skillLevels.core'),
-    familiar: t('home.skillLevels.familiar'),
-    learning: t('home.skillLevels.learning'),
-  };
-
   // 章节轨：顺序与下方 DOM 顺序一致，编号与 kicker 对应
   const railSections: RailSection[] = [
     { id: 'research', label: t('home.rail.research') },
@@ -138,7 +101,7 @@ export default function Home() {
     en: string;
     icon: typeof Code;
     glow: string;
-    skills: Array<{ name: string; level: Level }>;
+    skills: Array<{ name: string }>;
   }> = [
     {
       title: t('home.skillCategories.programming'),
@@ -146,11 +109,11 @@ export default function Home() {
       icon: Code,
       glow: 'var(--glow-violet)',
       skills: [
-        { name: 'C / C++', level: 'core' },
-        { name: 'Python', level: 'core' },
-        { name: 'Verilog', level: 'familiar' },
-        { name: 'Rust', level: 'learning' },
-        { name: t('skills.cangjie'), level: 'learning' },
+        { name: 'C / C++' },
+        { name: 'Python' },
+        { name: 'Verilog' },
+        { name: 'Rust' },
+        { name: t('skills.cangjie') },
       ],
     },
     {
@@ -159,10 +122,10 @@ export default function Home() {
       icon: Microchip,
       glow: 'var(--glow-cyan)',
       skills: [
-        { name: t('skills.fpga'), level: 'familiar' },
-        { name: t('skills.esp32'), level: 'familiar' },
-        { name: t('skills.rdkx5'), level: 'familiar' },
-        { name: t('skills.harmony'), level: 'familiar' },
+        { name: t('skills.fpga') },
+        { name: t('skills.esp32') },
+        { name: t('skills.rdkx5') },
+        { name: t('skills.harmony') },
       ],
     },
     {
@@ -171,9 +134,9 @@ export default function Home() {
       icon: Brain,
       glow: 'var(--glow-magenta)',
       skills: [
-        { name: t('skills.mcp'), level: 'familiar' },
-        { name: t('skills.aiSkills'), level: 'learning' },
-        { name: 'PyTorch · OpenCV', level: 'familiar' },
+        { name: t('skills.mcp') },
+        { name: t('skills.aiSkills') },
+        { name: 'PyTorch · OpenCV' },
       ],
     },
     {
@@ -182,10 +145,10 @@ export default function Home() {
       icon: Wrench,
       glow: 'var(--glow-lime)',
       skills: [
-        { name: 'PCB 绘制', level: 'familiar' },
-        { name: '传感器融合', level: 'familiar' },
-        { name: '嵌入式全流程', level: 'familiar' },
-        { name: 'Next.js / TS 全栈', level: 'learning' },
+        { name: 'PCB 绘制' },
+        { name: '传感器融合' },
+        { name: '嵌入式全流程' },
+        { name: 'Next.js / TS 全栈' },
       ],
     },
   ];
@@ -636,7 +599,7 @@ export default function Home() {
           <SectionHeading
             kicker="STACK / 03"
             title={t('home.skills')}
-            description="从寄存器到策略网络，我尽量让每一层都亲手碰过。右侧三点表示投入程度，不是自评分。"
+            description="从寄存器到策略网络，我尽量让每一层都亲手碰过。"
             align="left"
           />
 
@@ -672,26 +635,12 @@ export default function Home() {
                             <span className="truncate text-[13px] text-foreground/90">
                               {skill.name}
                             </span>
-                            <LevelDots level={skill.level} label={levelLabel[skill.level]} />
                           </li>
                         ))}
                       </ul>
                     </div>
                   );
                 })}
-
-                {/* 图例：说明三点代表什么，并声明这不是自评分 */}
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 p-6 sm:col-span-2 lg:col-span-4">
-                  {(['core', 'familiar', 'learning'] as Level[]).map((level) => (
-                    <span
-                      key={level}
-                      className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] text-muted-foreground"
-                    >
-                      <LevelDots level={level} label={levelLabel[level]} />
-                      {levelLabel[level]}
-                    </span>
-                  ))}
-                </div>
               </div>
             </GlassCard>
           </Reveal>
