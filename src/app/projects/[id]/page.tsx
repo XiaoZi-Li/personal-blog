@@ -12,7 +12,7 @@ const projectsData: Record<string, {
 }> = {
   'reid-system': {
     name: 'ReID 行人重识别科研项目',
-    description: '基于深度学习的 text-to-image 行人重识别研究项目。论文 CATSANet 已在 SCI 期刊 Pattern Analysis and Applications 正式发表，本人署名共同第一作者，负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写；配套代码由团队开源。',
+    description: '基于深度学习的 text-to-image 行人重识别研究项目。论文 CATSANet 已在 SCI 期刊 Pattern Analysis and Applications 正式发表，本人署名第二作者，负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写；配套代码由团队开源。',
     tech: ['Python', 'PyTorch', '跨模态检索', '深度学习'],
     github: 'https://github.com/purplemist/reid-system',
     image: 'https://images.unsplash.com/photo-1555949911-6c1a8b8c8b8b?w=800',

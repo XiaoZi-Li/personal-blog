@@ -150,13 +150,13 @@ function getResumeData(lang: string): ResumeData {
           { company: 'Zhijia Artificial Intelligence Technology (Tianjin) Co., Ltd.', role: 'Hardware Development Engineer (Intern)', period: '2026.09 - Present', desc: 'Communication links: mapped out the multiple communication channels of the wheeled robot (message queue / HTTP / real-time pose / video stream) and reused them in the in-house host application, enabling map loading, route management and real-time status display; Feature integration: wired up route execution, waypoint event scheduling, voice announcements and scheduled patrols, implementing mutual exclusion between concurrent tasks and cleanup of stale tasks; Full-stack development: built the console and operations panel on Next.js with a Python subprocess, including permission checks, audit logging and data backup.' },
         ],
         academic: [
-          { title: 'CATSANet: Text-to-Image Person Re-identification', role: 'Co-first Author', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: 'Paper', desc: 'Co-first author, published in the SCI journal Pattern Analysis and Applications (2026, 29:176), on text-to-image person re-identification; responsible for ablation studies and hyper-parameter tuning: ran multiple comparative experiments in a PyTorch / CLIP environment and assisted with hyper-parameter tuning, model training and ablation comparisons, then organised the experimental data and analysed the results; took part in solution discussions and idea generation, and handled literature review and writing of several sections.' },
+          { title: 'CATSANet: Text-to-Image Person Re-identification', role: 'Second Author', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: 'Paper', desc: 'Second author, published in the SCI journal Pattern Analysis and Applications (2026, 29:176), on text-to-image person re-identification; responsible for ablation studies and hyper-parameter tuning: ran multiple comparative experiments in a PyTorch / CLIP environment and assisted with hyper-parameter tuning, model training and ablation comparisons, then organised the experimental data and analysed the results; took part in solution discussions and idea generation, and handled literature review and writing of several sections.' },
         ],
         intent: {
           primary: 'Embedded Software/Hardware Development · Embodied Intelligence Internship',
           direction: 'Embedded development workflow, 4-layer PCB design through fabrication and soldering, stereo vision and on-device model deployment',
           also: 'Skilled at AI-assisted development, with hands-on experience deploying a model on-device and wiring up the real-time inference pipeline',
-          note: 'Co-first author of a paper in the SCI journal Pattern Analysis and Applications, responsible for ablation study design, result analysis and manuscript writing',
+          note: 'Second author of a paper in the SCI journal Pattern Analysis and Applications, responsible for ablation study design, result analysis and manuscript writing',
           available: 'Available immediately, remote or Tianjin/Beijing area',
         },
         practices: [
@@ -233,13 +233,13 @@ function getResumeData(lang: string): ResumeData {
           { company: '智嘉人工智能科技（天津）有限責任会社', role: 'ハードウェア開発エンジニア（インターン）', period: '2026.09 - 現在', desc: '通信経路の構築：車輪型ロボットの複数通信経路（メッセージキュー / HTTP / リアルタイム姿勢 / 映像ストリーム）を整理し、自社開発の上位アプリで再利用、地図読み込み・ルート管理・リアルタイム状態表示を実現；機能統合：ルート実行、ウェイポイントイベントの編成、音声アナウンス、定時巡回を接続し、複数タスクの相互排他と残留タスクのクリアを実装；フロントエンド／バックエンド開発：Next.js + Python サブプロセスでコンソールと運用パネルを実装（権限チェック、監査ログ、データバックアップを含む）。' },
         ],
         academic: [
-          { title: 'CATSANet テキストtoイメージ人物再識別', role: '共同第一著者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '論文', desc: '共同第一著者として SCI ジャーナル Pattern Analysis and Applications（2026, 29:176）に掲載、研究方向はテキストtoイメージ人物再識別；消融実験とパラメータ調整を担当：PyTorch / CLIP 環境で複数案の比較実験を行い、パラメータ調整・モデル学習・消融実験の比較を補助し、実験データの整理と結果分析を担当；方針検討とアイデア提案に参加し、文献調査と一部章の執筆を担当。' },
+          { title: 'CATSANet テキストtoイメージ人物再識別', role: '第二著者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '論文', desc: '第二著者として SCI ジャーナル Pattern Analysis and Applications（2026, 29:176）に掲載、研究方向はテキストtoイメージ人物再識別；消融実験とパラメータ調整を担当：PyTorch / CLIP 環境で複数案の比較実験を行い、パラメータ調整・モデル学習・消融実験の比較を補助し、実験データの整理と結果分析を担当；方針検討とアイデア提案に参加し、文献調査と一部章の執筆を担当。' },
         ],
         intent: {
           primary: '組み込みソフトウェア/ハードウェア開発 · 具現化知能インターン',
           direction: '組み込み開発の流れ、四層 PCB の設計から基板製造・はんだ付けまで、双目ステレオビジョンとエッジ側モデル配備',
           also: 'AI ツールを活用した開発を得意とし、モデルのエッジ側配備とリアルタイム推論経路の構築に実績あり',
-          note: 'SCI ジャーナル Pattern Analysis and Applications に共第一著者として論文発表、消融実験の設計・結果分析・論文執筆を担当',
+          note: 'SCI ジャーナル Pattern Analysis and Applications に第二著者として論文発表、消融実験の設計・結果分析・論文執筆を担当',
           available: 'すぐに勤務可能、リモートまたは天津/北京エリア',
         },
         practices: [
@@ -316,13 +316,13 @@ function getResumeData(lang: string): ResumeData {
           { company: '智嘉人工智能科技（天津）有限责任公司', role: '硬件开发工程师（实习）', period: '2026.09 - 至今', desc: '通信链路打通：梳理轮式机器人多路通信链路（消息队列 / HTTP / 实时位姿 / 视频流）并在自研上位机中复用，实现地图加载、路线管理与实时状态显示；功能集成：接入路线执行、点位事件编排、语音播报与定时巡检，实现多路任务互斥与残留任务清理；前后端开发：基于 Next.js + Python 子进程实现控制台与运维面板，含权限校验、审计日志与数据备份。' },
         ],
         academic: [
-          { title: 'CATSANet 文本到图像行人重识别', role: '共同第一作者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '查看论文', desc: '共同第一作者，发表于 SCI 期刊 Pattern Analysis and Applications（2026, 29:176），研究方向为文本到图像行人重识别；负责消融实验与参数调优：基于 PyTorch / CLIP 环境完成多组方案对比实验，辅助参数调优、模型训练与消融实验对比，并整理实验数据、分析实验结果；参与方案讨论与思路提出，负责文献调研与部分章节撰写。' },
+          { title: 'CATSANet 文本到图像行人重识别', role: '第二作者', period: '2026/08', link: 'https://link.springer.com/article/10.1007/s10044-026-01761-5', linkLabel: '查看论文', desc: '第二作者，发表于 SCI 期刊 Pattern Analysis and Applications（2026, 29:176），研究方向为文本到图像行人重识别；负责消融实验与参数调优：基于 PyTorch / CLIP 环境完成多组方案对比实验，辅助参数调优、模型训练与消融实验对比，并整理实验数据、分析实验结果；参与方案讨论与思路提出，负责文献调研与部分章节撰写。' },
         ],
         intent: {
           primary: '嵌入式软硬件开发 / 端侧 AI 部署方向实习',
           direction: '熟悉嵌入式系统开发流程，具备四层 PCB 设计、打样与焊接能力，掌握双目立体视觉与端侧模型部署',
           also: '善用主流 AI 工具辅助开发，具备模型端侧部署与实时推理链路打通的实战经验',
-          note: '以共同第一作者在 SCI 期刊 Pattern Analysis and Applications 发表论文一篇，负责消融实验设计、结果分析与论文撰写',
+          note: '以第二作者在 SCI 期刊 Pattern Analysis and Applications 发表论文一篇，负责消融实验设计、结果分析与论文撰写',
           available: '随时到岗，接受远程或天津/北京地区',
         },
         practices: [

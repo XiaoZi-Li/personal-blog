@@ -224,10 +224,10 @@ const translations = {
         title: '科研经历',
         paper: 'CATSANet —— 跨模态行人重识别',
         period: '2026.08',
-        role: '共同第一作者',
+        role: '第二作者',
         status: 'SCI 已正式发表',
         journal: 'Pattern Analysis and Applications',
-        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名共同第一作者（脚注注明与第三作者同等贡献），配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。'
+        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名第二作者，配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。'
       },
       resume: {
         title: '个人简历与求职意向',
@@ -349,8 +349,8 @@ const translations = {
       project1: {
         title: 'ReID行人重识别科研项目',
         period: '2026.08',
-        role: '共同第一作者',
-        description: '论文CATSANet已在SCI期刊Pattern Analysis and Applications正式发表，署名共同第一作者（论文注明与第三作者同等贡献），配套代码由团队开源；本人负责消融实验设计与结果分析',
+        role: '第二作者',
+        description: '论文CATSANet已在SCI期刊Pattern Analysis and Applications正式发表，署名第二作者，配套代码由团队开源；本人负责消融实验设计与结果分析',
         tags: ['深度学习', '跨模态检索', 'PyTorch']
       },
       // Project 2
@@ -676,10 +676,10 @@ const translations = {
         title: 'Research Experience',
         paper: 'CATSANet — Cross-modal Person Re-identification',
         period: '2026.08',
-        role: 'Co-first Author',
+        role: 'Second Author',
         status: 'SCI Published',
         journal: 'Pattern Analysis and Applications',
-        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as co-first author (the paper footnote states equal contribution with the third author); the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.'
+        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as the second author; the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.'
       },
     },
     // Skills
@@ -762,8 +762,8 @@ const translations = {
       project1: {
         title: 'ReID Person Re-identification Research Project',
         period: '2026.08',
-        role: 'Co-first Author',
-        description: 'Paper CATSANet officially published in the SCI journal Pattern Analysis and Applications, credited as co-first author (the paper footnote states equal contribution with the third author); the companion code is open-sourced by the team. My part covered ablation study design and result analysis',
+        role: 'Second Author',
+        description: 'Paper CATSANet officially published in the SCI journal Pattern Analysis and Applications, credited as the second author; the companion code is open-sourced by the team. My part covered ablation study design and result analysis',
         tags: ['Deep Learning', 'Cross-modal Retrieval', 'PyTorch']
       },
       // Project 2
@@ -1089,10 +1089,10 @@ const translations = {
         title: '研究経歴',
         paper: 'CATSANet — クロスモーダル歩行者再識別',
         period: '2026.08',
-        role: '共第一著者',
+        role: '第二著者',
         status: 'SCI 正式掲載済み',
         journal: 'Pattern Analysis and Applications',
-        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、共第一著者として署名（脚注に第三著者と同等の貢献と明記）、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。'
+        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、第二著者として署名、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。'
       },
     },
     // Skills
@@ -1175,8 +1175,8 @@ const translations = {
       project1: {
         title: 'ReID歩行者再識別研究プロジェクト',
         period: '2026.08',
-        role: '共第一著者',
-        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載、共第一著者として署名（脚注に第三著者と同等の貢献と明記）、付属コードはチームにより公開。本人の担当は消融実験の設計と結果分析',
+        role: '第二著者',
+        description: '論文 CATSANet が SCI ジャーナル Pattern Analysis and Applications に正式掲載、第二著者として署名、付属コードはチームにより公開。本人の担当は消融実験の設計と結果分析',
         tags: ['ディープラーニング', 'クロスモーダル検索', 'PyTorch']
       },
       // Project 2
