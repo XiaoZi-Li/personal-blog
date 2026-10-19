@@ -497,6 +497,15 @@ export default function Home() {
                   <p className="mt-5 max-w-3xl text-pretty text-[13px] leading-[1.85] text-muted-foreground sm:text-sm">
                     {t('home.research.desc')}
                   </p>
+
+                  {/* 详情页入口：把复现、排错、对照实验的完整过程留在站内 */}
+                  <Link
+                    href="/research/catsanet"
+                    className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.08em] text-[var(--neon-cyan)] transition-colors hover:text-[var(--neon-violet)] sm:text-xs"
+                  >
+                    {t('home.research.detail')}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </Link>
                 </div>
 
                 {/* 状态徽标：不是装饰，是这条资历的可信度标记 */}

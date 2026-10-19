@@ -223,11 +223,12 @@ const translations = {
         badge: '论文发表',
         title: '科研经历',
         paper: 'CATSANet —— 跨模态行人重识别',
-        period: '2026.08',
+        period: '2025.02 — 2026.08',
         role: '第二作者',
         status: 'SCI 已正式发表',
         journal: 'Pattern Analysis and Applications',
-        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名第二作者，配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。'
+        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名第二作者，配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。',
+        detail: '查看完整科研复盘'
       },
       resume: {
         title: '个人简历与求职意向',
@@ -675,11 +676,12 @@ const translations = {
         badge: 'Publication',
         title: 'Research Experience',
         paper: 'CATSANet — Cross-modal Person Re-identification',
-        period: '2026.08',
+        period: '2025.02 — 2026.08',
         role: 'Second Author',
         status: 'SCI Published',
         journal: 'Pattern Analysis and Applications',
-        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as the second author; the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.'
+        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as the second author; the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.',
+        detail: 'Read the full research write-up'
       },
     },
     // Skills
@@ -1088,11 +1090,12 @@ const translations = {
         badge: '論文発表',
         title: '研究経歴',
         paper: 'CATSANet — クロスモーダル歩行者再識別',
-        period: '2026.08',
+        period: '2025.02 — 2026.08',
         role: '第二著者',
         status: 'SCI 正式掲載済み',
         journal: 'Pattern Analysis and Applications',
-        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、第二著者として署名、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。'
+        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、第二著者として署名、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。',
+        detail: '研究の詳細を見る'
       },
     },
     // Skills
