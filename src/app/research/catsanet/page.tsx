@@ -163,8 +163,9 @@ function getResearchData(lang: string): ResearchData {
               'The predecessor method had code, but the environment, dependency versions and experiment records were incomplete.',
             points: [
               'Rebuilt the environment on a new server from the original archive, replacing only the changed files.',
-              'Finished a 100-epoch run: R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070, above the previous record of 78.05.',
+              'Finished a 100-epoch run (sdm+id+mlm, batch 64, lr 1e-5): R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070, above the previous record of 78.05.',
               'Compared 95 / 100 / 105 epochs and narrowed the best rank-1 window to roughly 90–110 epochs.',
+              'Ran the same configuration three times (2025-03, 2025-08, 2026-01); best R1 was 79.30474 at epoch 87 every time, bit for bit. The later two code snapshots can be confirmed to include the fusion block.',
             ],
           },
           {
@@ -184,10 +185,11 @@ function getResearchData(lang: string): ResearchData {
             body:
               'The PACL formula was in the model code, but the metrics did not move as expected. The loss had to be checked step by step.',
             points: [
-              'Compared every launch flag against options.py and found pacl_loss_weight, pacl_ot_reg and pacl_ot_iters were never registered in the parser — the command-line values were silently ignored.',
-              'Fixed the conflicting MLM configuration at the same time, then retrained with the formal 150-epoch configuration.',
-              'The cloud run on 2026-01-25 produced R1 78.43 / R5 90.55 / R10 94.19 / mAP 70.45 — the “+ TS + PACL” row of Table 3, matching digit for digit.',
-              'A control run with PACL present but its parameters unregistered stayed at the 79.01 baseline level, confirming the gain came from the loss actually taking effect.',
+              'Compared every launch flag against options.py and found pacl_loss_weight, pacl_ot_reg and pacl_ot_iters were never registered in the parser — the command-line values were silently ignored. I also checked whether loss_names actually contained pacl.',
+              'Completed PACL integration in four places: Sinkhorn and the loss in objectives.py, the forward pass in build.py, parameter registration in options.py, and logging in processor.py. Inside the loss, SAFL part features are cast from float16 to float32 before building the cost matrix, avoiding overflow and division by zero at half precision.',
+              'Fixed the conflicting MLM configuration and retrained with the formal 150-epoch setup. The cloud run on 2026-01-25 12:02 produced R1 78.42755 (recorded as 78.43) / R5 90.55 / R10 94.19 / mAP 70.45, with the best result at epoch 150.',
+              'Kept a 100-epoch “PACL + complex fusion” run whose loss_names contained only sdm+id+mlm: best R1 79.01, essentially level with the no-PACL baseline. This shows the gain comes from the loss actually being active, not from “adding a module always helps”.',
+              'Co-authored the PACL implementation notes and the PACL method document with the first author, covering integration, parameter meanings, tuning ranges, log format and the optimal-transport derivation.',
             ],
           },
           {
@@ -196,9 +198,9 @@ function getResearchData(lang: string): ResearchData {
             body:
               'Why not simply add part features to global features? The answer needed a reproducible experiment, not a preference.',
             points: [
-              'Built a control pair with identical loss combination, batch size, learning rate, epochs and dataset; the only difference was the fusion block in build.py.',
-              'Gated residual: best R1 79.30474 at epoch 87. Simple addition: best R1 63.7427 at epoch 86 — a 15.56-point drop.',
-              'Re-ran the gated version months later with the same configuration and got 79.30474 at epoch 87 again, bit for bit.',
+              'Built a control pair with identical sdm+id+mlm losses, 100 epochs, batch 64, lr 1e-5, ID and MLM weights of 1.0, and CUHK-PEDES; the only difference was the fusion block in build.py.',
+              'Gated residual: best R1 79.30474 at epoch 87 (2025-08-20). Simple addition: best R1 63.74269 at epoch 86 (2026-01-30) — a 15.56-point drop.',
+              'The same hyper-parameters run three times (2025-03, 2025-08, 2026-01) gave the same best R1 bit for bit, showing the whole pipeline is reproducible.',
             ],
           },
           {
@@ -207,21 +209,33 @@ function getResearchData(lang: string): ResearchData {
             body:
               'Conclusions from CUHK-PEDES needed a second dataset; RSTPReid has shorter texts and more complex scenes.',
             points: [
-              'Ran two rounds of RSTPReid training and parameter adjustment, recording rank-1 and the training/test curves.',
-              'Used the divergence between training and test metrics to detect overfitting, then adjusted epochs and learning rate.',
-              'Separated “best on one dataset” from “usable across datasets” to support the final configuration.',
+              'Run on 2026-02-19 02:00: sdm+mlm+id+itc+pacl, lr 1e-5, 100 epochs, batch 64, random sampler, PACL weight 0.02. Best R1 62.60 at epoch 7, with no further improvement afterwards.',
+              'Run on 2026-02-19 10:53: same loss combination, lr 2e-5, 30 epochs, identity sampler, PACL weight 0.01, ID weight 1.0, weight decay 1e-4, warmup 10. Best R1 60.25 at epoch 27 — a flatter curve, but below the first run.',
+              'Conclusion: RSTPReid peaks very early, so further training only overfits; a larger PACL weight is not better, and the identity sampler does not suit this cross-modal contrastive setting. The paper’s final 67.05 / 54.37 comes from the team’s later configuration; these two runs located the overfitting and weight sensitivity.',
             ],
           },
           {
             period: '2025.03 — 2026.02',
-            title: 'Manuscript and visualisation',
+            title: 'Manuscript, main figure and retrieval visuals',
             body:
-              'The contribution statement in the paper covers main text, algorithm design and experiments; my work also covered the figures.',
+              'The contribution statement in the paper covers main text, algorithm design and experiments; my work also covered figures, documents and typesetting.',
             points: [
               'Took part in the main pipeline figure: proposed the “reduce patches” step, adjusted the arrows and hierarchy, and wrote the English annotations.',
-              'Contributed to the first draft and wrote up method material on token reduction, fusion comparisons, the FLOPs table and visualisation notes.',
-              'Produced the three-row top-10 retrieval comparison figure (original / token-reduced / PACL + token-reduced) and its English caption.',
-              'Modified the evaluator to report text-to-image metrics only, so i2t scores would not influence model selection; fixed JSON serialisation, checkpoint path and plotting issues; kept each run’s configs and train_log.',
+              'Contributed to the first draft in 2025-07 and co-organised the method material with the first author: the token-reduction flow, before/after fusion comparisons, the FLOPs table and visualisation notes.',
+              'Maintained the LaTeX project locally (main.tex, pepadun.bib and the compiled prj.pdf). The early manuscript was titled “Fine-Grained Token Selection and Post-alignment Fusion for Cross-Modal Person ReID” with the method named GRFNet; after PACL was added it became CATSANet.',
+              'Produced the three-row top-10 retrieval comparison figure on 2026-02-02 (original / token-reduced / PACL + token-reduced), prepared five sample sets covering three checkpoints, and wrote the English caption. Checked formulas and LaTeX layout together with the first author.',
+            ],
+          },
+          {
+            period: '2025 — 2026',
+            title: 'Evaluation protocol, metrics tooling and reproducibility',
+            body:
+              'How metrics are defined and archived determines whether the conclusions can be re-checked; this work ran through the whole project.',
+            points: [
+              'Modified the evaluator to report text-to-image (t2i) metrics only, so i2t scores would not influence model selection.',
+              'Added a metrics dump and plotting script, plot_metrics.py, writing rank-1/5/10, mAP and mINP per epoch to metrics.json and generating single-metric and full-metric curves for cross-experiment comparison.',
+              'Fixed metric JSON serialisation, checkpoint path and plotting dependency issues; extended the visualisation script to switch datasets and export top-10 retrieval figures.',
+              'Kept multiple code snapshots (改版4, pacl_01, VERSION) plus each run’s configs and train_log, so every key number can be traced back to a date, configuration and code version.',
             ],
           },
         ],
@@ -261,15 +275,20 @@ function getResearchData(lang: string): ResearchData {
           },
           {
             title: 'Experiments I ran',
-            headers: ['Date', 'Configuration', 'Epochs', 'Result', 'Purpose'],
+            headers: ['Date', 'Configuration', 'Dataset / epochs', 'Result', 'Purpose'],
             rows: [
-              ['2025-03-04', 'Token reduction', '100', 'R1 79.305 / mAP 71.070', 'Reproduction baseline'],
-              ['2025-03-08', 'Token reduction, 95/100/105', '95–105', '≈77 / 79.30 / 78.85', 'Epoch sensitivity'],
-              ['2025-08-20', 'Gated residual fusion', '100', 'R1 79.30474 @ ep87', 'Fusion validation'],
-              ['2026-01-26', 'Same config, independent re-run', '100', 'R1 79.30474 @ ep87', 'Reproducibility'],
-              ['2026-01-30', 'Simple addition fusion', '100', 'R1 63.7427 @ ep86', 'Negative control'],
-              ['2026-01-25', 'TS + PACL, formal config', '150', 'R1 78.43 / mAP 70.45', 'Table 3 row'],
+              ['2025-03-04', 'sdm+id+mlm, 100 ep', 'CUHK-PEDES / 100', 'R1 79.305 / mAP 71.070', 'Reproduction baseline'],
+              ['2025-03-08', '95 / 100 / 105 ep sweep', 'CUHK-PEDES / 95–105', '≈77 / 79.30 / 78.85', 'Epoch sensitivity'],
+              ['2025-03-15', 'sdm+mlm+id+itc, 150 ep', 'CUHK-PEDES / 150', 'R1 78.10 @ ep130', 'No-fusion baseline'],
+              ['2025-08-20', 'Gated residual fusion', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', 'Fusion validation'],
+              ['2026-01-25 12:02', 'sdm+mlm+id+itc+pacl, 150 ep', 'CUHK-PEDES / 150', 'R1 78.43 / mAP 70.45', 'Table 3 row'],
+              ['2026-01-25 15:12', 'PACL + complex fusion, loss_names without pacl', 'CUHK-PEDES / 100', 'R1 79.01234 @ ep87', 'Evidence PACL was inactive'],
+              ['2026-01-26', 'Same config, independent re-run (third)', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', 'Reproducibility'],
+              ['2026-01-30', 'Simple addition fusion', 'CUHK-PEDES / 100', 'R1 63.74269 @ ep86', 'Negative control'],
+              ['2026-02-19 02:00', 'pacl 0.02, random sampler', 'RSTPReid / 100', 'R1 62.60 @ ep7', 'Overfitting diagnosis'],
+              ['2026-02-19 10:53', 'pacl 0.01, identity sampler', 'RSTPReid / 30', 'R1 60.25 @ ep27', 'Fewer epochs, lower weight'],
             ],
+            note: 'The paper’s full-model 78.79 / 70.35 is a team result. The anomalous 2026-02-18 run (75.55) is excluded pending a check of environment and data paths.',
           },
         ],
         troubleTitle: 'Engineering troubleshooting',
@@ -281,6 +300,16 @@ function getResearchData(lang: string): ResearchData {
             problem: 'PACL parameters not registered',
             symptom: 'Training normal, no errors, metrics did not improve',
             fix: 'Compared CLI flags with options.py, registered the three PACL parameters, retrained',
+          },
+          {
+            problem: 'PACL missing from the loss list',
+            symptom: 'Flags passed, but loss_names had no pacl; result level with no-PACL (79.01 vs 79.30)',
+            fix: 'Added pacl to loss_names and confirmed pacl_loss appears in the log',
+          },
+          {
+            problem: 'Half-precision instability',
+            symptom: 'Sinkhorn inputs could overflow or divide by zero in float16',
+            fix: 'Cast SAFL part features to float32 inside the loss before the cost matrix',
           },
           {
             problem: 'MLM configuration conflict',
@@ -310,17 +339,17 @@ function getResearchData(lang: string): ResearchData {
         ],
         abilityTitle: 'What this work demonstrates',
         abilities: [
-          { title: 'Reproduction and baselines', evidence: 'Re-ran 79.305 / 71.070 on new hardware; two independent runs matched bit for bit' },
-          { title: 'Experiment design and diagnosis', evidence: 'Epoch sweeps, loss decomposition, scheduler analysis, overfitting diagnosis' },
-          { title: 'Engineering troubleshooting', evidence: 'Found unregistered parameters and silent config failures from logs and code' },
-          { title: 'Controlled validation', evidence: '79.30 vs 63.74 with every other variable held identical' },
-          { title: 'Writing and visualisation', evidence: 'Draft, main figure, top-10 retrieval chart, formulas and LaTeX checks' },
-          { title: 'Data discipline', evidence: 'Ablation rows match the paper exactly; configs and logs retained' },
+          { title: 'Reproduction and baselines', evidence: 'Re-ran 79.305 / 71.070 on new hardware; three independent runs with the same hyper-parameters matched bit for bit' },
+          { title: 'Experiment design and diagnosis', evidence: 'Epoch sweeps, loss decomposition, scheduler analysis, two rounds of RSTPReid overfitting diagnosis' },
+          { title: 'Engineering troubleshooting', evidence: 'Located unregistered parameters, pacl missing from loss_names, float16 instability and silent config failures' },
+          { title: 'Controlled validation', evidence: '79.30 vs 63.74 with sdm+id+mlm, 100 ep, batch 64 and lr 1e-5 held identical' },
+          { title: 'Writing and visualisation', evidence: 'Draft, main figure, five retrieval sample sets, top-10 chart, co-authored PACL docs and LaTeX project' },
+          { title: 'Data discipline', evidence: 'Ablation rows match the paper exactly; configs and logs retained; anomalous runs excluded' },
         ],
         closingTitle: 'Paper and code',
         closing:
-          'CATSANet was published in Pattern Analysis and Applications (2026, 29:176). The full model result (78.79 / 70.35) is the team result; my own contributions are the experiments, engineering and manuscript work described above.',
-        closingNote: 'Written up from training logs, manuscript tables and working notes.',
+          'CATSANet was published in Pattern Analysis and Applications (2026, 29:176). The full model result (78.79 / 70.35) is the team result; my contributions are the experiments, engineering, co-authored method documents and manuscript work described above.',
+        closingNote: 'Written up from training logs, manuscript tables and working notes; the anomalous 2026-02-18 run is excluded.',
       };
     case 'ja-JP':
       return {
@@ -385,8 +414,9 @@ function getResearchData(lang: string): ResearchData {
             body: '前身手法のコードはありましたが、環境・依存バージョン・実験記録が不完全でした。',
             points: [
               '元のアーカイブから新サーバーで環境を再構築し、変更ファイルのみを差し替えて訓練を開始。',
-              '100 epoch で R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070 を達成（従来記録 78.05 を上回る）。',
+              '100 epoch 訓練（sdm+id+mlm、batch 64、lr 1e-5）で R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070 を達成（従来記録 78.05 を上回る）。',
               '95 / 100 / 105 epoch を比較し、rank-1 の最適域が概ね 90〜110 epoch と判断。',
+              '同じ設定を 2025-03、2025-08、2026-01 の 3 回実行し、best R1 はいずれも 79.30474 @ epoch 87 で桁まで一致。後の 2 回は融合ブロックを含むコードであることを確認済み。',
             ],
           },
           {
@@ -404,10 +434,11 @@ function getResearchData(lang: string): ResearchData {
             title: 'PACL：静かな失敗の修正',
             body: 'PACL の式はモデルに入っていたのに指標が動かず、損失が本当に効いているか確認する必要がありました。',
             points: [
-              '起動引数と options.py を突き合わせ、pacl_loss_weight / pacl_ot_reg / pacl_ot_iters がパーサーに未登録で、コマンドライン値が無視されていたと判明。',
-              'MLM 設定の矛盾も同時に修正し、正式な 150 epoch 設定で再訓練。',
-              '2026-01-25 のクラウド訓練で R1 78.43 / R5 90.55 / R10 94.19 / mAP 70.45。Table 3 の「+ TS + PACL」行と桁まで一致。',
-              'PACL を含むがパラメータ未登録の対照実行は 79.01 のベースライン水準に留まり、利得が実際に効いた損失によることを確認。',
+              '起動引数と options.py を突き合わせ、pacl_loss_weight / pacl_ot_reg / pacl_ot_iters がパーサーに未登録で、コマンドライン値が無視されていたと判明。loss_names に pacl が本当に入っているかも確認。',
+              'PACL の組み込みを 4 箇所で完了：objectives.py の Sinkhorn と損失、build.py のフォワード、options.py のパラメータ登録、processor.py のログ出力。損失内部で SAFL の part 特徴を float16 から float32 に変換し、半精度でのオーバーフローとゼロ除算を回避。',
+              'MLM 設定の矛盾も修正し、正式な 150 epoch 設定で再訓練。2026-01-25 12:02 のクラウド実行で R1 78.42755（論文では 78.43）/ R5 90.55 / R10 94.19 / mAP 70.45、best は第 150 epoch。',
+              '「PACL + 複雑融合」という名前でも loss_names が sdm+id+mlm のみだった 100 epoch 実行では best R1 79.01 で、PACL なしのベースラインとほぼ同等。利得は損失が実際に効いてこそ得られるという証拠。',
+              '第一著者と共同で『PACL 実装説明』『PACL 手法ドキュメント』を整理。組み込み方法、パラメータの意味、調整範囲、ログ形式、最適輸送の理論までをカバー。',
             ],
           },
           {
@@ -415,9 +446,9 @@ function getResearchData(lang: string): ResearchData {
             title: '融合モジュールの対照実験',
             body: '部品特徴と全局特徴を単純に足してはいけない理由を、好みではなく再現可能な実験で示す必要がありました。',
             points: [
-              '損失構成・バッチサイズ・学習率・epoch・データセットを揃え、build.py の融合部分だけを変えた対照を設計。',
-              '残差ゲート：best R1 79.30474 @ epoch 87。単純加算：best R1 63.7427 @ epoch 86 で 15.56 ポイント低下。',
-              '数か月後に同設定で独立に再実行し、79.30474 @ epoch 87 と桁まで一致。',
+              '損失 sdm+id+mlm、100 epoch、batch 64、lr 1e-5、ID と MLM の重み各 1.0、CUHK-PEDES を揃え、build.py の融合部分だけを変えた対照を設計。',
+              '残差ゲート：best R1 79.30474 @ epoch 87（2025-08-20）。単純加算：best R1 63.74269 @ epoch 86（2026-01-30）で 15.56 ポイント低下。',
+              '同じハイパーパラメータを 2025-03、2025-08、2026-01 の 3 回実行し、best R1 は桁まで一致。実験チェーン全体が再現可能。',
             ],
           },
           {
@@ -425,20 +456,31 @@ function getResearchData(lang: string): ResearchData {
             title: 'データセット間の調整と過学習診断',
             body: 'CUHK-PEDES の結論を別データセットでも確認する必要があり、RSTPReid は文が短くシーンも複雑です。',
             points: [
-              'RSTPReid で 2 回の訓練とパラメータ調整を行い、rank-1 と訓練／テスト曲線を記録。',
-              '訓練とテストの指標の乖離から過学習を判断し、epoch と学習率を調整して再検証。',
-              '「単一データセットの最良」と「データセット間で使える」を分け、最終設定の根拠とした。',
+              '2026-02-19 02:00 の実行：sdm+mlm+id+itc+pacl、lr 1e-5、100 epoch、batch 64、random sampler、PACL 重み 0.02。best R1 62.60 が第 7 epoch で、その後は改善なし。',
+              '同日 10:53 の実行：同じ損失構成、lr 2e-5、30 epoch、identity sampler、PACL 重み 0.01、ID 重み 1.0、weight decay 1e-4、warmup 10。best R1 60.25 が第 27 epoch。曲線は緩やかだが第 1 回を超えず。',
+              '結論：RSTPReid は最適点が非常に早く、訓練を続けると過学習する。PACL の重みは大きければ良いわけではなく、identity sampler もこのクロスモーダル比較には不向き。論文の最終値 67.05 / 54.37 はチームの後続設定によるもので、この 2 回は過学習と重み感度の特定が目的。',
             ],
           },
           {
             period: '2025.03 — 2026.02',
-            title: '論文執筆と可視化',
-            body: '論文の貢献声明は主稿・アルゴリズム設計・実験を挙げていますが、図の作業も担当しました。',
+            title: '論文執筆・メイン図・検索可視化',
+            body: '論文の貢献声明は主稿・アルゴリズム設計・実験を挙げていますが、図・資料・組版も担当しました。',
             points: [
               'メイン図の設計に参加し、「patch を減らす」ステップの提案、矢印と階層の調整、英語注記を担当。',
-              '初稿の執筆に参加し、token 削減の処理、融合の前後比較、FLOPs 表、可視化説明を資料化。',
-              '3 行の top-10 検索比較図（元画像／token 削減／PACL + token 削減）と英語キャプションを作成。',
-              '評価コードを t2i 方向のみ出力するよう修正し、i2t 指標がモデル選択に干渉しないようにした。JSON 保存・checkpoint パス・描画依存も修正し、各実行の configs と train_log を保持。',
+              '2025-07 に初稿の執筆に参加し、第一著者と共同で方法資料を整理：token 削減の処理、融合の前後比較、FLOPs 表、可視化説明。',
+              '論文の LaTeX プロジェクト（main.tex、pepadun.bib、コンパイル成果物 prj.pdf）をローカルで維持。初期稿のタイトルは “Fine-Grained Token Selection and Post-alignment Fusion for Cross-Modal Person ReID”、手法名は GRFNet で、PACL 追加後に CATSANet へ拡張。',
+              '2026-02-02 に 3 行の top-10 検索比較図（元画像／token 削減／PACL + token 削減）を作成し、3 つのチェックポイントをカバーする 5 組のサンプルを用意して英語キャプションを執筆。数式整理と LaTeX 組版チェックも第一著者と共同で実施。',
+            ],
+          },
+          {
+            period: '2025 — 2026',
+            title: '評価口径・指標ツール・再現性',
+            body: '指標の定義と保存方法が、実験結論を検証できるかどうかを決めます。この作業はプロジェクト全体に渡ります。',
+            points: [
+              '評価コードを t2i 方向のみ出力するよう修正し、i2t 指標がモデル選択に干渉しないようにした。',
+              '指標の保存と描画スクリプト plot_metrics.py を追加し、各 epoch の rank-1/5/10、mAP、mINP を metrics.json に書き出して、単一指標・全指標の曲線を生成。',
+              '指標の JSON 保存、checkpoint パス、描画依存の問題を修正。可視化スクリプトはデータセット切替と top-10 検索図の出力に対応。',
+              '複数のコードスナップショット（改版4、pacl_01、VERSION）と各実行の configs・train_log を保持し、主要な数値を日付・設定・コード版まで遡れるようにした。',
             ],
           },
         ],
@@ -478,15 +520,20 @@ function getResearchData(lang: string): ResearchData {
           },
           {
             title: '私が実行した実験',
-            headers: ['日付', '構成', 'Epoch', '結果', '用途'],
+            headers: ['日付', '構成', 'データセット / Epoch', '結果', '用途'],
             rows: [
-              ['2025-03-04', 'token 削減', '100', 'R1 79.305 / mAP 71.070', '再現ベースライン'],
-              ['2025-03-08', 'token 削減 95/100/105', '95–105', '約 77 / 79.30 / 78.85', 'epoch 感度'],
-              ['2025-08-20', '残差ゲート融合', '100', 'R1 79.30474 @ ep87', '融合の検証'],
-              ['2026-01-26', '同設定で独立再実行', '100', 'R1 79.30474 @ ep87', '再現性'],
-              ['2026-01-30', '単純加算融合', '100', 'R1 63.7427 @ ep86', '反証対照'],
-              ['2026-01-25', 'TS + PACL 正式設定', '150', 'R1 78.43 / mAP 70.45', 'Table 3 の行'],
+              ['2025-03-04', 'sdm+id+mlm、100 ep', 'CUHK-PEDES / 100', 'R1 79.305 / mAP 71.070', '再現ベースライン'],
+              ['2025-03-08', '95 / 100 / 105 ep 比較', 'CUHK-PEDES / 95–105', '約 77 / 79.30 / 78.85', 'epoch 感度'],
+              ['2025-03-15', 'sdm+mlm+id+itc、150 ep', 'CUHK-PEDES / 150', 'R1 78.10 @ ep130', '融合なしベースライン'],
+              ['2025-08-20', '残差ゲート融合', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', '融合の検証'],
+              ['2026-01-25 12:02', 'sdm+mlm+id+itc+pacl、150 ep', 'CUHK-PEDES / 150', 'R1 78.43 / mAP 70.45', 'Table 3 の行'],
+              ['2026-01-25 15:12', 'PACL + 複雑融合、loss_names に pacl なし', 'CUHK-PEDES / 100', 'R1 79.01234 @ ep87', 'PACL 未稼働の証拠'],
+              ['2026-01-26', '同設定で独立再実行（3 回目）', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', '再現性'],
+              ['2026-01-30', '単純加算融合', 'CUHK-PEDES / 100', 'R1 63.74269 @ ep86', '反証対照'],
+              ['2026-02-19 02:00', 'pacl 0.02、random sampler', 'RSTPReid / 100', 'R1 62.60 @ ep7', '過学習診断'],
+              ['2026-02-19 10:53', 'pacl 0.01、identity sampler', 'RSTPReid / 30', 'R1 60.25 @ ep27', '短縮と低重みの対照'],
             ],
+            note: '論文 full model の 78.79 / 70.35 はチーム全体の結果です。2026-02-18 の異常な 75.55 は環境とデータパスの確認待ちとして掲載していません。',
           },
         ],
         troubleTitle: '実装トラブルと対処',
@@ -495,6 +542,8 @@ function getResearchData(lang: string): ResearchData {
         fixLabel: '対処',
         troubles: [
           { problem: 'PACL パラメータ未登録', symptom: '訓練は正常、エラーなし、指標が伸びない', fix: 'CLI と options.py を突き合わせて 3 項目を登録し再訓練' },
+          { problem: 'PACL が損失リストにない', symptom: '引数は渡したが loss_names に pacl がなく、PACL なしと同等（79.01 対 79.30）', fix: 'loss_names に pacl を追加し、ログに pacl_loss が出ることを確認' },
+          { problem: '半精度の数値不安定', symptom: 'Sinkhorn 入力が float16 でオーバーフローやゼロ除算になり得る', fix: '損失内部で SAFL part 特徴を float32 に変換してから計算' },
           { problem: 'MLM 設定の矛盾', symptom: 'マスク戦略と損失設定が食い違う', fix: '設定をフォワード計算に合わせて統一し再開' },
           { problem: '指標の JSON 保存', symptom: '評価後に保存で例外', fix: 'traceback からテンソル型を特定し Python スカラーで書き込み' },
           { problem: 'checkpoint パス', symptom: '再開時に重みが見つからない', fix: '保存・読み込みのパス結合を統一して再実行' },
@@ -503,17 +552,17 @@ function getResearchData(lang: string): ResearchData {
         ],
         abilityTitle: 'この経験で示せること',
         abilities: [
-          { title: '再現とベースライン構築', evidence: '新ハードウェアで 79.305 / 71.070 を再現、2 回の独立実行が桁まで一致' },
-          { title: '実験設計と診断', evidence: 'epoch 比較、損失分解、スケジューラ分析、過学習診断' },
-          { title: '実装のトラブルシュート', evidence: 'ログとコードから未登録パラメータや静かな設定不備を特定' },
-          { title: '対照による検証', evidence: '他の変数を揃えた 79.30 対 63.74 の比較' },
-          { title: '執筆と可視化', evidence: '初稿、メイン図、top-10 検索図、数式と LaTeX の確認' },
-          { title: 'データの厳密さ', evidence: '消融行が論文と一致、configs とログを保持' },
+          { title: '再現とベースライン構築', evidence: '新ハードウェアで 79.305 / 71.070 を再現、同ハイパーの 3 回の独立実行が桁まで一致' },
+          { title: '実験設計と診断', evidence: 'epoch 比較、損失分解、スケジューラ分析、RSTPReid 2 回の過学習診断' },
+          { title: '実装のトラブルシュート', evidence: '未登録パラメータ、loss_names に pacl なし、float16 不安定、設定不備を特定' },
+          { title: '対照による検証', evidence: 'sdm+id+mlm、100 ep、batch 64、lr 1e-5 を揃えた 79.30 対 63.74 の比較' },
+          { title: '執筆と可視化', evidence: '初稿、メイン図、5 組の検索サンプル、top-10 図、共同整理した PACL 資料、LaTeX 工程' },
+          { title: 'データの厳密さ', evidence: '消融行が論文と一致、configs とログを保持、異常な実行は除外' },
         ],
         closingTitle: '論文とコード',
         closing:
-          'CATSANet は Pattern Analysis and Applications（2026, 29:176）に掲載されました。full model の 78.79 / 70.35 はチームの結果で、私の担当は本ページに記載した実験・実装・執筆です。',
-        closingNote: '訓練ログ、論文の表、作業記録をもとにまとめています。',
+          'CATSANet は Pattern Analysis and Applications（2026, 29:176）に掲載されました。full model の 78.79 / 70.35 はチームの結果で、私の担当は本ページに記載した実験・実装・第一著者との方法資料整理・執筆です。',
+        closingNote: '訓練ログ、論文の表、作業記録をもとにまとめています。2026-02-18 の異常な実行は除外しています。',
       };
     default: // zh-CN
       return {
@@ -596,8 +645,9 @@ function getResearchData(lang: string): ResearchData {
               '前身方法已有代码，但运行环境、依赖版本与实验记录不完整，需要先在干净环境里把结果复现出来。',
             points: [
               '在原压缩包基础上只替换改动过的文件，避免把混乱的本地修改一并带进来，并在新服务器上重建环境。',
-              '完成 100 epoch 训练，得到 R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070，高于原记录 78.05。',
+              '完成 100 epoch 训练（sdm+id+mlm，batch 64，lr 1e-5），得到 R1 79.305 / R5 91.147 / R10 94.282 / mAP 71.070，高于原记录 78.05。',
               '对比 95 / 100 / 105 epoch，把 rank-1 的最优区间收窄到 90 至 110 epoch。',
+              '这套配置在 2025-03、2025-08、2026-01 三次运行中 best R1 均为 79.30474 @ epoch 87，逐位一致；后两次的代码快照可确认包含融合段。',
             ],
           },
           {
@@ -617,10 +667,11 @@ function getResearchData(lang: string): ResearchData {
             body:
               'PACL 的公式与实现已经写进模型代码，但训练日志显示指标没有预期变化，需要确认损失是否真的参与优化。',
             points: [
-              '逐项比对训练启动参数与 options.py，发现 pacl_loss_weight、pacl_ot_reg、pacl_ot_iters 三个参数没有在解析器中注册，命令行传入后并未生效。',
-              '同时修正 MLM 相关配置的自相矛盾，并按正式配置启动 150 epoch 训练。',
-              '2026-01-25 云端训练得到 R1 78.43 / R5 90.55 / R10 94.19 / mAP 70.45，与论文 Table 3 的「+ TS + PACL」行四项指标逐位吻合。',
-              '保留了一次「模型里加了 PACL、但参数未注册」的对照运行，结果 79.01，说明未生效的版本不会带来论文报告的那一行收益。',
+              '逐项比对训练启动参数与 options.py，发现 pacl_loss_weight、pacl_ot_reg、pacl_ot_iters 三个参数没有在解析器中注册，命令行传入后并未生效；同时核查 loss_names 是否真的包含 pacl。',
+              '补全 PACL 的四处接入：objectives.py 的 Sinkhorn 与损失函数、build.py 的前向集成、options.py 的参数注册、processor.py 的日志输出；并在损失内部把 SAFL part 特征从 float16 转成 float32，避免半精度下的溢出与除零。',
+              '修正 MLM 相关配置冲突后，按正式配置启动 150 epoch 训练；2026-01-25 12:02 的云端运行得到 R1 78.42755（论文记为 78.43）/ R5 90.55 / R10 94.19 / mAP 70.45，best 出现在第 150 epoch。',
+              '保留了一组「PACL + 复杂融合」但 loss_names 只有 sdm+id+mlm 的 100 epoch 运行，best R1 79.01，与无 PACL 基线基本持平，说明收益来自损失真正生效，而不是「加个模块总会涨一点」。',
+              '与第一作者共同整理《PACL 实现说明》和《PACL 方法文档》，覆盖接入方式、参数含义、调参区间、日志格式与最优传输的理论推导。',
             ],
           },
           {
@@ -629,9 +680,9 @@ function getResearchData(lang: string): ResearchData {
             body:
               '残差交互融合是团队讨论中形成的方案，但「为什么不能直接把部件特征和全局特征相加」需要一个可复核的答案。',
             points: [
-              '设计控制变量对照：两组实验的损失组合、批大小、学习率、epoch、数据集逐项一致，唯一差异是 build.py 中的融合代码段。',
-              '残差门控版本 best R1 79.30474 @ epoch 87；简单加法版本 best R1 63.7427 @ epoch 86，下降 15.56 个百分点。',
-              '几个月后以相同配置独立复跑残差版本，best R1 仍为 79.30474 @ epoch 87，逐位一致。',
+              '设计控制变量对照：两组均为 sdm+id+mlm、100 epoch、batch 64、lr 1e-5、ID 与 MLM 权重各 1.0、CUHK-PEDES，唯一差异是 build.py 中的融合代码段。',
+              '残差门控版本 best R1 79.30474 @ epoch 87（2025-08-20）；简单加法版本 best R1 63.74269 @ epoch 86（2026-01-30），下降 15.56 个百分点。',
+              '同一组超参在 2025-03、2025-08、2026-01 三次运行中 best R1 逐位一致，整条实验链路可复现。',
             ],
           },
           {
@@ -640,21 +691,33 @@ function getResearchData(lang: string): ResearchData {
             body:
               'CUHK-PEDES 上的结论需要在另一个数据集上验证，RSTPReid 的文本更短、场景更复杂，是常见的泛化测试集。',
             points: [
-              '完成两轮 RSTPReid 训练与参数调整，记录每轮的 rank-1 与训练／测试曲线。',
-              '通过训练集与测试集指标的分离趋势判断过拟合，调整 epoch 与学习率后重新验证。',
-              '把「单数据集最优」与「跨数据集可用」区分开，为论文最终配置的选择提供依据。',
+              '2026-02-19 02:00 一轮：sdm+mlm+id+itc+pacl，lr 1e-5，100 epoch，batch 64，random sampler，PACL 权重 0.02，best R1 62.60 出现在第 7 epoch，此后不再提升。',
+              '同日 10:53 一轮：同损失组合，lr 2e-5，30 epoch，identity sampler，PACL 权重 0.01，ID 权重 1.0，weight decay 1e-4，warmup 10 epoch，best R1 60.25 出现在第 27 epoch，曲线更平缓但未超过第一轮。',
+              '结论：RSTPReid 的最优点出现很早，继续训练只会过拟合；PACL 权重不是越大越好，identity sampler 也不适合这个跨模态对比设置。论文最终报告的 67.05 / 54.37 是团队后续配置的结果，这两轮的作用是定位过拟合与权重敏感性。',
             ],
           },
           {
             period: '2025.03 — 2026.02',
             title: '论文写作、主图与检索配图',
             body:
-              '论文第 16 页的贡献声明写的是主稿撰写、算法设计与实验执行，我的工作还覆盖了图与排版。',
+              '论文第 16 页的贡献声明写的是主稿撰写、算法设计与实验执行，我的工作还覆盖了图、文档与排版。',
             points: [
               '参与论文主图设计：提出在图像分支后增加「减少 patch」的步骤示意、调整箭头长度与层级关系，并补充对应的英文标注。',
-              '参与论文初稿撰写，并把「减 Token」的处理流程、特征融合前后对比、FLOPs 结构表与可视化说明写成可交给第一作者使用的文档。',
-              '制作三行 top-10 检索对比图（原始、减 token、PACL + 减 token），并撰写图注英文描述。',
-              '修改评估代码，使其只输出文本到图像（t2i）方向的指标，避免 i2t 指标干扰模型选择；修复指标 JSON 序列化、checkpoint 路径与绘图依赖问题，并保留每次运行的 configs 与 train_log。',
+              '2025-07 参与论文初稿撰写，并与第一作者共同整理方法材料：减 Token 的处理流程、特征融合前后对比、FLOPs 结构表与可视化说明。',
+              '本地维护论文 LaTeX 工程（main.tex、pepadun.bib 与编译产物 prj.pdf）。早期稿件标题为 “Fine-Grained Token Selection and Post-alignment Fusion for Cross-Modal Person ReID”、方法名 GRFNet，加入 PACL 后扩展为 CATSANet。',
+              '2026-02-02 制作三行 top-10 检索对比图（原始、减 token、PACL + 减 token），准备五组覆盖三个检查点的样例并撰写图注英文描述；与第一作者共同完成公式整理与 LaTeX 排版检查。',
+            ],
+          },
+          {
+            period: '2025 — 2026',
+            title: '评估口径、指标工具与可复现性',
+            body:
+              '指标口径和留档方式决定了实验结论能不能被复核，这部分工作贯穿整个项目。',
+            points: [
+              '修改评估代码，使其只输出文本到图像（t2i）方向的指标，避免 i2t 指标干扰模型选择。',
+              '增加指标落盘与绘图脚本 plot_metrics.py，把每个 epoch 的 rank-1/5/10、mAP、mINP 写成 metrics.json，再生成单指标与全指标曲线，便于跨实验对比。',
+              '修复指标 JSON 序列化、checkpoint 路径与绘图依赖问题；改造可视化脚本，支持切换数据集、导出 top-10 检索结果图。',
+              '维护多份代码快照（改版4、pacl_01、VERSION）与每次运行的 configs、train_log，使关键数字可以回溯到具体日期、配置与代码版本。',
             ],
           },
         ],
@@ -694,15 +757,20 @@ function getResearchData(lang: string): ResearchData {
           },
           {
             title: '我亲手执行的主要实验',
-            headers: ['时间', '配置', '轮数', '结果', '用途'],
+            headers: ['时间', '配置', '数据集 / 轮数', '结果', '用途'],
             rows: [
-              ['2025-03-04', '减 token', '100', 'R1 79.305 / mAP 71.070', '复现基线'],
-              ['2025-03-08', '减 token，95/100/105', '95–105', '约 77 / 79.30 / 78.85', '确认 epoch 敏感区间'],
-              ['2025-08-20', '残差门控融合', '100', 'R1 79.30474 @ ep87', '融合方案验证'],
-              ['2026-01-26', '同配置独立复跑', '100', 'R1 79.30474 @ ep87', '证明可复现'],
-              ['2026-01-30', '简单加法融合', '100', 'R1 63.7427 @ ep86', '反证门控必要性'],
-              ['2026-01-25', 'TS + PACL 正式配置', '150', 'R1 78.43 / mAP 70.45', '论文 Table 3 关键行'],
+              ['2025-03-04', 'sdm+id+mlm，100 ep', 'CUHK-PEDES / 100', 'R1 79.305 / mAP 71.070', '复现基线'],
+              ['2025-03-08', '95 / 100 / 105 ep 对比', 'CUHK-PEDES / 95–105', '约 77 / 79.30 / 78.85', '确认 epoch 敏感区间'],
+              ['2025-03-15', 'sdm+mlm+id+itc，150 ep', 'CUHK-PEDES / 150', 'R1 78.10 @ ep130', '无融合基线'],
+              ['2025-08-20', '残差门控融合', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', '融合方案验证'],
+              ['2026-01-25 12:02', 'sdm+mlm+id+itc+pacl，150 ep', 'CUHK-PEDES / 150', 'R1 78.43 / mAP 70.45', '论文 Table 3 关键行'],
+              ['2026-01-25 15:12', 'PACL + 复杂融合，loss_names 无 pacl', 'CUHK-PEDES / 100', 'R1 79.01234 @ ep87', 'PACL 未启用证据'],
+              ['2026-01-26', '同配置独立复跑（第三次）', 'CUHK-PEDES / 100', 'R1 79.30474 @ ep87', '证明可复现'],
+              ['2026-01-30', '简单加法融合', 'CUHK-PEDES / 100', 'R1 63.74269 @ ep86', '反证门控必要性'],
+              ['2026-02-19 02:00', 'pacl 0.02，random sampler', 'RSTPReid / 100', 'R1 62.60 @ ep7', '过拟合诊断'],
+              ['2026-02-19 10:53', 'pacl 0.01，identity sampler', 'RSTPReid / 30', 'R1 60.25 @ ep27', '缩轮与降权对照'],
             ],
+            note: '论文 full model 的 78.79 / 70.35 是团队整体结果；2026-02-18 的 75.55 异常运行未列入，待核对运行环境与数据路径。',
           },
         ],
         troubleTitle: '工程排错清单',
@@ -714,6 +782,16 @@ function getResearchData(lang: string): ResearchData {
             problem: 'PACL 参数未注册',
             symptom: '训练正常，无报错，指标不涨',
             fix: '逐项比对命令行参数与 options.py，补注册三个 PACL 参数后重新训练',
+          },
+          {
+            problem: 'PACL 未进入损失列表',
+            symptom: '参数已传，但日志 loss_names 不含 pacl，结果与无 PACL 持平（79.01 vs 79.30）',
+            fix: '在 loss_names 中加入 pacl，并确认日志出现 pacl_loss 字段',
+          },
+          {
+            problem: '半精度数值不稳定',
+            symptom: 'Sinkhorn 输入在 float16 下可能溢出或除零',
+            fix: '损失内部把 SAFL part 特征转成 float32 再计算代价矩阵',
           },
           {
             problem: 'MLM 配置冲突',
@@ -745,33 +823,33 @@ function getResearchData(lang: string): ResearchData {
         abilities: [
           {
             title: '复现与建基线',
-            evidence: '换硬件后复跑 79.305 / 71.070；同配置两次独立运行逐位一致',
+            evidence: '换硬件后复跑 79.305 / 71.070；同超参三次独立运行 best R1 逐位一致',
           },
           {
             title: '实验设计与诊断',
-            evidence: '95/100/105 epoch 对比、loss 分解、学习率调度分析、RSTPReid 过拟合诊断',
+            evidence: '95/100/105 epoch 对比、loss 分解、学习率调度分析、RSTPReid 两轮过拟合诊断',
           },
           {
             title: '工程排错',
-            evidence: '从日志与配置定位 PACL 三参数未注册、MLM 配置冲突等静默故障',
+            evidence: '定位 PACL 三参数未注册、loss_names 未含 pacl、float16 数值不稳定、MLM 配置冲突等静默故障',
           },
           {
             title: '对照验证',
-            evidence: '融合对照 79.30 与 63.74，其余变量逐项一致',
+            evidence: '融合对照 79.30 与 63.74，两组 sdm+id+mlm、100 ep、batch 64、lr 1e-5 逐项一致',
           },
           {
             title: '论文写作与可视化',
-            evidence: '初稿参与、主图设计、top-10 检索图与英文标注、公式与 LaTeX 检查',
+            evidence: '初稿参与、主图设计、五组检索样例与 top-10 图、共同整理 PACL 文档、LaTeX 工程',
           },
           {
             title: '数据严谨性',
-            evidence: '消融行与论文逐位吻合，配置与训练日志全程留存',
+            evidence: '消融行与论文逐位吻合，配置与日志留存，异常结果单独标注不引用',
           },
         ],
         closingTitle: '论文与代码',
         closing:
-          'CATSANet 发表于 Pattern Analysis and Applications（2026, 29:176）。论文 full model 的 78.79 / 70.35 是团队整体结果，不是我单独跑出的数字；我的工作就是上面记录的实验执行、工程落地与部分成稿。',
-        closingNote: '内容依据训练日志、论文表格与工作记录整理。',
+          'CATSANet 发表于 Pattern Analysis and Applications（2026, 29:176）。论文 full model 的 78.79 / 70.35 是团队整体结果，不是我单独跑出的数字；我的工作就是上面记录的实验执行、工程落地、与第一作者共同整理的方法文档与部分成稿。',
+        closingNote: '内容依据训练日志、论文表格与工作记录整理；2026-02-18 的异常运行已排除在外。',
       };
   }
 }

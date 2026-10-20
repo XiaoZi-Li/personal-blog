@@ -227,7 +227,7 @@ const translations = {
         role: '第二作者',
         status: 'SCI 已正式发表',
         journal: 'Pattern Analysis and Applications',
-        desc: '论文已在 SCI 期刊 Pattern Analysis and Applications 正式发表，署名第二作者，配套代码由团队开源。本人负责消融实验设计与参数调优、结果分析与文献调研，并参与部分章节撰写。',
+        desc: '从接手复现到论文成稿，负责 CATSANet 的实验执行、PACL 工程落地、融合模块对照验证与跨数据集调参。云端训练得到 R1 78.43 / mAP 70.45，构成论文 Table 3 的关键消融行；通过 79.30 与 63.74 的控制变量对照，证明门控融合的必要性。第二作者，Pattern Analysis and Applications (2026)。',
         detail: '查看完整科研复盘'
       },
       resume: {
@@ -680,7 +680,7 @@ const translations = {
         role: 'Second Author',
         status: 'SCI Published',
         journal: 'Pattern Analysis and Applications',
-        desc: 'Officially published in the SCI journal Pattern Analysis and Applications, credited as the second author; the companion code is open-sourced by the team. My contribution covered ablation study design and parameter tuning, result analysis and literature review, plus writing parts of the manuscript.',
+        desc: 'From taking over the reproduction to the final manuscript, I handled CATSANet’s experiment execution, PACL engineering, controlled validation of the fusion module and cross-dataset tuning. The cloud run produced R1 78.43 / mAP 70.45, forming the key ablation row in Table 3; the controlled comparison of 79.30 vs 63.74 demonstrates why gated fusion is necessary. Second author, Pattern Analysis and Applications (2026).',
         detail: 'Read the full research write-up'
       },
     },
@@ -1094,7 +1094,7 @@ const translations = {
         role: '第二著者',
         status: 'SCI 正式掲載済み',
         journal: 'Pattern Analysis and Applications',
-        desc: 'SCI ジャーナル Pattern Analysis and Applications に正式掲載、第二著者として署名、付属コードはチームにより公開。本人の担当は消融実験の設計とパラメータ調整、結果分析、文献調査、および一部章の執筆。',
+        desc: '再現の引き継ぎから論文完成まで、CATSANet の実験実行、PACL の実装、融合モジュールの対照検証、データセット間の調整を担当。クラウド訓練で R1 78.43 / mAP 70.45 を得て、論文 Table 3 の重要消融行を構成。79.30 対 63.74 の制御変量比較で、ゲート融合の必要性を示しました。第二著者、Pattern Analysis and Applications (2026)。',
         detail: '研究の詳細を見る'
       },
     },
